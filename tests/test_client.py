@@ -21,12 +21,17 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from dinari import Dinari, AsyncDinari, APIResponseValidationError
-from dinari._types import Omit
-from dinari._models import BaseModel, FinalRequestOptions
-from dinari._constants import RAW_RESPONSE_HEADER
-from dinari._exceptions import DinariError, APIStatusError, APITimeoutError, APIResponseValidationError
-from dinari._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
+from dinari_api_sdk import Dinari, AsyncDinari, APIResponseValidationError
+from dinari_api_sdk._types import Omit
+from dinari_api_sdk._models import BaseModel, FinalRequestOptions
+from dinari_api_sdk._constants import RAW_RESPONSE_HEADER
+from dinari_api_sdk._exceptions import DinariError, APIStatusError, APITimeoutError, APIResponseValidationError
+from dinari_api_sdk._base_client import (
+    DEFAULT_TIMEOUT,
+    HTTPX_DEFAULT_TIMEOUT,
+    BaseClient,
+    make_request_options,
+)
 
 from .utils import update_env
 
@@ -225,10 +230,10 @@ class TestDinari:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "dinari/_legacy_response.py",
-                        "dinari/_response.py",
+                        "dinari_api_sdk/_legacy_response.py",
+                        "dinari_api_sdk/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "dinari/_compat.py",
+                        "dinari_api_sdk/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -702,7 +707,7 @@ class TestDinari:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.get("/api/v2/_health/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -714,7 +719,7 @@ class TestDinari:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.get("/api/v2/_health/").mock(return_value=httpx.Response(500))
@@ -727,7 +732,7 @@ class TestDinari:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
@@ -758,7 +763,7 @@ class TestDinari:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
         self, client: Dinari, failures_before_success: int, respx_mock: MockRouter
@@ -781,7 +786,7 @@ class TestDinari:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
         self, client: Dinari, failures_before_success: int, respx_mock: MockRouter
@@ -979,10 +984,10 @@ class TestAsyncDinari:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "dinari/_legacy_response.py",
-                        "dinari/_response.py",
+                        "dinari_api_sdk/_legacy_response.py",
+                        "dinari_api_sdk/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "dinari/_compat.py",
+                        "dinari_api_sdk/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1472,7 +1477,7 @@ class TestAsyncDinari:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.get("/api/v2/_health/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -1484,7 +1489,7 @@ class TestAsyncDinari:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.get("/api/v2/_health/").mock(return_value=httpx.Response(500))
@@ -1497,7 +1502,7 @@ class TestAsyncDinari:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
@@ -1529,7 +1534,7 @@ class TestAsyncDinari:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
@@ -1553,7 +1558,7 @@ class TestAsyncDinari:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
@@ -1587,8 +1592,8 @@ class TestAsyncDinari:
         import nest_asyncio
         import threading
 
-        from dinari._utils import asyncify
-        from dinari._base_client import get_platform
+        from dinari_api_sdk._utils import asyncify
+        from dinari_api_sdk._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()

@@ -61,6 +61,6 @@
   ],
   "release-type": "python",
   "extra-files": [
-    "src/dinari/_version.py"
+    "src/dinari_api_sdk/_version.py"
   ]
 }
