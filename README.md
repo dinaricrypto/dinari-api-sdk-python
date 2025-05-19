@@ -35,6 +35,8 @@ client = Dinari(
     api_secret_key=os.environ.get(
         "DINARI_API_SECRET_KEY"
     ),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="sandbox",
 )
 
 stocks = client.v2.market_data.stocks.list()
@@ -59,6 +61,8 @@ client = AsyncDinari(
     api_secret_key=os.environ.get(
         "DINARI_API_SECRET_KEY"
     ),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="sandbox",
 )
 
 
