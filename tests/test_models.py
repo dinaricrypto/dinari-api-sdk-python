@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from dinari_api_sdk._utils import PropertyInfo
-from dinari_api_sdk._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from dinari_api_sdk._models import BaseModel, construct_type
+from dinari._utils import PropertyInfo
+from dinari._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from dinari._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

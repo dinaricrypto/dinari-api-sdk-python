@@ -21,23 +21,18 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from dinari_api_sdk import Dinari, AsyncDinari, APIResponseValidationError
-from dinari_api_sdk._types import Omit
-from dinari_api_sdk._models import BaseModel, FinalRequestOptions
-from dinari_api_sdk._constants import RAW_RESPONSE_HEADER
-from dinari_api_sdk._exceptions import DinariError, APIStatusError, APITimeoutError, APIResponseValidationError
-from dinari_api_sdk._base_client import (
-    DEFAULT_TIMEOUT,
-    HTTPX_DEFAULT_TIMEOUT,
-    BaseClient,
-    make_request_options,
-)
+from dinari import Dinari, AsyncDinari, APIResponseValidationError
+from dinari._types import Omit
+from dinari._models import BaseModel, FinalRequestOptions
+from dinari._constants import RAW_RESPONSE_HEADER
+from dinari._exceptions import DinariError, APIStatusError, APITimeoutError, APIResponseValidationError
+from dinari._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
 
 from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My API Key"
-secret = "My Secret"
+api_key_id = "My API Key ID"
+api_secret_key = "My API Secret Key"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -59,7 +54,9 @@ def _get_open_connections(client: Dinari | AsyncDinari) -> int:
 
 
 class TestDinari:
-    client = Dinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+    client = Dinari(
+        base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+    )
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -85,13 +82,13 @@ class TestDinari:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(api_key="another My API Key")
-        assert copied.api_key == "another My API Key"
-        assert self.client.api_key == "My API Key"
+        copied = self.client.copy(api_key_id="another My API Key ID")
+        assert copied.api_key_id == "another My API Key ID"
+        assert self.client.api_key_id == "My API Key ID"
 
-        copied = self.client.copy(secret="another My Secret")
-        assert copied.secret == "another My Secret"
-        assert self.client.secret == "My Secret"
+        copied = self.client.copy(api_secret_key="another My API Secret Key")
+        assert copied.api_secret_key == "another My API Secret Key"
+        assert self.client.api_secret_key == "My API Secret Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -112,8 +109,8 @@ class TestDinari:
     def test_copy_default_headers(self) -> None:
         client = Dinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -150,8 +147,8 @@ class TestDinari:
     def test_copy_default_query(self) -> None:
         client = Dinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_query={"foo": "bar"},
         )
@@ -243,10 +240,10 @@ class TestDinari:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "dinari_api_sdk/_legacy_response.py",
-                        "dinari_api_sdk/_response.py",
+                        "dinari/_legacy_response.py",
+                        "dinari/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "dinari_api_sdk/_compat.py",
+                        "dinari/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -279,8 +276,8 @@ class TestDinari:
     def test_client_timeout_option(self) -> None:
         client = Dinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             timeout=httpx.Timeout(0),
         )
@@ -294,8 +291,8 @@ class TestDinari:
         with httpx.Client(timeout=None) as http_client:
             client = Dinari(
                 base_url=base_url,
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -308,8 +305,8 @@ class TestDinari:
         with httpx.Client() as http_client:
             client = Dinari(
                 base_url=base_url,
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -322,8 +319,8 @@ class TestDinari:
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = Dinari(
                 base_url=base_url,
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -337,8 +334,8 @@ class TestDinari:
             async with httpx.AsyncClient() as http_client:
                 Dinari(
                     base_url=base_url,
-                    api_key=api_key,
-                    secret=secret,
+                    api_key_id=api_key_id,
+                    api_secret_key=api_secret_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
@@ -346,8 +343,8 @@ class TestDinari:
     def test_default_headers_option(self) -> None:
         client = Dinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -357,8 +354,8 @@ class TestDinari:
 
         client2 = Dinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -370,27 +367,31 @@ class TestDinari:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = Dinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        client = Dinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-API-Key-Id") == api_key
+        assert request.headers.get("X-API-Key-Id") == api_key_id
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-API-Secret-Key") == secret
+        assert request.headers.get("X-API-Secret-Key") == api_secret_key
 
         with pytest.raises(DinariError):
             with update_env(
                 **{
-                    "DINARI_API_KEY": Omit(),
-                    "DINARI_SECRET": Omit(),
+                    "DINARI_API_KEY_ID": Omit(),
+                    "DINARI_API_SECRET_KEY": Omit(),
                 }
             ):
-                client2 = Dinari(base_url=base_url, api_key=None, secret=None, _strict_response_validation=True)
+                client2 = Dinari(
+                    base_url=base_url, api_key_id=None, api_secret_key=None, _strict_response_validation=True
+                )
             _ = client2
 
     def test_default_query_option(self) -> None:
         client = Dinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_query={"query_param": "bar"},
         )
@@ -593,7 +594,10 @@ class TestDinari:
 
     def test_base_url_setter(self) -> None:
         client = Dinari(
-            base_url="https://example.com/from_init", api_key=api_key, secret=secret, _strict_response_validation=True
+            base_url="https://example.com/from_init",
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
+            _strict_response_validation=True,
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -603,7 +607,7 @@ class TestDinari:
 
     def test_base_url_env(self) -> None:
         with update_env(DINARI_BASE_URL="http://localhost:5000/from/env"):
-            client = Dinari(api_key=api_key, secret=secret, _strict_response_validation=True)
+            client = Dinari(api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
@@ -611,14 +615,14 @@ class TestDinari:
         [
             Dinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
             ),
             Dinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -640,14 +644,14 @@ class TestDinari:
         [
             Dinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
             ),
             Dinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -669,14 +673,14 @@ class TestDinari:
         [
             Dinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
             ),
             Dinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -694,7 +698,9 @@ class TestDinari:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = Dinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        client = Dinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
         assert not client.is_closed()
 
         copied = client.copy()
@@ -705,7 +711,9 @@ class TestDinari:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = Dinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        client = Dinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -728,8 +736,8 @@ class TestDinari:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             Dinari(
                 base_url=base_url,
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 max_retries=cast(Any, None),
             )
@@ -741,12 +749,16 @@ class TestDinari:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = Dinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        strict_client = Dinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = Dinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=False)
+        client = Dinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=False
+        )
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -774,37 +786,37 @@ class TestDinari:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = Dinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        client = Dinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(
-            side_effect=httpx.TimeoutException("Test timeout error")
-        )
+        respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.get(
-                "/api/v2/market_data/market_hours/",
+                "/api/v2/market_data/stocks/",
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(return_value=httpx.Response(500))
+        respx_mock.get("/api/v2/market_data/stocks/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.get(
-                "/api/v2/market_data/market_hours/",
+                "/api/v2/market_data/stocks/",
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -812,7 +824,7 @@ class TestDinari:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
@@ -835,15 +847,15 @@ class TestDinari:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=retry_handler)
 
-        response = client.api.v2.market_data.with_raw_response.get_market_hours()
+        response = client.v2.market_data.stocks.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
         self, client: Dinari, failures_before_success: int, respx_mock: MockRouter
@@ -859,16 +871,16 @@ class TestDinari:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=retry_handler)
 
-        response = client.api.v2.market_data.with_raw_response.get_market_hours(
+        response = client.v2.market_data.stocks.with_raw_response.list(
             extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
         self, client: Dinari, failures_before_success: int, respx_mock: MockRouter
@@ -884,17 +896,17 @@ class TestDinari:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=retry_handler)
 
-        response = client.api.v2.market_data.with_raw_response.get_market_hours(
-            extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.v2.market_data.stocks.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
 
 class TestAsyncDinari:
-    client = AsyncDinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+    client = AsyncDinari(
+        base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+    )
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -922,13 +934,13 @@ class TestAsyncDinari:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(api_key="another My API Key")
-        assert copied.api_key == "another My API Key"
-        assert self.client.api_key == "My API Key"
+        copied = self.client.copy(api_key_id="another My API Key ID")
+        assert copied.api_key_id == "another My API Key ID"
+        assert self.client.api_key_id == "My API Key ID"
 
-        copied = self.client.copy(secret="another My Secret")
-        assert copied.secret == "another My Secret"
-        assert self.client.secret == "My Secret"
+        copied = self.client.copy(api_secret_key="another My API Secret Key")
+        assert copied.api_secret_key == "another My API Secret Key"
+        assert self.client.api_secret_key == "My API Secret Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -949,8 +961,8 @@ class TestAsyncDinari:
     def test_copy_default_headers(self) -> None:
         client = AsyncDinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -987,8 +999,8 @@ class TestAsyncDinari:
     def test_copy_default_query(self) -> None:
         client = AsyncDinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_query={"foo": "bar"},
         )
@@ -1080,10 +1092,10 @@ class TestAsyncDinari:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "dinari_api_sdk/_legacy_response.py",
-                        "dinari_api_sdk/_response.py",
+                        "dinari/_legacy_response.py",
+                        "dinari/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "dinari_api_sdk/_compat.py",
+                        "dinari/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1116,8 +1128,8 @@ class TestAsyncDinari:
     async def test_client_timeout_option(self) -> None:
         client = AsyncDinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             timeout=httpx.Timeout(0),
         )
@@ -1131,8 +1143,8 @@ class TestAsyncDinari:
         async with httpx.AsyncClient(timeout=None) as http_client:
             client = AsyncDinari(
                 base_url=base_url,
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -1145,8 +1157,8 @@ class TestAsyncDinari:
         async with httpx.AsyncClient() as http_client:
             client = AsyncDinari(
                 base_url=base_url,
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -1159,8 +1171,8 @@ class TestAsyncDinari:
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = AsyncDinari(
                 base_url=base_url,
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -1174,8 +1186,8 @@ class TestAsyncDinari:
             with httpx.Client() as http_client:
                 AsyncDinari(
                     base_url=base_url,
-                    api_key=api_key,
-                    secret=secret,
+                    api_key_id=api_key_id,
+                    api_secret_key=api_secret_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
@@ -1183,8 +1195,8 @@ class TestAsyncDinari:
     def test_default_headers_option(self) -> None:
         client = AsyncDinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -1194,8 +1206,8 @@ class TestAsyncDinari:
 
         client2 = AsyncDinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1207,27 +1219,31 @@ class TestAsyncDinari:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = AsyncDinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        client = AsyncDinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-API-Key-Id") == api_key
+        assert request.headers.get("X-API-Key-Id") == api_key_id
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-API-Secret-Key") == secret
+        assert request.headers.get("X-API-Secret-Key") == api_secret_key
 
         with pytest.raises(DinariError):
             with update_env(
                 **{
-                    "DINARI_API_KEY": Omit(),
-                    "DINARI_SECRET": Omit(),
+                    "DINARI_API_KEY_ID": Omit(),
+                    "DINARI_API_SECRET_KEY": Omit(),
                 }
             ):
-                client2 = AsyncDinari(base_url=base_url, api_key=None, secret=None, _strict_response_validation=True)
+                client2 = AsyncDinari(
+                    base_url=base_url, api_key_id=None, api_secret_key=None, _strict_response_validation=True
+                )
             _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncDinari(
             base_url=base_url,
-            api_key=api_key,
-            secret=secret,
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
             _strict_response_validation=True,
             default_query={"query_param": "bar"},
         )
@@ -1430,7 +1446,10 @@ class TestAsyncDinari:
 
     def test_base_url_setter(self) -> None:
         client = AsyncDinari(
-            base_url="https://example.com/from_init", api_key=api_key, secret=secret, _strict_response_validation=True
+            base_url="https://example.com/from_init",
+            api_key_id=api_key_id,
+            api_secret_key=api_secret_key,
+            _strict_response_validation=True,
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -1440,7 +1459,7 @@ class TestAsyncDinari:
 
     def test_base_url_env(self) -> None:
         with update_env(DINARI_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncDinari(api_key=api_key, secret=secret, _strict_response_validation=True)
+            client = AsyncDinari(api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
@@ -1448,14 +1467,14 @@ class TestAsyncDinari:
         [
             AsyncDinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
             ),
             AsyncDinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1477,14 +1496,14 @@ class TestAsyncDinari:
         [
             AsyncDinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
             ),
             AsyncDinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1506,14 +1525,14 @@ class TestAsyncDinari:
         [
             AsyncDinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
             ),
             AsyncDinari(
                 base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1531,7 +1550,9 @@ class TestAsyncDinari:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncDinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        client = AsyncDinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1543,7 +1564,9 @@ class TestAsyncDinari:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncDinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        client = AsyncDinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1567,8 +1590,8 @@ class TestAsyncDinari:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             AsyncDinari(
                 base_url=base_url,
-                api_key=api_key,
-                secret=secret,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
                 _strict_response_validation=True,
                 max_retries=cast(Any, None),
             )
@@ -1581,12 +1604,16 @@ class TestAsyncDinari:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncDinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        strict_client = AsyncDinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncDinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=False)
+        client = AsyncDinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=False
+        )
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1615,37 +1642,37 @@ class TestAsyncDinari:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncDinari(base_url=base_url, api_key=api_key, secret=secret, _strict_response_validation=True)
+        client = AsyncDinari(
+            base_url=base_url, api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True
+        )
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(
-            side_effect=httpx.TimeoutException("Test timeout error")
-        )
+        respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.get(
-                "/api/v2/market_data/market_hours/",
+                "/api/v2/market_data/stocks/",
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(return_value=httpx.Response(500))
+        respx_mock.get("/api/v2/market_data/stocks/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.get(
-                "/api/v2/market_data/market_hours/",
+                "/api/v2/market_data/stocks/",
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1653,7 +1680,7 @@ class TestAsyncDinari:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
@@ -1677,15 +1704,15 @@ class TestAsyncDinari:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=retry_handler)
 
-        response = await client.api.v2.market_data.with_raw_response.get_market_hours()
+        response = await client.v2.market_data.stocks.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
@@ -1702,16 +1729,16 @@ class TestAsyncDinari:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=retry_handler)
 
-        response = await client.api.v2.market_data.with_raw_response.get_market_hours(
+        response = await client.v2.market_data.stocks.with_raw_response.list(
             extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("dinari._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
@@ -1728,9 +1755,9 @@ class TestAsyncDinari:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/v2/market_data/market_hours/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=retry_handler)
 
-        response = await client.api.v2.market_data.with_raw_response.get_market_hours(
+        response = await client.v2.market_data.stocks.with_raw_response.list(
             extra_headers={"x-stainless-retry-count": "42"}
         )
 
@@ -1747,8 +1774,8 @@ class TestAsyncDinari:
         import nest_asyncio
         import threading
 
-        from dinari_api_sdk._utils import asyncify
-        from dinari_api_sdk._base_client import get_platform
+        from dinari._utils import asyncify
+        from dinari._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()

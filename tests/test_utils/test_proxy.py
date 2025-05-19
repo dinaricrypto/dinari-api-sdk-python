@@ -2,7 +2,7 @@ import operator
 from typing import Any
 from typing_extensions import override
 
-from dinari_api_sdk._utils import LazyProxy
+from dinari._utils import LazyProxy
 
 
 class RecursiveLazyProxy(LazyProxy[Any]):
