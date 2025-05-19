@@ -13,19 +13,19 @@ class MarketDataGetMarketHoursResponse(BaseModel):
     """Whether or not the market is open"""
 
     next_session_close_dt: datetime
-    """Timestamp in ISO 8601 format at which the next session closes"""
+    """Datetime at which the next session closes. ISO 8601 timestamp."""
 
     next_session_open_dt: datetime
-    """Timestamp in ISO 8601 format at which the next session opens"""
+    """Datetime at which the next session opens. ISO 8601 timestamp."""
 
     current_session_close_dt: Optional[datetime] = None
-    """
-    Timestamp in ISO 8601 format at which the current session closes or null if the
-    market is currently closed
+    """Datetime at which the current session closes.
+
+    `null` if the market is currently closed. ISO 8601 timestamp.
     """
 
     current_session_open_dt: Optional[datetime] = None
-    """
-    Timestamp in ISO 8601 format at which the current session opened or null if the
-    market is currently closed
+    """Datetime at which the current session opened.
+
+    `null` if the market is currently closed. ISO 8601 timestamp.
     """

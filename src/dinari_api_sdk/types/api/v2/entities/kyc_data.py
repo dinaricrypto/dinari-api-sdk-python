@@ -10,25 +10,25 @@ __all__ = ["KYCData"]
 
 class KYCData(BaseModel):
     country_code: str
-    """
-    ISO 3166-1 alpha 2 country code of citizenship or the country the organization
-    is based out of.
+    """Country of citizenship or home country of the organization.
+
+    ISO 3166-1 alpha 2 country code.
     """
 
     last_name: str
-    """Last name of the person"""
+    """Last name of the person."""
 
     address_city: Optional[str] = None
     """City of address. Not all international addresses use this attribute."""
 
     address_postal_code: Optional[str] = None
-    """ZIP or postal code of residence address.
+    """Postal code of residence address.
 
     Not all international addresses use this attribute.
     """
 
     address_street_1: Optional[str] = None
-    """Street name of address."""
+    """Street address of address."""
 
     address_street_2: Optional[str] = None
     """Extension of address, usually apartment or suite number."""
@@ -36,21 +36,21 @@ class KYCData(BaseModel):
     address_subdivision: Optional[str] = None
     """State or subdivision of address.
 
-    In the US, this should be the unabbreviated name. Not all international
-    addresses use this attribute.
+    In the US, this should be the unabbreviated name of the state. Not all
+    international addresses use this attribute.
     """
 
     birth_date: Optional[date] = None
-    """Birth date of the individual"""
+    """Birth date of the individual. In ISO 8601 format, YYYY-MM-DD."""
 
     email: Optional[str] = None
-    """Email address"""
+    """Email address."""
 
     first_name: Optional[str] = None
-    """First name of the person, or name of the organization"""
+    """First name of the person."""
 
     middle_name: Optional[str] = None
     """Middle name of the user"""
 
     tax_id_number: Optional[str] = None
-    """ID number of the official tax document of the country the entity belongs to"""
+    """ID number of the official tax document of the country the entity belongs to."""

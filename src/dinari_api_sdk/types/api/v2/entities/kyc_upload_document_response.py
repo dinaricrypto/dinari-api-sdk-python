@@ -8,13 +8,13 @@ __all__ = ["KYCUploadDocumentResponse"]
 
 class KYCUploadDocumentResponse(BaseModel):
     id: str
-    """ID of the document"""
+    """ID of the document."""
 
     document_type: KYCDocumentType
-    """Type of the document"""
+    """Type of document."""
 
     filename: str
-    """Filename of the document"""
+    """Filename of document."""
 
     url: str
-    """URL to access the document. Expires in 1 hour"""
+    """Temporary URL to access the document. Expires in 1 hour."""

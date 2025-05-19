@@ -10,28 +10,30 @@ __all__ = ["StockSplit"]
 
 class StockSplit(BaseModel):
     id: str
-    """Unique identifier for the stock split"""
+    """ID of the `StockSplit`"""
 
     ex_date: date
-    """Ex-date of the split (Eastern Time Zone).
+    """Ex-date of the split in Eastern Time Zone.
 
-    First day the stock trades at post-split prices. Typically is last in the
-    process, and the main important date for investors.
+    First day the stock trades at post-split prices. Typically is last date in the
+    process, and the main important date for investors. In ISO 8601 format,
+    YYYY-MM-DD.
     """
 
     payable_date: date
-    """Payable date (Eastern Time Zone) of the split.
+    """Payable date of the split in Eastern Time Zone.
 
-    Date when company will send out the new shares. Mainly for record keeping by
-    brokerages, who forward the shares to eventual owners. Typically is second in
-    the process.
+    This is the date when company will send out the new shares. Mainly for record
+    keeping by brokerages, who forward the shares to eventual owners. Typically is
+    the second date in the process. In ISO 8601 format, YYYY-MM-DD.
     """
 
     record_date: date
     """
-    Record date (Eastern Time Zone) of the split, for company to determine where to
+    Record date of the split in Eastern Time Zone, for company to determine where to
     send their new shares. Mainly for record keeping by brokerages, who forward the
-    shares to eventual owners. Typically is first in the process.
+    shares to eventual owners. Typically is the first date in the process. In ISO
+    8601 format, YYYY-MM-DD.
     """
 
     split_from: float
@@ -41,10 +43,11 @@ class StockSplit(BaseModel):
     """The number of shares after the split. In a 10-for-1 split, this would be 10."""
 
     status: Literal["PENDING", "IN_PROGRESS", "COMPLETE"]
-    """The status of Dinari's processing of the split.
+    """The status of Dinari's processing of the `StockSplit`.
 
-    Stocks for which a split is `IN_PROGRESS` will not be available for trading.
+    `Stocks` for which this status is `IN_PROGRESS` will not be available for
+    trading.
     """
 
     stock_id: str
-    """Reference to the id of the stock for this split"""
+    """ID of the `Stock` whose shares are being split."""

@@ -10,19 +10,19 @@ __all__ = ["StockRetrieveHistoricalPricesResponse", "StockRetrieveHistoricalPric
 
 class StockRetrieveHistoricalPricesResponseItem(BaseModel):
     close: float
-    """Close price of the stock in the given time period."""
+    """Close price from the given time period."""
 
     high: float
-    """Highest price of the stock in the given time period."""
+    """Highest price from the given time period."""
 
     low: float
-    """Lowest price of the stock in the given time period."""
+    """Lowest price from the given time period."""
 
     open: float
-    """Open price of the stock in the given time period."""
+    """Open price from the given time period."""
 
     timestamp: int
-    """The Unix timestamp in seconds for the start of the aggregate window."""
+    """The UNIX timestamp in seconds for the start of the aggregate window."""
 
 
 StockRetrieveHistoricalPricesResponse: TypeAlias = List[StockRetrieveHistoricalPricesResponseItem]

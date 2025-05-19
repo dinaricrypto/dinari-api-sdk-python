@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Mapping, cast
+
 import httpx
 
-from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ....._utils import maybe_transform, async_maybe_transform
+from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
+from ....._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -19,7 +21,6 @@ from .....types.api.v2.entities import KYCDocumentType, kyc_submit_params, kyc_u
 from .....types.api.v2.entities.kyc_info import KYCInfo
 from .....types.api.v2.entities.kyc_data_param import KYCDataParam
 from .....types.api.v2.entities.kyc_document_type import KYCDocumentType
-from .....types.api.v2.entities.kyc_get_url_response import KYCGetURLResponse
 from .....types.api.v2.entities.kyc_upload_document_response import KYCUploadDocumentResponse
 
 __all__ = ["KYCResource", "AsyncKYCResource"]
@@ -57,7 +58,11 @@ class KYCResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> KYCInfo:
         """
-        Retrieves KYC data of the entity.
+        Get most recent KYC data of the `Entity`.
+
+        If there are any completed KYC checks, data from the most recent one will be
+        returned. If there are no completed KYC checks, the most recent KYC check
+        information, regardless of status, will be returned.
 
         Args:
           extra_headers: Send extra headers
@@ -78,39 +83,6 @@ class KYCResource(SyncAPIResource):
             cast_to=KYCInfo,
         )
 
-    def get_url(
-        self,
-        entity_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> KYCGetURLResponse:
-        """
-        Gets an iframe URL for managed (self-service) KYC.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not entity_id:
-            raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
-        return self._get(
-            f"/api/v2/entities/{entity_id}/kyc/url",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=KYCGetURLResponse,
-        )
-
     def submit(
         self,
         entity_id: str,
@@ -125,12 +97,16 @@ class KYCResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> KYCInfo:
         """
-        Submits KYC data manually (for Partner KYC-enabled entities).
+        Submit KYC data directly, for partners that are provisioned to provide their own
+        KYC data.
+
+        This feature is available for everyone in sandbox mode, and for specifically
+        provisioned partners in production.
 
         Args:
-          data: Object consisting of KYC data for an entity
+          data: KYC data for an `Entity`.
 
-          provider_name: Name of the KYC provider that provided the KYC information
+          provider_name: Name of the KYC provider that provided the KYC information.
 
           extra_headers: Send extra headers
 
@@ -163,6 +139,7 @@ class KYCResource(SyncAPIResource):
         *,
         entity_id: str,
         document_type: KYCDocumentType,
+        file: FileTypes,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -171,10 +148,14 @@ class KYCResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> KYCUploadDocumentResponse:
         """
-        Uploads KYC-related documentation (for Partner KYC-enabled entities).
+        Upload KYC-related documentation for partners that are provisioned to provide
+        their own KYC data.
 
         Args:
-          document_type: Type of the document to be uploaded
+          document_type: Type of `KYCDocument` to be uploaded.
+
+          file: File to be uploaded. Must be a valid image or PDF file (jpg, jpeg, png, pdf)
+              less than 10MB in size.
 
           extra_headers: Send extra headers
 
@@ -188,11 +169,24 @@ class KYCResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         if not kyc_id:
             raise ValueError(f"Expected a non-empty value for `kyc_id` but received {kyc_id!r}")
+        body = deepcopy_minimal({"file": file})
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
             f"/api/v2/entities/{entity_id}/kyc/{kyc_id}/document",
-            body=maybe_transform({"document_type": document_type}, kyc_upload_document_params.KYCUploadDocumentParams),
+            body=maybe_transform(body, kyc_upload_document_params.KYCUploadDocumentParams),
+            files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"document_type": document_type}, kyc_upload_document_params.KYCUploadDocumentParams
+                ),
             ),
             cast_to=KYCUploadDocumentResponse,
         )
@@ -230,7 +224,11 @@ class AsyncKYCResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> KYCInfo:
         """
-        Retrieves KYC data of the entity.
+        Get most recent KYC data of the `Entity`.
+
+        If there are any completed KYC checks, data from the most recent one will be
+        returned. If there are no completed KYC checks, the most recent KYC check
+        information, regardless of status, will be returned.
 
         Args:
           extra_headers: Send extra headers
@@ -251,39 +249,6 @@ class AsyncKYCResource(AsyncAPIResource):
             cast_to=KYCInfo,
         )
 
-    async def get_url(
-        self,
-        entity_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> KYCGetURLResponse:
-        """
-        Gets an iframe URL for managed (self-service) KYC.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not entity_id:
-            raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
-        return await self._get(
-            f"/api/v2/entities/{entity_id}/kyc/url",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=KYCGetURLResponse,
-        )
-
     async def submit(
         self,
         entity_id: str,
@@ -298,12 +263,16 @@ class AsyncKYCResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> KYCInfo:
         """
-        Submits KYC data manually (for Partner KYC-enabled entities).
+        Submit KYC data directly, for partners that are provisioned to provide their own
+        KYC data.
+
+        This feature is available for everyone in sandbox mode, and for specifically
+        provisioned partners in production.
 
         Args:
-          data: Object consisting of KYC data for an entity
+          data: KYC data for an `Entity`.
 
-          provider_name: Name of the KYC provider that provided the KYC information
+          provider_name: Name of the KYC provider that provided the KYC information.
 
           extra_headers: Send extra headers
 
@@ -336,6 +305,7 @@ class AsyncKYCResource(AsyncAPIResource):
         *,
         entity_id: str,
         document_type: KYCDocumentType,
+        file: FileTypes,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -344,10 +314,14 @@ class AsyncKYCResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> KYCUploadDocumentResponse:
         """
-        Uploads KYC-related documentation (for Partner KYC-enabled entities).
+        Upload KYC-related documentation for partners that are provisioned to provide
+        their own KYC data.
 
         Args:
-          document_type: Type of the document to be uploaded
+          document_type: Type of `KYCDocument` to be uploaded.
+
+          file: File to be uploaded. Must be a valid image or PDF file (jpg, jpeg, png, pdf)
+              less than 10MB in size.
 
           extra_headers: Send extra headers
 
@@ -361,13 +335,24 @@ class AsyncKYCResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         if not kyc_id:
             raise ValueError(f"Expected a non-empty value for `kyc_id` but received {kyc_id!r}")
+        body = deepcopy_minimal({"file": file})
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             f"/api/v2/entities/{entity_id}/kyc/{kyc_id}/document",
-            body=await async_maybe_transform(
-                {"document_type": document_type}, kyc_upload_document_params.KYCUploadDocumentParams
-            ),
+            body=await async_maybe_transform(body, kyc_upload_document_params.KYCUploadDocumentParams),
+            files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"document_type": document_type}, kyc_upload_document_params.KYCUploadDocumentParams
+                ),
             ),
             cast_to=KYCUploadDocumentResponse,
         )
@@ -379,9 +364,6 @@ class KYCResourceWithRawResponse:
 
         self.retrieve = to_raw_response_wrapper(
             kyc.retrieve,
-        )
-        self.get_url = to_raw_response_wrapper(
-            kyc.get_url,
         )
         self.submit = to_raw_response_wrapper(
             kyc.submit,
@@ -398,9 +380,6 @@ class AsyncKYCResourceWithRawResponse:
         self.retrieve = async_to_raw_response_wrapper(
             kyc.retrieve,
         )
-        self.get_url = async_to_raw_response_wrapper(
-            kyc.get_url,
-        )
         self.submit = async_to_raw_response_wrapper(
             kyc.submit,
         )
@@ -416,9 +395,6 @@ class KYCResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             kyc.retrieve,
         )
-        self.get_url = to_streamed_response_wrapper(
-            kyc.get_url,
-        )
         self.submit = to_streamed_response_wrapper(
             kyc.submit,
         )
@@ -433,9 +409,6 @@ class AsyncKYCResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             kyc.retrieve,
-        )
-        self.get_url = async_to_streamed_response_wrapper(
-            kyc.get_url,
         )
         self.submit = async_to_streamed_response_wrapper(
             kyc.submit,

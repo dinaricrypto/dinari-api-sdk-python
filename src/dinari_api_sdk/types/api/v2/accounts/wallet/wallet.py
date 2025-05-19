@@ -7,10 +7,10 @@ __all__ = ["Wallet"]
 
 class Wallet(BaseModel):
     address: str
-    """Address of the wallet"""
+    """Address of the `Wallet`."""
 
     is_aml_flagged: bool
-    """Indicates whether the wallet is flagged for AML violations"""
+    """Indicates whether the `Wallet` is flagged for AML violation."""
 
     is_managed_wallet: bool
-    """Indicates whether the wallet is a Dinari-managed wallet"""
+    """Indicates whether the `Wallet` is a Dinari-managed wallet."""

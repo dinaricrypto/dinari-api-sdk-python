@@ -17,10 +17,10 @@ class AccountRetrieveDividendPaymentsResponseItem(BaseModel):
     """Currency in which the dividend was paid. (e.g. USD)"""
 
     payment_date: date
-    """Date the dividend was distributed to the account."""
+    """Date the dividend was distributed to the account. ISO 8601 format, YYYY-MM-DD."""
 
     stock_id: str
-    """ID of the stock for which the dividend was paid."""
+    """ID of the `Stock` for which the dividend was paid."""
 
 
 AccountRetrieveDividendPaymentsResponse: TypeAlias = List[AccountRetrieveDividendPaymentsResponseItem]

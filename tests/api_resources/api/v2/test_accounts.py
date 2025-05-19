@@ -9,6 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from dinari_api_sdk import Dinari, AsyncDinari
+from dinari_api_sdk._utils import parse_date
 from dinari_api_sdk.types.api.v2 import (
     AccountRetrieveCashResponse,
     AccountRetrievePortfolioResponse,
@@ -153,7 +154,22 @@ class TestAccounts:
     @parametrize
     def test_method_retrieve_dividend_payments(self, client: Dinari) -> None:
         account = client.api.v2.accounts.retrieve_dividend_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
+        )
+        assert_matches_type(AccountRetrieveDividendPaymentsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_retrieve_dividend_payments_with_all_params(self, client: Dinari) -> None:
+        account = client.api.v2.accounts.retrieve_dividend_payments(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
+            page=1,
+            page_size=1,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountRetrieveDividendPaymentsResponse, account, path=["response"])
 
@@ -161,7 +177,9 @@ class TestAccounts:
     @parametrize
     def test_raw_response_retrieve_dividend_payments(self, client: Dinari) -> None:
         response = client.api.v2.accounts.with_raw_response.retrieve_dividend_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
         )
 
         assert response.is_closed is True
@@ -173,7 +191,9 @@ class TestAccounts:
     @parametrize
     def test_streaming_response_retrieve_dividend_payments(self, client: Dinari) -> None:
         with client.api.v2.accounts.with_streaming_response.retrieve_dividend_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -188,14 +208,30 @@ class TestAccounts:
     def test_path_params_retrieve_dividend_payments(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.api.v2.accounts.with_raw_response.retrieve_dividend_payments(
-                "",
+                account_id="",
+                end_date=parse_date("2019-12-27"),
+                start_date=parse_date("2019-12-27"),
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_retrieve_interest_payments(self, client: Dinari) -> None:
         account = client.api.v2.accounts.retrieve_interest_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
+        )
+        assert_matches_type(AccountRetrieveInterestPaymentsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_retrieve_interest_payments_with_all_params(self, client: Dinari) -> None:
+        account = client.api.v2.accounts.retrieve_interest_payments(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
+            page=1,
+            page_size=1,
         )
         assert_matches_type(AccountRetrieveInterestPaymentsResponse, account, path=["response"])
 
@@ -203,7 +239,9 @@ class TestAccounts:
     @parametrize
     def test_raw_response_retrieve_interest_payments(self, client: Dinari) -> None:
         response = client.api.v2.accounts.with_raw_response.retrieve_interest_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
         )
 
         assert response.is_closed is True
@@ -215,7 +253,9 @@ class TestAccounts:
     @parametrize
     def test_streaming_response_retrieve_interest_payments(self, client: Dinari) -> None:
         with client.api.v2.accounts.with_streaming_response.retrieve_interest_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -230,7 +270,9 @@ class TestAccounts:
     def test_path_params_retrieve_interest_payments(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.api.v2.accounts.with_raw_response.retrieve_interest_payments(
-                "",
+                account_id="",
+                end_date=parse_date("2019-12-27"),
+                start_date=parse_date("2019-12-27"),
             )
 
     @pytest.mark.skip()
@@ -409,7 +451,22 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_retrieve_dividend_payments(self, async_client: AsyncDinari) -> None:
         account = await async_client.api.v2.accounts.retrieve_dividend_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
+        )
+        assert_matches_type(AccountRetrieveDividendPaymentsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_retrieve_dividend_payments_with_all_params(self, async_client: AsyncDinari) -> None:
+        account = await async_client.api.v2.accounts.retrieve_dividend_payments(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
+            page=1,
+            page_size=1,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccountRetrieveDividendPaymentsResponse, account, path=["response"])
 
@@ -417,7 +474,9 @@ class TestAsyncAccounts:
     @parametrize
     async def test_raw_response_retrieve_dividend_payments(self, async_client: AsyncDinari) -> None:
         response = await async_client.api.v2.accounts.with_raw_response.retrieve_dividend_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
         )
 
         assert response.is_closed is True
@@ -429,7 +488,9 @@ class TestAsyncAccounts:
     @parametrize
     async def test_streaming_response_retrieve_dividend_payments(self, async_client: AsyncDinari) -> None:
         async with async_client.api.v2.accounts.with_streaming_response.retrieve_dividend_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -444,14 +505,30 @@ class TestAsyncAccounts:
     async def test_path_params_retrieve_dividend_payments(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.api.v2.accounts.with_raw_response.retrieve_dividend_payments(
-                "",
+                account_id="",
+                end_date=parse_date("2019-12-27"),
+                start_date=parse_date("2019-12-27"),
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve_interest_payments(self, async_client: AsyncDinari) -> None:
         account = await async_client.api.v2.accounts.retrieve_interest_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
+        )
+        assert_matches_type(AccountRetrieveInterestPaymentsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_retrieve_interest_payments_with_all_params(self, async_client: AsyncDinari) -> None:
+        account = await async_client.api.v2.accounts.retrieve_interest_payments(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
+            page=1,
+            page_size=1,
         )
         assert_matches_type(AccountRetrieveInterestPaymentsResponse, account, path=["response"])
 
@@ -459,7 +536,9 @@ class TestAsyncAccounts:
     @parametrize
     async def test_raw_response_retrieve_interest_payments(self, async_client: AsyncDinari) -> None:
         response = await async_client.api.v2.accounts.with_raw_response.retrieve_interest_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
         )
 
         assert response.is_closed is True
@@ -471,7 +550,9 @@ class TestAsyncAccounts:
     @parametrize
     async def test_streaming_response_retrieve_interest_payments(self, async_client: AsyncDinari) -> None:
         async with async_client.api.v2.accounts.with_streaming_response.retrieve_interest_payments(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_date("2019-12-27"),
+            start_date=parse_date("2019-12-27"),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -486,7 +567,9 @@ class TestAsyncAccounts:
     async def test_path_params_retrieve_interest_payments(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.api.v2.accounts.with_raw_response.retrieve_interest_payments(
-                "",
+                account_id="",
+                end_date=parse_date("2019-12-27"),
+                start_date=parse_date("2019-12-27"),
             )
 
     @pytest.mark.skip()

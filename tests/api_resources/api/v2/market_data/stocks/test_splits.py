@@ -24,7 +24,7 @@ class TestSplits:
     @parametrize
     def test_method_retrieve(self, client: Dinari) -> None:
         split = client.api.v2.market_data.stocks.splits.retrieve(
-            stock_id="stock_id",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(SplitRetrieveResponse, split, path=["response"])
 
@@ -32,7 +32,7 @@ class TestSplits:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Dinari) -> None:
         split = client.api.v2.market_data.stocks.splits.retrieve(
-            stock_id="stock_id",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page=1,
             page_size=1,
         )
@@ -42,7 +42,7 @@ class TestSplits:
     @parametrize
     def test_raw_response_retrieve(self, client: Dinari) -> None:
         response = client.api.v2.market_data.stocks.splits.with_raw_response.retrieve(
-            stock_id="stock_id",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -54,7 +54,7 @@ class TestSplits:
     @parametrize
     def test_streaming_response_retrieve(self, client: Dinari) -> None:
         with client.api.v2.market_data.stocks.splits.with_streaming_response.retrieve(
-            stock_id="stock_id",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -117,7 +117,7 @@ class TestAsyncSplits:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDinari) -> None:
         split = await async_client.api.v2.market_data.stocks.splits.retrieve(
-            stock_id="stock_id",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(SplitRetrieveResponse, split, path=["response"])
 
@@ -125,7 +125,7 @@ class TestAsyncSplits:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncDinari) -> None:
         split = await async_client.api.v2.market_data.stocks.splits.retrieve(
-            stock_id="stock_id",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page=1,
             page_size=1,
         )
@@ -135,7 +135,7 @@ class TestAsyncSplits:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDinari) -> None:
         response = await async_client.api.v2.market_data.stocks.splits.with_raw_response.retrieve(
-            stock_id="stock_id",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -147,7 +147,7 @@ class TestAsyncSplits:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDinari) -> None:
         async with async_client.api.v2.market_data.stocks.splits.with_streaming_response.retrieve(
-            stock_id="stock_id",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

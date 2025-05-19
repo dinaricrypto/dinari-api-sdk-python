@@ -40,11 +40,13 @@ class Dinari(SyncAPIClient):
 
     # client options
     api_key: str
+    secret: str
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -66,7 +68,9 @@ class Dinari(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Dinari client instance.
 
-        This automatically infers the `api_key` argument from the `DINARI_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `api_key` from `DINARI_API_KEY`
+        - `secret` from `DINARI_SECRET`
         """
         if api_key is None:
             api_key = os.environ.get("DINARI_API_KEY")
@@ -75,6 +79,14 @@ class Dinari(SyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the DINARI_API_KEY environment variable"
             )
         self.api_key = api_key
+
+        if secret is None:
+            secret = os.environ.get("DINARI_SECRET")
+        if secret is None:
+            raise DinariError(
+                "The secret client option must be set either by passing secret to the client or by setting the DINARI_SECRET environment variable"
+            )
+        self.secret = secret
 
         if base_url is None:
             base_url = os.environ.get("DINARI_BASE_URL")
@@ -104,8 +116,17 @@ class Dinari(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
+        return {**self._api_key_id, **self._api_secret_key}
+
+    @property
+    def _api_key_id(self) -> dict[str, str]:
         api_key = self.api_key
-        return {"Authorization": f"Bearer {api_key}"}
+        return {"X-API-Key-Id": api_key}
+
+    @property
+    def _api_secret_key(self) -> dict[str, str]:
+        secret = self.secret
+        return {"X-API-Secret-Key": secret}
 
     @property
     @override
@@ -120,6 +141,7 @@ class Dinari(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -154,6 +176,7 @@ class Dinari(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            secret=secret or self.secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -208,11 +231,13 @@ class AsyncDinari(AsyncAPIClient):
 
     # client options
     api_key: str
+    secret: str
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -234,7 +259,9 @@ class AsyncDinari(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncDinari client instance.
 
-        This automatically infers the `api_key` argument from the `DINARI_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `api_key` from `DINARI_API_KEY`
+        - `secret` from `DINARI_SECRET`
         """
         if api_key is None:
             api_key = os.environ.get("DINARI_API_KEY")
@@ -243,6 +270,14 @@ class AsyncDinari(AsyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the DINARI_API_KEY environment variable"
             )
         self.api_key = api_key
+
+        if secret is None:
+            secret = os.environ.get("DINARI_SECRET")
+        if secret is None:
+            raise DinariError(
+                "The secret client option must be set either by passing secret to the client or by setting the DINARI_SECRET environment variable"
+            )
+        self.secret = secret
 
         if base_url is None:
             base_url = os.environ.get("DINARI_BASE_URL")
@@ -272,8 +307,17 @@ class AsyncDinari(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
+        return {**self._api_key_id, **self._api_secret_key}
+
+    @property
+    def _api_key_id(self) -> dict[str, str]:
         api_key = self.api_key
-        return {"Authorization": f"Bearer {api_key}"}
+        return {"X-API-Key-Id": api_key}
+
+    @property
+    def _api_secret_key(self) -> dict[str, str]:
+        secret = self.secret
+        return {"X-API-Secret-Key": secret}
 
     @property
     @override
@@ -288,6 +332,7 @@ class AsyncDinari(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -322,6 +367,7 @@ class AsyncDinari(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            secret=secret or self.secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,

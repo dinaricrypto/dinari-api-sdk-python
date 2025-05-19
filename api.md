@@ -2,16 +2,6 @@
 
 ## V2
 
-Types:
-
-```python
-from dinari_api_sdk.types.api import V2GetHealthResponse
-```
-
-Methods:
-
-- <code title="get /api/v2/_health/">client.api.v2.<a href="./src/dinari_api_sdk/resources/api/v2/v2.py">get_health</a>() -> <a href="./src/dinari_api_sdk/types/api/v2_get_health_response.py">V2GetHealthResponse</a></code>
-
 ### MarketData
 
 Types:
@@ -100,7 +90,6 @@ from dinari_api_sdk.types.api.v2.entities import (
     KYCData,
     KYCDocumentType,
     KYCInfo,
-    KYCGetURLResponse,
     KYCUploadDocumentResponse,
 )
 ```
@@ -108,7 +97,6 @@ from dinari_api_sdk.types.api.v2.entities import (
 Methods:
 
 - <code title="get /api/v2/entities/{entity_id}/kyc">client.api.v2.entities.kyc.<a href="./src/dinari_api_sdk/resources/api/v2/entities/kyc.py">retrieve</a>(entity_id) -> <a href="./src/dinari_api_sdk/types/api/v2/entities/kyc_info.py">KYCInfo</a></code>
-- <code title="get /api/v2/entities/{entity_id}/kyc/url">client.api.v2.entities.kyc.<a href="./src/dinari_api_sdk/resources/api/v2/entities/kyc.py">get_url</a>(entity_id) -> <a href="./src/dinari_api_sdk/types/api/v2/entities/kyc_get_url_response.py">KYCGetURLResponse</a></code>
 - <code title="post /api/v2/entities/{entity_id}/kyc">client.api.v2.entities.kyc.<a href="./src/dinari_api_sdk/resources/api/v2/entities/kyc.py">submit</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/entities/kyc_submit_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/entities/kyc_info.py">KYCInfo</a></code>
 - <code title="post /api/v2/entities/{entity_id}/kyc/{kyc_id}/document">client.api.v2.entities.kyc.<a href="./src/dinari_api_sdk/resources/api/v2/entities/kyc.py">upload_document</a>(kyc_id, \*, entity_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/entities/kyc_upload_document_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/entities/kyc_upload_document_response.py">KYCUploadDocumentResponse</a></code>
 
@@ -130,8 +118,8 @@ Methods:
 - <code title="get /api/v2/accounts/{account_id}">client.api.v2.accounts.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/accounts.py">retrieve</a>(account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/entities/account.py">Account</a></code>
 - <code title="post /api/v2/accounts/{account_id}/deactivate">client.api.v2.accounts.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/accounts.py">deactivate</a>(account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/entities/account.py">Account</a></code>
 - <code title="get /api/v2/accounts/{account_id}/cash">client.api.v2.accounts.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/accounts.py">retrieve_cash</a>(account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/account_retrieve_cash_response.py">AccountRetrieveCashResponse</a></code>
-- <code title="get /api/v2/accounts/{account_id}/dividend_payments">client.api.v2.accounts.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/accounts.py">retrieve_dividend_payments</a>(account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/account_retrieve_dividend_payments_response.py">AccountRetrieveDividendPaymentsResponse</a></code>
-- <code title="get /api/v2/accounts/{account_id}/interest_payments">client.api.v2.accounts.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/accounts.py">retrieve_interest_payments</a>(account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/account_retrieve_interest_payments_response.py">AccountRetrieveInterestPaymentsResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/dividend_payments">client.api.v2.accounts.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/accounts.py">retrieve_dividend_payments</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/account_retrieve_dividend_payments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/account_retrieve_dividend_payments_response.py">AccountRetrieveDividendPaymentsResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/interest_payments">client.api.v2.accounts.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/accounts.py">retrieve_interest_payments</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/account_retrieve_interest_payments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/account_retrieve_interest_payments_response.py">AccountRetrieveInterestPaymentsResponse</a></code>
 - <code title="get /api/v2/accounts/{account_id}/portfolio">client.api.v2.accounts.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/accounts.py">retrieve_portfolio</a>(account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/account_retrieve_portfolio_response.py">AccountRetrievePortfolioResponse</a></code>
 
 #### Wallet
@@ -167,7 +155,6 @@ Types:
 from dinari_api_sdk.types.api.v2.accounts import (
     Order,
     OrderListResponse,
-    OrderGetEstimatedFeeResponse,
     OrderRetrieveFulfillmentsResponse,
 )
 ```
@@ -175,10 +162,9 @@ from dinari_api_sdk.types.api.v2.accounts import (
 Methods:
 
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.api.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/orders.py">retrieve</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order.py">Order</a></code>
-- <code title="get /api/v2/accounts/{account_id}/orders">client.api.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/orders.py">list</a>(account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_list_response.py">OrderListResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/orders">client.api.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/orders.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/accounts/order_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_list_response.py">OrderListResponse</a></code>
 - <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.api.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/orders.py">cancel</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order.py">Order</a></code>
-- <code title="post /api/v2/accounts/{account_id}/orders/estimated_fee">client.api.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/orders.py">get_estimated_fee</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/accounts/order_get_estimated_fee_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_get_estimated_fee_response.py">OrderGetEstimatedFeeResponse</a></code>
-- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.api.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/orders.py">retrieve_fulfillments</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_retrieve_fulfillments_response.py">OrderRetrieveFulfillmentsResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.api.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/orders.py">retrieve_fulfillments</a>(order_id, \*, account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/accounts/order_retrieve_fulfillments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_retrieve_fulfillments_response.py">OrderRetrieveFulfillmentsResponse</a></code>
 
 #### OrderFulfillments
 
@@ -190,8 +176,7 @@ from dinari_api_sdk.types.api.v2.accounts import OrderFulfillment, OrderFulfillm
 
 Methods:
 
-- <code title="get /api/v2/accounts/{account_id}/order_fulfillments/{fulfillment_id}">client.api.v2.accounts.order_fulfillments.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/order_fulfillments.py">retrieve</a>(fulfillment_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_fulfillment.py">OrderFulfillment</a></code>
-- <code title="get /api/v2/accounts/{account_id}/order_fulfillments">client.api.v2.accounts.order_fulfillments.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/order_fulfillments.py">query</a>(account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_fulfillment_query_response.py">OrderFulfillmentQueryResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/order_fulfillments">client.api.v2.accounts.order_fulfillments.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/order_fulfillments.py">query</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/accounts/order_fulfillment_query_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_fulfillment_query_response.py">OrderFulfillmentQueryResponse</a></code>
 
 #### OrderRequests
 
@@ -207,8 +192,7 @@ from dinari_api_sdk.types.api.v2.accounts import (
 
 Methods:
 
-- <code title="get /api/v2/accounts/{account_id}/order_requests/{request_id}">client.api.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/order_requests.py">retrieve</a>(request_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_request.py">OrderRequest</a></code>
-- <code title="get /api/v2/accounts/{account_id}/order_requests">client.api.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/order_requests.py">list</a>(account_id) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_request_list_response.py">OrderRequestListResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/order_requests">client.api.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/order_requests.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/accounts/order_request_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_request_list_response.py">OrderRequestListResponse</a></code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/limit_buy">client.api.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/order_requests.py">create_limit_buy</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/accounts/order_request_create_limit_buy_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_request.py">OrderRequest</a></code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/limit_sell">client.api.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/order_requests.py">create_limit_sell</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/accounts/order_request_create_limit_sell_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_request.py">OrderRequest</a></code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/market_buy">client.api.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/api/v2/accounts/order_requests.py">create_market_buy</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/api/v2/accounts/order_request_create_market_buy_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/api/v2/accounts/order_request.py">OrderRequest</a></code>

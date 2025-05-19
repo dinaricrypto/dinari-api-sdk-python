@@ -63,7 +63,7 @@ class WalletResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Wallet:
         """
-        Retrieves details of the wallet connected to the account.
+        Get the wallet connected to the `Account`.
 
         Args:
           extra_headers: Send extra headers
@@ -121,7 +121,7 @@ class AsyncWalletResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Wallet:
         """
-        Retrieves details of the wallet connected to the account.
+        Get the wallet connected to the `Account`.
 
         Args:
           extra_headers: Send extra headers

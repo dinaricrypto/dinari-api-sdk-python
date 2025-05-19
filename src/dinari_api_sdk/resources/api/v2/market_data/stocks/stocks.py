@@ -79,11 +79,12 @@ class StocksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockListResponse:
-        """
-        Returns a list of stocks available for trading.
+        """Get a list of `Stocks`.
 
         Args:
-          symbols: List of stock symbols to query. If not provided, all stocks are returned.
+          symbols: List of `Stock` symbols to query.
+
+        If not provided, all `Stocks` are returned.
 
           extra_headers: Send extra headers
 
@@ -123,11 +124,11 @@ class StocksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockRetrieveDividendsResponse:
-        """Returns a list of announced stock dividend details for a specified stock.
+        """
+        Get a list of announced stock dividend details for a specified `Stock`.
 
-        Note
-        that this data applies only to actual stocks. Yield received for holding dShares
-        may differ from this.
+        Note that this data applies only to actual stocks. Yield received for holding
+        tokenized shares may differ from this.
 
         Args:
           extra_headers: Send extra headers
@@ -160,10 +161,10 @@ class StocksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockRetrieveHistoricalPricesResponse:
-        """Returns a list of historical prices for a specified stock.
+        """Get historical price data for a specified `Stock`.
 
-        Each index in the
-        array represents a single tick in a price chart.
+        Each index in the array
+        represents a single tick in a price chart.
 
         Args:
           timespan: The timespan of the historical prices to query.
@@ -205,11 +206,11 @@ class StocksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockRetrieveNewsResponse:
         """
-        Get the most recent news articles relating to a stock, including a summary of
-        the article and a link to the original source
+        Get the most recent news articles relating to a `Stock`, including a summary of
+        the article and a link to the original source.
 
         Args:
-          limit: The number of news articles to return, default is 10 max is 25
+          limit: The number of articles to return.
 
           extra_headers: Send extra headers
 
@@ -245,7 +246,7 @@ class StocksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockRetrieveQuoteResponse:
         """
-        Returns a stock quote for a specified stock.
+        Get quote for a specified `Stock`.
 
         Args:
           extra_headers: Send extra headers
@@ -304,11 +305,12 @@ class AsyncStocksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockListResponse:
-        """
-        Returns a list of stocks available for trading.
+        """Get a list of `Stocks`.
 
         Args:
-          symbols: List of stock symbols to query. If not provided, all stocks are returned.
+          symbols: List of `Stock` symbols to query.
+
+        If not provided, all `Stocks` are returned.
 
           extra_headers: Send extra headers
 
@@ -348,11 +350,11 @@ class AsyncStocksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockRetrieveDividendsResponse:
-        """Returns a list of announced stock dividend details for a specified stock.
+        """
+        Get a list of announced stock dividend details for a specified `Stock`.
 
-        Note
-        that this data applies only to actual stocks. Yield received for holding dShares
-        may differ from this.
+        Note that this data applies only to actual stocks. Yield received for holding
+        tokenized shares may differ from this.
 
         Args:
           extra_headers: Send extra headers
@@ -385,10 +387,10 @@ class AsyncStocksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockRetrieveHistoricalPricesResponse:
-        """Returns a list of historical prices for a specified stock.
+        """Get historical price data for a specified `Stock`.
 
-        Each index in the
-        array represents a single tick in a price chart.
+        Each index in the array
+        represents a single tick in a price chart.
 
         Args:
           timespan: The timespan of the historical prices to query.
@@ -430,11 +432,11 @@ class AsyncStocksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockRetrieveNewsResponse:
         """
-        Get the most recent news articles relating to a stock, including a summary of
-        the article and a link to the original source
+        Get the most recent news articles relating to a `Stock`, including a summary of
+        the article and a link to the original source.
 
         Args:
-          limit: The number of news articles to return, default is 10 max is 25
+          limit: The number of articles to return.
 
           extra_headers: Send extra headers
 
@@ -470,7 +472,7 @@ class AsyncStocksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> StockRetrieveQuoteResponse:
         """
-        Returns a stock quote for a specified stock.
+        Get quote for a specified `Stock`.
 
         Args:
           extra_headers: Send extra headers

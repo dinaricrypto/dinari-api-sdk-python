@@ -10,41 +10,55 @@ __all__ = ["StockListResponse", "StockListResponseItem"]
 
 class StockListResponseItem(BaseModel):
     id: str
-    """Unique identifier for the stock"""
+    """ID of the `Stock`"""
 
     is_fractionable: bool
-    """Whether the stock allows for fractional trading.
+    """Whether the `Stock` allows for fractional trading.
 
-    If it is not fractionable, Dinari only supports limit orders for the stock.
+    If it is not fractionable, Dinari only supports limit orders for the `Stock`.
     """
 
+    is_tradable: bool
+    """Whether the `Stock` is available for trading."""
+
     name: str
-    """Stock Name"""
+    """Company name"""
 
     symbol: str
-    """Ticker symbol of the stock"""
+    """Ticker symbol"""
 
     cik: Optional[str] = None
     """SEC Central Index Key.
 
     Refer to
     [this link](https://www.sec.gov/submit-filings/filer-support-resources/how-do-i-guides/understand-utilize-edgar-ciks-passphrases-access-codes)
+    for more information.
     """
 
     composite_figi: Optional[str] = None
-    """Composite FIGI ID. Refer to [this link](https://www.openfigi.com/about/figi)"""
+    """Composite FIGI ID.
+
+    Refer to [this link](https://www.openfigi.com/about/figi) for more information.
+    """
 
     cusip: Optional[str] = None
-    """CUSIP ID. Refer to [this link](https://www.cusip.com/identifiers.html)"""
+    """CUSIP ID.
+
+    Refer to [this link](https://www.cusip.com/identifiers.html) for more
+    information.
+    """
 
     description: Optional[str] = None
-    """Description of the company and what they do/offer."""
+    """Description of the company and their services."""
 
     display_name: Optional[str] = None
-    """Name of Stock for application display"""
+    """Name of `Stock` for application display.
+
+    If defined, this supercedes the `name` field for displaying the name.
+    """
 
     logo_url: Optional[str] = None
-    """The URL of the logo of the stock. The preferred format is svg."""
+    """URL of the company's logo. Supported formats are SVG and PNG."""
 
 
 StockListResponse: TypeAlias = List[StockListResponseItem]

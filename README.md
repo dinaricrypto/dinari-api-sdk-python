@@ -29,10 +29,11 @@ from dinari_api_sdk import Dinari
 
 client = Dinari(
     api_key=os.environ.get("DINARI_API_KEY"),  # This is the default and can be omitted
+    secret=os.environ.get("DINARI_SECRET"),  # This is the default and can be omitted
 )
 
-response = client.api.v2.get_health()
-print(response.status)
+response = client.api.v2.market_data.get_market_hours()
+print(response.is_market_open)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -51,12 +52,13 @@ from dinari_api_sdk import AsyncDinari
 
 client = AsyncDinari(
     api_key=os.environ.get("DINARI_API_KEY"),  # This is the default and can be omitted
+    secret=os.environ.get("DINARI_SECRET"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    response = await client.api.v2.get_health()
-    print(response.status)
+    response = await client.api.v2.market_data.get_market_hours()
+    print(response.is_market_open)
 
 
 asyncio.run(main())
@@ -97,13 +99,33 @@ kyc_info = client.api.v2.entities.kyc.submit(
         "birth_date": date.fromisoformat("2019-12-27"),
         "email": "johndoe@website.com",
         "first_name": "John",
-        "middle_name": "middle_name",
-        "tax_id_number": "123456789",
+        "middle_name": "x",
+        "tax_id_number": "12-3456789",
     },
-    provider_name="provider_name",
+    provider_name="x",
 )
 print(kyc_info.data)
 ```
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
+
+```python
+from pathlib import Path
+from dinari_api_sdk import Dinari
+
+client = Dinari()
+
+client.api.v2.entities.kyc.upload_document(
+    kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    document_type="GOVERNMENT_ID",
+    file=Path("/path/to/file"),
+)
+```
+
+The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
 
 ## Handling errors
 
@@ -121,7 +143,7 @@ from dinari_api_sdk import Dinari
 client = Dinari()
 
 try:
-    client.api.v2.get_health()
+    client.api.v2.market_data.get_market_hours()
 except dinari_api_sdk.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -164,7 +186,7 @@ client = Dinari(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).api.v2.get_health()
+client.with_options(max_retries=5).api.v2.market_data.get_market_hours()
 ```
 
 ### Timeouts
@@ -187,7 +209,7 @@ client = Dinari(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).api.v2.get_health()
+client.with_options(timeout=5.0).api.v2.market_data.get_market_hours()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -228,11 +250,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from dinari_api_sdk import Dinari
 
 client = Dinari()
-response = client.api.v2.with_raw_response.get_health()
+response = client.api.v2.market_data.with_raw_response.get_market_hours()
 print(response.headers.get('X-My-Header'))
 
-v2 = response.parse()  # get the object that `api.v2.get_health()` would have returned
-print(v2.status)
+market_data = response.parse()  # get the object that `api.v2.market_data.get_market_hours()` would have returned
+print(market_data.is_market_open)
 ```
 
 These methods return an [`APIResponse`](https://github.com/dinaricrypto/dinari-api-sdk-python/tree/main/src/dinari_api_sdk/_response.py) object.
@@ -246,7 +268,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.api.v2.with_streaming_response.get_health() as response:
+with client.api.v2.market_data.with_streaming_response.get_market_hours() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

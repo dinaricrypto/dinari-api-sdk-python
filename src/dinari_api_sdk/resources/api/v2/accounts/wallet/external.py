@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ......_types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -46,7 +48,7 @@ class ExternalResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: int,
+        chain_id: Literal["eip155:1", "eip155:42161", "eip155:8453", "eip155:81457", "eip155:7887", "eip155:98866"],
         nonce: str,
         signature: str,
         wallet_address: str,
@@ -58,16 +60,16 @@ class ExternalResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Wallet:
         """
-        Connects a wallet to the account using the nonce and signature
+        Connect a `Wallet` to the `Account` after verifying the signature.
 
         Args:
-          chain_id: Blockchain the wallet to link is on
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on.
 
-          nonce: Nonce used to sign the wallet connection message
+          nonce: Nonce contained within the connection message.
 
-          signature: Signature payload from signing the wallet connection message with the wallet
+          signature: Signature payload from signing the connection message with the `Wallet`.
 
-          wallet_address: Address of the wallet
+          wallet_address: Address of the `Wallet`.
 
           extra_headers: Send extra headers
 
@@ -109,10 +111,10 @@ class ExternalResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ExternalGetNonceResponse:
         """
-        Gets a nonce and message to be signed in order to verify wallet ownership.
+        Get a nonce and message to be signed in order to verify `Wallet` ownership.
 
         Args:
-          wallet_address: Address of the wallet to connect
+          wallet_address: Address of the `Wallet` to connect.
 
           extra_headers: Send extra headers
 
@@ -163,7 +165,7 @@ class AsyncExternalResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: int,
+        chain_id: Literal["eip155:1", "eip155:42161", "eip155:8453", "eip155:81457", "eip155:7887", "eip155:98866"],
         nonce: str,
         signature: str,
         wallet_address: str,
@@ -175,16 +177,16 @@ class AsyncExternalResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Wallet:
         """
-        Connects a wallet to the account using the nonce and signature
+        Connect a `Wallet` to the `Account` after verifying the signature.
 
         Args:
-          chain_id: Blockchain the wallet to link is on
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on.
 
-          nonce: Nonce used to sign the wallet connection message
+          nonce: Nonce contained within the connection message.
 
-          signature: Signature payload from signing the wallet connection message with the wallet
+          signature: Signature payload from signing the connection message with the `Wallet`.
 
-          wallet_address: Address of the wallet
+          wallet_address: Address of the `Wallet`.
 
           extra_headers: Send extra headers
 
@@ -226,10 +228,10 @@ class AsyncExternalResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ExternalGetNonceResponse:
         """
-        Gets a nonce and message to be signed in order to verify wallet ownership.
+        Get a nonce and message to be signed in order to verify `Wallet` ownership.
 
         Args:
-          wallet_address: Address of the wallet to connect
+          wallet_address: Address of the `Wallet` to connect.
 
           extra_headers: Send extra headers
 

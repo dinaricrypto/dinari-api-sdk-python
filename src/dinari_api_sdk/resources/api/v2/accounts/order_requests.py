@@ -16,6 +16,7 @@ from ....._response import (
 )
 from ....._base_client import make_request_options
 from .....types.api.v2.accounts import (
+    order_request_list_params,
     order_request_create_limit_buy_params,
     order_request_create_limit_sell_params,
     order_request_create_market_buy_params,
@@ -47,46 +48,12 @@ class OrderRequestsResource(SyncAPIResource):
         """
         return OrderRequestsResourceWithStreamingResponse(self)
 
-    def retrieve(
-        self,
-        request_id: str,
-        *,
-        account_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrderRequest:
-        """
-        Retrieves details of a specific managed order request by its ID.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        if not request_id:
-            raise ValueError(f"Expected a non-empty value for `request_id` but received {request_id!r}")
-        return self._get(
-            f"/api/v2/accounts/{account_id}/order_requests/{request_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=OrderRequest,
-        )
-
     def list(
         self,
         account_id: str,
         *,
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -95,7 +62,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestListResponse:
         """
-        Lists managed order requests.
+        Lists managed `OrderRequests`.
 
         Args:
           extra_headers: Send extra headers
@@ -111,7 +78,17 @@ class OrderRequestsResource(SyncAPIResource):
         return self._get(
             f"/api/v2/accounts/{account_id}/order_requests",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    order_request_list_params.OrderRequestListParams,
+                ),
             ),
             cast_to=OrderRequestListResponse,
         )
@@ -131,15 +108,15 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Creates a managed limit buy request.
+        Create a managed limit buy `OrderRequest`.
 
         Args:
-          asset_quantity: Quantity of stock to trade. Must be a positive integer.
+          asset_quantity: Quantity of shares to trade. Must be a positive integer.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
 
-          stock_id: ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -182,15 +159,15 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Creates a managed limit sell request.
+        Create a managed limit sell `OrderRequest`.
 
         Args:
-          asset_quantity: Quantity of stock to trade. Must be a positive integer.
+          asset_quantity: Quantity of shares to trade. Must be a positive integer.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
 
-          stock_id: ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -224,7 +201,6 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
-        include_fees: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -233,15 +209,13 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Creates a managed market buy request.
+        Create a managed market buy `OrderRequest`.
 
         Args:
-          payment_amount: Amount of USD to pay or receive for the order. Must be a positive number with a
-              precision of up to 2 decimal places.
+          payment_amount: Amount of currency (USD for US equities and ETFS) to pay or receive for the
+              order. Must be a positive number with a precision of up to 2 decimal places.
 
-          stock_id: ID of stock, as returned by the `/stocks` endpoint, e.g. 1
-
-          include_fees: Whether to include fees in the `payment_amount` input field.
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -259,7 +233,6 @@ class OrderRequestsResource(SyncAPIResource):
                 {
                     "payment_amount": payment_amount,
                     "stock_id": stock_id,
-                    "include_fees": include_fees,
                 },
                 order_request_create_market_buy_params.OrderRequestCreateMarketBuyParams,
             ),
@@ -283,13 +256,13 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Creates a managed market sell request.
+        Create a managed market sell `OrderRequest`.
 
         Args:
-          asset_quantity: Quantity of stock to trade. Must be a positive number with a precision of up to
+          asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
               9 decimal places.
 
-          stock_id: ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -337,46 +310,12 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         """
         return AsyncOrderRequestsResourceWithStreamingResponse(self)
 
-    async def retrieve(
-        self,
-        request_id: str,
-        *,
-        account_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrderRequest:
-        """
-        Retrieves details of a specific managed order request by its ID.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        if not request_id:
-            raise ValueError(f"Expected a non-empty value for `request_id` but received {request_id!r}")
-        return await self._get(
-            f"/api/v2/accounts/{account_id}/order_requests/{request_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=OrderRequest,
-        )
-
     async def list(
         self,
         account_id: str,
         *,
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -385,7 +324,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestListResponse:
         """
-        Lists managed order requests.
+        Lists managed `OrderRequests`.
 
         Args:
           extra_headers: Send extra headers
@@ -401,7 +340,17 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         return await self._get(
             f"/api/v2/accounts/{account_id}/order_requests",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    order_request_list_params.OrderRequestListParams,
+                ),
             ),
             cast_to=OrderRequestListResponse,
         )
@@ -421,15 +370,15 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Creates a managed limit buy request.
+        Create a managed limit buy `OrderRequest`.
 
         Args:
-          asset_quantity: Quantity of stock to trade. Must be a positive integer.
+          asset_quantity: Quantity of shares to trade. Must be a positive integer.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
 
-          stock_id: ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -472,15 +421,15 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Creates a managed limit sell request.
+        Create a managed limit sell `OrderRequest`.
 
         Args:
-          asset_quantity: Quantity of stock to trade. Must be a positive integer.
+          asset_quantity: Quantity of shares to trade. Must be a positive integer.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
 
-          stock_id: ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -514,7 +463,6 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
-        include_fees: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -523,15 +471,13 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Creates a managed market buy request.
+        Create a managed market buy `OrderRequest`.
 
         Args:
-          payment_amount: Amount of USD to pay or receive for the order. Must be a positive number with a
-              precision of up to 2 decimal places.
+          payment_amount: Amount of currency (USD for US equities and ETFS) to pay or receive for the
+              order. Must be a positive number with a precision of up to 2 decimal places.
 
-          stock_id: ID of stock, as returned by the `/stocks` endpoint, e.g. 1
-
-          include_fees: Whether to include fees in the `payment_amount` input field.
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -549,7 +495,6 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 {
                     "payment_amount": payment_amount,
                     "stock_id": stock_id,
-                    "include_fees": include_fees,
                 },
                 order_request_create_market_buy_params.OrderRequestCreateMarketBuyParams,
             ),
@@ -573,13 +518,13 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Creates a managed market sell request.
+        Create a managed market sell `OrderRequest`.
 
         Args:
-          asset_quantity: Quantity of stock to trade. Must be a positive number with a precision of up to
+          asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
               9 decimal places.
 
-          stock_id: ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -611,9 +556,6 @@ class OrderRequestsResourceWithRawResponse:
     def __init__(self, order_requests: OrderRequestsResource) -> None:
         self._order_requests = order_requests
 
-        self.retrieve = to_raw_response_wrapper(
-            order_requests.retrieve,
-        )
         self.list = to_raw_response_wrapper(
             order_requests.list,
         )
@@ -635,9 +577,6 @@ class AsyncOrderRequestsResourceWithRawResponse:
     def __init__(self, order_requests: AsyncOrderRequestsResource) -> None:
         self._order_requests = order_requests
 
-        self.retrieve = async_to_raw_response_wrapper(
-            order_requests.retrieve,
-        )
         self.list = async_to_raw_response_wrapper(
             order_requests.list,
         )
@@ -659,9 +598,6 @@ class OrderRequestsResourceWithStreamingResponse:
     def __init__(self, order_requests: OrderRequestsResource) -> None:
         self._order_requests = order_requests
 
-        self.retrieve = to_streamed_response_wrapper(
-            order_requests.retrieve,
-        )
         self.list = to_streamed_response_wrapper(
             order_requests.list,
         )
@@ -683,9 +619,6 @@ class AsyncOrderRequestsResourceWithStreamingResponse:
     def __init__(self, order_requests: AsyncOrderRequestsResource) -> None:
         self._order_requests = order_requests
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            order_requests.retrieve,
-        )
         self.list = async_to_streamed_response_wrapper(
             order_requests.list,
         )

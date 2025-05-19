@@ -9,4 +9,4 @@ __all__ = ["ExternalGetNonceParams"]
 
 class ExternalGetNonceParams(TypedDict, total=False):
     wallet_address: Required[str]
-    """Address of the wallet to connect"""
+    """Address of the `Wallet` to connect."""

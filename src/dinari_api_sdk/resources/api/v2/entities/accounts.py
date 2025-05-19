@@ -53,8 +53,10 @@ class AccountsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Account:
-        """
-        Creates a new Account for the given Entity.
+        """Create a new `Account` for a specific `Entity`.
+
+        This `Entity` represents your
+        organization itself, or an individual customer of your organization.
 
         Args:
           extra_headers: Send extra headers
@@ -88,8 +90,11 @@ class AccountsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountListResponse:
-        """
-        Retrieves a list of Accounts that belong to a specific Entity.
+        """Get a list of all `Accounts` that belong to a specific `Entity`.
+
+        This `Entity`
+        represents your organization itself, or an individual customer of your
+        organization.
 
         Args:
           extra_headers: Send extra headers
@@ -152,8 +157,10 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Account:
-        """
-        Creates a new Account for the given Entity.
+        """Create a new `Account` for a specific `Entity`.
+
+        This `Entity` represents your
+        organization itself, or an individual customer of your organization.
 
         Args:
           extra_headers: Send extra headers
@@ -187,8 +194,11 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountListResponse:
-        """
-        Retrieves a list of Accounts that belong to a specific Entity.
+        """Get a list of all `Accounts` that belong to a specific `Entity`.
+
+        This `Entity`
+        represents your organization itself, or an individual customer of your
+        organization.
 
         Args:
           extra_headers: Send extra headers

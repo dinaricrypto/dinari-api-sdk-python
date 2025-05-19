@@ -10,16 +10,20 @@ __all__ = ["Entity"]
 
 class Entity(BaseModel):
     id: str
-    """Unique identifier for the entity"""
+    """Unique ID of the `Entity`."""
 
     entity_type: Literal["INDIVIDUAL", "ORGANIZATION"]
-    """Type of entity"""
+    """Type of `Entity`.
+
+    `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their individual
+    customers.
+    """
 
     is_kyc_complete: bool
-    """Indicates if Entity completed KYC"""
+    """Indicates if `Entity` completed KYC."""
 
     name: Optional[str] = None
-    """Name of Entity"""
+    """Name of `Entity`."""
 
     nationality: Optional[str] = None
-    """Nationality of the entity"""
+    """Nationality or home country of the `Entity`."""

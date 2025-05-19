@@ -77,13 +77,13 @@ class EntitiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Entity:
-        """Creates a new Entity to be managed by your organization.
+        """Create a new `Entity` to be managed by your organization.
 
-        The Entity represents
-        an individual customer of your organization.
+        This `Entity`
+        represents an individual customer of your organization.
 
         Args:
-          name: Name of the entity
+          name: Name of the `Entity`.
 
           extra_headers: Send extra headers
 
@@ -114,7 +114,7 @@ class EntitiesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Entity:
         """
-        Retrieves a specific customer Entity of your organization by their ID.
+        Get a specific customer `Entity` of your organization by their ID.
 
         Args:
           extra_headers: Send extra headers
@@ -145,10 +145,10 @@ class EntitiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> EntityListResponse:
-        """Returns a list of all direct Entities your organization manages.
+        """Get a list of all direct `Entities` your organization manages.
 
-        An Entity
-        represents an individual customer of your organization.
+        These `Entities`
+        represent individual customers of your organization.
         """
         return self._get(
             "/api/v2/entities/",
@@ -168,7 +168,7 @@ class EntitiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Entity:
-        """Returns the current authenticated Entity."""
+        """Get the current authenticated `Entity`, which represents your organization."""
         return self._get(
             "/api/v2/entities/me",
             options=make_request_options(
@@ -217,13 +217,13 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Entity:
-        """Creates a new Entity to be managed by your organization.
+        """Create a new `Entity` to be managed by your organization.
 
-        The Entity represents
-        an individual customer of your organization.
+        This `Entity`
+        represents an individual customer of your organization.
 
         Args:
-          name: Name of the entity
+          name: Name of the `Entity`.
 
           extra_headers: Send extra headers
 
@@ -254,7 +254,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Entity:
         """
-        Retrieves a specific customer Entity of your organization by their ID.
+        Get a specific customer `Entity` of your organization by their ID.
 
         Args:
           extra_headers: Send extra headers
@@ -285,10 +285,10 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> EntityListResponse:
-        """Returns a list of all direct Entities your organization manages.
+        """Get a list of all direct `Entities` your organization manages.
 
-        An Entity
-        represents an individual customer of your organization.
+        These `Entities`
+        represent individual customers of your organization.
         """
         return await self._get(
             "/api/v2/entities/",
@@ -308,7 +308,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Entity:
-        """Returns the current authenticated Entity."""
+        """Get the current authenticated `Entity`, which represents your organization."""
         return await self._get(
             "/api/v2/entities/me",
             options=make_request_options(

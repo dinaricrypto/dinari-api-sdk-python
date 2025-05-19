@@ -5,13 +5,13 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import TypedDict
 
-__all__ = ["StockListParams"]
+__all__ = ["OrderFulfillmentQueryParams"]
 
 
-class StockListParams(TypedDict, total=False):
+class OrderFulfillmentQueryParams(TypedDict, total=False):
+    order_ids: List[str]
+    """List of `Order` IDs to query `OrderFulfillments` for."""
+
     page: int
 
     page_size: int
-
-    symbols: List[str]
-    """List of `Stock` symbols to query. If not provided, all `Stocks` are returned."""

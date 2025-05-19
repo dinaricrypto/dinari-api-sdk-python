@@ -2,18 +2,8 @@
 
 from __future__ import annotations
 
-import httpx
-
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from ...._base_client import make_request_options
 from .accounts.accounts import (
     AccountsResource,
     AsyncAccountsResource,
@@ -38,7 +28,6 @@ from .market_data.market_data import (
     MarketDataResourceWithStreamingResponse,
     AsyncMarketDataResourceWithStreamingResponse,
 )
-from ....types.api.v2_get_health_response import V2GetHealthResponse
 
 __all__ = ["V2Resource", "AsyncV2Resource"]
 
@@ -75,25 +64,6 @@ class V2Resource(SyncAPIResource):
         """
         return V2ResourceWithStreamingResponse(self)
 
-    def get_health(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> V2GetHealthResponse:
-        """Get Health Status"""
-        return self._get(
-            "/api/v2/_health/",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=V2GetHealthResponse,
-        )
-
 
 class AsyncV2Resource(AsyncAPIResource):
     @cached_property
@@ -127,33 +97,10 @@ class AsyncV2Resource(AsyncAPIResource):
         """
         return AsyncV2ResourceWithStreamingResponse(self)
 
-    async def get_health(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> V2GetHealthResponse:
-        """Get Health Status"""
-        return await self._get(
-            "/api/v2/_health/",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=V2GetHealthResponse,
-        )
-
 
 class V2ResourceWithRawResponse:
     def __init__(self, v2: V2Resource) -> None:
         self._v2 = v2
-
-        self.get_health = to_raw_response_wrapper(
-            v2.get_health,
-        )
 
     @cached_property
     def market_data(self) -> MarketDataResourceWithRawResponse:
@@ -172,10 +119,6 @@ class AsyncV2ResourceWithRawResponse:
     def __init__(self, v2: AsyncV2Resource) -> None:
         self._v2 = v2
 
-        self.get_health = async_to_raw_response_wrapper(
-            v2.get_health,
-        )
-
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithRawResponse:
         return AsyncMarketDataResourceWithRawResponse(self._v2.market_data)
@@ -193,10 +136,6 @@ class V2ResourceWithStreamingResponse:
     def __init__(self, v2: V2Resource) -> None:
         self._v2 = v2
 
-        self.get_health = to_streamed_response_wrapper(
-            v2.get_health,
-        )
-
     @cached_property
     def market_data(self) -> MarketDataResourceWithStreamingResponse:
         return MarketDataResourceWithStreamingResponse(self._v2.market_data)
@@ -213,10 +152,6 @@ class V2ResourceWithStreamingResponse:
 class AsyncV2ResourceWithStreamingResponse:
     def __init__(self, v2: AsyncV2Resource) -> None:
         self._v2 = v2
-
-        self.get_health = async_to_streamed_response_wrapper(
-            v2.get_health,
-        )
 
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithStreamingResponse:
