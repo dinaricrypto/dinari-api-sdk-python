@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from dinari_api_sdk import Dinari, AsyncDinari
-from dinari_api_sdk._streaming import Stream, AsyncStream, ServerSentEvent
+from dinari import Dinari, AsyncDinari
+from dinari._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio
