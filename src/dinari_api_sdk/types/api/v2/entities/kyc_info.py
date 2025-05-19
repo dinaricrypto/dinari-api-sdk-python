@@ -12,16 +12,13 @@ __all__ = ["KYCInfo"]
 
 class KYCInfo(BaseModel):
     id: str
-    """Unique identifier for the KYC check"""
+    """ID of the KYC check."""
 
     status: Literal["PASS", "FAIL", "PENDING", "INCOMPLETE"]
-    """KYC status"""
+    """KYC check status."""
 
     checked_dt: Optional[datetime] = None
-    """Timestamp when the KYC was last checked"""
+    """Datetime when the KYC was last checked. ISO 8601 timestamp."""
 
     data: Optional[KYCData] = None
-    """Object consisting of KYC data for an entity"""
-
-    provider_name: Optional[str] = None
-    """Name of the KYC provider that provided the KYC check"""
+    """KYC data for an `Entity`."""

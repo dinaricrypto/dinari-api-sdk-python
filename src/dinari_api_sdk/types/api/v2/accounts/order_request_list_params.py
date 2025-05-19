@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["StockRetrieveNewsParams"]
+__all__ = ["OrderRequestListParams"]
 
 
-class StockRetrieveNewsParams(TypedDict, total=False):
-    limit: int
-    """The number of articles to return."""
+class OrderRequestListParams(TypedDict, total=False):
+    page: int
+
+    page_size: int

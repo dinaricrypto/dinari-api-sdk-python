@@ -11,7 +11,7 @@ __all__ = ["KYCSubmitParams"]
 
 class KYCSubmitParams(TypedDict, total=False):
     data: Required[KYCDataParam]
-    """Object consisting of KYC data for an entity"""
+    """KYC data for an `Entity`."""
 
     provider_name: Required[str]
-    """Name of the KYC provider that provided the KYC information"""
+    """Name of the KYC provider that provided the KYC information."""

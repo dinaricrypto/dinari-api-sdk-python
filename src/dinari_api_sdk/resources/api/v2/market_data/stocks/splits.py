@@ -55,10 +55,10 @@ class SplitsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SplitRetrieveResponse:
-        """Returns a list of stock splits for a given stock id.
+        """Get a list of stock splits for a specific `Stock`.
 
-        The splits are ordered by
-        the date they were created, with the most recent split first.
+        The splits are ordered by the
+        date they were created, with the most recent split first.
 
         In an example 10-for-1 stock split, trading will be halted for the stock at the
         end of the `payable_date`, as the split transitions from `PENDING` to
@@ -108,10 +108,11 @@ class SplitsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SplitListResponse:
-        """Returns a list of stock splits.
+        """Get a list of stock splits for `Stocks` available for trade via Dinari.
 
-        The splits are ordered by the date they were
-        created, with the most recent split first.
+        The
+        splits are ordered by the date they were created, with the most recent split
+        first.
 
         In an example 10-for-1 stock split, trading will be halted for the stock at the
         end of the `payable_date`, as the split transitions from `PENDING` to
@@ -181,10 +182,10 @@ class AsyncSplitsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SplitRetrieveResponse:
-        """Returns a list of stock splits for a given stock id.
+        """Get a list of stock splits for a specific `Stock`.
 
-        The splits are ordered by
-        the date they were created, with the most recent split first.
+        The splits are ordered by the
+        date they were created, with the most recent split first.
 
         In an example 10-for-1 stock split, trading will be halted for the stock at the
         end of the `payable_date`, as the split transitions from `PENDING` to
@@ -234,10 +235,11 @@ class AsyncSplitsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SplitListResponse:
-        """Returns a list of stock splits.
+        """Get a list of stock splits for `Stocks` available for trade via Dinari.
 
-        The splits are ordered by the date they were
-        created, with the most recent split first.
+        The
+        splits are ordered by the date they were created, with the most recent split
+        first.
 
         In an example 10-for-1 stock split, trading will be halted for the stock at the
         end of the `payable_date`, as the split transitions from `PENDING` to

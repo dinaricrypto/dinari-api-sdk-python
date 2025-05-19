@@ -20,14 +20,14 @@ class StockRetrieveNewsResponseItem(BaseModel):
     """URL of the image for the news article"""
 
     published_dt: datetime
-    """Timestamp when the article was published"""
+    """Datetime when the article was published. ISO 8601 timestamp."""
 
     publisher: str
     """The publisher of the news article"""
 
     amp_url: Optional[str] = None
     """
-    The mobile friendly Accelerated Mobile Page (AMP) URL of the news article if
+    Mobile-friendly Accelerated Mobile Page (AMP) URL of the news article, if
     available
     """
 

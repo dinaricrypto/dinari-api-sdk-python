@@ -10,23 +10,32 @@ __all__ = ["OrderRequest"]
 
 
 class OrderRequest(BaseModel):
-    account_id: str
-    """ID of account placing the order"""
+    id: str
+    """ID of `OrderRequest`.
 
-    confirmation_code: str
-    """Confirmation code of order request.
-
-    This is the primary identifier for the `/order_requests` endpoint
+    This is the primary identifier for the `/order_requests` routes.
     """
 
+    account_id: str
+    """ID of `Account` placing the `OrderRequest`."""
+
     created_dt: datetime
-    """Timestamp at which the order request was created."""
+    """Datetime at which the `OrderRequest` was created. ISO 8601 timestamp."""
+
+    order_side: Literal["BUY", "SELL"]
+    """Indicates whether `Order` is a buy or sell."""
+
+    order_tif: Literal["DAY", "GTC", "IOC", "FOK"]
+    """Indicates how long `Order` is valid for."""
+
+    order_type: Literal["MARKET", "LIMIT"]
+    """Type of `Order`."""
 
     status: Literal["PENDING", "SUBMITTED", "ERROR", "CANCELLED"]
-    """Status of order request"""
+    """Status of `OrderRequest`."""
 
     order_id: Optional[str] = None
-    """ID of order created from the order request.
+    """ID of `Order` created from the `OrderRequest`.
 
-    This is the primary identifier for the `/orders` endpoint
+    This is the primary identifier for the `/orders` routes.
     """

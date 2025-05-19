@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import Union
+from datetime import date
+
 import httpx
 
 from .orders import (
@@ -13,6 +16,7 @@ from .orders import (
     AsyncOrdersResourceWithStreamingResponse,
 )
 from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -38,6 +42,7 @@ from .order_requests import (
     AsyncOrderRequestsResourceWithStreamingResponse,
 )
 from ....._base_client import make_request_options
+from .....types.api.v2 import account_retrieve_dividend_payments_params, account_retrieve_interest_payments_params
 from .order_fulfillments import (
     OrderFulfillmentsResource,
     AsyncOrderFulfillmentsResource,
@@ -103,7 +108,7 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Account:
         """
-        Retrieves a specific account by its ID.
+        Get a specific `Account` by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -135,8 +140,9 @@ class AccountsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Account:
-        """
-        Sets the account to be inactive.
+        """Set the `Account` to be inactive.
+
+        Inactive accounts cannot be used for trading.
 
         Args:
           extra_headers: Send extra headers
@@ -169,7 +175,8 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrieveCashResponse:
         """
-        Retrieves the cash amount in the account.
+        Get the cash balances of the `Account`, including stablecoins and other cash
+        equivalents.
 
         Args:
           extra_headers: Send extra headers
@@ -194,6 +201,11 @@ class AccountsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
+        end_date: Union[str, date],
+        start_date: Union[str, date],
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        stock_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -202,9 +214,16 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrieveDividendPaymentsResponse:
         """
-        Retrieves dividend payments made to the account.
+        Get dividend payments made to the `Account` from dividend-bearing stock
+        holdings.
 
         Args:
+          end_date: End date, exclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+
+          start_date: Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+
+          stock_id: Optional ID of the `Stock` to filter by
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -218,7 +237,20 @@ class AccountsResource(SyncAPIResource):
         return self._get(
             f"/api/v2/accounts/{account_id}/dividend_payments",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "end_date": end_date,
+                        "start_date": start_date,
+                        "page": page,
+                        "page_size": page_size,
+                        "stock_id": stock_id,
+                    },
+                    account_retrieve_dividend_payments_params.AccountRetrieveDividendPaymentsParams,
+                ),
             ),
             cast_to=AccountRetrieveDividendPaymentsResponse,
         )
@@ -227,6 +259,10 @@ class AccountsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
+        end_date: Union[str, date],
+        start_date: Union[str, date],
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -235,9 +271,16 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrieveInterestPaymentsResponse:
         """
-        Retrieves interest payments made to the account.
+        Get interest payments made to the `Account` from yield-bearing cash holdings.
+
+        Currently, the only yield-bearing stablecoin accepted by Dinari is
+        [USD+](https://usd.dinari.com/).
 
         Args:
+          end_date: End date, exclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+
+          start_date: Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -251,7 +294,19 @@ class AccountsResource(SyncAPIResource):
         return self._get(
             f"/api/v2/accounts/{account_id}/interest_payments",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "end_date": end_date,
+                        "start_date": start_date,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    account_retrieve_interest_payments_params.AccountRetrieveInterestPaymentsParams,
+                ),
             ),
             cast_to=AccountRetrieveInterestPaymentsResponse,
         )
@@ -268,7 +323,8 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrievePortfolioResponse:
         """
-        Retrieves the portfolio of the account, sans cash equivalents.
+        Get the portfolio of the `Account`, excluding cash equivalents such as
+        stablecoins.
 
         Args:
           extra_headers: Send extra headers
@@ -338,7 +394,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Account:
         """
-        Retrieves a specific account by its ID.
+        Get a specific `Account` by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -370,8 +426,9 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Account:
-        """
-        Sets the account to be inactive.
+        """Set the `Account` to be inactive.
+
+        Inactive accounts cannot be used for trading.
 
         Args:
           extra_headers: Send extra headers
@@ -404,7 +461,8 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrieveCashResponse:
         """
-        Retrieves the cash amount in the account.
+        Get the cash balances of the `Account`, including stablecoins and other cash
+        equivalents.
 
         Args:
           extra_headers: Send extra headers
@@ -429,6 +487,11 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
+        end_date: Union[str, date],
+        start_date: Union[str, date],
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        stock_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -437,9 +500,16 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrieveDividendPaymentsResponse:
         """
-        Retrieves dividend payments made to the account.
+        Get dividend payments made to the `Account` from dividend-bearing stock
+        holdings.
 
         Args:
+          end_date: End date, exclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+
+          start_date: Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+
+          stock_id: Optional ID of the `Stock` to filter by
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -453,7 +523,20 @@ class AsyncAccountsResource(AsyncAPIResource):
         return await self._get(
             f"/api/v2/accounts/{account_id}/dividend_payments",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "end_date": end_date,
+                        "start_date": start_date,
+                        "page": page,
+                        "page_size": page_size,
+                        "stock_id": stock_id,
+                    },
+                    account_retrieve_dividend_payments_params.AccountRetrieveDividendPaymentsParams,
+                ),
             ),
             cast_to=AccountRetrieveDividendPaymentsResponse,
         )
@@ -462,6 +545,10 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
+        end_date: Union[str, date],
+        start_date: Union[str, date],
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -470,9 +557,16 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrieveInterestPaymentsResponse:
         """
-        Retrieves interest payments made to the account.
+        Get interest payments made to the `Account` from yield-bearing cash holdings.
+
+        Currently, the only yield-bearing stablecoin accepted by Dinari is
+        [USD+](https://usd.dinari.com/).
 
         Args:
+          end_date: End date, exclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+
+          start_date: Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -486,7 +580,19 @@ class AsyncAccountsResource(AsyncAPIResource):
         return await self._get(
             f"/api/v2/accounts/{account_id}/interest_payments",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "end_date": end_date,
+                        "start_date": start_date,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    account_retrieve_interest_payments_params.AccountRetrieveInterestPaymentsParams,
+                ),
             ),
             cast_to=AccountRetrieveInterestPaymentsResponse,
         )
@@ -503,7 +609,8 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrievePortfolioResponse:
         """
-        Retrieves the portfolio of the account, sans cash equivalents.
+        Get the portfolio of the `Account`, excluding cash equivalents such as
+        stablecoins.
 
         Args:
           extra_headers: Send extra headers

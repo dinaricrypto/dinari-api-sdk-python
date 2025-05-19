@@ -11,13 +11,13 @@ __all__ = ["AccountRetrieveInterestPaymentsResponse", "AccountRetrieveInterestPa
 
 class AccountRetrieveInterestPaymentsResponseItem(BaseModel):
     amount: float
-    """Amount of interest paid"""
+    """Amount of interest paid."""
 
     currency: str
-    """Type of currency (e.g. USD)"""
+    """Currency in which the interest was paid (e.g. USD)."""
 
     payment_date: date
-    """Date of interest payment. In US Eastern time zone"""
+    """Date of interest payment in US Eastern time zone. ISO 8601 format, YYYY-MM-DD."""
 
 
 AccountRetrieveInterestPaymentsResponse: TypeAlias = List[AccountRetrieveInterestPaymentsResponseItem]

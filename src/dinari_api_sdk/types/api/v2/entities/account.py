@@ -9,13 +9,13 @@ __all__ = ["Account"]
 
 class Account(BaseModel):
     id: str
-    """Unique identifier for the account"""
+    """Unique ID for the `Account`."""
 
     created_dt: datetime
-    """Timestamp when the account was created"""
+    """Datetime when the `Account` was created. ISO 8601 timestamp."""
 
     entity_id: str
-    """Identifier for the Entity that owns the account"""
+    """ID for the `Entity` that owns the `Account`."""
 
     is_active: bool
-    """Indicates whether the account is active"""
+    """Indicates whether the `Account` is active."""

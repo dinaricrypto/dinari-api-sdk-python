@@ -62,8 +62,8 @@ class MarketDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> MarketDataGetMarketHoursResponse:
         """
-        Returns an object containing the market hours for the current day and next open
-        trading day.
+        Get the market hours for the current trading session and next open trading
+        session.
         """
         return self._get(
             "/api/v2/market_data/market_hours/",
@@ -109,8 +109,8 @@ class AsyncMarketDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> MarketDataGetMarketHoursResponse:
         """
-        Returns an object containing the market hours for the current day and next open
-        trading day.
+        Get the market hours for the current trading session and next open trading
+        session.
         """
         return await self._get(
             "/api/v2/market_data/market_hours/",

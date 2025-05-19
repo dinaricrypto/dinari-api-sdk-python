@@ -12,7 +12,6 @@ from dinari_api_sdk import Dinari, AsyncDinari
 from dinari_api_sdk.types.api.v2.accounts import (
     Order,
     OrderListResponse,
-    OrderGetEstimatedFeeResponse,
     OrderRetrieveFulfillmentsResponse,
 )
 
@@ -78,7 +77,17 @@ class TestOrders:
     @parametrize
     def test_method_list(self, client: Dinari) -> None:
         order = client.api.v2.accounts.orders.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderListResponse, order, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_list_with_all_params(self, client: Dinari) -> None:
+        order = client.api.v2.accounts.orders.list(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            page=1,
+            page_size=1,
         )
         assert_matches_type(OrderListResponse, order, path=["response"])
 
@@ -86,7 +95,7 @@ class TestOrders:
     @parametrize
     def test_raw_response_list(self, client: Dinari) -> None:
         response = client.api.v2.accounts.orders.with_raw_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -98,7 +107,7 @@ class TestOrders:
     @parametrize
     def test_streaming_response_list(self, client: Dinari) -> None:
         with client.api.v2.accounts.orders.with_streaming_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -113,7 +122,7 @@ class TestOrders:
     def test_path_params_list(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.api.v2.accounts.orders.with_raw_response.list(
-                "",
+                account_id="",
             )
 
     @pytest.mark.skip()
@@ -170,64 +179,21 @@ class TestOrders:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_get_estimated_fee(self, client: Dinari) -> None:
-        order = client.api.v2.accounts.orders.get_estimated_fee(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id=0,
-            contract_address="contract_address",
-            order_data={"foo": "string"},
-        )
-        assert_matches_type(OrderGetEstimatedFeeResponse, order, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_get_estimated_fee(self, client: Dinari) -> None:
-        response = client.api.v2.accounts.orders.with_raw_response.get_estimated_fee(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id=0,
-            contract_address="contract_address",
-            order_data={"foo": "string"},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        order = response.parse()
-        assert_matches_type(OrderGetEstimatedFeeResponse, order, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_get_estimated_fee(self, client: Dinari) -> None:
-        with client.api.v2.accounts.orders.with_streaming_response.get_estimated_fee(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id=0,
-            contract_address="contract_address",
-            order_data={"foo": "string"},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            order = response.parse()
-            assert_matches_type(OrderGetEstimatedFeeResponse, order, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_get_estimated_fee(self, client: Dinari) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.api.v2.accounts.orders.with_raw_response.get_estimated_fee(
-                account_id="",
-                chain_id=0,
-                contract_address="contract_address",
-                order_data={"foo": "string"},
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_retrieve_fulfillments(self, client: Dinari) -> None:
         order = client.api.v2.accounts.orders.retrieve_fulfillments(
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRetrieveFulfillmentsResponse, order, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_retrieve_fulfillments_with_all_params(self, client: Dinari) -> None:
+        order = client.api.v2.accounts.orders.retrieve_fulfillments(
+            order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            page=1,
+            page_size=1,
         )
         assert_matches_type(OrderRetrieveFulfillmentsResponse, order, path=["response"])
 
@@ -334,7 +300,17 @@ class TestAsyncOrders:
     @parametrize
     async def test_method_list(self, async_client: AsyncDinari) -> None:
         order = await async_client.api.v2.accounts.orders.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderListResponse, order, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
+        order = await async_client.api.v2.accounts.orders.list(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            page=1,
+            page_size=1,
         )
         assert_matches_type(OrderListResponse, order, path=["response"])
 
@@ -342,7 +318,7 @@ class TestAsyncOrders:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncDinari) -> None:
         response = await async_client.api.v2.accounts.orders.with_raw_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -354,7 +330,7 @@ class TestAsyncOrders:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncDinari) -> None:
         async with async_client.api.v2.accounts.orders.with_streaming_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -369,7 +345,7 @@ class TestAsyncOrders:
     async def test_path_params_list(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.api.v2.accounts.orders.with_raw_response.list(
-                "",
+                account_id="",
             )
 
     @pytest.mark.skip()
@@ -426,64 +402,21 @@ class TestAsyncOrders:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_get_estimated_fee(self, async_client: AsyncDinari) -> None:
-        order = await async_client.api.v2.accounts.orders.get_estimated_fee(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id=0,
-            contract_address="contract_address",
-            order_data={"foo": "string"},
-        )
-        assert_matches_type(OrderGetEstimatedFeeResponse, order, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_get_estimated_fee(self, async_client: AsyncDinari) -> None:
-        response = await async_client.api.v2.accounts.orders.with_raw_response.get_estimated_fee(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id=0,
-            contract_address="contract_address",
-            order_data={"foo": "string"},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        order = await response.parse()
-        assert_matches_type(OrderGetEstimatedFeeResponse, order, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_get_estimated_fee(self, async_client: AsyncDinari) -> None:
-        async with async_client.api.v2.accounts.orders.with_streaming_response.get_estimated_fee(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id=0,
-            contract_address="contract_address",
-            order_data={"foo": "string"},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            order = await response.parse()
-            assert_matches_type(OrderGetEstimatedFeeResponse, order, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_get_estimated_fee(self, async_client: AsyncDinari) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.api.v2.accounts.orders.with_raw_response.get_estimated_fee(
-                account_id="",
-                chain_id=0,
-                contract_address="contract_address",
-                order_data={"foo": "string"},
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     async def test_method_retrieve_fulfillments(self, async_client: AsyncDinari) -> None:
         order = await async_client.api.v2.accounts.orders.retrieve_fulfillments(
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRetrieveFulfillmentsResponse, order, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_retrieve_fulfillments_with_all_params(self, async_client: AsyncDinari) -> None:
+        order = await async_client.api.v2.accounts.orders.retrieve_fulfillments(
+            order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            page=1,
+            page_size=1,
         )
         assert_matches_type(OrderRetrieveFulfillmentsResponse, order, path=["response"])
 
