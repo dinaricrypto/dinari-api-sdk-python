@@ -610,6 +610,25 @@ class TestDinari:
             client = Dinari(api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
+        # explicit environment arg requires explicitness
+        with update_env(DINARI_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                Dinari(
+                    api_key_id=api_key_id,
+                    api_secret_key=api_secret_key,
+                    _strict_response_validation=True,
+                    environment="production",
+                )
+
+            client = Dinari(
+                base_url=None,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
+                _strict_response_validation=True,
+                environment="production",
+            )
+            assert str(client.base_url).startswith("https://api-enterprise.sbt.dinari.com")
+
     @pytest.mark.parametrize(
         "client",
         [
@@ -1461,6 +1480,25 @@ class TestAsyncDinari:
         with update_env(DINARI_BASE_URL="http://localhost:5000/from/env"):
             client = AsyncDinari(api_key_id=api_key_id, api_secret_key=api_secret_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
+
+        # explicit environment arg requires explicitness
+        with update_env(DINARI_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                AsyncDinari(
+                    api_key_id=api_key_id,
+                    api_secret_key=api_secret_key,
+                    _strict_response_validation=True,
+                    environment="production",
+                )
+
+            client = AsyncDinari(
+                base_url=None,
+                api_key_id=api_key_id,
+                api_secret_key=api_secret_key,
+                _strict_response_validation=True,
+                environment="production",
+            )
+            assert str(client.base_url).startswith("https://api-enterprise.sbt.dinari.com")
 
     @pytest.mark.parametrize(
         "client",
