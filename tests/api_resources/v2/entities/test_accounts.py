@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from dinari import Dinari, AsyncDinari
 from tests.utils import assert_matches_type
-from dinari.types.v2.entities import Account, AccountListResponse
+from dinari_api_sdk import Dinari, AsyncDinari
+from dinari_api_sdk.types.v2.entities import Account, AccountListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

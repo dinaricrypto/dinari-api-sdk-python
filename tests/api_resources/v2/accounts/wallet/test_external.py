@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from dinari import Dinari, AsyncDinari
 from tests.utils import assert_matches_type
-from dinari.types.v2.accounts.wallet import (
+from dinari_api_sdk import Dinari, AsyncDinari
+from dinari_api_sdk.types.v2.accounts.wallet import (
     Wallet,
     ExternalGetNonceResponse,
 )

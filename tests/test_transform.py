@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from dinari._types import NOT_GIVEN, Base64FileInput
-from dinari._utils import (
+from dinari_api_sdk._types import NOT_GIVEN, Base64FileInput
+from dinari_api_sdk._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from dinari._compat import PYDANTIC_V2
-from dinari._models import BaseModel
+from dinari_api_sdk._compat import PYDANTIC_V2
+from dinari_api_sdk._models import BaseModel
 
 _T = TypeVar("_T")
 

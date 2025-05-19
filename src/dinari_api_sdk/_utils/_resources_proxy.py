@@ -7,17 +7,17 @@ from ._proxy import LazyProxy
 
 
 class ResourcesProxy(LazyProxy[Any]):
-    """A proxy for the `dinari.resources` module.
+    """A proxy for the `dinari_api_sdk.resources` module.
 
-    This is used so that we can lazily import `dinari.resources` only when
-    needed *and* so that users can just import `dinari` and reference `dinari.resources`
+    This is used so that we can lazily import `dinari_api_sdk.resources` only when
+    needed *and* so that users can just import `dinari_api_sdk` and reference `dinari_api_sdk.resources`
     """
 
     @override
     def __load__(self) -> Any:
         import importlib
 
-        mod = importlib.import_module("dinari.resources")
+        mod = importlib.import_module("dinari_api_sdk.resources")
         return mod
 
 
