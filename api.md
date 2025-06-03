@@ -206,6 +206,7 @@ from dinari_api_sdk.types.v2.accounts import (
     CreateLimitOrderInput,
     OrderRequest,
     OrderRequestListResponse,
+    OrderRequestGetFeeQuoteResponse,
 )
 ```
 
@@ -217,6 +218,7 @@ Methods:
 - <code title="post /api/v2/accounts/{account_id}/order_requests/limit_sell">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">create_limit_sell</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_limit_sell_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/market_buy">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">create_market_buy</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_market_buy_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/market_sell">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">create_market_sell</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_market_sell_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/fee_quote">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">get_fee_quote</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_get_fee_quote_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request_get_fee_quote_response.py">OrderRequestGetFeeQuoteResponse</a></code>
 
 ### WithdrawalRequests
 
