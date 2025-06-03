@@ -1,19 +1,19 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .api import (
-    APIResource,
-    AsyncAPIResource,
-    APIResourceWithRawResponse,
-    AsyncAPIResourceWithRawResponse,
-    APIResourceWithStreamingResponse,
-    AsyncAPIResourceWithStreamingResponse,
+from .v2 import (
+    V2Resource,
+    AsyncV2Resource,
+    V2ResourceWithRawResponse,
+    AsyncV2ResourceWithRawResponse,
+    V2ResourceWithStreamingResponse,
+    AsyncV2ResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "APIResource",
-    "AsyncAPIResource",
-    "APIResourceWithRawResponse",
-    "AsyncAPIResourceWithRawResponse",
-    "APIResourceWithStreamingResponse",
-    "AsyncAPIResourceWithStreamingResponse",
+    "V2Resource",
+    "AsyncV2Resource",
+    "V2ResourceWithRawResponse",
+    "AsyncV2ResourceWithRawResponse",
+    "V2ResourceWithStreamingResponse",
+    "AsyncV2ResourceWithStreamingResponse",
 ]

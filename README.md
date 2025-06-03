@@ -28,17 +28,21 @@ import os
 from dinari_api_sdk import Dinari
 
 client = Dinari(
-    api_key=os.environ.get("DINARI_API_KEY"),  # This is the default and can be omitted
+    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted
+    api_secret_key=os.environ.get(
+        "DINARI_API_SECRET_KEY"
+    ),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="sandbox",
 )
 
-response = client.api.v2.get_health()
-print(response.status)
+stocks = client.v2.market_data.stocks.list()
 ```
 
-While you can provide an `api_key` keyword argument,
+While you can provide a `api_key_id` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `DINARI_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
+to add `DINARI_API_KEY_ID="My API Key ID"` to your `.env` file
+so that your API Key ID is not stored in source control.
 
 ## Async usage
 
@@ -50,13 +54,17 @@ import asyncio
 from dinari_api_sdk import AsyncDinari
 
 client = AsyncDinari(
-    api_key=os.environ.get("DINARI_API_KEY"),  # This is the default and can be omitted
+    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted
+    api_secret_key=os.environ.get(
+        "DINARI_API_SECRET_KEY"
+    ),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="sandbox",
 )
 
 
 async def main() -> None:
-    response = await client.api.v2.get_health()
-    print(response.status)
+    stocks = await client.v2.market_data.stocks.list()
 
 
 asyncio.run(main())
@@ -73,8 +81,6 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
-from datetime import date
-
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
@@ -84,26 +90,36 @@ from dinari_api_sdk import Dinari
 
 client = Dinari()
 
-kyc_info = client.api.v2.entities.kyc.submit(
+kyc_info = client.v2.entities.kyc.submit(
     entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
     data={
         "country_code": "SG",
         "last_name": "Doe",
-        "address_city": "San Francisco",
-        "address_postal_code": "94111",
-        "address_street_1": "123 Main St.",
-        "address_street_2": "Apt. 123",
-        "address_subdivision": "California",
-        "birth_date": date.fromisoformat("2019-12-27"),
-        "email": "johndoe@website.com",
-        "first_name": "John",
-        "middle_name": "middle_name",
-        "tax_id_number": "123456789",
     },
-    provider_name="provider_name",
+    provider_name="x",
 )
 print(kyc_info.data)
 ```
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
+
+```python
+from pathlib import Path
+from dinari_api_sdk import Dinari
+
+client = Dinari()
+
+client.v2.entities.kyc.document.upload(
+    kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    document_type="GOVERNMENT_ID",
+    file=Path("/path/to/file"),
+)
+```
+
+The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
 
 ## Handling errors
 
@@ -121,7 +137,7 @@ from dinari_api_sdk import Dinari
 client = Dinari()
 
 try:
-    client.api.v2.get_health()
+    client.v2.market_data.stocks.list()
 except dinari_api_sdk.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -164,7 +180,7 @@ client = Dinari(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).api.v2.get_health()
+client.with_options(max_retries=5).v2.market_data.stocks.list()
 ```
 
 ### Timeouts
@@ -187,7 +203,7 @@ client = Dinari(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).api.v2.get_health()
+client.with_options(timeout=5.0).v2.market_data.stocks.list()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -228,11 +244,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from dinari_api_sdk import Dinari
 
 client = Dinari()
-response = client.api.v2.with_raw_response.get_health()
+response = client.v2.market_data.stocks.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
-v2 = response.parse()  # get the object that `api.v2.get_health()` would have returned
-print(v2.status)
+stock = response.parse()  # get the object that `v2.market_data.stocks.list()` would have returned
+print(stock)
 ```
 
 These methods return an [`APIResponse`](https://github.com/dinaricrypto/dinari-api-sdk-python/tree/main/src/dinari_api_sdk/_response.py) object.
@@ -246,7 +262,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.api.v2.with_streaming_response.get_health() as response:
+with client.v2.market_data.stocks.with_streaming_response.list() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

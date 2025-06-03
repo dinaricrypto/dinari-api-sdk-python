@@ -1,9 +1,22 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import typing as _t
+
 from . import types
 from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes
 from ._utils import file_from_path
-from ._client import Client, Dinari, Stream, Timeout, Transport, AsyncClient, AsyncDinari, AsyncStream, RequestOptions
+from ._client import (
+    ENVIRONMENTS,
+    Client,
+    Dinari,
+    Stream,
+    Timeout,
+    Transport,
+    AsyncClient,
+    AsyncDinari,
+    AsyncStream,
+    RequestOptions,
+)
 from ._models import BaseModel
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
@@ -59,6 +72,7 @@ __all__ = [
     "AsyncStream",
     "Dinari",
     "AsyncDinari",
+    "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",
     "DEFAULT_TIMEOUT",
@@ -67,6 +81,9 @@ __all__ = [
     "DefaultHttpxClient",
     "DefaultAsyncHttpxClient",
 ]
+
+if not _t.TYPE_CHECKING:
+    from ._utils._resources_proxy import resources as resources
 
 _setup_logging()
 
