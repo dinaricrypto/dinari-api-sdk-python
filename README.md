@@ -81,8 +81,6 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
-from datetime import date
-
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
@@ -97,16 +95,6 @@ kyc_info = client.v2.entities.kyc.submit(
     data={
         "country_code": "SG",
         "last_name": "Doe",
-        "address_city": "San Francisco",
-        "address_postal_code": "94111",
-        "address_street_1": "123 Main St.",
-        "address_street_2": "Apt. 123",
-        "address_subdivision": "California",
-        "birth_date": date.fromisoformat("2019-12-27"),
-        "email": "johndoe@website.com",
-        "first_name": "John",
-        "middle_name": "x",
-        "tax_id_number": "12-3456789",
     },
     provider_name="x",
 )
