@@ -16,14 +16,20 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v2.accounts import (
+    OrderSide,
+    OrderType,
     order_request_list_params,
+    order_request_get_fee_quote_params,
     order_request_create_limit_buy_params,
     order_request_create_limit_sell_params,
     order_request_create_market_buy_params,
     order_request_create_market_sell_params,
 )
+from ....types.v2.accounts.order_side import OrderSide
+from ....types.v2.accounts.order_type import OrderType
 from ....types.v2.accounts.order_request import OrderRequest
 from ....types.v2.accounts.order_request_list_response import OrderRequestListResponse
+from ....types.v2.accounts.order_request_get_fee_quote_response import OrderRequestGetFeeQuoteResponse
 
 __all__ = ["OrderRequestsResource", "AsyncOrderRequestsResource"]
 
@@ -325,6 +331,70 @@ class OrderRequestsResource(SyncAPIResource):
             cast_to=OrderRequest,
         )
 
+    def get_fee_quote(
+        self,
+        account_id: str,
+        *,
+        order_side: OrderSide,
+        order_type: OrderType,
+        stock_id: str,
+        asset_token_quantity: float | NotGiven = NOT_GIVEN,
+        limit_price: float | NotGiven = NOT_GIVEN,
+        payment_token_quantity: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OrderRequestGetFeeQuoteResponse:
+        """
+        Get fee quote data for an `Order Request`.
+
+        Args:
+          order_side: Indicates whether `Order Request` is a buy or sell.
+
+          order_type: Type of `Order Request`.
+
+          stock_id: The Stock ID associated with the Order Request
+
+          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
+              sell `Order Requests`.
+
+          limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
+              Required for limit `Order Requests`.
+
+          payment_token_quantity: Amount of payment tokens involved. Required for market buy `Order Requests`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._post(
+            f"/api/v2/accounts/{account_id}/order_requests/fee_quote",
+            body=maybe_transform(
+                {
+                    "order_side": order_side,
+                    "order_type": order_type,
+                    "stock_id": stock_id,
+                    "asset_token_quantity": asset_token_quantity,
+                    "limit_price": limit_price,
+                    "payment_token_quantity": payment_token_quantity,
+                },
+                order_request_get_fee_quote_params.OrderRequestGetFeeQuoteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderRequestGetFeeQuoteResponse,
+        )
+
 
 class AsyncOrderRequestsResource(AsyncAPIResource):
     @cached_property
@@ -623,6 +693,70 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
             cast_to=OrderRequest,
         )
 
+    async def get_fee_quote(
+        self,
+        account_id: str,
+        *,
+        order_side: OrderSide,
+        order_type: OrderType,
+        stock_id: str,
+        asset_token_quantity: float | NotGiven = NOT_GIVEN,
+        limit_price: float | NotGiven = NOT_GIVEN,
+        payment_token_quantity: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OrderRequestGetFeeQuoteResponse:
+        """
+        Get fee quote data for an `Order Request`.
+
+        Args:
+          order_side: Indicates whether `Order Request` is a buy or sell.
+
+          order_type: Type of `Order Request`.
+
+          stock_id: The Stock ID associated with the Order Request
+
+          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
+              sell `Order Requests`.
+
+          limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
+              Required for limit `Order Requests`.
+
+          payment_token_quantity: Amount of payment tokens involved. Required for market buy `Order Requests`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return await self._post(
+            f"/api/v2/accounts/{account_id}/order_requests/fee_quote",
+            body=await async_maybe_transform(
+                {
+                    "order_side": order_side,
+                    "order_type": order_type,
+                    "stock_id": stock_id,
+                    "asset_token_quantity": asset_token_quantity,
+                    "limit_price": limit_price,
+                    "payment_token_quantity": payment_token_quantity,
+                },
+                order_request_get_fee_quote_params.OrderRequestGetFeeQuoteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderRequestGetFeeQuoteResponse,
+        )
+
 
 class OrderRequestsResourceWithRawResponse:
     def __init__(self, order_requests: OrderRequestsResource) -> None:
@@ -645,6 +779,9 @@ class OrderRequestsResourceWithRawResponse:
         )
         self.create_market_sell = to_raw_response_wrapper(
             order_requests.create_market_sell,
+        )
+        self.get_fee_quote = to_raw_response_wrapper(
+            order_requests.get_fee_quote,
         )
 
 
@@ -670,6 +807,9 @@ class AsyncOrderRequestsResourceWithRawResponse:
         self.create_market_sell = async_to_raw_response_wrapper(
             order_requests.create_market_sell,
         )
+        self.get_fee_quote = async_to_raw_response_wrapper(
+            order_requests.get_fee_quote,
+        )
 
 
 class OrderRequestsResourceWithStreamingResponse:
@@ -694,6 +834,9 @@ class OrderRequestsResourceWithStreamingResponse:
         self.create_market_sell = to_streamed_response_wrapper(
             order_requests.create_market_sell,
         )
+        self.get_fee_quote = to_streamed_response_wrapper(
+            order_requests.get_fee_quote,
+        )
 
 
 class AsyncOrderRequestsResourceWithStreamingResponse:
@@ -717,4 +860,7 @@ class AsyncOrderRequestsResourceWithStreamingResponse:
         )
         self.create_market_sell = async_to_streamed_response_wrapper(
             order_requests.create_market_sell,
+        )
+        self.get_fee_quote = async_to_streamed_response_wrapper(
+            order_requests.get_fee_quote,
         )
