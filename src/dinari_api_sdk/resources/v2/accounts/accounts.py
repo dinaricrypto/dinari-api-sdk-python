@@ -7,14 +7,6 @@ from datetime import date
 
 import httpx
 
-from .orders import (
-    OrdersResource,
-    AsyncOrdersResource,
-    OrdersResourceWithRawResponse,
-    AsyncOrdersResourceWithRawResponse,
-    OrdersResourceWithStreamingResponse,
-    AsyncOrdersResourceWithStreamingResponse,
-)
 from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
@@ -39,6 +31,14 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .orders.orders import (
+    OrdersResource,
+    AsyncOrdersResource,
+    OrdersResourceWithRawResponse,
+    AsyncOrdersResourceWithRawResponse,
+    OrdersResourceWithStreamingResponse,
+    AsyncOrdersResourceWithStreamingResponse,
+)
 from .wallet.wallet import (
     WalletResource,
     AsyncWalletResource,
@@ -46,14 +46,6 @@ from .wallet.wallet import (
     AsyncWalletResourceWithRawResponse,
     WalletResourceWithStreamingResponse,
     AsyncWalletResourceWithStreamingResponse,
-)
-from .order_requests import (
-    OrderRequestsResource,
-    AsyncOrderRequestsResource,
-    OrderRequestsResourceWithRawResponse,
-    AsyncOrderRequestsResourceWithRawResponse,
-    OrderRequestsResourceWithStreamingResponse,
-    AsyncOrderRequestsResourceWithStreamingResponse,
 )
 from ...._base_client import make_request_options
 from ....types.v2.chain import Chain
@@ -74,6 +66,14 @@ from .withdrawal_requests import (
     AsyncWithdrawalRequestsResourceWithStreamingResponse,
 )
 from ....types.v2.entities.account import Account
+from .order_requests.order_requests import (
+    OrderRequestsResource,
+    AsyncOrderRequestsResource,
+    OrderRequestsResourceWithRawResponse,
+    AsyncOrderRequestsResourceWithRawResponse,
+    OrderRequestsResourceWithStreamingResponse,
+    AsyncOrderRequestsResourceWithStreamingResponse,
+)
 from ....types.v2.account_get_portfolio_response import AccountGetPortfolioResponse
 from ....types.v2.account_get_cash_balances_response import AccountGetCashBalancesResponse
 from ....types.v2.account_get_dividend_payments_response import AccountGetDividendPaymentsResponse

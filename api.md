@@ -177,10 +177,28 @@ from dinari_api_sdk.types.v2.accounts import (
 
 Methods:
 
-- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">retrieve</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order.py">Order</a></code>
-- <code title="get /api/v2/accounts/{account_id}/orders">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_list_response.py">OrderListResponse</a></code>
-- <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">cancel</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order.py">Order</a></code>
-- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">get_fulfillments</a>(order_id, \*, account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_response.py">OrderGetFulfillmentsResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/orders.py">retrieve</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order.py">Order</a></code>
+- <code title="get /api/v2/accounts/{account_id}/orders">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/orders.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_list_response.py">OrderListResponse</a></code>
+- <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/orders.py">cancel</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order.py">Order</a></code>
+- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/orders.py">get_fulfillments</a>(order_id, \*, account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_response.py">OrderGetFulfillmentsResponse</a></code>
+
+#### Stocks
+
+##### Eip155
+
+Types:
+
+```python
+from dinari_api_sdk.types.v2.accounts.orders.stocks import (
+    Eip155GetFeeQuoteResponse,
+    Eip155PrepareOrderResponse,
+)
+```
+
+Methods:
+
+- <code title="post /api/v2/accounts/{account_id}/orders/stocks/eip155/fee_quote">client.v2.accounts.orders.stocks.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/stocks/eip155.py">get_fee_quote</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/orders/stocks/eip155_get_fee_quote_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/orders/stocks/eip155_get_fee_quote_response.py">Eip155GetFeeQuoteResponse</a></code>
+- <code title="post /api/v2/accounts/{account_id}/orders/stocks/eip155/prepare">client.v2.accounts.orders.stocks.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/stocks/eip155.py">prepare_order</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/orders/stocks/eip155_prepare_order_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/orders/stocks/eip155_prepare_order_response.py">Eip155PrepareOrderResponse</a></code>
 
 ### OrderFulfillments
 
@@ -210,13 +228,28 @@ from dinari_api_sdk.types.v2.accounts import (
 
 Methods:
 
-- <code title="get /api/v2/accounts/{account_id}/order_requests/{order_request_id}">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">retrieve</a>(order_request_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
-- <code title="get /api/v2/accounts/{account_id}/order_requests">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request_list_response.py">OrderRequestListResponse</a></code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/limit_buy">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">create_limit_buy</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_limit_buy_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/limit_sell">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">create_limit_sell</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_limit_sell_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/market_buy">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">create_market_buy</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_market_buy_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/market_sell">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">create_market_sell</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_market_sell_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/fee_quote">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests.py">get_fee_quote</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_get_fee_quote_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request_get_fee_quote_response.py">OrderRequestGetFeeQuoteResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/order_requests/{order_request_id}">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/order_requests.py">retrieve</a>(order_request_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
+- <code title="get /api/v2/accounts/{account_id}/order_requests">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/order_requests.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request_list_response.py">OrderRequestListResponse</a></code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/limit_buy">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/order_requests.py">create_limit_buy</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_limit_buy_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/limit_sell">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/order_requests.py">create_limit_sell</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_limit_sell_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/market_buy">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/order_requests.py">create_market_buy</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_market_buy_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/market_sell">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/order_requests.py">create_market_sell</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_create_market_sell_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/fee_quote">client.v2.accounts.order_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/order_requests.py">get_fee_quote</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_request_get_fee_quote_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request_get_fee_quote_response.py">OrderRequestGetFeeQuoteResponse</a></code>
+
+#### Stocks
+
+##### Eip155
+
+Types:
+
+```python
+from dinari_api_sdk.types.v2.accounts.order_requests.stocks import Eip155PrepareProxiedOrderResponse
+```
+
+Methods:
+
+- <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155">client.v2.accounts.order_requests.stocks.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/stocks/eip155.py">create_proxied_order</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_requests/stocks/eip155_create_proxied_order_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155/prepare">client.v2.accounts.order_requests.stocks.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/stocks/eip155.py">prepare_proxied_order</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_requests/stocks/eip155_prepare_proxied_order_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_requests/stocks/eip155_prepare_proxied_order_response.py">Eip155PrepareProxiedOrderResponse</a></code>
 
 ### WithdrawalRequests
 
