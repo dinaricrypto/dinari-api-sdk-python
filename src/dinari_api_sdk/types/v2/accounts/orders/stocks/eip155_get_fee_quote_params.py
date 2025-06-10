@@ -4,20 +4,17 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from ..chain import Chain
-from .order_tif import OrderTif
-from .order_side import OrderSide
-from .order_type import OrderType
+from ....chain import Chain
+from ...order_tif import OrderTif
+from ...order_side import OrderSide
+from ...order_type import OrderType
 
-__all__ = ["OrderGetFeeQuoteParams"]
+__all__ = ["Eip155GetFeeQuoteParams"]
 
 
-class OrderGetFeeQuoteParams(TypedDict, total=False):
+class Eip155GetFeeQuoteParams(TypedDict, total=False):
     chain_id: Required[Chain]
     """CAIP-2 chain ID of the blockchain where the `Order` will be placed."""
-
-    contract_address: Required[str]
-    """Address of the smart contract that will create the `Order`."""
 
     order_side: Required[OrderSide]
     """Indicates whether `Order` is a buy or sell."""
@@ -29,7 +26,7 @@ class OrderGetFeeQuoteParams(TypedDict, total=False):
     """Type of `Order`."""
 
     stock_id: Required[str]
-    """The Stock ID associated with the Order"""
+    """The ID of the `Stock` for which the `Order` is being placed."""
 
     asset_token_quantity: float
     """Amount of dShare asset tokens involved.

@@ -4,18 +4,26 @@ from __future__ import annotations
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import maybe_transform, async_maybe_transform
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ....._utils import maybe_transform, async_maybe_transform
+from ....._compat import cached_property
+from ....._resource import SyncAPIResource, AsyncAPIResource
+from ....._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
-from ....types.v2.accounts import (
+from .stocks.stocks import (
+    StocksResource,
+    AsyncStocksResource,
+    StocksResourceWithRawResponse,
+    AsyncStocksResourceWithRawResponse,
+    StocksResourceWithStreamingResponse,
+    AsyncStocksResourceWithStreamingResponse,
+)
+from ....._base_client import make_request_options
+from .....types.v2.accounts import (
     OrderSide,
     OrderType,
     order_request_list_params,
@@ -25,16 +33,20 @@ from ....types.v2.accounts import (
     order_request_create_market_buy_params,
     order_request_create_market_sell_params,
 )
-from ....types.v2.accounts.order_side import OrderSide
-from ....types.v2.accounts.order_type import OrderType
-from ....types.v2.accounts.order_request import OrderRequest
-from ....types.v2.accounts.order_request_list_response import OrderRequestListResponse
-from ....types.v2.accounts.order_request_get_fee_quote_response import OrderRequestGetFeeQuoteResponse
+from .....types.v2.accounts.order_side import OrderSide
+from .....types.v2.accounts.order_type import OrderType
+from .....types.v2.accounts.order_request import OrderRequest
+from .....types.v2.accounts.order_request_list_response import OrderRequestListResponse
+from .....types.v2.accounts.order_request_get_fee_quote_response import OrderRequestGetFeeQuoteResponse
 
 __all__ = ["OrderRequestsResource", "AsyncOrderRequestsResource"]
 
 
 class OrderRequestsResource(SyncAPIResource):
+    @cached_property
+    def stocks(self) -> StocksResource:
+        return StocksResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> OrderRequestsResourceWithRawResponse:
         """
@@ -67,7 +79,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Get a specific managed `OrderRequest` by its ID.
+        Get a specific `OrderRequest` by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -104,7 +116,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestListResponse:
         """
-        Lists managed `OrderRequests`.
+        Lists `OrderRequests`.
 
         Args:
           extra_headers: Send extra headers
@@ -150,7 +162,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed limit buy `OrderRequest`.
+        Create a managed `OrderRequest` to place a limit buy `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive integer.
@@ -201,7 +213,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed limit sell `OrderRequest`.
+        Create a managed `OrderRequest` to place a limit sell `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive integer.
@@ -251,10 +263,10 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed market buy `OrderRequest`.
+        Create a managed `OrderRequest` to place a market buy `Order`.
 
         Args:
-          payment_amount: Amount of currency (USD for US equities and ETFS) to pay or receive for the
+          payment_amount: Amount of currency (USD for US equities and ETFs) to pay or receive for the
               order. Must be a positive number with a precision of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
@@ -298,7 +310,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed market sell `OrderRequest`.
+        Create a managed `OrderRequest` to place a market sell `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
@@ -348,8 +360,10 @@ class OrderRequestsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestGetFeeQuoteResponse:
-        """
-        Get fee quote data for an `Order Request`.
+        """Get fee quote data for an `Order Request`.
+
+        This is provided primarily for
+        informational purposes.
 
         Args:
           order_side: Indicates whether `Order Request` is a buy or sell.
@@ -398,6 +412,10 @@ class OrderRequestsResource(SyncAPIResource):
 
 class AsyncOrderRequestsResource(AsyncAPIResource):
     @cached_property
+    def stocks(self) -> AsyncStocksResource:
+        return AsyncStocksResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> AsyncOrderRequestsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -429,7 +447,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Get a specific managed `OrderRequest` by its ID.
+        Get a specific `OrderRequest` by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -466,7 +484,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestListResponse:
         """
-        Lists managed `OrderRequests`.
+        Lists `OrderRequests`.
 
         Args:
           extra_headers: Send extra headers
@@ -512,7 +530,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed limit buy `OrderRequest`.
+        Create a managed `OrderRequest` to place a limit buy `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive integer.
@@ -563,7 +581,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed limit sell `OrderRequest`.
+        Create a managed `OrderRequest` to place a limit sell `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive integer.
@@ -613,10 +631,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed market buy `OrderRequest`.
+        Create a managed `OrderRequest` to place a market buy `Order`.
 
         Args:
-          payment_amount: Amount of currency (USD for US equities and ETFS) to pay or receive for the
+          payment_amount: Amount of currency (USD for US equities and ETFs) to pay or receive for the
               order. Must be a positive number with a precision of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
@@ -660,7 +678,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed market sell `OrderRequest`.
+        Create a managed `OrderRequest` to place a market sell `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
@@ -710,8 +728,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestGetFeeQuoteResponse:
-        """
-        Get fee quote data for an `Order Request`.
+        """Get fee quote data for an `Order Request`.
+
+        This is provided primarily for
+        informational purposes.
 
         Args:
           order_side: Indicates whether `Order Request` is a buy or sell.
@@ -784,6 +804,10 @@ class OrderRequestsResourceWithRawResponse:
             order_requests.get_fee_quote,
         )
 
+    @cached_property
+    def stocks(self) -> StocksResourceWithRawResponse:
+        return StocksResourceWithRawResponse(self._order_requests.stocks)
+
 
 class AsyncOrderRequestsResourceWithRawResponse:
     def __init__(self, order_requests: AsyncOrderRequestsResource) -> None:
@@ -810,6 +834,10 @@ class AsyncOrderRequestsResourceWithRawResponse:
         self.get_fee_quote = async_to_raw_response_wrapper(
             order_requests.get_fee_quote,
         )
+
+    @cached_property
+    def stocks(self) -> AsyncStocksResourceWithRawResponse:
+        return AsyncStocksResourceWithRawResponse(self._order_requests.stocks)
 
 
 class OrderRequestsResourceWithStreamingResponse:
@@ -838,6 +866,10 @@ class OrderRequestsResourceWithStreamingResponse:
             order_requests.get_fee_quote,
         )
 
+    @cached_property
+    def stocks(self) -> StocksResourceWithStreamingResponse:
+        return StocksResourceWithStreamingResponse(self._order_requests.stocks)
+
 
 class AsyncOrderRequestsResourceWithStreamingResponse:
     def __init__(self, order_requests: AsyncOrderRequestsResource) -> None:
@@ -864,3 +896,7 @@ class AsyncOrderRequestsResourceWithStreamingResponse:
         self.get_fee_quote = async_to_streamed_response_wrapper(
             order_requests.get_fee_quote,
         )
+
+    @cached_property
+    def stocks(self) -> AsyncStocksResourceWithStreamingResponse:
+        return AsyncStocksResourceWithStreamingResponse(self._order_requests.stocks)

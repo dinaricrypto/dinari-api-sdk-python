@@ -5,11 +5,11 @@ from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
-from ..chain import Chain
-from ...._models import BaseModel
+from ....chain import Chain
+from ......_models import BaseModel
 
 __all__ = [
-    "OrderGetFeeQuoteResponse",
+    "Eip155GetFeeQuoteResponse",
     "OrderFeeContractObject",
     "OrderFeeContractObjectFeeQuote",
     "OrderFeeContractObjectFee",
@@ -62,7 +62,7 @@ class OrderFeeContractObject(BaseModel):
     """Address of payment token used for fees"""
 
 
-class OrderGetFeeQuoteResponse(BaseModel):
+class Eip155GetFeeQuoteResponse(BaseModel):
     chain_id: Chain
     """CAIP-2 chain ID of the blockchain where the `Order` will be placed"""
 
