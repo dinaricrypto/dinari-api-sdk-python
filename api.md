@@ -171,7 +171,6 @@ from dinari_api_sdk.types.v2.accounts import (
     OrderTif,
     OrderType,
     OrderListResponse,
-    OrderGetFeeQuoteResponse,
     OrderGetFulfillmentsResponse,
 )
 ```
@@ -181,7 +180,6 @@ Methods:
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">retrieve</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order.py">Order</a></code>
 - <code title="get /api/v2/accounts/{account_id}/orders">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_list_response.py">OrderListResponse</a></code>
 - <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">cancel</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order.py">Order</a></code>
-- <code title="post /api/v2/accounts/{account_id}/orders/fee_quote">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">get_fee_quote</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_get_fee_quote_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_get_fee_quote_response.py">OrderGetFeeQuoteResponse</a></code>
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">get_fulfillments</a>(order_id, \*, account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_response.py">OrderGetFulfillmentsResponse</a></code>
 
 ### OrderFulfillments
