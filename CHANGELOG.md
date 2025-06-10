@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0 (2025-06-10)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.1.0-alpha.2...v0.1.0)
+
+### Features
+
+* **api:** api update ([bb7fa33](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/bb7fa33e700623404d6d0d4cc9e3c7027aafe396))
+* **api:** update routes ([f9c335e](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/f9c335e6702c11124e0522953feab3f864e1f166))
+
 ## 0.1.0-alpha.2 (2025-06-03)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
