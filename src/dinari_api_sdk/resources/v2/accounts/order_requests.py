@@ -67,7 +67,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Get a specific managed `OrderRequest` by its ID.
+        Get a specific `OrderRequest` by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -104,7 +104,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestListResponse:
         """
-        Lists managed `OrderRequests`.
+        Lists `OrderRequests`.
 
         Args:
           extra_headers: Send extra headers
@@ -150,7 +150,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed limit buy `OrderRequest`.
+        Create a managed `OrderRequest` to place a limit buy `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive integer.
@@ -201,7 +201,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed limit sell `OrderRequest`.
+        Create a managed `OrderRequest` to place a limit sell `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive integer.
@@ -251,10 +251,10 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed market buy `OrderRequest`.
+        Create a managed `OrderRequest` to place a market buy `Order`.
 
         Args:
-          payment_amount: Amount of currency (USD for US equities and ETFS) to pay or receive for the
+          payment_amount: Amount of currency (USD for US equities and ETFs) to pay or receive for the
               order. Must be a positive number with a precision of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
@@ -298,7 +298,7 @@ class OrderRequestsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed market sell `OrderRequest`.
+        Create a managed `OrderRequest` to place a market sell `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
@@ -348,8 +348,10 @@ class OrderRequestsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestGetFeeQuoteResponse:
-        """
-        Get fee quote data for an `Order Request`.
+        """Get fee quote data for an `Order Request`.
+
+        This is provided primarily for
+        informational purposes.
 
         Args:
           order_side: Indicates whether `Order Request` is a buy or sell.
@@ -429,7 +431,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Get a specific managed `OrderRequest` by its ID.
+        Get a specific `OrderRequest` by its ID.
 
         Args:
           extra_headers: Send extra headers
@@ -466,7 +468,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestListResponse:
         """
-        Lists managed `OrderRequests`.
+        Lists `OrderRequests`.
 
         Args:
           extra_headers: Send extra headers
@@ -512,7 +514,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed limit buy `OrderRequest`.
+        Create a managed `OrderRequest` to place a limit buy `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive integer.
@@ -563,7 +565,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed limit sell `OrderRequest`.
+        Create a managed `OrderRequest` to place a limit sell `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive integer.
@@ -613,10 +615,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed market buy `OrderRequest`.
+        Create a managed `OrderRequest` to place a market buy `Order`.
 
         Args:
-          payment_amount: Amount of currency (USD for US equities and ETFS) to pay or receive for the
+          payment_amount: Amount of currency (USD for US equities and ETFs) to pay or receive for the
               order. Must be a positive number with a precision of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
@@ -660,7 +662,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequest:
         """
-        Create a managed market sell `OrderRequest`.
+        Create a managed `OrderRequest` to place a market sell `Order`.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
@@ -710,8 +712,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderRequestGetFeeQuoteResponse:
-        """
-        Get fee quote data for an `Order Request`.
+        """Get fee quote data for an `Order Request`.
+
+        This is provided primarily for
+        informational purposes.
 
         Args:
           order_side: Indicates whether `Order Request` is a buy or sell.
