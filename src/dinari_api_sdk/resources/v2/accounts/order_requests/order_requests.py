@@ -4,18 +4,26 @@ from __future__ import annotations
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import maybe_transform, async_maybe_transform
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ....._utils import maybe_transform, async_maybe_transform
+from ....._compat import cached_property
+from ....._resource import SyncAPIResource, AsyncAPIResource
+from ....._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
-from ....types.v2.accounts import (
+from .stocks.stocks import (
+    StocksResource,
+    AsyncStocksResource,
+    StocksResourceWithRawResponse,
+    AsyncStocksResourceWithRawResponse,
+    StocksResourceWithStreamingResponse,
+    AsyncStocksResourceWithStreamingResponse,
+)
+from ....._base_client import make_request_options
+from .....types.v2.accounts import (
     OrderSide,
     OrderType,
     order_request_list_params,
@@ -25,16 +33,20 @@ from ....types.v2.accounts import (
     order_request_create_market_buy_params,
     order_request_create_market_sell_params,
 )
-from ....types.v2.accounts.order_side import OrderSide
-from ....types.v2.accounts.order_type import OrderType
-from ....types.v2.accounts.order_request import OrderRequest
-from ....types.v2.accounts.order_request_list_response import OrderRequestListResponse
-from ....types.v2.accounts.order_request_get_fee_quote_response import OrderRequestGetFeeQuoteResponse
+from .....types.v2.accounts.order_side import OrderSide
+from .....types.v2.accounts.order_type import OrderType
+from .....types.v2.accounts.order_request import OrderRequest
+from .....types.v2.accounts.order_request_list_response import OrderRequestListResponse
+from .....types.v2.accounts.order_request_get_fee_quote_response import OrderRequestGetFeeQuoteResponse
 
 __all__ = ["OrderRequestsResource", "AsyncOrderRequestsResource"]
 
 
 class OrderRequestsResource(SyncAPIResource):
+    @cached_property
+    def stocks(self) -> StocksResource:
+        return StocksResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> OrderRequestsResourceWithRawResponse:
         """
@@ -399,6 +411,10 @@ class OrderRequestsResource(SyncAPIResource):
 
 
 class AsyncOrderRequestsResource(AsyncAPIResource):
+    @cached_property
+    def stocks(self) -> AsyncStocksResource:
+        return AsyncStocksResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncOrderRequestsResourceWithRawResponse:
         """
@@ -788,6 +804,10 @@ class OrderRequestsResourceWithRawResponse:
             order_requests.get_fee_quote,
         )
 
+    @cached_property
+    def stocks(self) -> StocksResourceWithRawResponse:
+        return StocksResourceWithRawResponse(self._order_requests.stocks)
+
 
 class AsyncOrderRequestsResourceWithRawResponse:
     def __init__(self, order_requests: AsyncOrderRequestsResource) -> None:
@@ -814,6 +834,10 @@ class AsyncOrderRequestsResourceWithRawResponse:
         self.get_fee_quote = async_to_raw_response_wrapper(
             order_requests.get_fee_quote,
         )
+
+    @cached_property
+    def stocks(self) -> AsyncStocksResourceWithRawResponse:
+        return AsyncStocksResourceWithRawResponse(self._order_requests.stocks)
 
 
 class OrderRequestsResourceWithStreamingResponse:
@@ -842,6 +866,10 @@ class OrderRequestsResourceWithStreamingResponse:
             order_requests.get_fee_quote,
         )
 
+    @cached_property
+    def stocks(self) -> StocksResourceWithStreamingResponse:
+        return StocksResourceWithStreamingResponse(self._order_requests.stocks)
+
 
 class AsyncOrderRequestsResourceWithStreamingResponse:
     def __init__(self, order_requests: AsyncOrderRequestsResource) -> None:
@@ -868,3 +896,7 @@ class AsyncOrderRequestsResourceWithStreamingResponse:
         self.get_fee_quote = async_to_streamed_response_wrapper(
             order_requests.get_fee_quote,
         )
+
+    @cached_property
+    def stocks(self) -> AsyncStocksResourceWithStreamingResponse:
+        return AsyncStocksResourceWithStreamingResponse(self._order_requests.stocks)

@@ -4,26 +4,38 @@ from __future__ import annotations
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import maybe_transform, async_maybe_transform
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ....._utils import maybe_transform, async_maybe_transform
+from ....._compat import cached_property
+from ....._resource import SyncAPIResource, AsyncAPIResource
+from ....._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
-from ....types.v2.accounts import order_list_params, order_get_fulfillments_params
-from ....types.v2.accounts.order import Order
-from ....types.v2.accounts.order_list_response import OrderListResponse
-from ....types.v2.accounts.order_get_fulfillments_response import OrderGetFulfillmentsResponse
+from .stocks.stocks import (
+    StocksResource,
+    AsyncStocksResource,
+    StocksResourceWithRawResponse,
+    AsyncStocksResourceWithRawResponse,
+    StocksResourceWithStreamingResponse,
+    AsyncStocksResourceWithStreamingResponse,
+)
+from ....._base_client import make_request_options
+from .....types.v2.accounts import order_list_params, order_get_fulfillments_params
+from .....types.v2.accounts.order import Order
+from .....types.v2.accounts.order_list_response import OrderListResponse
+from .....types.v2.accounts.order_get_fulfillments_response import OrderGetFulfillmentsResponse
 
 __all__ = ["OrdersResource", "AsyncOrdersResource"]
 
 
 class OrdersResource(SyncAPIResource):
+    @cached_property
+    def stocks(self) -> StocksResource:
+        return StocksResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> OrdersResourceWithRawResponse:
         """
@@ -220,6 +232,10 @@ class OrdersResource(SyncAPIResource):
 
 
 class AsyncOrdersResource(AsyncAPIResource):
+    @cached_property
+    def stocks(self) -> AsyncStocksResource:
+        return AsyncStocksResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncOrdersResourceWithRawResponse:
         """
@@ -432,6 +448,10 @@ class OrdersResourceWithRawResponse:
             orders.get_fulfillments,
         )
 
+    @cached_property
+    def stocks(self) -> StocksResourceWithRawResponse:
+        return StocksResourceWithRawResponse(self._orders.stocks)
+
 
 class AsyncOrdersResourceWithRawResponse:
     def __init__(self, orders: AsyncOrdersResource) -> None:
@@ -449,6 +469,10 @@ class AsyncOrdersResourceWithRawResponse:
         self.get_fulfillments = async_to_raw_response_wrapper(
             orders.get_fulfillments,
         )
+
+    @cached_property
+    def stocks(self) -> AsyncStocksResourceWithRawResponse:
+        return AsyncStocksResourceWithRawResponse(self._orders.stocks)
 
 
 class OrdersResourceWithStreamingResponse:
@@ -468,6 +492,10 @@ class OrdersResourceWithStreamingResponse:
             orders.get_fulfillments,
         )
 
+    @cached_property
+    def stocks(self) -> StocksResourceWithStreamingResponse:
+        return StocksResourceWithStreamingResponse(self._orders.stocks)
+
 
 class AsyncOrdersResourceWithStreamingResponse:
     def __init__(self, orders: AsyncOrdersResource) -> None:
@@ -485,3 +513,7 @@ class AsyncOrdersResourceWithStreamingResponse:
         self.get_fulfillments = async_to_streamed_response_wrapper(
             orders.get_fulfillments,
         )
+
+    @cached_property
+    def stocks(self) -> AsyncStocksResourceWithStreamingResponse:
+        return AsyncStocksResourceWithStreamingResponse(self._orders.stocks)
