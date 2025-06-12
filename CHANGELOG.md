@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.1 (2025-06-12)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.1.0...v0.1.1)
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([5506690](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/550669035d85b3b88f1f0282a0469249b7fed649))
+
+
+### Chores
+
+* **internal:** version bump ([024de68](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/024de6899a8f86c30c2b017d8159532087636bf0))
+* **tests:** run tests in parallel ([be21988](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/be2198817a2e6adaa4a902c529ec354a305445f8))
+
 ## 0.1.0 (2025-06-10)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.1.0-alpha.2...v0.1.0)
