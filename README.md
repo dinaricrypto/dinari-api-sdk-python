@@ -1,6 +1,6 @@
 # Dinari Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/dinari-api-sdk.svg)](https://pypi.org/project/dinari-api-sdk/)
+[![PyPI version](<https://img.shields.io/pypi/v/dinari-api-sdk.svg?label=pypi%20(stable)>)](https://pypi.org/project/dinari-api-sdk/)
 
 The Dinari Python library provides convenient access to the Dinari REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
