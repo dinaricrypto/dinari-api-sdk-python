@@ -72,6 +72,40 @@ asyncio.run(main())
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
 
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from PyPI
+pip install dinari-api-sdk[aiohttp]
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import os
+import asyncio
+from dinari_api_sdk import DefaultAioHttpClient
+from dinari_api_sdk import AsyncDinari
+
+
+async def main() -> None:
+    async with AsyncDinari(
+        api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted
+        api_secret_key=os.environ.get(
+            "DINARI_API_SECRET_KEY"
+        ),  # This is the default and can be omitted
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        stocks = await client.v2.market_data.stocks.list()
+
+
+asyncio.run(main())
+```
+
 ## Using types
 
 Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
