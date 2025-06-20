@@ -24,12 +24,13 @@ from pydantic import ValidationError
 from dinari_api_sdk import Dinari, AsyncDinari, APIResponseValidationError
 from dinari_api_sdk._types import Omit
 from dinari_api_sdk._models import BaseModel, FinalRequestOptions
-from dinari_api_sdk._constants import RAW_RESPONSE_HEADER
 from dinari_api_sdk._exceptions import DinariError, APIStatusError, APITimeoutError, APIResponseValidationError
 from dinari_api_sdk._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
+    DefaultHttpxClient,
+    DefaultAsyncHttpxClient,
     make_request_options,
 )
 
@@ -821,30 +822,21 @@ class TestDinari:
 
     @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Dinari) -> None:
         respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.get(
-                "/api/v2/market_data/stocks/",
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            client.v2.market_data.stocks.with_streaming_response.list().__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Dinari) -> None:
         respx_mock.get("/api/v2/market_data/stocks/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.get(
-                "/api/v2/market_data/stocks/",
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            client.v2.market_data.stocks.with_streaming_response.list().__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -925,6 +917,28 @@ class TestDinari:
         response = client.v2.market_data.stocks.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
+
+    def test_proxy_environment_variables(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # Test that the proxy environment variables are set correctly
+        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
+
+        client = DefaultHttpxClient()
+
+        mounts = tuple(client._mounts.items())
+        assert len(mounts) == 1
+        assert mounts[0][0].pattern == "https://"
+
+    @pytest.mark.filterwarnings("ignore:.*deprecated.*:DeprecationWarning")
+    def test_default_client_creation(self) -> None:
+        # Ensure that the client can be initialized without any exceptions
+        DefaultHttpxClient(
+            verify=True,
+            cert=None,
+            trust_env=True,
+            http1=True,
+            http2=False,
+            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+        )
 
     @pytest.mark.respx(base_url=base_url)
     def test_follow_redirects(self, respx_mock: MockRouter) -> None:
@@ -1723,30 +1737,21 @@ class TestAsyncDinari:
 
     @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncDinari) -> None:
         respx_mock.get("/api/v2/market_data/stocks/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.get(
-                "/api/v2/market_data/stocks/",
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            await async_client.v2.market_data.stocks.with_streaming_response.list().__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("dinari_api_sdk._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncDinari) -> None:
         respx_mock.get("/api/v2/market_data/stocks/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.get(
-                "/api/v2/market_data/stocks/",
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            await async_client.v2.market_data.stocks.with_streaming_response.list().__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1877,6 +1882,28 @@ class TestAsyncDinari:
                     raise AssertionError("calling get_platform using asyncify resulted in a hung process")
 
                 time.sleep(0.1)
+
+    async def test_proxy_environment_variables(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # Test that the proxy environment variables are set correctly
+        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
+
+        client = DefaultAsyncHttpxClient()
+
+        mounts = tuple(client._mounts.items())
+        assert len(mounts) == 1
+        assert mounts[0][0].pattern == "https://"
+
+    @pytest.mark.filterwarnings("ignore:.*deprecated.*:DeprecationWarning")
+    async def test_default_client_creation(self) -> None:
+        # Ensure that the client can be initialized without any exceptions
+        DefaultAsyncHttpxClient(
+            verify=True,
+            cert=None,
+            trust_env=True,
+            http1=True,
+            http2=False,
+            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+        )
 
     @pytest.mark.respx(base_url=base_url)
     async def test_follow_redirects(self, respx_mock: MockRouter) -> None:

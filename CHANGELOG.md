@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.2.0 (2025-06-20)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** api update ([632603e](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/632603ee5e21a39dc8d9c3587b9b8823b644cb54))
+* **client:** add support for aiohttp ([ced87af](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/ced87af0a491995f7d57f6865cda004274362527))
+
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([5506690](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/550669035d85b3b88f1f0282a0469249b7fed649))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([8c5668a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/8c5668a56280d1401371cafb0b565fa4f3a8d3b6))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([2992259](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/29922591544a80efaf20906af05e22dbda8d2dfd))
+* **internal:** update conftest.py ([3a52da0](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/3a52da00238097e55464bd1417760f3a8c2dfb00))
+* **internal:** version bump ([024de68](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/024de6899a8f86c30c2b017d8159532087636bf0))
+* **readme:** update badges ([282115a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/282115a18021e383caf34584b2a98cea7d1ce077))
+* **tests:** add tests for httpx client instantiation & proxies ([4a32140](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/4a32140d75804b0fc53ef6de6a11a9c0d6cab966))
+* **tests:** run tests in parallel ([be21988](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/be2198817a2e6adaa4a902c529ec354a305445f8))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([1e15ada](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/1e15adaa615898b48208826120bcc998aee04830))
+
 ## 0.1.0 (2025-06-10)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.1.0-alpha.2...v0.1.0)
