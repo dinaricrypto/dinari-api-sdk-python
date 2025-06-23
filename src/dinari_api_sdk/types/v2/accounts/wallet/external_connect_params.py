@@ -2,16 +2,19 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
-
-from ...chain import Chain
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["ExternalConnectParams"]
 
 
 class ExternalConnectParams(TypedDict, total=False):
-    chain_id: Required[Chain]
-    """CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on."""
+    chain_id: Required[
+        Literal["eip155:1", "eip155:42161", "eip155:8453", "eip155:81457", "eip155:7887", "eip155:98866", "eip155:0"]
+    ]
+    """CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on.
+
+    eip155:0 is used for EOA wallets
+    """
 
     nonce: Required[str]
     """Nonce contained within the connection message."""

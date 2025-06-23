@@ -46,8 +46,8 @@ class OrderFeeContractObjectFee(BaseModel):
 
 
 class OrderFeeContractObject(BaseModel):
-    chain_id: int
-    """EVM chain ID where the order is placed"""
+    chain_id: Literal[42161, 1, 8453, 81457, 7887, 98866]
+    """EVM chain ID of the blockchain where the `Order` will be placed."""
 
     fee_quote: OrderFeeContractObjectFeeQuote
     """`FeeQuote` structure to pass into contracts."""

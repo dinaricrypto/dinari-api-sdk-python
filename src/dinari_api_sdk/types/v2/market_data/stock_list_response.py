@@ -27,6 +27,9 @@ class StockListResponseItem(BaseModel):
     symbol: str
     """Ticker symbol"""
 
+    tokens: List[str]
+    """List of CAIP-10 formatted token addresses."""
+
     cik: Optional[str] = None
     """SEC Central Index Key.
 
