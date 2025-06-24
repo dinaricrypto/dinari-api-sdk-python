@@ -19,3 +19,6 @@ class OrderRequestCreateLimitSellParams(TypedDict, total=False):
 
     stock_id: Required[str]
     """ID of `Stock`."""
+
+    recipient_account_id: str
+    """ID of `Account` to receive the `Order`."""

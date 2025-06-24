@@ -62,7 +62,7 @@ from dinari_api_sdk.types.v2 import Entity, EntityListResponse
 Methods:
 
 - <code title="post /api/v2/entities/">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">create</a>(\*\*<a href="src/dinari_api_sdk/types/v2/entity_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entity.py">Entity</a></code>
-- <code title="get /api/v2/entities/">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">list</a>() -> <a href="./src/dinari_api_sdk/types/v2/entity_list_response.py">EntityListResponse</a></code>
+- <code title="get /api/v2/entities/">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">list</a>(\*\*<a href="src/dinari_api_sdk/types/v2/entity_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entity_list_response.py">EntityListResponse</a></code>
 - <code title="get /api/v2/entities/{entity_id}">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">retrieve_by_id</a>(entity_id) -> <a href="./src/dinari_api_sdk/types/v2/entity.py">Entity</a></code>
 - <code title="get /api/v2/entities/me">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">retrieve_current</a>() -> <a href="./src/dinari_api_sdk/types/v2/entity.py">Entity</a></code>
 

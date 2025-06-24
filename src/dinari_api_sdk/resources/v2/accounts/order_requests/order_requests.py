@@ -154,6 +154,7 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: int,
         limit_price: float,
         stock_id: str,
+        recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -172,6 +173,8 @@ class OrderRequestsResource(SyncAPIResource):
 
           stock_id: ID of `Stock`.
 
+          recipient_account_id: ID of `Account` to receive the `Order`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -189,6 +192,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_limit_buy_params.OrderRequestCreateLimitBuyParams,
             ),
@@ -205,6 +209,7 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: int,
         limit_price: float,
         stock_id: str,
+        recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -223,6 +228,8 @@ class OrderRequestsResource(SyncAPIResource):
 
           stock_id: ID of `Stock`.
 
+          recipient_account_id: ID of `Account` to receive the `Order`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -240,6 +247,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_limit_sell_params.OrderRequestCreateLimitSellParams,
             ),
@@ -255,6 +263,7 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
+        recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -275,6 +284,8 @@ class OrderRequestsResource(SyncAPIResource):
 
           stock_id: ID of `Stock`.
 
+          recipient_account_id: ID of `Account` to receive the `Order`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -291,6 +302,7 @@ class OrderRequestsResource(SyncAPIResource):
                 {
                     "payment_amount": payment_amount,
                     "stock_id": stock_id,
+                    "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_market_buy_params.OrderRequestCreateMarketBuyParams,
             ),
@@ -306,6 +318,7 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
+        recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -321,6 +334,8 @@ class OrderRequestsResource(SyncAPIResource):
               9 decimal places.
 
           stock_id: ID of `Stock`.
+
+          recipient_account_id: ID of `Account` to receive the `Order`.
 
           extra_headers: Send extra headers
 
@@ -338,6 +353,7 @@ class OrderRequestsResource(SyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "stock_id": stock_id,
+                    "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_market_sell_params.OrderRequestCreateMarketSellParams,
             ),
@@ -526,6 +542,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: int,
         limit_price: float,
         stock_id: str,
+        recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -544,6 +561,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           stock_id: ID of `Stock`.
 
+          recipient_account_id: ID of `Account` to receive the `Order`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -561,6 +580,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_limit_buy_params.OrderRequestCreateLimitBuyParams,
             ),
@@ -577,6 +597,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: int,
         limit_price: float,
         stock_id: str,
+        recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -595,6 +616,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           stock_id: ID of `Stock`.
 
+          recipient_account_id: ID of `Account` to receive the `Order`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -612,6 +635,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_limit_sell_params.OrderRequestCreateLimitSellParams,
             ),
@@ -627,6 +651,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
+        recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -647,6 +672,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           stock_id: ID of `Stock`.
 
+          recipient_account_id: ID of `Account` to receive the `Order`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -663,6 +690,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 {
                     "payment_amount": payment_amount,
                     "stock_id": stock_id,
+                    "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_market_buy_params.OrderRequestCreateMarketBuyParams,
             ),
@@ -678,6 +706,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
+        recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -693,6 +722,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
               9 decimal places.
 
           stock_id: ID of `Stock`.
+
+          recipient_account_id: ID of `Account` to receive the `Order`.
 
           extra_headers: Send extra headers
 
@@ -710,6 +741,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "stock_id": stock_id,
+                    "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_market_sell_params.OrderRequestCreateMarketSellParams,
             ),

@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
+from datetime import datetime
 
 from ...._models import BaseModel
 
@@ -13,6 +14,9 @@ class StockRetrieveQuoteResponse(BaseModel):
 
     stock_id: str
     """ID of the `Stock`"""
+
+    timestamp: datetime
+    """When the Stock Quote was generated."""
 
     change: Optional[float] = None
     """The change in price from the previous close."""

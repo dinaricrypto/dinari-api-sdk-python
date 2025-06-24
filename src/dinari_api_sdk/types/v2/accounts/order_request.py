@@ -42,3 +42,6 @@ class OrderRequest(BaseModel):
 
     This is the primary identifier for the `/orders` routes.
     """
+
+    recipient_account_id: Optional[str] = None
+    """ID of recipient `Account`."""

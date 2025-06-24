@@ -12,6 +12,9 @@ __all__ = ["KYCDataParam"]
 
 
 class KYCDataParam(TypedDict, total=False):
+    address_country_code: Required[str]
+    """Country of residence. ISO 3166-1 alpha 2 country code."""
+
     country_code: Required[str]
     """Country of citizenship or home country of the organization.
 

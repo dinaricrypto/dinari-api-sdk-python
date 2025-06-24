@@ -7,6 +7,7 @@ import httpx
 from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
+from .....types.v2 import Chain
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
     to_raw_response_wrapper,
@@ -23,6 +24,7 @@ from .stocks.stocks import (
     AsyncStocksResourceWithStreamingResponse,
 )
 from ....._base_client import make_request_options
+from .....types.v2.chain import Chain
 from .....types.v2.accounts import order_list_params, order_get_fulfillments_params
 from .....types.v2.accounts.order import Order
 from .....types.v2.accounts.order_list_response import OrderListResponse
@@ -95,6 +97,8 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: str,
         *,
+        chain_id: Chain | NotGiven = NOT_GIVEN,
+        order_transaction_hash: str | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -104,10 +108,16 @@ class OrdersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderListResponse:
-        """
-        Get a list of all `Orders` under the `Account`.
+        """Get a list of all `Orders` under the `Account`.
+
+        Optionally `Orders` can be
+        filtered by chain ID or transaction hash.
 
         Args:
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
+
+          order_transaction_hash: Transaction hash of the `Order`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -127,6 +137,8 @@ class OrdersResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "chain_id": chain_id,
+                        "order_transaction_hash": order_transaction_hash,
                         "page": page,
                         "page_size": page_size,
                     },
@@ -295,6 +307,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
+        chain_id: Chain | NotGiven = NOT_GIVEN,
+        order_transaction_hash: str | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -304,10 +318,16 @@ class AsyncOrdersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OrderListResponse:
-        """
-        Get a list of all `Orders` under the `Account`.
+        """Get a list of all `Orders` under the `Account`.
+
+        Optionally `Orders` can be
+        filtered by chain ID or transaction hash.
 
         Args:
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
+
+          order_transaction_hash: Transaction hash of the `Order`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -327,6 +347,8 @@ class AsyncOrdersResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "chain_id": chain_id,
+                        "order_transaction_hash": order_transaction_hash,
                         "page": page,
                         "page_size": page_size,
                     },
