@@ -27,3 +27,9 @@ class Entity(BaseModel):
 
     nationality: Optional[str] = None
     """Nationality or home country of the `Entity`."""
+
+    reference_id: Optional[str] = None
+    """Case sensitive unique reference ID that you can set for the `Entity`.
+
+    We recommend setting this to the unique ID of the `Entity` in your system.
+    """

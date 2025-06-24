@@ -27,6 +27,15 @@ class TestEntities:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_create_with_all_params(self, client: Dinari) -> None:
+        entity = client.v2.entities.create(
+            name="x",
+            reference_id="x",
+        )
+        assert_matches_type(Entity, entity, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_create(self, client: Dinari) -> None:
         response = client.v2.entities.with_raw_response.create(
             name="x",
@@ -55,6 +64,16 @@ class TestEntities:
     @parametrize
     def test_method_list(self, client: Dinari) -> None:
         entity = client.v2.entities.list()
+        assert_matches_type(EntityListResponse, entity, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_list_with_all_params(self, client: Dinari) -> None:
+        entity = client.v2.entities.list(
+            page=1,
+            page_size=1,
+            reference_id="x",
+        )
         assert_matches_type(EntityListResponse, entity, path=["response"])
 
     @pytest.mark.skip()
@@ -165,6 +184,15 @@ class TestAsyncEntities:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncDinari) -> None:
+        entity = await async_client.v2.entities.create(
+            name="x",
+            reference_id="x",
+        )
+        assert_matches_type(Entity, entity, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_create(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.with_raw_response.create(
             name="x",
@@ -193,6 +221,16 @@ class TestAsyncEntities:
     @parametrize
     async def test_method_list(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.list()
+        assert_matches_type(EntityListResponse, entity, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
+        entity = await async_client.v2.entities.list(
+            page=1,
+            page_size=1,
+            reference_id="x",
+        )
         assert_matches_type(EntityListResponse, entity, path=["response"])
 
     @pytest.mark.skip()
