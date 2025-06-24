@@ -1,28 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List
-from typing_extensions import Literal
 
 from ......_models import BaseModel
+from .order_fee_amount import OrderFeeAmount
 
-__all__ = ["Eip155PrepareOrderResponse", "Fee", "TransactionData"]
-
-
-class Fee(BaseModel):
-    fee_in_eth: float
-    """
-    The quantity of the fee paid via payment token in
-    [ETH](https://ethereum.org/en/developers/docs/intro-to-ether/#what-is-ether).
-    """
-
-    fee_in_wei: str
-    """
-    The quantity of the fee paid via payment token in
-    [wei](https://ethereum.org/en/developers/docs/intro-to-ether/#denominations).
-    """
-
-    type: Literal["SPONSORED_NETWORK", "NETWORK", "TRADING", "ORDER", "PARTNER_ORDER", "PARTNER_TRADING"]
-    """Type of fee."""
+__all__ = ["Eip155PrepareOrderResponse", "TransactionData"]
 
 
 class TransactionData(BaseModel):
@@ -47,7 +30,7 @@ class TransactionData(BaseModel):
 
 
 class Eip155PrepareOrderResponse(BaseModel):
-    fees: List[Fee]
+    fees: List[OrderFeeAmount]
     """Fees included in the order transaction. Provided here as a reference."""
 
     transaction_data: List[TransactionData]

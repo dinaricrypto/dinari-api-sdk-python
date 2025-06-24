@@ -23,7 +23,7 @@ from .accounts import (
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
-from ....types.v2 import entity_list_params, entity_create_params
+from ....types.v2 import entity_list_params, entity_create_params, entity_update_params
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
     to_raw_response_wrapper,
@@ -106,6 +106,44 @@ class EntitiesResource(SyncAPIResource):
                 },
                 entity_create_params.EntityCreateParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Entity,
+        )
+
+    def update(
+        self,
+        entity_id: str,
+        *,
+        reference_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Entity:
+        """
+        Update a specific customer `Entity` of your organization.
+
+        Args:
+          reference_id: Case sensitive unique reference ID for the `Entity`. We recommend setting this
+              to the unique ID of the `Entity` in your system.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not entity_id:
+            raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
+        return self._patch(
+            f"/api/v2/entities/{entity_id}",
+            body=maybe_transform({"reference_id": reference_id}, entity_update_params.EntityUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -287,6 +325,44 @@ class AsyncEntitiesResource(AsyncAPIResource):
             cast_to=Entity,
         )
 
+    async def update(
+        self,
+        entity_id: str,
+        *,
+        reference_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Entity:
+        """
+        Update a specific customer `Entity` of your organization.
+
+        Args:
+          reference_id: Case sensitive unique reference ID for the `Entity`. We recommend setting this
+              to the unique ID of the `Entity` in your system.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not entity_id:
+            raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
+        return await self._patch(
+            f"/api/v2/entities/{entity_id}",
+            body=await async_maybe_transform({"reference_id": reference_id}, entity_update_params.EntityUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Entity,
+        )
+
     async def list(
         self,
         *,
@@ -395,6 +471,9 @@ class EntitiesResourceWithRawResponse:
         self.create = to_raw_response_wrapper(
             entities.create,
         )
+        self.update = to_raw_response_wrapper(
+            entities.update,
+        )
         self.list = to_raw_response_wrapper(
             entities.list,
         )
@@ -420,6 +499,9 @@ class AsyncEntitiesResourceWithRawResponse:
 
         self.create = async_to_raw_response_wrapper(
             entities.create,
+        )
+        self.update = async_to_raw_response_wrapper(
+            entities.update,
         )
         self.list = async_to_raw_response_wrapper(
             entities.list,
@@ -447,6 +529,9 @@ class EntitiesResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             entities.create,
         )
+        self.update = to_streamed_response_wrapper(
+            entities.update,
+        )
         self.list = to_streamed_response_wrapper(
             entities.list,
         )
@@ -472,6 +557,9 @@ class AsyncEntitiesResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             entities.create,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            entities.update,
         )
         self.list = async_to_streamed_response_wrapper(
             entities.list,

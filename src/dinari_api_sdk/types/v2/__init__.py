@@ -7,6 +7,7 @@ from .entity import Entity as Entity
 from .entity_list_params import EntityListParams as EntityListParams
 from .entity_create_params import EntityCreateParams as EntityCreateParams
 from .entity_list_response import EntityListResponse as EntityListResponse
+from .entity_update_params import EntityUpdateParams as EntityUpdateParams
 from .account_get_portfolio_response import AccountGetPortfolioResponse as AccountGetPortfolioResponse
 from .account_get_cash_balances_response import AccountGetCashBalancesResponse as AccountGetCashBalancesResponse
 from .account_mint_sandbox_tokens_params import AccountMintSandboxTokensParams as AccountMintSandboxTokensParams

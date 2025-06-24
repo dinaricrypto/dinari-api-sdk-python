@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -17,8 +15,9 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.v2.accounts.wallet import external_connect_params, external_get_nonce_params
+from .....types.v2.accounts.wallet import WalletChainID, external_connect_params, external_get_nonce_params
 from .....types.v2.accounts.wallet.wallet import Wallet
+from .....types.v2.accounts.wallet.wallet_chain_id import WalletChainID
 from .....types.v2.accounts.wallet.external_get_nonce_response import ExternalGetNonceResponse
 
 __all__ = ["ExternalResource", "AsyncExternalResource"]
@@ -48,9 +47,7 @@ class ExternalResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Literal[
-            "eip155:1", "eip155:42161", "eip155:8453", "eip155:81457", "eip155:7887", "eip155:98866", "eip155:0"
-        ],
+        chain_id: WalletChainID,
         nonce: str,
         signature: str,
         wallet_address: str,
@@ -105,9 +102,7 @@ class ExternalResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Literal[
-            "eip155:1", "eip155:42161", "eip155:8453", "eip155:81457", "eip155:7887", "eip155:98866", "eip155:0"
-        ],
+        chain_id: WalletChainID,
         wallet_address: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -178,9 +173,7 @@ class AsyncExternalResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Literal[
-            "eip155:1", "eip155:42161", "eip155:8453", "eip155:81457", "eip155:7887", "eip155:98866", "eip155:0"
-        ],
+        chain_id: WalletChainID,
         nonce: str,
         signature: str,
         wallet_address: str,
@@ -235,9 +228,7 @@ class AsyncExternalResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Literal[
-            "eip155:1", "eip155:42161", "eip155:8453", "eip155:81457", "eip155:7887", "eip155:98866", "eip155:0"
-        ],
+        chain_id: WalletChainID,
         wallet_address: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
