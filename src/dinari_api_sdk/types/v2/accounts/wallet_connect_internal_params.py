@@ -4,23 +4,20 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from .wallet_chain_id import WalletChainID
+from .wallet.wallet_chain_id import WalletChainID
 
-__all__ = ["ExternalConnectParams"]
+__all__ = ["WalletConnectInternalParams"]
 
 
-class ExternalConnectParams(TypedDict, total=False):
+class WalletConnectInternalParams(TypedDict, total=False):
     chain_id: Required[WalletChainID]
     """CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on.
 
     eip155:0 is used for EOA wallets
     """
 
-    nonce: Required[str]
-    """Nonce contained within the connection message."""
-
-    signature: Required[str]
-    """Signature payload from signing the connection message with the `Wallet`."""
-
     wallet_address: Required[str]
     """Address of the `Wallet`."""
+
+    is_shared: bool
+    """Is the linked Wallet shared or not"""

@@ -13,6 +13,7 @@ from .external import (
     AsyncExternalResourceWithStreamingResponse,
 )
 from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -22,7 +23,10 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
+from .....types.v2.accounts import wallet_connect_internal_params
+from .....types.v2.accounts.wallet import WalletChainID
 from .....types.v2.accounts.wallet.wallet import Wallet
+from .....types.v2.accounts.wallet.wallet_chain_id import WalletChainID
 
 __all__ = ["WalletResource", "AsyncWalletResource"]
 
@@ -50,6 +54,57 @@ class WalletResource(SyncAPIResource):
         For more information, see https://www.github.com/dinaricrypto/dinari-api-sdk-python#with_streaming_response
         """
         return WalletResourceWithStreamingResponse(self)
+
+    def connect_internal(
+        self,
+        account_id: str,
+        *,
+        chain_id: WalletChainID,
+        wallet_address: str,
+        is_shared: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Wallet:
+        """
+        Connect an internal `Wallet` to the `Account`.
+
+        Args:
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on. eip155:0
+              is used for EOA wallets
+
+          wallet_address: Address of the `Wallet`.
+
+          is_shared: Is the linked Wallet shared or not
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._post(
+            f"/api/v2/accounts/{account_id}/wallet/internal",
+            body=maybe_transform(
+                {
+                    "chain_id": chain_id,
+                    "wallet_address": wallet_address,
+                    "is_shared": is_shared,
+                },
+                wallet_connect_internal_params.WalletConnectInternalParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Wallet,
+        )
 
     def get(
         self,
@@ -109,6 +164,57 @@ class AsyncWalletResource(AsyncAPIResource):
         """
         return AsyncWalletResourceWithStreamingResponse(self)
 
+    async def connect_internal(
+        self,
+        account_id: str,
+        *,
+        chain_id: WalletChainID,
+        wallet_address: str,
+        is_shared: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Wallet:
+        """
+        Connect an internal `Wallet` to the `Account`.
+
+        Args:
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on. eip155:0
+              is used for EOA wallets
+
+          wallet_address: Address of the `Wallet`.
+
+          is_shared: Is the linked Wallet shared or not
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return await self._post(
+            f"/api/v2/accounts/{account_id}/wallet/internal",
+            body=await async_maybe_transform(
+                {
+                    "chain_id": chain_id,
+                    "wallet_address": wallet_address,
+                    "is_shared": is_shared,
+                },
+                wallet_connect_internal_params.WalletConnectInternalParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Wallet,
+        )
+
     async def get(
         self,
         account_id: str,
@@ -147,6 +253,9 @@ class WalletResourceWithRawResponse:
     def __init__(self, wallet: WalletResource) -> None:
         self._wallet = wallet
 
+        self.connect_internal = to_raw_response_wrapper(
+            wallet.connect_internal,
+        )
         self.get = to_raw_response_wrapper(
             wallet.get,
         )
@@ -160,6 +269,9 @@ class AsyncWalletResourceWithRawResponse:
     def __init__(self, wallet: AsyncWalletResource) -> None:
         self._wallet = wallet
 
+        self.connect_internal = async_to_raw_response_wrapper(
+            wallet.connect_internal,
+        )
         self.get = async_to_raw_response_wrapper(
             wallet.get,
         )
@@ -173,6 +285,9 @@ class WalletResourceWithStreamingResponse:
     def __init__(self, wallet: WalletResource) -> None:
         self._wallet = wallet
 
+        self.connect_internal = to_streamed_response_wrapper(
+            wallet.connect_internal,
+        )
         self.get = to_streamed_response_wrapper(
             wallet.get,
         )
@@ -186,6 +301,9 @@ class AsyncWalletResourceWithStreamingResponse:
     def __init__(self, wallet: AsyncWalletResource) -> None:
         self._wallet = wallet
 
+        self.connect_internal = async_to_streamed_response_wrapper(
+            wallet.connect_internal,
+        )
         self.get = async_to_streamed_response_wrapper(
             wallet.get,
         )
