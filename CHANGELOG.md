@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.2.0 (2025-06-24)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** 20250624 new updates ([3097402](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/3097402e70929580ab8d7c9c49f96c16eda8fcde))
+* **api:** Add link to docs ([592dc88](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/592dc88ef6831a841e00e41cf9fdb4b9d1ac3b0a))
+* **api:** api update ([1434b83](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/1434b8339761282b1503b352e81ef5fd82199eab))
+* **api:** api update ([5424d14](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/5424d148109eaabbb02cac8dac27c3f460dcc780))
+* **api:** api update ([33898ec](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/33898ecd7d19336ee33d72148c3e0185082437a8))
+* **api:** api update ([632603e](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/632603ee5e21a39dc8d9c3587b9b8823b644cb54))
+* **client:** add support for aiohttp ([ced87af](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/ced87af0a491995f7d57f6865cda004274362527))
+
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([5506690](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/550669035d85b3b88f1f0282a0469249b7fed649))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([8c5668a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/8c5668a56280d1401371cafb0b565fa4f3a8d3b6))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([2992259](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/29922591544a80efaf20906af05e22dbda8d2dfd))
+* **internal:** update conftest.py ([3a52da0](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/3a52da00238097e55464bd1417760f3a8c2dfb00))
+* **internal:** version bump ([024de68](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/024de6899a8f86c30c2b017d8159532087636bf0))
+* **readme:** update badges ([282115a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/282115a18021e383caf34584b2a98cea7d1ce077))
+* **tests:** add tests for httpx client instantiation & proxies ([4a32140](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/4a32140d75804b0fc53ef6de6a11a9c0d6cab966))
+* **tests:** run tests in parallel ([be21988](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/be2198817a2e6adaa4a902c529ec354a305445f8))
+* **tests:** skip some failing tests on the latest python versions ([56c6eef](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/56c6eef2aa965bed4c327fcb85d359c99b210c42))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([1e15ada](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/1e15adaa615898b48208826120bcc998aee04830))
+
 ## 0.1.0 (2025-06-10)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.1.0-alpha.2...v0.1.0)

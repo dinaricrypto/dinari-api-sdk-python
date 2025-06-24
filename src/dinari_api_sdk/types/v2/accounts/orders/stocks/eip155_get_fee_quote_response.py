@@ -7,13 +7,9 @@ from pydantic import Field as FieldInfo
 
 from ....chain import Chain
 from ......_models import BaseModel
+from .order_fee_amount import OrderFeeAmount
 
-__all__ = [
-    "Eip155GetFeeQuoteResponse",
-    "OrderFeeContractObject",
-    "OrderFeeContractObjectFeeQuote",
-    "OrderFeeContractObjectFee",
-]
+__all__ = ["Eip155GetFeeQuoteResponse", "OrderFeeContractObject", "OrderFeeContractObjectFeeQuote"]
 
 
 class OrderFeeContractObjectFeeQuote(BaseModel):
@@ -28,26 +24,9 @@ class OrderFeeContractObjectFeeQuote(BaseModel):
     timestamp: int
 
 
-class OrderFeeContractObjectFee(BaseModel):
-    fee_in_eth: float
-    """
-    The quantity of the fee paid via payment token in
-    [ETH](https://ethereum.org/en/developers/docs/intro-to-ether/#what-is-ether).
-    """
-
-    fee_in_wei: str
-    """
-    The quantity of the fee paid via payment token in
-    [wei](https://ethereum.org/en/developers/docs/intro-to-ether/#denominations).
-    """
-
-    type: Literal["SPONSORED_NETWORK", "NETWORK", "TRADING", "ORDER", "PARTNER_ORDER", "PARTNER_TRADING"]
-    """Type of fee."""
-
-
 class OrderFeeContractObject(BaseModel):
-    chain_id: int
-    """EVM chain ID where the order is placed"""
+    chain_id: Literal[42161, 1, 8453, 81457, 7887, 98866]
+    """EVM chain ID of the blockchain where the `Order` will be placed."""
 
     fee_quote: OrderFeeContractObjectFeeQuote
     """`FeeQuote` structure to pass into contracts."""
@@ -55,7 +34,7 @@ class OrderFeeContractObject(BaseModel):
     fee_quote_signature: str
     """Signed `FeeQuote` structure to pass into contracts."""
 
-    fees: List[OrderFeeContractObjectFee]
+    fees: List[OrderFeeAmount]
     """Breakdown of fees"""
 
     payment_token: str

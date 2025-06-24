@@ -108,6 +108,7 @@ class TestKYC:
         kyc = client.v2.entities.kyc.submit(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             data={
+                "address_country_code": "SG",
                 "country_code": "SG",
                 "last_name": "Doe",
             },
@@ -121,6 +122,7 @@ class TestKYC:
         kyc = client.v2.entities.kyc.submit(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             data={
+                "address_country_code": "SG",
                 "country_code": "SG",
                 "last_name": "Doe",
                 "address_city": "San Francisco",
@@ -144,6 +146,7 @@ class TestKYC:
         response = client.v2.entities.kyc.with_raw_response.submit(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             data={
+                "address_country_code": "SG",
                 "country_code": "SG",
                 "last_name": "Doe",
             },
@@ -161,6 +164,7 @@ class TestKYC:
         with client.v2.entities.kyc.with_streaming_response.submit(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             data={
+                "address_country_code": "SG",
                 "country_code": "SG",
                 "last_name": "Doe",
             },
@@ -181,6 +185,7 @@ class TestKYC:
             client.v2.entities.kyc.with_raw_response.submit(
                 entity_id="",
                 data={
+                    "address_country_code": "SG",
                     "country_code": "SG",
                     "last_name": "Doe",
                 },
@@ -189,7 +194,9 @@ class TestKYC:
 
 
 class TestAsyncKYC:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @pytest.mark.skip()
     @parametrize
@@ -281,6 +288,7 @@ class TestAsyncKYC:
         kyc = await async_client.v2.entities.kyc.submit(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             data={
+                "address_country_code": "SG",
                 "country_code": "SG",
                 "last_name": "Doe",
             },
@@ -294,6 +302,7 @@ class TestAsyncKYC:
         kyc = await async_client.v2.entities.kyc.submit(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             data={
+                "address_country_code": "SG",
                 "country_code": "SG",
                 "last_name": "Doe",
                 "address_city": "San Francisco",
@@ -317,6 +326,7 @@ class TestAsyncKYC:
         response = await async_client.v2.entities.kyc.with_raw_response.submit(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             data={
+                "address_country_code": "SG",
                 "country_code": "SG",
                 "last_name": "Doe",
             },
@@ -334,6 +344,7 @@ class TestAsyncKYC:
         async with async_client.v2.entities.kyc.with_streaming_response.submit(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             data={
+                "address_country_code": "SG",
                 "country_code": "SG",
                 "last_name": "Doe",
             },
@@ -354,6 +365,7 @@ class TestAsyncKYC:
             await async_client.v2.entities.kyc.with_raw_response.submit(
                 entity_id="",
                 data={
+                    "address_country_code": "SG",
                     "country_code": "SG",
                     "last_name": "Doe",
                 },

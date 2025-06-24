@@ -138,6 +138,18 @@ class TestOrderRequests:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_create_limit_buy_with_all_params(self, client: Dinari) -> None:
+        order_request = client.v2.accounts.order_requests.create_limit_buy(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            asset_quantity=0,
+            limit_price=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRequest, order_request, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_create_limit_buy(self, client: Dinari) -> None:
         response = client.v2.accounts.order_requests.with_raw_response.create_limit_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -187,6 +199,18 @@ class TestOrderRequests:
             asset_quantity=0,
             limit_price=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRequest, order_request, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_limit_sell_with_all_params(self, client: Dinari) -> None:
+        order_request = client.v2.accounts.order_requests.create_limit_sell(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            asset_quantity=0,
+            limit_price=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -245,6 +269,17 @@ class TestOrderRequests:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_create_market_buy_with_all_params(self, client: Dinari) -> None:
+        order_request = client.v2.accounts.order_requests.create_market_buy(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_amount=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRequest, order_request, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_create_market_buy(self, client: Dinari) -> None:
         response = client.v2.accounts.order_requests.with_raw_response.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -290,6 +325,17 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRequest, order_request, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_market_sell_with_all_params(self, client: Dinari) -> None:
+        order_request = client.v2.accounts.order_requests.create_market_sell(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            asset_quantity=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -403,7 +449,9 @@ class TestOrderRequests:
 
 
 class TestAsyncOrderRequests:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @pytest.mark.skip()
     @parametrize
@@ -522,6 +570,18 @@ class TestAsyncOrderRequests:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_create_limit_buy_with_all_params(self, async_client: AsyncDinari) -> None:
+        order_request = await async_client.v2.accounts.order_requests.create_limit_buy(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            asset_quantity=0,
+            limit_price=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRequest, order_request, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_create_limit_buy(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.order_requests.with_raw_response.create_limit_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -571,6 +631,18 @@ class TestAsyncOrderRequests:
             asset_quantity=0,
             limit_price=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRequest, order_request, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_limit_sell_with_all_params(self, async_client: AsyncDinari) -> None:
+        order_request = await async_client.v2.accounts.order_requests.create_limit_sell(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            asset_quantity=0,
+            limit_price=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -629,6 +701,17 @@ class TestAsyncOrderRequests:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_create_market_buy_with_all_params(self, async_client: AsyncDinari) -> None:
+        order_request = await async_client.v2.accounts.order_requests.create_market_buy(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            payment_amount=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRequest, order_request, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_create_market_buy(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.order_requests.with_raw_response.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -674,6 +757,17 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(OrderRequest, order_request, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_market_sell_with_all_params(self, async_client: AsyncDinari) -> None:
+        order_request = await async_client.v2.accounts.order_requests.create_market_sell(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            asset_quantity=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 

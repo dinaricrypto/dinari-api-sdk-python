@@ -10,9 +10,12 @@ __all__ = ["OrderRequestCreateMarketBuyParams"]
 class OrderRequestCreateMarketBuyParams(TypedDict, total=False):
     payment_amount: Required[float]
     """
-    Amount of currency (USD for US equities and ETFs) to pay or receive for the
-    order. Must be a positive number with a precision of up to 2 decimal places.
+    Amount of currency (USD for US equities and ETFs) to pay for the order. Must be
+    a positive number with a precision of up to 2 decimal places.
     """
 
     stock_id: Required[str]
     """ID of `Stock`."""
+
+    recipient_account_id: str
+    """ID of `Account` to receive the `Order`."""

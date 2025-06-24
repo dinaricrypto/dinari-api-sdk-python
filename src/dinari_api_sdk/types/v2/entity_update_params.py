@@ -2,15 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
-__all__ = ["EntityCreateParams"]
+__all__ = ["EntityUpdateParams"]
 
 
-class EntityCreateParams(TypedDict, total=False):
-    name: Required[str]
-    """Name of the `Entity`."""
-
+class EntityUpdateParams(TypedDict, total=False):
     reference_id: str
     """Case sensitive unique reference ID for the `Entity`.
 

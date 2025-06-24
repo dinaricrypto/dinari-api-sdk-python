@@ -25,7 +25,7 @@ class TestExternal:
     def test_method_connect(self, client: Dinari) -> None:
         external = client.v2.accounts.wallet.external.connect(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id="eip155:1",
+            chain_id="eip155:0",
             nonce="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             signature="0xeaF12bD1DfFd",
             wallet_address="wallet_address",
@@ -37,7 +37,7 @@ class TestExternal:
     def test_raw_response_connect(self, client: Dinari) -> None:
         response = client.v2.accounts.wallet.external.with_raw_response.connect(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id="eip155:1",
+            chain_id="eip155:0",
             nonce="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             signature="0xeaF12bD1DfFd",
             wallet_address="wallet_address",
@@ -53,7 +53,7 @@ class TestExternal:
     def test_streaming_response_connect(self, client: Dinari) -> None:
         with client.v2.accounts.wallet.external.with_streaming_response.connect(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id="eip155:1",
+            chain_id="eip155:0",
             nonce="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             signature="0xeaF12bD1DfFd",
             wallet_address="wallet_address",
@@ -72,7 +72,7 @@ class TestExternal:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.v2.accounts.wallet.external.with_raw_response.connect(
                 account_id="",
-                chain_id="eip155:1",
+                chain_id="eip155:0",
                 nonce="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 signature="0xeaF12bD1DfFd",
                 wallet_address="wallet_address",
@@ -83,6 +83,7 @@ class TestExternal:
     def test_method_get_nonce(self, client: Dinari) -> None:
         external = client.v2.accounts.wallet.external.get_nonce(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            chain_id="eip155:0",
             wallet_address="wallet_address",
         )
         assert_matches_type(ExternalGetNonceResponse, external, path=["response"])
@@ -92,6 +93,7 @@ class TestExternal:
     def test_raw_response_get_nonce(self, client: Dinari) -> None:
         response = client.v2.accounts.wallet.external.with_raw_response.get_nonce(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            chain_id="eip155:0",
             wallet_address="wallet_address",
         )
 
@@ -105,6 +107,7 @@ class TestExternal:
     def test_streaming_response_get_nonce(self, client: Dinari) -> None:
         with client.v2.accounts.wallet.external.with_streaming_response.get_nonce(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            chain_id="eip155:0",
             wallet_address="wallet_address",
         ) as response:
             assert not response.is_closed
@@ -121,19 +124,22 @@ class TestExternal:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.v2.accounts.wallet.external.with_raw_response.get_nonce(
                 account_id="",
+                chain_id="eip155:0",
                 wallet_address="wallet_address",
             )
 
 
 class TestAsyncExternal:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_connect(self, async_client: AsyncDinari) -> None:
         external = await async_client.v2.accounts.wallet.external.connect(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id="eip155:1",
+            chain_id="eip155:0",
             nonce="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             signature="0xeaF12bD1DfFd",
             wallet_address="wallet_address",
@@ -145,7 +151,7 @@ class TestAsyncExternal:
     async def test_raw_response_connect(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.wallet.external.with_raw_response.connect(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id="eip155:1",
+            chain_id="eip155:0",
             nonce="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             signature="0xeaF12bD1DfFd",
             wallet_address="wallet_address",
@@ -161,7 +167,7 @@ class TestAsyncExternal:
     async def test_streaming_response_connect(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.accounts.wallet.external.with_streaming_response.connect(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id="eip155:1",
+            chain_id="eip155:0",
             nonce="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             signature="0xeaF12bD1DfFd",
             wallet_address="wallet_address",
@@ -180,7 +186,7 @@ class TestAsyncExternal:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.v2.accounts.wallet.external.with_raw_response.connect(
                 account_id="",
-                chain_id="eip155:1",
+                chain_id="eip155:0",
                 nonce="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 signature="0xeaF12bD1DfFd",
                 wallet_address="wallet_address",
@@ -191,6 +197,7 @@ class TestAsyncExternal:
     async def test_method_get_nonce(self, async_client: AsyncDinari) -> None:
         external = await async_client.v2.accounts.wallet.external.get_nonce(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            chain_id="eip155:0",
             wallet_address="wallet_address",
         )
         assert_matches_type(ExternalGetNonceResponse, external, path=["response"])
@@ -200,6 +207,7 @@ class TestAsyncExternal:
     async def test_raw_response_get_nonce(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.wallet.external.with_raw_response.get_nonce(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            chain_id="eip155:0",
             wallet_address="wallet_address",
         )
 
@@ -213,6 +221,7 @@ class TestAsyncExternal:
     async def test_streaming_response_get_nonce(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.accounts.wallet.external.with_streaming_response.get_nonce(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            chain_id="eip155:0",
             wallet_address="wallet_address",
         ) as response:
             assert not response.is_closed
@@ -229,5 +238,6 @@ class TestAsyncExternal:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.v2.accounts.wallet.external.with_raw_response.get_nonce(
                 account_id="",
+                chain_id="eip155:0",
                 wallet_address="wallet_address",
             )

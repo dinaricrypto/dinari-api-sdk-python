@@ -7,7 +7,6 @@ import httpx
 from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
-from .....types.v2 import Chain
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
     to_raw_response_wrapper,
@@ -16,9 +15,9 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.v2.chain import Chain
-from .....types.v2.accounts.wallet import external_connect_params, external_get_nonce_params
+from .....types.v2.accounts.wallet import WalletChainID, external_connect_params, external_get_nonce_params
 from .....types.v2.accounts.wallet.wallet import Wallet
+from .....types.v2.accounts.wallet.wallet_chain_id import WalletChainID
 from .....types.v2.accounts.wallet.external_get_nonce_response import ExternalGetNonceResponse
 
 __all__ = ["ExternalResource", "AsyncExternalResource"]
@@ -48,7 +47,7 @@ class ExternalResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Chain,
+        chain_id: WalletChainID,
         nonce: str,
         signature: str,
         wallet_address: str,
@@ -63,7 +62,8 @@ class ExternalResource(SyncAPIResource):
         Connect a `Wallet` to the `Account` after verifying the signature.
 
         Args:
-          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on.
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on. eip155:0
+              is used for EOA wallets
 
           nonce: Nonce contained within the connection message.
 
@@ -102,6 +102,7 @@ class ExternalResource(SyncAPIResource):
         self,
         account_id: str,
         *,
+        chain_id: WalletChainID,
         wallet_address: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -114,6 +115,9 @@ class ExternalResource(SyncAPIResource):
         Get a nonce and message to be signed in order to verify `Wallet` ownership.
 
         Args:
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` is on. eip155:0 is used
+              for EOA wallets
+
           wallet_address: Address of the `Wallet` to connect.
 
           extra_headers: Send extra headers
@@ -134,7 +138,11 @@ class ExternalResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"wallet_address": wallet_address}, external_get_nonce_params.ExternalGetNonceParams
+                    {
+                        "chain_id": chain_id,
+                        "wallet_address": wallet_address,
+                    },
+                    external_get_nonce_params.ExternalGetNonceParams,
                 ),
             ),
             cast_to=ExternalGetNonceResponse,
@@ -165,7 +173,7 @@ class AsyncExternalResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Chain,
+        chain_id: WalletChainID,
         nonce: str,
         signature: str,
         wallet_address: str,
@@ -180,7 +188,8 @@ class AsyncExternalResource(AsyncAPIResource):
         Connect a `Wallet` to the `Account` after verifying the signature.
 
         Args:
-          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on.
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on. eip155:0
+              is used for EOA wallets
 
           nonce: Nonce contained within the connection message.
 
@@ -219,6 +228,7 @@ class AsyncExternalResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
+        chain_id: WalletChainID,
         wallet_address: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -231,6 +241,9 @@ class AsyncExternalResource(AsyncAPIResource):
         Get a nonce and message to be signed in order to verify `Wallet` ownership.
 
         Args:
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Wallet` is on. eip155:0 is used
+              for EOA wallets
+
           wallet_address: Address of the `Wallet` to connect.
 
           extra_headers: Send extra headers
@@ -251,7 +264,11 @@ class AsyncExternalResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"wallet_address": wallet_address}, external_get_nonce_params.ExternalGetNonceParams
+                    {
+                        "chain_id": chain_id,
+                        "wallet_address": wallet_address,
+                    },
+                    external_get_nonce_params.ExternalGetNonceParams,
                 ),
             ),
             cast_to=ExternalGetNonceResponse,

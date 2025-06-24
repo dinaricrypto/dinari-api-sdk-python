@@ -86,6 +86,8 @@ class TestOrders:
     def test_method_list_with_all_params(self, client: Dinari) -> None:
         order = client.v2.accounts.orders.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            chain_id="eip155:1",
+            order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,
         )
@@ -242,7 +244,9 @@ class TestOrders:
 
 
 class TestAsyncOrders:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @pytest.mark.skip()
     @parametrize
@@ -309,6 +313,8 @@ class TestAsyncOrders:
     async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
         order = await async_client.v2.accounts.orders.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            chain_id="eip155:1",
+            order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,
         )
