@@ -82,8 +82,9 @@ class V2Resource(SyncAPIResource):
     def list_orders(
         self,
         *,
-        chain_id: Chain,
+        chain_id: Chain | NotGiven = NOT_GIVEN,
         order_fulfillment_transaction_hash: str | NotGiven = NOT_GIVEN,
+        order_request_id: str | NotGiven = NOT_GIVEN,
         order_transaction_hash: str | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
@@ -103,6 +104,8 @@ class V2Resource(SyncAPIResource):
           chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
 
           order_fulfillment_transaction_hash: Fulfillment transaction hash of the `Order`.
+
+          order_request_id: Order Request ID for the `Order`
 
           order_transaction_hash: Transaction hash of the `Order`.
 
@@ -125,6 +128,7 @@ class V2Resource(SyncAPIResource):
                     {
                         "chain_id": chain_id,
                         "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
+                        "order_request_id": order_request_id,
                         "order_transaction_hash": order_transaction_hash,
                         "page": page,
                         "page_size": page_size,
@@ -171,8 +175,9 @@ class AsyncV2Resource(AsyncAPIResource):
     async def list_orders(
         self,
         *,
-        chain_id: Chain,
+        chain_id: Chain | NotGiven = NOT_GIVEN,
         order_fulfillment_transaction_hash: str | NotGiven = NOT_GIVEN,
+        order_request_id: str | NotGiven = NOT_GIVEN,
         order_transaction_hash: str | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
@@ -192,6 +197,8 @@ class AsyncV2Resource(AsyncAPIResource):
           chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
 
           order_fulfillment_transaction_hash: Fulfillment transaction hash of the `Order`.
+
+          order_request_id: Order Request ID for the `Order`
 
           order_transaction_hash: Transaction hash of the `Order`.
 
@@ -214,6 +221,7 @@ class AsyncV2Resource(AsyncAPIResource):
                     {
                         "chain_id": chain_id,
                         "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
+                        "order_request_id": order_request_id,
                         "order_transaction_hash": order_transaction_hash,
                         "page": page,
                         "page_size": page_size,

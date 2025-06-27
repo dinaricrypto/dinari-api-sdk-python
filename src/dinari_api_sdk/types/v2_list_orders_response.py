@@ -72,6 +72,9 @@ class V2ListOrdersResponseItem(BaseModel):
     currency (USD for US equities and ETFs).
     """
 
+    order_request_id: Optional[str] = None
+    """Order Request ID for the `Order`"""
+
     payment_token: Optional[str] = None
     """The payment token (stablecoin) address."""
 

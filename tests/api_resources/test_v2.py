@@ -20,9 +20,7 @@ class TestV2:
     @pytest.mark.skip()
     @parametrize
     def test_method_list_orders(self, client: Dinari) -> None:
-        v2 = client.v2.list_orders(
-            chain_id="eip155:1",
-        )
+        v2 = client.v2.list_orders()
         assert_matches_type(V2ListOrdersResponse, v2, path=["response"])
 
     @pytest.mark.skip()
@@ -31,6 +29,7 @@ class TestV2:
         v2 = client.v2.list_orders(
             chain_id="eip155:1",
             order_fulfillment_transaction_hash="order_fulfillment_transaction_hash",
+            order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,
@@ -40,9 +39,7 @@ class TestV2:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_list_orders(self, client: Dinari) -> None:
-        response = client.v2.with_raw_response.list_orders(
-            chain_id="eip155:1",
-        )
+        response = client.v2.with_raw_response.list_orders()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -52,9 +49,7 @@ class TestV2:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list_orders(self, client: Dinari) -> None:
-        with client.v2.with_streaming_response.list_orders(
-            chain_id="eip155:1",
-        ) as response:
+        with client.v2.with_streaming_response.list_orders() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -72,9 +67,7 @@ class TestAsyncV2:
     @pytest.mark.skip()
     @parametrize
     async def test_method_list_orders(self, async_client: AsyncDinari) -> None:
-        v2 = await async_client.v2.list_orders(
-            chain_id="eip155:1",
-        )
+        v2 = await async_client.v2.list_orders()
         assert_matches_type(V2ListOrdersResponse, v2, path=["response"])
 
     @pytest.mark.skip()
@@ -83,6 +76,7 @@ class TestAsyncV2:
         v2 = await async_client.v2.list_orders(
             chain_id="eip155:1",
             order_fulfillment_transaction_hash="order_fulfillment_transaction_hash",
+            order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,
@@ -92,9 +86,7 @@ class TestAsyncV2:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list_orders(self, async_client: AsyncDinari) -> None:
-        response = await async_client.v2.with_raw_response.list_orders(
-            chain_id="eip155:1",
-        )
+        response = await async_client.v2.with_raw_response.list_orders()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -104,9 +96,7 @@ class TestAsyncV2:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list_orders(self, async_client: AsyncDinari) -> None:
-        async with async_client.v2.with_streaming_response.list_orders(
-            chain_id="eip155:1",
-        ) as response:
+        async with async_client.v2.with_streaming_response.list_orders() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
