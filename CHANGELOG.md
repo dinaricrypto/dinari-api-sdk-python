@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.0 (2025-06-27)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** api update ([ae52537](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/ae5253773516747852d3793dd340bf0c456104cc))
+* **api:** api update ([c3ad3a3](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/c3ad3a3a70e29f7f1b2515053b6cf239f3a317ce))
+* **api:** api update ([95100e8](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/95100e808c6f862e1ac9dae91e8205067800dc4c))
+* **api:** api update ([5dbc39c](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/5dbc39c860970cdd6506c38b18c14063ecffec7e))
+* **api:** remove quote api ([a900149](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/a900149713273507525e3c5b6da11f3bb12cbde3))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([c20072a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/c20072acf3ecbe32d58773f96b7edfb951c6420e))
+
 ## 0.2.0 (2025-06-24)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.1.0...v0.2.0)

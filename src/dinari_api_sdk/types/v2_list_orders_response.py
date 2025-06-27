@@ -1,19 +1,20 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
+from typing_extensions import TypeAlias
 
-from ..chain import Chain
-from .order_tif import OrderTif
-from ...._models import BaseModel
-from .order_side import OrderSide
-from .order_type import OrderType
-from .brokerage_order_status import BrokerageOrderStatus
+from .._models import BaseModel
+from .v2.chain import Chain
+from .v2.accounts.order_tif import OrderTif
+from .v2.accounts.order_side import OrderSide
+from .v2.accounts.order_type import OrderType
+from .v2.accounts.brokerage_order_status import BrokerageOrderStatus
 
-__all__ = ["Order"]
+__all__ = ["V2ListOrdersResponse", "V2ListOrdersResponseItem"]
 
 
-class Order(BaseModel):
+class V2ListOrdersResponseItem(BaseModel):
     id: str
     """ID of the `Order`."""
 
@@ -47,6 +48,9 @@ class Order(BaseModel):
     stock_id: str
     """The `Stock` ID associated with the `Order`"""
 
+    account_id: Optional[str] = None
+    """Account ID the order was made for."""
+
     asset_token: Optional[str] = None
     """The dShare asset token address."""
 
@@ -55,6 +59,9 @@ class Order(BaseModel):
 
     cancel_transaction_hash: Optional[str] = None
     """Transaction hash for cancellation of `Order`, if the `Order` was cancelled."""
+
+    entity_id: Optional[str] = None
+    """Entity ID of the Order"""
 
     fee: Optional[float] = None
     """Fee amount associated with `Order`."""
@@ -73,3 +80,6 @@ class Order(BaseModel):
 
     payment_token_quantity: Optional[float] = None
     """Total amount of payment involved."""
+
+
+V2ListOrdersResponse: TypeAlias = List[V2ListOrdersResponseItem]

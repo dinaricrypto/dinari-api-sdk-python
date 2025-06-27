@@ -5,10 +5,10 @@ from datetime import datetime
 
 from ...._models import BaseModel
 
-__all__ = ["StockRetrieveQuoteResponse"]
+__all__ = ["StockRetrieveCurrentPriceResponse"]
 
 
-class StockRetrieveQuoteResponse(BaseModel):
+class StockRetrieveCurrentPriceResponse(BaseModel):
     price: float
     """The ask price."""
 

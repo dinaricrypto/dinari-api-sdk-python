@@ -1,5 +1,15 @@
 # V2
 
+Types:
+
+```python
+from dinari_api_sdk.types import V2ListOrdersResponse
+```
+
+Methods:
+
+- <code title="get /api/v2/orders/">client.v2.<a href="./src/dinari_api_sdk/resources/v2/v2.py">list_orders</a>(\*\*<a href="src/dinari_api_sdk/types/v2_list_orders_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2_list_orders_response.py">V2ListOrdersResponse</a></code>
+
 ## MarketData
 
 Types:
@@ -19,20 +29,22 @@ Types:
 ```python
 from dinari_api_sdk.types.v2.market_data import (
     StockListResponse,
+    StockRetrieveCurrentPriceResponse,
+    StockRetrieveCurrentQuoteResponse,
     StockRetrieveDividendsResponse,
     StockRetrieveHistoricalPricesResponse,
     StockRetrieveNewsResponse,
-    StockRetrieveQuoteResponse,
 )
 ```
 
 Methods:
 
 - <code title="get /api/v2/market_data/stocks/">client.v2.market_data.stocks.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/stocks.py">list</a>(\*\*<a href="src/dinari_api_sdk/types/v2/market_data/stock_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stock_list_response.py">StockListResponse</a></code>
+- <code title="get /api/v2/market_data/stocks/{stock_id}/current_price">client.v2.market_data.stocks.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/stocks.py">retrieve_current_price</a>(stock_id) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stock_retrieve_current_price_response.py">StockRetrieveCurrentPriceResponse</a></code>
+- <code title="get /api/v2/market_data/stocks/{stock_id}/current_quote">client.v2.market_data.stocks.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/stocks.py">retrieve_current_quote</a>(stock_id) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stock_retrieve_current_quote_response.py">StockRetrieveCurrentQuoteResponse</a></code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/dividends">client.v2.market_data.stocks.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/stocks.py">retrieve_dividends</a>(stock_id) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stock_retrieve_dividends_response.py">StockRetrieveDividendsResponse</a></code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/historical_prices/">client.v2.market_data.stocks.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/stocks.py">retrieve_historical_prices</a>(stock_id, \*\*<a href="src/dinari_api_sdk/types/v2/market_data/stock_retrieve_historical_prices_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stock_retrieve_historical_prices_response.py">StockRetrieveHistoricalPricesResponse</a></code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/news">client.v2.market_data.stocks.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/stocks.py">retrieve_news</a>(stock_id, \*\*<a href="src/dinari_api_sdk/types/v2/market_data/stock_retrieve_news_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stock_retrieve_news_response.py">StockRetrieveNewsResponse</a></code>
-- <code title="get /api/v2/market_data/stocks/{stock_id}/quote">client.v2.market_data.stocks.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/stocks.py">retrieve_quote</a>(stock_id) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stock_retrieve_quote_response.py">StockRetrieveQuoteResponse</a></code>
 
 #### Splits
 

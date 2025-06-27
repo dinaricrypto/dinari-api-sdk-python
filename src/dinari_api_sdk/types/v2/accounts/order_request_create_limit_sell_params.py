@@ -8,8 +8,11 @@ __all__ = ["OrderRequestCreateLimitSellParams"]
 
 
 class OrderRequestCreateLimitSellParams(TypedDict, total=False):
-    asset_quantity: Required[int]
-    """Quantity of shares to trade. Must be a positive integer."""
+    asset_quantity: Required[float]
+    """Amount of dShare asset involved.
+
+    Required for limit `Orders` and market sell `Orders`.
+    """
 
     limit_price: Required[float]
     """Price at which to execute the order.

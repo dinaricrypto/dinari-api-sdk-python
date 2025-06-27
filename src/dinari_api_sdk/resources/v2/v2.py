@@ -2,8 +2,22 @@
 
 from __future__ import annotations
 
+import httpx
+
+from ...types import v2_list_orders_params
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
+from ...types.v2 import Chain
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from ..._base_client import make_request_options
+from ...types.v2.chain import Chain
 from .accounts.accounts import (
     AccountsResource,
     AsyncAccountsResource,
@@ -28,6 +42,7 @@ from .market_data.market_data import (
     MarketDataResourceWithStreamingResponse,
     AsyncMarketDataResourceWithStreamingResponse,
 )
+from ...types.v2_list_orders_response import V2ListOrdersResponse
 
 __all__ = ["V2Resource", "AsyncV2Resource"]
 
@@ -64,6 +79,66 @@ class V2Resource(SyncAPIResource):
         """
         return V2ResourceWithStreamingResponse(self)
 
+    def list_orders(
+        self,
+        *,
+        chain_id: Chain | NotGiven = NOT_GIVEN,
+        order_fulfillment_transaction_hash: str | NotGiven = NOT_GIVEN,
+        order_request_id: str | NotGiven = NOT_GIVEN,
+        order_transaction_hash: str | NotGiven = NOT_GIVEN,
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2ListOrdersResponse:
+        """Get a list of all `Orders` under the `Entity`.
+
+        Optionally `Orders` can be
+        transaction hash or fulfillment transaction hash.
+
+        Args:
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
+
+          order_fulfillment_transaction_hash: Fulfillment transaction hash of the `Order`.
+
+          order_request_id: Order Request ID for the `Order`
+
+          order_transaction_hash: Transaction hash of the `Order`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/api/v2/orders/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "chain_id": chain_id,
+                        "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
+                        "order_request_id": order_request_id,
+                        "order_transaction_hash": order_transaction_hash,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    v2_list_orders_params.V2ListOrdersParams,
+                ),
+            ),
+            cast_to=V2ListOrdersResponse,
+        )
+
 
 class AsyncV2Resource(AsyncAPIResource):
     @cached_property
@@ -97,10 +172,74 @@ class AsyncV2Resource(AsyncAPIResource):
         """
         return AsyncV2ResourceWithStreamingResponse(self)
 
+    async def list_orders(
+        self,
+        *,
+        chain_id: Chain | NotGiven = NOT_GIVEN,
+        order_fulfillment_transaction_hash: str | NotGiven = NOT_GIVEN,
+        order_request_id: str | NotGiven = NOT_GIVEN,
+        order_transaction_hash: str | NotGiven = NOT_GIVEN,
+        page: int | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> V2ListOrdersResponse:
+        """Get a list of all `Orders` under the `Entity`.
+
+        Optionally `Orders` can be
+        transaction hash or fulfillment transaction hash.
+
+        Args:
+          chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
+
+          order_fulfillment_transaction_hash: Fulfillment transaction hash of the `Order`.
+
+          order_request_id: Order Request ID for the `Order`
+
+          order_transaction_hash: Transaction hash of the `Order`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/api/v2/orders/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "chain_id": chain_id,
+                        "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
+                        "order_request_id": order_request_id,
+                        "order_transaction_hash": order_transaction_hash,
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    v2_list_orders_params.V2ListOrdersParams,
+                ),
+            ),
+            cast_to=V2ListOrdersResponse,
+        )
+
 
 class V2ResourceWithRawResponse:
     def __init__(self, v2: V2Resource) -> None:
         self._v2 = v2
+
+        self.list_orders = to_raw_response_wrapper(
+            v2.list_orders,
+        )
 
     @cached_property
     def market_data(self) -> MarketDataResourceWithRawResponse:
@@ -119,6 +258,10 @@ class AsyncV2ResourceWithRawResponse:
     def __init__(self, v2: AsyncV2Resource) -> None:
         self._v2 = v2
 
+        self.list_orders = async_to_raw_response_wrapper(
+            v2.list_orders,
+        )
+
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithRawResponse:
         return AsyncMarketDataResourceWithRawResponse(self._v2.market_data)
@@ -136,6 +279,10 @@ class V2ResourceWithStreamingResponse:
     def __init__(self, v2: V2Resource) -> None:
         self._v2 = v2
 
+        self.list_orders = to_streamed_response_wrapper(
+            v2.list_orders,
+        )
+
     @cached_property
     def market_data(self) -> MarketDataResourceWithStreamingResponse:
         return MarketDataResourceWithStreamingResponse(self._v2.market_data)
@@ -152,6 +299,10 @@ class V2ResourceWithStreamingResponse:
 class AsyncV2ResourceWithStreamingResponse:
     def __init__(self, v2: AsyncV2Resource) -> None:
         self._v2 = v2
+
+        self.list_orders = async_to_streamed_response_wrapper(
+            v2.list_orders,
+        )
 
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithStreamingResponse:

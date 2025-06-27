@@ -33,8 +33,9 @@ from .....types.v2.market_data import (
 )
 from .....types.v2.market_data.stock_list_response import StockListResponse
 from .....types.v2.market_data.stock_retrieve_news_response import StockRetrieveNewsResponse
-from .....types.v2.market_data.stock_retrieve_quote_response import StockRetrieveQuoteResponse
 from .....types.v2.market_data.stock_retrieve_dividends_response import StockRetrieveDividendsResponse
+from .....types.v2.market_data.stock_retrieve_current_price_response import StockRetrieveCurrentPriceResponse
+from .....types.v2.market_data.stock_retrieve_current_quote_response import StockRetrieveCurrentQuoteResponse
 from .....types.v2.market_data.stock_retrieve_historical_prices_response import StockRetrieveHistoricalPricesResponse
 
 __all__ = ["StocksResource", "AsyncStocksResource"]
@@ -109,6 +110,72 @@ class StocksResource(SyncAPIResource):
                 ),
             ),
             cast_to=StockListResponse,
+        )
+
+    def retrieve_current_price(
+        self,
+        stock_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> StockRetrieveCurrentPriceResponse:
+        """
+        Get current price for a specified `Stock`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not stock_id:
+            raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
+        return self._get(
+            f"/api/v2/market_data/stocks/{stock_id}/current_price",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=StockRetrieveCurrentPriceResponse,
+        )
+
+    def retrieve_current_quote(
+        self,
+        stock_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> StockRetrieveCurrentQuoteResponse:
+        """
+        Get quote for a specified `Stock`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not stock_id:
+            raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
+        return self._get(
+            f"/api/v2/market_data/stocks/{stock_id}/current_quote",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=StockRetrieveCurrentQuoteResponse,
         )
 
     def retrieve_dividends(
@@ -232,39 +299,6 @@ class StocksResource(SyncAPIResource):
             cast_to=StockRetrieveNewsResponse,
         )
 
-    def retrieve_quote(
-        self,
-        stock_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> StockRetrieveQuoteResponse:
-        """
-        Get quote for a specified `Stock`.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not stock_id:
-            raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
-        return self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/quote",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=StockRetrieveQuoteResponse,
-        )
-
 
 class AsyncStocksResource(AsyncAPIResource):
     @cached_property
@@ -335,6 +369,72 @@ class AsyncStocksResource(AsyncAPIResource):
                 ),
             ),
             cast_to=StockListResponse,
+        )
+
+    async def retrieve_current_price(
+        self,
+        stock_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> StockRetrieveCurrentPriceResponse:
+        """
+        Get current price for a specified `Stock`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not stock_id:
+            raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
+        return await self._get(
+            f"/api/v2/market_data/stocks/{stock_id}/current_price",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=StockRetrieveCurrentPriceResponse,
+        )
+
+    async def retrieve_current_quote(
+        self,
+        stock_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> StockRetrieveCurrentQuoteResponse:
+        """
+        Get quote for a specified `Stock`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not stock_id:
+            raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
+        return await self._get(
+            f"/api/v2/market_data/stocks/{stock_id}/current_quote",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=StockRetrieveCurrentQuoteResponse,
         )
 
     async def retrieve_dividends(
@@ -458,39 +558,6 @@ class AsyncStocksResource(AsyncAPIResource):
             cast_to=StockRetrieveNewsResponse,
         )
 
-    async def retrieve_quote(
-        self,
-        stock_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> StockRetrieveQuoteResponse:
-        """
-        Get quote for a specified `Stock`.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not stock_id:
-            raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
-        return await self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/quote",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=StockRetrieveQuoteResponse,
-        )
-
 
 class StocksResourceWithRawResponse:
     def __init__(self, stocks: StocksResource) -> None:
@@ -498,6 +565,12 @@ class StocksResourceWithRawResponse:
 
         self.list = to_raw_response_wrapper(
             stocks.list,
+        )
+        self.retrieve_current_price = to_raw_response_wrapper(
+            stocks.retrieve_current_price,
+        )
+        self.retrieve_current_quote = to_raw_response_wrapper(
+            stocks.retrieve_current_quote,
         )
         self.retrieve_dividends = to_raw_response_wrapper(
             stocks.retrieve_dividends,
@@ -507,9 +580,6 @@ class StocksResourceWithRawResponse:
         )
         self.retrieve_news = to_raw_response_wrapper(
             stocks.retrieve_news,
-        )
-        self.retrieve_quote = to_raw_response_wrapper(
-            stocks.retrieve_quote,
         )
 
     @cached_property
@@ -524,6 +594,12 @@ class AsyncStocksResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             stocks.list,
         )
+        self.retrieve_current_price = async_to_raw_response_wrapper(
+            stocks.retrieve_current_price,
+        )
+        self.retrieve_current_quote = async_to_raw_response_wrapper(
+            stocks.retrieve_current_quote,
+        )
         self.retrieve_dividends = async_to_raw_response_wrapper(
             stocks.retrieve_dividends,
         )
@@ -532,9 +608,6 @@ class AsyncStocksResourceWithRawResponse:
         )
         self.retrieve_news = async_to_raw_response_wrapper(
             stocks.retrieve_news,
-        )
-        self.retrieve_quote = async_to_raw_response_wrapper(
-            stocks.retrieve_quote,
         )
 
     @cached_property
@@ -549,6 +622,12 @@ class StocksResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             stocks.list,
         )
+        self.retrieve_current_price = to_streamed_response_wrapper(
+            stocks.retrieve_current_price,
+        )
+        self.retrieve_current_quote = to_streamed_response_wrapper(
+            stocks.retrieve_current_quote,
+        )
         self.retrieve_dividends = to_streamed_response_wrapper(
             stocks.retrieve_dividends,
         )
@@ -557,9 +636,6 @@ class StocksResourceWithStreamingResponse:
         )
         self.retrieve_news = to_streamed_response_wrapper(
             stocks.retrieve_news,
-        )
-        self.retrieve_quote = to_streamed_response_wrapper(
-            stocks.retrieve_quote,
         )
 
     @cached_property
@@ -574,6 +650,12 @@ class AsyncStocksResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             stocks.list,
         )
+        self.retrieve_current_price = async_to_streamed_response_wrapper(
+            stocks.retrieve_current_price,
+        )
+        self.retrieve_current_quote = async_to_streamed_response_wrapper(
+            stocks.retrieve_current_quote,
+        )
         self.retrieve_dividends = async_to_streamed_response_wrapper(
             stocks.retrieve_dividends,
         )
@@ -582,9 +664,6 @@ class AsyncStocksResourceWithStreamingResponse:
         )
         self.retrieve_news = async_to_streamed_response_wrapper(
             stocks.retrieve_news,
-        )
-        self.retrieve_quote = async_to_streamed_response_wrapper(
-            stocks.retrieve_quote,
         )
 
     @cached_property
