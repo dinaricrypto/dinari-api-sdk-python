@@ -151,7 +151,7 @@ class OrderRequestsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        asset_quantity: int,
+        asset_quantity: float,
         limit_price: float,
         stock_id: str,
         recipient_account_id: str | NotGiven = NOT_GIVEN,
@@ -166,7 +166,8 @@ class OrderRequestsResource(SyncAPIResource):
         Create a managed `OrderRequest` to place a limit buy `Order`.
 
         Args:
-          asset_quantity: Quantity of shares to trade. Must be a positive integer.
+          asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
+              `Orders`.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
@@ -206,7 +207,7 @@ class OrderRequestsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        asset_quantity: int,
+        asset_quantity: float,
         limit_price: float,
         stock_id: str,
         recipient_account_id: str | NotGiven = NOT_GIVEN,
@@ -221,7 +222,8 @@ class OrderRequestsResource(SyncAPIResource):
         Create a managed `OrderRequest` to place a limit sell `Order`.
 
         Args:
-          asset_quantity: Quantity of shares to trade. Must be a positive integer.
+          asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
+              `Orders`.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
@@ -539,7 +541,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        asset_quantity: int,
+        asset_quantity: float,
         limit_price: float,
         stock_id: str,
         recipient_account_id: str | NotGiven = NOT_GIVEN,
@@ -554,7 +556,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         Create a managed `OrderRequest` to place a limit buy `Order`.
 
         Args:
-          asset_quantity: Quantity of shares to trade. Must be a positive integer.
+          asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
+              `Orders`.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
@@ -594,7 +597,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        asset_quantity: int,
+        asset_quantity: float,
         limit_price: float,
         stock_id: str,
         recipient_account_id: str | NotGiven = NOT_GIVEN,
@@ -609,7 +612,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         Create a managed `OrderRequest` to place a limit sell `Order`.
 
         Args:
-          asset_quantity: Quantity of shares to trade. Must be a positive integer.
+          asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
+              `Orders`.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
