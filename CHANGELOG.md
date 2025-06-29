@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.1 (2025-06-29)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.3.0...v0.3.1)
+
+### Bug Fixes
+
+* **ci:** correct conditional ([2fe0154](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/2fe0154f57b1d983185a21de2cb9ac3bf2cc42e9))
+
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([c13f457](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/c13f45750abb16f41f3e17fd9f2e65f87fdabec7))
+
 ## 0.3.0 (2025-06-27)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.2.0...v0.3.0)
