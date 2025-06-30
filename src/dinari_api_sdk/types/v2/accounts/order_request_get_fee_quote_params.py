@@ -32,5 +32,11 @@ class OrderRequestGetFeeQuoteParams(TypedDict, total=False):
     USD for US equities and ETFs. Required for limit `Order Requests`.
     """
 
+    payment_token_address: str
+    """Address of the payment token to be used for an order.
+
+    If not provided, the default payment token (USD+) will be used.
+    """
+
     payment_token_quantity: float
     """Amount of payment tokens involved. Required for market buy `Order Requests`."""
