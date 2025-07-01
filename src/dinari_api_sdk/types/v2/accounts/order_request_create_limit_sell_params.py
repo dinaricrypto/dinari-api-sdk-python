@@ -23,5 +23,13 @@ class OrderRequestCreateLimitSellParams(TypedDict, total=False):
     stock_id: Required[str]
     """ID of `Stock`."""
 
+    payment_token_address: str
+    """Address of the payment token to be used for the sell order.
+
+    If not provided, the default payment token (USD+) will be used. Should only be
+    specified if `recipient_account_id` for a non-managed wallet account is also
+    provided.
+    """
+
     recipient_account_id: str
     """ID of `Account` to receive the `Order`."""

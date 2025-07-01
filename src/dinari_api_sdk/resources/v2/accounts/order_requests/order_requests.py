@@ -210,6 +210,7 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
+        payment_token_address: str | NotGiven = NOT_GIVEN,
         recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -230,6 +231,10 @@ class OrderRequestsResource(SyncAPIResource):
 
           stock_id: ID of `Stock`.
 
+          payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
+              default payment token (USD+) will be used. Should only be specified if
+              `recipient_account_id` for a non-managed wallet account is also provided.
+
           recipient_account_id: ID of `Account` to receive the `Order`.
 
           extra_headers: Send extra headers
@@ -249,6 +254,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_limit_sell_params.OrderRequestCreateLimitSellParams,
@@ -320,6 +326,7 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
+        payment_token_address: str | NotGiven = NOT_GIVEN,
         recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -336,6 +343,10 @@ class OrderRequestsResource(SyncAPIResource):
               9 decimal places.
 
           stock_id: ID of `Stock`.
+
+          payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
+              default payment token (USD+) will be used. Should only be specified if
+              `recipient_account_id` for a non-managed wallet account is also provided.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -355,6 +366,7 @@ class OrderRequestsResource(SyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "stock_id": stock_id,
+                    "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_market_sell_params.OrderRequestCreateMarketSellParams,
@@ -374,6 +386,7 @@ class OrderRequestsResource(SyncAPIResource):
         stock_id: str,
         asset_token_quantity: float | NotGiven = NOT_GIVEN,
         limit_price: float | NotGiven = NOT_GIVEN,
+        payment_token_address: str | NotGiven = NOT_GIVEN,
         payment_token_quantity: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -400,6 +413,9 @@ class OrderRequestsResource(SyncAPIResource):
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Order Requests`.
 
+          payment_token_address: Address of the payment token to be used for an order. If not provided, the
+              default payment token (USD+) will be used.
+
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Order Requests`.
 
           extra_headers: Send extra headers
@@ -421,6 +437,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
                     "limit_price": limit_price,
+                    "payment_token_address": payment_token_address,
                     "payment_token_quantity": payment_token_quantity,
                 },
                 order_request_get_fee_quote_params.OrderRequestGetFeeQuoteParams,
@@ -600,6 +617,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
+        payment_token_address: str | NotGiven = NOT_GIVEN,
         recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -620,6 +638,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           stock_id: ID of `Stock`.
 
+          payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
+              default payment token (USD+) will be used. Should only be specified if
+              `recipient_account_id` for a non-managed wallet account is also provided.
+
           recipient_account_id: ID of `Account` to receive the `Order`.
 
           extra_headers: Send extra headers
@@ -639,6 +661,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_limit_sell_params.OrderRequestCreateLimitSellParams,
@@ -710,6 +733,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
+        payment_token_address: str | NotGiven = NOT_GIVEN,
         recipient_account_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -726,6 +750,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
               9 decimal places.
 
           stock_id: ID of `Stock`.
+
+          payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
+              default payment token (USD+) will be used. Should only be specified if
+              `recipient_account_id` for a non-managed wallet account is also provided.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -745,6 +773,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "stock_id": stock_id,
+                    "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_market_sell_params.OrderRequestCreateMarketSellParams,
@@ -764,6 +793,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         stock_id: str,
         asset_token_quantity: float | NotGiven = NOT_GIVEN,
         limit_price: float | NotGiven = NOT_GIVEN,
+        payment_token_address: str | NotGiven = NOT_GIVEN,
         payment_token_quantity: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -790,6 +820,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Order Requests`.
 
+          payment_token_address: Address of the payment token to be used for an order. If not provided, the
+              default payment token (USD+) will be used.
+
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Order Requests`.
 
           extra_headers: Send extra headers
@@ -811,6 +844,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
                     "limit_price": limit_price,
+                    "payment_token_address": payment_token_address,
                     "payment_token_quantity": payment_token_quantity,
                 },
                 order_request_get_fee_quote_params.OrderRequestGetFeeQuoteParams,
