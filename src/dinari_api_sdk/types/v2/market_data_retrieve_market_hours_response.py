@@ -18,6 +18,9 @@ class MarketDataRetrieveMarketHoursResponse(BaseModel):
     next_session_open_dt: datetime
     """Datetime at which the next session opens. ISO 8601 timestamp."""
 
+    current_session_after_hours_close_time_dt: Optional[datetime] = None
+    """Time at which the current session after-hours end."""
+
     current_session_close_dt: Optional[datetime] = None
     """Datetime at which the current session closes.
 
@@ -29,3 +32,18 @@ class MarketDataRetrieveMarketHoursResponse(BaseModel):
 
     `null` if the market is currently closed. ISO 8601 timestamp.
     """
+
+    current_session_overnight_open_time_dt: Optional[datetime] = None
+    """Time at which the current session overnight starts."""
+
+    current_session_pre_market_open_time_dt: Optional[datetime] = None
+    """Time at which the current session pre-market hours start."""
+
+    next_session_after_hours_close_time_dt: Optional[datetime] = None
+    """Time at which the next session after-hours end."""
+
+    next_session_overnight_open_time_dt: Optional[datetime] = None
+    """Time at which the next session overnight starts."""
+
+    next_session_pre_market_open_time_dt: Optional[datetime] = None
+    """Time at which the next session pre-market hours start."""
