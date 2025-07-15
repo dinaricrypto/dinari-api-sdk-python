@@ -234,6 +234,10 @@ Types:
 
 ```python
 from dinari_api_sdk.types.v2.accounts import (
+    CreateLimitBuyOrderInput,
+    CreateLimitSellOrderInput,
+    CreateMarketBuyOrderInput,
+    CreateMarketSellOrderInput,
     OrderRequest,
     OrderRequestListResponse,
     OrderRequestGetFeeQuoteResponse,
