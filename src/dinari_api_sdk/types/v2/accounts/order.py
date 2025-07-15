@@ -41,6 +41,9 @@ class Order(BaseModel):
     order_type: OrderType
     """Type of `Order`."""
 
+    payment_token: str
+    """The payment token (stablecoin) address."""
+
     status: BrokerageOrderStatus
     """Status of the `Order`."""
 
@@ -67,9 +70,6 @@ class Order(BaseModel):
 
     order_request_id: Optional[str] = None
     """Order Request ID for the `Order`"""
-
-    payment_token: Optional[str] = None
-    """The payment token (stablecoin) address."""
 
     payment_token_quantity: Optional[float] = None
     """Total amount of payment involved."""

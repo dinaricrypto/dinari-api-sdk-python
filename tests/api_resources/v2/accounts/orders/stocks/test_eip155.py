@@ -29,6 +29,7 @@ class TestEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Eip155GetFeeQuoteResponse, eip155, path=["response"])
@@ -42,10 +43,10 @@ class TestEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_token_quantity=0,
             limit_price=0,
-            payment_token="payment_token",
             payment_token_quantity=0,
         )
         assert_matches_type(Eip155GetFeeQuoteResponse, eip155, path=["response"])
@@ -59,6 +60,7 @@ class TestEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -76,6 +78,7 @@ class TestEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -96,6 +99,7 @@ class TestEip155:
                 order_side="BUY",
                 order_tif="DAY",
                 order_type="MARKET",
+                payment_token="payment_token",
                 stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
@@ -108,6 +112,7 @@ class TestEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Eip155PrepareOrderResponse, eip155, path=["response"])
@@ -121,10 +126,10 @@ class TestEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_token_quantity=0,
             limit_price=0,
-            payment_token="payment_token",
             payment_token_quantity=0,
         )
         assert_matches_type(Eip155PrepareOrderResponse, eip155, path=["response"])
@@ -138,6 +143,7 @@ class TestEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -155,6 +161,7 @@ class TestEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -175,6 +182,7 @@ class TestEip155:
                 order_side="BUY",
                 order_tif="DAY",
                 order_type="MARKET",
+                payment_token="payment_token",
                 stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
@@ -193,6 +201,7 @@ class TestAsyncEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Eip155GetFeeQuoteResponse, eip155, path=["response"])
@@ -206,10 +215,10 @@ class TestAsyncEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_token_quantity=0,
             limit_price=0,
-            payment_token="payment_token",
             payment_token_quantity=0,
         )
         assert_matches_type(Eip155GetFeeQuoteResponse, eip155, path=["response"])
@@ -223,6 +232,7 @@ class TestAsyncEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -240,6 +250,7 @@ class TestAsyncEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -260,6 +271,7 @@ class TestAsyncEip155:
                 order_side="BUY",
                 order_tif="DAY",
                 order_type="MARKET",
+                payment_token="payment_token",
                 stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
@@ -272,6 +284,7 @@ class TestAsyncEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Eip155PrepareOrderResponse, eip155, path=["response"])
@@ -285,10 +298,10 @@ class TestAsyncEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_token_quantity=0,
             limit_price=0,
-            payment_token="payment_token",
             payment_token_quantity=0,
         )
         assert_matches_type(Eip155PrepareOrderResponse, eip155, path=["response"])
@@ -302,6 +315,7 @@ class TestAsyncEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -319,6 +333,7 @@ class TestAsyncEip155:
             order_side="BUY",
             order_tif="DAY",
             order_type="MARKET",
+            payment_token="payment_token",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -339,5 +354,6 @@ class TestAsyncEip155:
                 order_side="BUY",
                 order_tif="DAY",
                 order_type="MARKET",
+                payment_token="payment_token",
                 stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
