@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.4.0 (2025-07-15)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** api update ([062b4ed](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/062b4eda3563aa73fca7dbe4735a7a358f62e31a))
+* **api:** api update ([18687df](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/18687df51e42b3b230c98fe33150717ee87e7f5a))
+* **api:** api update ([6efd666](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/6efd666acd802404ef727b48900345eb03c0c19b))
+* **api:** manual updates ([f0b7269](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/f0b72693b21c4d6b1ea322a943f5f04e8cacd69b))
+* clean up environment call outs ([9879e46](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/9879e46c19e12f605f5feced83093b666b1226fe))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([2fe0154](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/2fe0154f57b1d983185a21de2cb9ac3bf2cc42e9))
+* **client:** don't send Content-Type header on GET requests ([2a26960](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/2a269604e9060be0a7e5c254f71805a7bf7d2ff3))
+* **parsing:** correctly handle nested discriminated unions ([ee738af](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/ee738af1400653a5455ca14904e7df23b7337959))
+
+
+### Chores
+
+* **ci:** change upload type ([915dc55](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/915dc554aec9251172307a12dfbb916053396d4b))
+* **ci:** only run for pushes and fork pull requests ([c13f457](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/c13f45750abb16f41f3e17fd9f2e65f87fdabec7))
+* **internal:** bump pinned h11 dep ([e4f87ad](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/e4f87add975c4452a8a6a1e217c2c81897ddc7e8))
+* **internal:** codegen related update ([7e36b52](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/7e36b52e8bcde9019df821753f6fe98a00ea874f))
+* **package:** mark python 3.13 as supported ([e3027df](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/e3027df4ee8c81d93bdf68b8264cc8b49eeb7c4e))
+* **readme:** fix version rendering on pypi ([6b0e7f0](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/6b0e7f0c412f68ba5ec635bef0c59d6e557a0ab6))
+
 ## 0.3.0 (2025-06-27)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.2.0...v0.3.0)
