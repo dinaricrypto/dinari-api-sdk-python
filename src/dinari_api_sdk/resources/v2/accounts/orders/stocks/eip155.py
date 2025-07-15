@@ -56,10 +56,10 @@ class Eip155Resource(SyncAPIResource):
         order_side: OrderSide,
         order_tif: OrderTif,
         order_type: OrderType,
+        payment_token: str,
         stock_id: str,
         asset_token_quantity: float | NotGiven = NOT_GIVEN,
         limit_price: float | NotGiven = NOT_GIVEN,
-        payment_token: str | NotGiven = NOT_GIVEN,
         payment_token_quantity: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -86,6 +86,8 @@ class Eip155Resource(SyncAPIResource):
 
           order_type: Type of `Order`.
 
+          payment_token: Address of payment token.
+
           stock_id: The ID of the `Stock` for which the `Order` is being placed.
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
@@ -93,8 +95,6 @@ class Eip155Resource(SyncAPIResource):
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
-
-          payment_token: Address of payment token.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
 
@@ -116,10 +116,10 @@ class Eip155Resource(SyncAPIResource):
                     "order_side": order_side,
                     "order_tif": order_tif,
                     "order_type": order_type,
+                    "payment_token": payment_token,
                     "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
                     "limit_price": limit_price,
-                    "payment_token": payment_token,
                     "payment_token_quantity": payment_token_quantity,
                 },
                 eip155_get_fee_quote_params.Eip155GetFeeQuoteParams,
@@ -138,10 +138,10 @@ class Eip155Resource(SyncAPIResource):
         order_side: OrderSide,
         order_tif: OrderTif,
         order_type: OrderType,
+        payment_token: str,
         stock_id: str,
         asset_token_quantity: float | NotGiven = NOT_GIVEN,
         limit_price: float | NotGiven = NOT_GIVEN,
-        payment_token: str | NotGiven = NOT_GIVEN,
         payment_token_quantity: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -168,6 +168,8 @@ class Eip155Resource(SyncAPIResource):
 
           order_type: Type of `Order`.
 
+          payment_token: Address of payment token.
+
           stock_id: The ID of the `Stock` for which the `Order` is being placed.
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
@@ -175,8 +177,6 @@ class Eip155Resource(SyncAPIResource):
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
-
-          payment_token: Address of payment token.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
 
@@ -198,10 +198,10 @@ class Eip155Resource(SyncAPIResource):
                     "order_side": order_side,
                     "order_tif": order_tif,
                     "order_type": order_type,
+                    "payment_token": payment_token,
                     "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
                     "limit_price": limit_price,
-                    "payment_token": payment_token,
                     "payment_token_quantity": payment_token_quantity,
                 },
                 eip155_prepare_order_params.Eip155PrepareOrderParams,
@@ -241,10 +241,10 @@ class AsyncEip155Resource(AsyncAPIResource):
         order_side: OrderSide,
         order_tif: OrderTif,
         order_type: OrderType,
+        payment_token: str,
         stock_id: str,
         asset_token_quantity: float | NotGiven = NOT_GIVEN,
         limit_price: float | NotGiven = NOT_GIVEN,
-        payment_token: str | NotGiven = NOT_GIVEN,
         payment_token_quantity: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -271,6 +271,8 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           order_type: Type of `Order`.
 
+          payment_token: Address of payment token.
+
           stock_id: The ID of the `Stock` for which the `Order` is being placed.
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
@@ -278,8 +280,6 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
-
-          payment_token: Address of payment token.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
 
@@ -301,10 +301,10 @@ class AsyncEip155Resource(AsyncAPIResource):
                     "order_side": order_side,
                     "order_tif": order_tif,
                     "order_type": order_type,
+                    "payment_token": payment_token,
                     "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
                     "limit_price": limit_price,
-                    "payment_token": payment_token,
                     "payment_token_quantity": payment_token_quantity,
                 },
                 eip155_get_fee_quote_params.Eip155GetFeeQuoteParams,
@@ -323,10 +323,10 @@ class AsyncEip155Resource(AsyncAPIResource):
         order_side: OrderSide,
         order_tif: OrderTif,
         order_type: OrderType,
+        payment_token: str,
         stock_id: str,
         asset_token_quantity: float | NotGiven = NOT_GIVEN,
         limit_price: float | NotGiven = NOT_GIVEN,
-        payment_token: str | NotGiven = NOT_GIVEN,
         payment_token_quantity: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -353,6 +353,8 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           order_type: Type of `Order`.
 
+          payment_token: Address of payment token.
+
           stock_id: The ID of the `Stock` for which the `Order` is being placed.
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
@@ -360,8 +362,6 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
-
-          payment_token: Address of payment token.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
 
@@ -383,10 +383,10 @@ class AsyncEip155Resource(AsyncAPIResource):
                     "order_side": order_side,
                     "order_tif": order_tif,
                     "order_type": order_type,
+                    "payment_token": payment_token,
                     "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
                     "limit_price": limit_price,
-                    "payment_token": payment_token,
                     "payment_token_quantity": payment_token_quantity,
                 },
                 eip155_prepare_order_params.Eip155PrepareOrderParams,

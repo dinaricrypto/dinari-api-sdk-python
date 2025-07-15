@@ -25,6 +25,9 @@ class Eip155PrepareOrderParams(TypedDict, total=False):
     order_type: Required[OrderType]
     """Type of `Order`."""
 
+    payment_token: Required[str]
+    """Address of payment token."""
+
     stock_id: Required[str]
     """The ID of the `Stock` for which the `Order` is being placed."""
 
@@ -39,9 +42,6 @@ class Eip155PrepareOrderParams(TypedDict, total=False):
 
     USD for US equities and ETFs. Required for limit `Orders`.
     """
-
-    payment_token: str
-    """Address of payment token."""
 
     payment_token_quantity: float
     """Amount of payment tokens involved. Required for market buy `Orders`."""

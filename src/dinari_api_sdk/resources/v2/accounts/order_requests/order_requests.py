@@ -7,6 +7,7 @@ import httpx
 from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
+from .....types.v2 import Chain
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
     to_raw_response_wrapper,
@@ -23,6 +24,7 @@ from .stocks.stocks import (
     AsyncStocksResourceWithStreamingResponse,
 )
 from ....._base_client import make_request_options
+from .....types.v2.chain import Chain
 from .....types.v2.accounts import (
     OrderSide,
     OrderType,
@@ -385,6 +387,7 @@ class OrderRequestsResource(SyncAPIResource):
         order_type: OrderType,
         stock_id: str,
         asset_token_quantity: float | NotGiven = NOT_GIVEN,
+        chain_id: Chain | NotGiven = NOT_GIVEN,
         limit_price: float | NotGiven = NOT_GIVEN,
         payment_token_address: str | NotGiven = NOT_GIVEN,
         payment_token_quantity: float | NotGiven = NOT_GIVEN,
@@ -409,6 +412,9 @@ class OrderRequestsResource(SyncAPIResource):
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
               sell `Order Requests`.
+
+          chain_id: CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
+              not provided, the default chain ID (eip155:42161) will be used.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Order Requests`.
@@ -436,6 +442,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "order_type": order_type,
                     "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
+                    "chain_id": chain_id,
                     "limit_price": limit_price,
                     "payment_token_address": payment_token_address,
                     "payment_token_quantity": payment_token_quantity,
@@ -792,6 +799,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         order_type: OrderType,
         stock_id: str,
         asset_token_quantity: float | NotGiven = NOT_GIVEN,
+        chain_id: Chain | NotGiven = NOT_GIVEN,
         limit_price: float | NotGiven = NOT_GIVEN,
         payment_token_address: str | NotGiven = NOT_GIVEN,
         payment_token_quantity: float | NotGiven = NOT_GIVEN,
@@ -816,6 +824,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
               sell `Order Requests`.
+
+          chain_id: CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
+              not provided, the default chain ID (eip155:42161) will be used.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Order Requests`.
@@ -843,6 +854,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "order_type": order_type,
                     "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
+                    "chain_id": chain_id,
                     "limit_price": limit_price,
                     "payment_token_address": payment_token_address,
                     "payment_token_quantity": payment_token_quantity,

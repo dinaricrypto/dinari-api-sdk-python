@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
+from ..chain import Chain
 from .order_side import OrderSide
 from .order_type import OrderType
 
@@ -24,6 +25,12 @@ class OrderRequestGetFeeQuoteParams(TypedDict, total=False):
     """Amount of dShare asset tokens involved.
 
     Required for limit `Orders` and market sell `Order Requests`.
+    """
+
+    chain_id: Chain
+    """CAIP-2 chain ID of the blockchain where the `Order Request` will be placed.
+
+    If not provided, the default chain ID (eip155:42161) will be used.
     """
 
     limit_price: float
