@@ -16,17 +16,13 @@ class StockRetrieveDividendsResponseItem(BaseModel):
     currency: Optional[str] = None
     """Currency in which the dividend is paid."""
 
-    declaration_date: Optional[date] = None
-    """Date on which the dividend was announced. In ISO 8601 format, YYYY-MM-DD."""
-
     dividend_type: Optional[str] = None
     """Type of dividend.
 
     Dividends that have been paid and/or are expected to be paid on consistent
     schedules are denoted as `CD`. Special Cash dividends that have been paid that
     are infrequent or unusual, and/or can not be expected to occur in the future are
-    denoted as `SC`. Long-term and short-term capital gain distributions are denoted
-    as `LT` and `ST`, respectively.
+    denoted as `SC`.
     """
 
     ex_dividend_date: Optional[date] = None
@@ -34,17 +30,6 @@ class StockRetrieveDividendsResponseItem(BaseModel):
     Date on or after which a `Stock` is traded without the right to receive the next
     dividend payment. If you purchase a `Stock` on or after the ex-dividend date,
     you will not receive the upcoming dividend. In ISO 8601 format, YYYY-MM-DD.
-    """
-
-    frequency: Optional[int] = None
-    """Frequency of the dividend. The following values are possible:
-
-    - `1` - Annual
-    - `2` - Semi-Annual
-    - `4` - Quarterly
-    - `12` - Monthly
-    - `52` - Weekly
-    - `365` - Daily
     """
 
     pay_date: Optional[date] = None
