@@ -17,13 +17,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestMarketData:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_market_hours(self, client: Dinari) -> None:
         market_data = client.v2.market_data.retrieve_market_hours()
         assert_matches_type(MarketDataRetrieveMarketHoursResponse, market_data, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve_market_hours(self, client: Dinari) -> None:
         response = client.v2.market_data.with_raw_response.retrieve_market_hours()
@@ -33,7 +33,7 @@ class TestMarketData:
         market_data = response.parse()
         assert_matches_type(MarketDataRetrieveMarketHoursResponse, market_data, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_market_hours(self, client: Dinari) -> None:
         with client.v2.market_data.with_streaming_response.retrieve_market_hours() as response:
@@ -51,13 +51,13 @@ class TestAsyncMarketData:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_market_hours(self, async_client: AsyncDinari) -> None:
         market_data = await async_client.v2.market_data.retrieve_market_hours()
         assert_matches_type(MarketDataRetrieveMarketHoursResponse, market_data, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_market_hours(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.market_data.with_raw_response.retrieve_market_hours()
@@ -67,7 +67,7 @@ class TestAsyncMarketData:
         market_data = await response.parse()
         assert_matches_type(MarketDataRetrieveMarketHoursResponse, market_data, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_market_hours(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.market_data.with_streaming_response.retrieve_market_hours() as response:

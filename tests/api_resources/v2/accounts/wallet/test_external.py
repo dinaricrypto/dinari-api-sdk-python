@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestExternal:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_connect(self, client: Dinari) -> None:
         external = client.v2.accounts.wallet.external.connect(
@@ -32,7 +32,7 @@ class TestExternal:
         )
         assert_matches_type(Wallet, external, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_connect(self, client: Dinari) -> None:
         response = client.v2.accounts.wallet.external.with_raw_response.connect(
@@ -48,7 +48,7 @@ class TestExternal:
         external = response.parse()
         assert_matches_type(Wallet, external, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_connect(self, client: Dinari) -> None:
         with client.v2.accounts.wallet.external.with_streaming_response.connect(
@@ -66,7 +66,7 @@ class TestExternal:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_connect(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -78,7 +78,7 @@ class TestExternal:
                 wallet_address="wallet_address",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get_nonce(self, client: Dinari) -> None:
         external = client.v2.accounts.wallet.external.get_nonce(
@@ -88,7 +88,7 @@ class TestExternal:
         )
         assert_matches_type(ExternalGetNonceResponse, external, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get_nonce(self, client: Dinari) -> None:
         response = client.v2.accounts.wallet.external.with_raw_response.get_nonce(
@@ -102,7 +102,7 @@ class TestExternal:
         external = response.parse()
         assert_matches_type(ExternalGetNonceResponse, external, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get_nonce(self, client: Dinari) -> None:
         with client.v2.accounts.wallet.external.with_streaming_response.get_nonce(
@@ -118,7 +118,7 @@ class TestExternal:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_get_nonce(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -134,7 +134,7 @@ class TestAsyncExternal:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_connect(self, async_client: AsyncDinari) -> None:
         external = await async_client.v2.accounts.wallet.external.connect(
@@ -146,7 +146,7 @@ class TestAsyncExternal:
         )
         assert_matches_type(Wallet, external, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_connect(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.wallet.external.with_raw_response.connect(
@@ -162,7 +162,7 @@ class TestAsyncExternal:
         external = await response.parse()
         assert_matches_type(Wallet, external, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_connect(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.accounts.wallet.external.with_streaming_response.connect(
@@ -180,7 +180,7 @@ class TestAsyncExternal:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_connect(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -192,7 +192,7 @@ class TestAsyncExternal:
                 wallet_address="wallet_address",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get_nonce(self, async_client: AsyncDinari) -> None:
         external = await async_client.v2.accounts.wallet.external.get_nonce(
@@ -202,7 +202,7 @@ class TestAsyncExternal:
         )
         assert_matches_type(ExternalGetNonceResponse, external, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get_nonce(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.wallet.external.with_raw_response.get_nonce(
@@ -216,7 +216,7 @@ class TestAsyncExternal:
         external = await response.parse()
         assert_matches_type(ExternalGetNonceResponse, external, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get_nonce(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.accounts.wallet.external.with_streaming_response.get_nonce(
@@ -232,7 +232,7 @@ class TestAsyncExternal:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_get_nonce(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):

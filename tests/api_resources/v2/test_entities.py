@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestEntities:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Dinari) -> None:
         entity = client.v2.entities.create(
@@ -28,7 +28,7 @@ class TestEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Dinari) -> None:
         entity = client.v2.entities.create(
@@ -37,7 +37,7 @@ class TestEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Dinari) -> None:
         response = client.v2.entities.with_raw_response.create(
@@ -49,7 +49,7 @@ class TestEntities:
         entity = response.parse()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Dinari) -> None:
         with client.v2.entities.with_streaming_response.create(
@@ -63,7 +63,7 @@ class TestEntities:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Dinari) -> None:
         entity = client.v2.entities.update(
@@ -71,7 +71,7 @@ class TestEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Dinari) -> None:
         entity = client.v2.entities.update(
@@ -80,7 +80,7 @@ class TestEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Dinari) -> None:
         response = client.v2.entities.with_raw_response.update(
@@ -92,7 +92,7 @@ class TestEntities:
         entity = response.parse()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Dinari) -> None:
         with client.v2.entities.with_streaming_response.update(
@@ -106,7 +106,7 @@ class TestEntities:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -114,13 +114,13 @@ class TestEntities:
                 entity_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Dinari) -> None:
         entity = client.v2.entities.list()
         assert_matches_type(EntityListResponse, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Dinari) -> None:
         entity = client.v2.entities.list(
@@ -130,7 +130,7 @@ class TestEntities:
         )
         assert_matches_type(EntityListResponse, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Dinari) -> None:
         response = client.v2.entities.with_raw_response.list()
@@ -140,7 +140,7 @@ class TestEntities:
         entity = response.parse()
         assert_matches_type(EntityListResponse, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Dinari) -> None:
         with client.v2.entities.with_streaming_response.list() as response:
@@ -152,7 +152,7 @@ class TestEntities:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_by_id(self, client: Dinari) -> None:
         entity = client.v2.entities.retrieve_by_id(
@@ -160,7 +160,7 @@ class TestEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve_by_id(self, client: Dinari) -> None:
         response = client.v2.entities.with_raw_response.retrieve_by_id(
@@ -172,7 +172,7 @@ class TestEntities:
         entity = response.parse()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_by_id(self, client: Dinari) -> None:
         with client.v2.entities.with_streaming_response.retrieve_by_id(
@@ -186,7 +186,7 @@ class TestEntities:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve_by_id(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -194,13 +194,13 @@ class TestEntities:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_current(self, client: Dinari) -> None:
         entity = client.v2.entities.retrieve_current()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve_current(self, client: Dinari) -> None:
         response = client.v2.entities.with_raw_response.retrieve_current()
@@ -210,7 +210,7 @@ class TestEntities:
         entity = response.parse()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_current(self, client: Dinari) -> None:
         with client.v2.entities.with_streaming_response.retrieve_current() as response:
@@ -228,7 +228,7 @@ class TestAsyncEntities:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.create(
@@ -236,7 +236,7 @@ class TestAsyncEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.create(
@@ -245,7 +245,7 @@ class TestAsyncEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.with_raw_response.create(
@@ -257,7 +257,7 @@ class TestAsyncEntities:
         entity = await response.parse()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.with_streaming_response.create(
@@ -271,7 +271,7 @@ class TestAsyncEntities:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.update(
@@ -279,7 +279,7 @@ class TestAsyncEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.update(
@@ -288,7 +288,7 @@ class TestAsyncEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.with_raw_response.update(
@@ -300,7 +300,7 @@ class TestAsyncEntities:
         entity = await response.parse()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.with_streaming_response.update(
@@ -314,7 +314,7 @@ class TestAsyncEntities:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -322,13 +322,13 @@ class TestAsyncEntities:
                 entity_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.list()
         assert_matches_type(EntityListResponse, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.list(
@@ -338,7 +338,7 @@ class TestAsyncEntities:
         )
         assert_matches_type(EntityListResponse, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.with_raw_response.list()
@@ -348,7 +348,7 @@ class TestAsyncEntities:
         entity = await response.parse()
         assert_matches_type(EntityListResponse, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.with_streaming_response.list() as response:
@@ -360,7 +360,7 @@ class TestAsyncEntities:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_by_id(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.retrieve_by_id(
@@ -368,7 +368,7 @@ class TestAsyncEntities:
         )
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_by_id(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.with_raw_response.retrieve_by_id(
@@ -380,7 +380,7 @@ class TestAsyncEntities:
         entity = await response.parse()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_by_id(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.with_streaming_response.retrieve_by_id(
@@ -394,7 +394,7 @@ class TestAsyncEntities:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve_by_id(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -402,13 +402,13 @@ class TestAsyncEntities:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_current(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.retrieve_current()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_current(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.with_raw_response.retrieve_current()
@@ -418,7 +418,7 @@ class TestAsyncEntities:
         entity = await response.parse()
         assert_matches_type(Entity, entity, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_current(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.with_streaming_response.retrieve_current() as response:
