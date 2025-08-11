@@ -20,13 +20,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSplits:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Dinari) -> None:
         split = client.v2.market_data.stocks.splits.list()
         assert_matches_type(SplitListResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Dinari) -> None:
         split = client.v2.market_data.stocks.splits.list(
@@ -35,7 +35,7 @@ class TestSplits:
         )
         assert_matches_type(SplitListResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Dinari) -> None:
         response = client.v2.market_data.stocks.splits.with_raw_response.list()
@@ -45,7 +45,7 @@ class TestSplits:
         split = response.parse()
         assert_matches_type(SplitListResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Dinari) -> None:
         with client.v2.market_data.stocks.splits.with_streaming_response.list() as response:
@@ -57,7 +57,7 @@ class TestSplits:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_for_stock(self, client: Dinari) -> None:
         split = client.v2.market_data.stocks.splits.list_for_stock(
@@ -65,7 +65,7 @@ class TestSplits:
         )
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_for_stock_with_all_params(self, client: Dinari) -> None:
         split = client.v2.market_data.stocks.splits.list_for_stock(
@@ -75,7 +75,7 @@ class TestSplits:
         )
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list_for_stock(self, client: Dinari) -> None:
         response = client.v2.market_data.stocks.splits.with_raw_response.list_for_stock(
@@ -87,7 +87,7 @@ class TestSplits:
         split = response.parse()
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list_for_stock(self, client: Dinari) -> None:
         with client.v2.market_data.stocks.splits.with_streaming_response.list_for_stock(
@@ -101,7 +101,7 @@ class TestSplits:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list_for_stock(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `stock_id` but received ''"):
@@ -115,13 +115,13 @@ class TestAsyncSplits:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncDinari) -> None:
         split = await async_client.v2.market_data.stocks.splits.list()
         assert_matches_type(SplitListResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
         split = await async_client.v2.market_data.stocks.splits.list(
@@ -130,7 +130,7 @@ class TestAsyncSplits:
         )
         assert_matches_type(SplitListResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.market_data.stocks.splits.with_raw_response.list()
@@ -140,7 +140,7 @@ class TestAsyncSplits:
         split = await response.parse()
         assert_matches_type(SplitListResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.market_data.stocks.splits.with_streaming_response.list() as response:
@@ -152,7 +152,7 @@ class TestAsyncSplits:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_for_stock(self, async_client: AsyncDinari) -> None:
         split = await async_client.v2.market_data.stocks.splits.list_for_stock(
@@ -160,7 +160,7 @@ class TestAsyncSplits:
         )
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_for_stock_with_all_params(self, async_client: AsyncDinari) -> None:
         split = await async_client.v2.market_data.stocks.splits.list_for_stock(
@@ -170,7 +170,7 @@ class TestAsyncSplits:
         )
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list_for_stock(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.market_data.stocks.splits.with_raw_response.list_for_stock(
@@ -182,7 +182,7 @@ class TestAsyncSplits:
         split = await response.parse()
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list_for_stock(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.market_data.stocks.splits.with_streaming_response.list_for_stock(
@@ -196,7 +196,7 @@ class TestAsyncSplits:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list_for_stock(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `stock_id` but received ''"):
