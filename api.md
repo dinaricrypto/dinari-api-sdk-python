@@ -298,3 +298,17 @@ Methods:
 
 - <code title="get /api/v2/accounts/{account_id}/withdrawals/{withdrawal_id}">client.v2.accounts.withdrawals.<a href="./src/dinari_api_sdk/resources/v2/accounts/withdrawals.py">retrieve</a>(withdrawal_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/withdrawal.py">Withdrawal</a></code>
 - <code title="get /api/v2/accounts/{account_id}/withdrawals">client.v2.accounts.withdrawals.<a href="./src/dinari_api_sdk/resources/v2/accounts/withdrawals.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/withdrawal_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/withdrawal_list_response.py">WithdrawalListResponse</a></code>
+
+### TokenTransfers
+
+Types:
+
+```python
+from dinari_api_sdk.types.v2.accounts import TokenTransfer, TokenTransferListResponse
+```
+
+Methods:
+
+- <code title="post /api/v2/accounts/{account_id}/token_transfers">client.v2.accounts.token_transfers.<a href="./src/dinari_api_sdk/resources/v2/accounts/token_transfers.py">create</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/token_transfer_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/token_transfer.py">TokenTransfer</a></code>
+- <code title="get /api/v2/accounts/{account_id}/token_transfers/{transfer_id}">client.v2.accounts.token_transfers.<a href="./src/dinari_api_sdk/resources/v2/accounts/token_transfers.py">retrieve</a>(transfer_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/token_transfer.py">TokenTransfer</a></code>
+- <code title="get /api/v2/accounts/{account_id}/token_transfers">client.v2.accounts.token_transfers.<a href="./src/dinari_api_sdk/resources/v2/accounts/token_transfers.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/token_transfer_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/token_transfer_list_response.py">TokenTransferListResponse</a></code>

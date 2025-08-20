@@ -48,6 +48,14 @@ from .wallet.wallet import (
     AsyncWalletResourceWithStreamingResponse,
 )
 from ...._base_client import make_request_options
+from .token_transfers import (
+    TokenTransfersResource,
+    AsyncTokenTransfersResource,
+    TokenTransfersResourceWithRawResponse,
+    AsyncTokenTransfersResourceWithRawResponse,
+    TokenTransfersResourceWithStreamingResponse,
+    AsyncTokenTransfersResourceWithStreamingResponse,
+)
 from ....types.v2.chain import Chain
 from .order_fulfillments import (
     OrderFulfillmentsResource,
@@ -106,6 +114,10 @@ class AccountsResource(SyncAPIResource):
     @cached_property
     def withdrawals(self) -> WithdrawalsResource:
         return WithdrawalsResource(self._client)
+
+    @cached_property
+    def token_transfers(self) -> TokenTransfersResource:
+        return TokenTransfersResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AccountsResourceWithRawResponse:
@@ -445,6 +457,10 @@ class AsyncAccountsResource(AsyncAPIResource):
     @cached_property
     def withdrawals(self) -> AsyncWithdrawalsResource:
         return AsyncWithdrawalsResource(self._client)
+
+    @cached_property
+    def token_transfers(self) -> AsyncTokenTransfersResource:
+        return AsyncTokenTransfersResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncAccountsResourceWithRawResponse:
@@ -810,6 +826,10 @@ class AccountsResourceWithRawResponse:
     def withdrawals(self) -> WithdrawalsResourceWithRawResponse:
         return WithdrawalsResourceWithRawResponse(self._accounts.withdrawals)
 
+    @cached_property
+    def token_transfers(self) -> TokenTransfersResourceWithRawResponse:
+        return TokenTransfersResourceWithRawResponse(self._accounts.token_transfers)
+
 
 class AsyncAccountsResourceWithRawResponse:
     def __init__(self, accounts: AsyncAccountsResource) -> None:
@@ -860,6 +880,10 @@ class AsyncAccountsResourceWithRawResponse:
     @cached_property
     def withdrawals(self) -> AsyncWithdrawalsResourceWithRawResponse:
         return AsyncWithdrawalsResourceWithRawResponse(self._accounts.withdrawals)
+
+    @cached_property
+    def token_transfers(self) -> AsyncTokenTransfersResourceWithRawResponse:
+        return AsyncTokenTransfersResourceWithRawResponse(self._accounts.token_transfers)
 
 
 class AccountsResourceWithStreamingResponse:
@@ -912,6 +936,10 @@ class AccountsResourceWithStreamingResponse:
     def withdrawals(self) -> WithdrawalsResourceWithStreamingResponse:
         return WithdrawalsResourceWithStreamingResponse(self._accounts.withdrawals)
 
+    @cached_property
+    def token_transfers(self) -> TokenTransfersResourceWithStreamingResponse:
+        return TokenTransfersResourceWithStreamingResponse(self._accounts.token_transfers)
+
 
 class AsyncAccountsResourceWithStreamingResponse:
     def __init__(self, accounts: AsyncAccountsResource) -> None:
@@ -962,3 +990,7 @@ class AsyncAccountsResourceWithStreamingResponse:
     @cached_property
     def withdrawals(self) -> AsyncWithdrawalsResourceWithStreamingResponse:
         return AsyncWithdrawalsResourceWithStreamingResponse(self._accounts.withdrawals)
+
+    @cached_property
+    def token_transfers(self) -> AsyncTokenTransfersResourceWithStreamingResponse:
+        return AsyncTokenTransfersResourceWithStreamingResponse(self._accounts.token_transfers)
