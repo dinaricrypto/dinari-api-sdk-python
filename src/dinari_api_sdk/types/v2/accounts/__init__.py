@@ -10,6 +10,7 @@ from .order_type import OrderType as OrderType
 from .withdrawal import Withdrawal as Withdrawal
 from .fulfillment import Fulfillment as Fulfillment
 from .order_request import OrderRequest as OrderRequest
+from .token_transfer import TokenTransfer as TokenTransfer
 from .order_list_params import OrderListParams as OrderListParams
 from .withdrawal_request import WithdrawalRequest as WithdrawalRequest
 from .order_list_response import OrderListResponse as OrderListResponse
@@ -17,7 +18,10 @@ from .brokerage_order_status import BrokerageOrderStatus as BrokerageOrderStatus
 from .withdrawal_list_params import WithdrawalListParams as WithdrawalListParams
 from .withdrawal_list_response import WithdrawalListResponse as WithdrawalListResponse
 from .order_request_list_params import OrderRequestListParams as OrderRequestListParams
+from .token_transfer_list_params import TokenTransferListParams as TokenTransferListParams
 from .order_request_list_response import OrderRequestListResponse as OrderRequestListResponse
+from .token_transfer_create_params import TokenTransferCreateParams as TokenTransferCreateParams
+from .token_transfer_list_response import TokenTransferListResponse as TokenTransferListResponse
 from .order_get_fulfillments_params import OrderGetFulfillmentsParams as OrderGetFulfillmentsParams
 from .order_fulfillment_query_params import OrderFulfillmentQueryParams as OrderFulfillmentQueryParams
 from .wallet_connect_internal_params import WalletConnectInternalParams as WalletConnectInternalParams
