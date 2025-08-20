@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.5.0 (2025-08-20)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** api update ([8cf76f6](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/8cf76f6326e3aba1ae820964b7eaf5fb1b926545))
+* **api:** api update ([4c71387](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/4c71387e66a1496d1599c969218672b6aaf839a8))
+* **api:** manual updates ([4afcb2b](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/4afcb2b25da6c8809e06216c5146914dffbf9465))
+* **client:** support file upload requests ([d7108e4](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d7108e4d251ec891863baf31642c8931c1f575ee))
+
+
+### Bug Fixes
+
+* **parsing:** ignore empty metadata ([309633b](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/309633bce74a59d20fe84541baff1163f471aa48))
+* **parsing:** parse extra field types ([b322167](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/b32216714b2ba41f28bbbb5ffbf5c0ed8f4544d2))
+
+
+### Chores
+
+* **internal:** fix ruff target version ([b8cf7cf](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/b8cf7cfd5bb5bc1e4807e01c8e1a2477efd9688b))
+* **internal:** update comment in script ([aa2dbe3](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/aa2dbe3c1012869fc6db1d74ebdc0696d3d6e9f7))
+* **internal:** update test skipping reason ([baf1d65](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/baf1d65c30d15871af704211a582cd5a9b14773a))
+* **project:** add settings file for vscode ([a6ce3b9](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/a6ce3b980be1352f3999960f9c9c4532d9e4ff29))
+* update @stainless-api/prism-cli to v5.15.0 ([d4d1378](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d4d1378834dee9ca2acd095c751c20db13bfc08d))
+
 ## 0.4.0 (2025-07-15)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.3.0...v0.4.0)
