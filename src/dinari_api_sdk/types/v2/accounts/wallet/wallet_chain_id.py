@@ -17,8 +17,6 @@ WalletChainID: TypeAlias = Literal[
     "eip155:84532",
     "eip155:168587773",
     "eip155:98867",
-    "eip155:31337",
-    "eip155:1337",
     "eip155:202110",
     "eip155:179205",
     "eip155:179202",
