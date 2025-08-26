@@ -19,4 +19,5 @@ Chain: TypeAlias = Literal[
     "eip155:202110",
     "eip155:179205",
     "eip155:179202",
+    "eip155:98865",
 ]
