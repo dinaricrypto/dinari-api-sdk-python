@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import TypedDict
+
+from ...._types import SequenceNotStr
 
 __all__ = ["StockListParams"]
 
@@ -13,5 +14,5 @@ class StockListParams(TypedDict, total=False):
 
     page_size: int
 
-    symbols: List[str]
+    symbols: SequenceNotStr[str]
     """List of `Stock` symbols to query. If not provided, all `Stocks` are returned."""
