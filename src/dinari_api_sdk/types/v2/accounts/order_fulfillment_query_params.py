@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import TypedDict
+
+from ...._types import SequenceNotStr
 
 __all__ = ["OrderFulfillmentQueryParams"]
 
 
 class OrderFulfillmentQueryParams(TypedDict, total=False):
-    order_ids: List[str]
+    order_ids: SequenceNotStr[str]
     """List of `Order` IDs to query `OrderFulfillments` for."""
 
     page: int
