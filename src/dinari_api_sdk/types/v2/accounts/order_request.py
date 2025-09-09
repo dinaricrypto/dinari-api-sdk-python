@@ -34,7 +34,7 @@ class OrderRequest(BaseModel):
     order_type: OrderType
     """Type of `Order`."""
 
-    status: Literal["PENDING", "SUBMITTED", "ERROR", "CANCELLED"]
+    status: Literal["QUOTED", "PENDING", "PENDING_BRIDGE", "SUBMITTED", "ERROR", "CANCELLED"]
     """Status of `OrderRequest`."""
 
     order_id: Optional[str] = None
