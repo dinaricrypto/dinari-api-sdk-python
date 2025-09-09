@@ -403,6 +403,10 @@ class OrderRequestsResource(SyncAPIResource):
         This is provided primarily for
         informational purposes.
 
+        For market buy orders, the notional amount of the order includes the fees. For
+        market and limit sell orders, fees are deducted from the proceeds of the sale.
+        For limit buy orders, the fees are added to the total cost of the order.
+
         Args:
           order_side: Indicates whether `Order Request` is a buy or sell.
 
@@ -814,6 +818,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
         This is provided primarily for
         informational purposes.
+
+        For market buy orders, the notional amount of the order includes the fees. For
+        market and limit sell orders, fees are deducted from the proceeds of the sale.
+        For limit buy orders, the fees are added to the total cost of the order.
 
         Args:
           order_side: Indicates whether `Order Request` is a buy or sell.
