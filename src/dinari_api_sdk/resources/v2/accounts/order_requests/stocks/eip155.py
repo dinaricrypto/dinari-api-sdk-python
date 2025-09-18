@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ......_types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ......_types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ......_utils import maybe_transform, async_maybe_transform
 from ......_compat import cached_property
 from ......types.v2 import Chain
@@ -65,7 +65,7 @@ class Eip155Resource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """Create a proxied order on EVM from a prepared proxied order.
 
@@ -117,15 +117,15 @@ class Eip155Resource(SyncAPIResource):
         order_type: OrderType,
         payment_token: str,
         stock_id: str,
-        asset_token_quantity: float | NotGiven = NOT_GIVEN,
-        limit_price: float | NotGiven = NOT_GIVEN,
-        payment_token_quantity: float | NotGiven = NOT_GIVEN,
+        asset_token_quantity: float | Omit = omit,
+        limit_price: float | Omit = omit,
+        payment_token_quantity: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Eip155PrepareProxiedOrderResponse:
         """Prepare a proxied order to be placed on EVM.
 
@@ -219,7 +219,7 @@ class AsyncEip155Resource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """Create a proxied order on EVM from a prepared proxied order.
 
@@ -271,15 +271,15 @@ class AsyncEip155Resource(AsyncAPIResource):
         order_type: OrderType,
         payment_token: str,
         stock_id: str,
-        asset_token_quantity: float | NotGiven = NOT_GIVEN,
-        limit_price: float | NotGiven = NOT_GIVEN,
-        payment_token_quantity: float | NotGiven = NOT_GIVEN,
+        asset_token_quantity: float | Omit = omit,
+        limit_price: float | Omit = omit,
+        payment_token_quantity: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Eip155PrepareProxiedOrderResponse:
         """Prepare a proxied order to be placed on EVM.
 
