@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from .....types.v2 import Chain
@@ -78,7 +78,7 @@ class OrderRequestsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """
         Get a specific `OrderRequest` by its ID.
@@ -108,14 +108,14 @@ class OrderRequestsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequestListResponse:
         """
         Lists `OrderRequests`.
@@ -156,13 +156,13 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
-        recipient_account_id: str | NotGiven = NOT_GIVEN,
+        recipient_account_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """
         Create a managed `OrderRequest` to place a limit buy `Order`.
@@ -212,14 +212,14 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
-        payment_token_address: str | NotGiven = NOT_GIVEN,
-        recipient_account_id: str | NotGiven = NOT_GIVEN,
+        payment_token_address: str | Omit = omit,
+        recipient_account_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """
         Create a managed `OrderRequest` to place a limit sell `Order`.
@@ -273,13 +273,13 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
-        recipient_account_id: str | NotGiven = NOT_GIVEN,
+        recipient_account_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """Create a managed `OrderRequest` to place a market buy `Order`.
 
@@ -328,14 +328,14 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
-        payment_token_address: str | NotGiven = NOT_GIVEN,
-        recipient_account_id: str | NotGiven = NOT_GIVEN,
+        payment_token_address: str | Omit = omit,
+        recipient_account_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """
         Create a managed `OrderRequest` to place a market sell `Order`.
@@ -386,17 +386,17 @@ class OrderRequestsResource(SyncAPIResource):
         order_side: OrderSide,
         order_type: OrderType,
         stock_id: str,
-        asset_token_quantity: float | NotGiven = NOT_GIVEN,
-        chain_id: Chain | NotGiven = NOT_GIVEN,
-        limit_price: float | NotGiven = NOT_GIVEN,
-        payment_token_address: str | NotGiven = NOT_GIVEN,
-        payment_token_quantity: float | NotGiven = NOT_GIVEN,
+        asset_token_quantity: float | Omit = omit,
+        chain_id: Chain | Omit = omit,
+        limit_price: float | Omit = omit,
+        payment_token_address: str | Omit = omit,
+        payment_token_quantity: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequestGetFeeQuoteResponse:
         """Get fee quote data for an `Order Request`.
 
@@ -494,7 +494,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """
         Get a specific `OrderRequest` by its ID.
@@ -524,14 +524,14 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequestListResponse:
         """
         Lists `OrderRequests`.
@@ -572,13 +572,13 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
-        recipient_account_id: str | NotGiven = NOT_GIVEN,
+        recipient_account_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """
         Create a managed `OrderRequest` to place a limit buy `Order`.
@@ -628,14 +628,14 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
-        payment_token_address: str | NotGiven = NOT_GIVEN,
-        recipient_account_id: str | NotGiven = NOT_GIVEN,
+        payment_token_address: str | Omit = omit,
+        recipient_account_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """
         Create a managed `OrderRequest` to place a limit sell `Order`.
@@ -689,13 +689,13 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
-        recipient_account_id: str | NotGiven = NOT_GIVEN,
+        recipient_account_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """Create a managed `OrderRequest` to place a market buy `Order`.
 
@@ -744,14 +744,14 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
-        payment_token_address: str | NotGiven = NOT_GIVEN,
-        recipient_account_id: str | NotGiven = NOT_GIVEN,
+        payment_token_address: str | Omit = omit,
+        recipient_account_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
         """
         Create a managed `OrderRequest` to place a market sell `Order`.
@@ -802,17 +802,17 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         order_side: OrderSide,
         order_type: OrderType,
         stock_id: str,
-        asset_token_quantity: float | NotGiven = NOT_GIVEN,
-        chain_id: Chain | NotGiven = NOT_GIVEN,
-        limit_price: float | NotGiven = NOT_GIVEN,
-        payment_token_address: str | NotGiven = NOT_GIVEN,
-        payment_token_quantity: float | NotGiven = NOT_GIVEN,
+        asset_token_quantity: float | Omit = omit,
+        chain_id: Chain | Omit = omit,
+        limit_price: float | Omit = omit,
+        payment_token_address: str | Omit = omit,
+        payment_token_quantity: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequestGetFeeQuoteResponse:
         """Get fee quote data for an `Order Request`.
 

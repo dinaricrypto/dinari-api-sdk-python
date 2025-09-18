@@ -14,7 +14,7 @@ from .splits import (
     SplitsResourceWithStreamingResponse,
     AsyncSplitsResourceWithStreamingResponse,
 )
-from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
+from ....._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -67,15 +67,15 @@ class StocksResource(SyncAPIResource):
     def list(
         self,
         *,
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        symbols: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
+        symbols: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockListResponse:
         """Get a list of `Stocks`.
 
@@ -120,7 +120,7 @@ class StocksResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveCurrentPriceResponse:
         """
         Get current price for a specified `Stock`.
@@ -153,7 +153,7 @@ class StocksResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveCurrentQuoteResponse:
         """
         Get quote for a specified `Stock`.
@@ -186,7 +186,7 @@ class StocksResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveDividendsResponse:
         """
         Get a list of announced stock dividend details for a specified `Stock`.
@@ -223,7 +223,7 @@ class StocksResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveHistoricalPricesResponse:
         """Get historical price data for a specified `Stock`.
 
@@ -261,13 +261,13 @@ class StocksResource(SyncAPIResource):
         self,
         stock_id: str,
         *,
-        limit: int | NotGiven = NOT_GIVEN,
+        limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveNewsResponse:
         """
         Get the most recent news articles relating to a `Stock`, including a summary of
@@ -326,15 +326,15 @@ class AsyncStocksResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        symbols: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
+        symbols: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockListResponse:
         """Get a list of `Stocks`.
 
@@ -379,7 +379,7 @@ class AsyncStocksResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveCurrentPriceResponse:
         """
         Get current price for a specified `Stock`.
@@ -412,7 +412,7 @@ class AsyncStocksResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveCurrentQuoteResponse:
         """
         Get quote for a specified `Stock`.
@@ -445,7 +445,7 @@ class AsyncStocksResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveDividendsResponse:
         """
         Get a list of announced stock dividend details for a specified `Stock`.
@@ -482,7 +482,7 @@ class AsyncStocksResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveHistoricalPricesResponse:
         """Get historical price data for a specified `Stock`.
 
@@ -520,13 +520,13 @@ class AsyncStocksResource(AsyncAPIResource):
         self,
         stock_id: str,
         *,
-        limit: int | NotGiven = NOT_GIVEN,
+        limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockRetrieveNewsResponse:
         """
         Get the most recent news articles relating to a `Stock`, including a summary of

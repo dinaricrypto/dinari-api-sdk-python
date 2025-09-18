@@ -7,7 +7,7 @@ from datetime import date
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v2 import (
@@ -147,7 +147,7 @@ class AccountsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
         Get a specific `Account` by its ID.
@@ -180,7 +180,7 @@ class AccountsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """Set the `Account` to be inactive.
 
@@ -214,7 +214,7 @@ class AccountsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetCashBalancesResponse:
         """
         Get the cash balances of the `Account`, including stablecoins and other cash
@@ -245,15 +245,15 @@ class AccountsResource(SyncAPIResource):
         *,
         end_date: Union[str, date],
         start_date: Union[str, date],
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        stock_id: str | NotGiven = NOT_GIVEN,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
+        stock_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetDividendPaymentsResponse:
         """
         Get dividend payments made to the `Account` from dividend-bearing stock
@@ -303,14 +303,14 @@ class AccountsResource(SyncAPIResource):
         *,
         end_date: Union[str, date],
         start_date: Union[str, date],
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetInterestPaymentsResponse:
         """
         Get interest payments made to the `Account` from yield-bearing cash holdings.
@@ -362,7 +362,7 @@ class AccountsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetPortfolioResponse:
         """
         Get the portfolio of the `Account`, excluding cash equivalents such as
@@ -391,13 +391,13 @@ class AccountsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Chain | NotGiven = NOT_GIVEN,
+        chain_id: Chain | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Mints 1,000 mockUSD sandbox payment tokens to the `Wallet` connected to the
@@ -490,7 +490,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
         Get a specific `Account` by its ID.
@@ -523,7 +523,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """Set the `Account` to be inactive.
 
@@ -557,7 +557,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetCashBalancesResponse:
         """
         Get the cash balances of the `Account`, including stablecoins and other cash
@@ -588,15 +588,15 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         end_date: Union[str, date],
         start_date: Union[str, date],
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        stock_id: str | NotGiven = NOT_GIVEN,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
+        stock_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetDividendPaymentsResponse:
         """
         Get dividend payments made to the `Account` from dividend-bearing stock
@@ -646,14 +646,14 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         end_date: Union[str, date],
         start_date: Union[str, date],
-        page: int | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetInterestPaymentsResponse:
         """
         Get interest payments made to the `Account` from yield-bearing cash holdings.
@@ -705,7 +705,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetPortfolioResponse:
         """
         Get the portfolio of the `Account`, excluding cash equivalents such as
@@ -734,13 +734,13 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Chain | NotGiven = NOT_GIVEN,
+        chain_id: Chain | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Mints 1,000 mockUSD sandbox payment tokens to the `Wallet` connected to the
