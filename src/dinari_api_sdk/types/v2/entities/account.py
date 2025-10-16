@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 
 from ...._models import BaseModel
@@ -19,3 +20,6 @@ class Account(BaseModel):
 
     is_active: bool
     """Indicates whether the `Account` is active."""
+
+    brokerage_account_id: Optional[str] = None
+    """ID of the brokerage account associated with the `Account`."""
