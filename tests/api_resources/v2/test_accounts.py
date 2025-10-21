@@ -279,7 +279,17 @@ class TestAccounts:
     @parametrize
     def test_method_get_portfolio(self, client: Dinari) -> None:
         account = client.v2.accounts.get_portfolio(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AccountGetPortfolioResponse, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_get_portfolio_with_all_params(self, client: Dinari) -> None:
+        account = client.v2.accounts.get_portfolio(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            page=1,
+            page_size=1,
         )
         assert_matches_type(AccountGetPortfolioResponse, account, path=["response"])
 
@@ -287,7 +297,7 @@ class TestAccounts:
     @parametrize
     def test_raw_response_get_portfolio(self, client: Dinari) -> None:
         response = client.v2.accounts.with_raw_response.get_portfolio(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -299,7 +309,7 @@ class TestAccounts:
     @parametrize
     def test_streaming_response_get_portfolio(self, client: Dinari) -> None:
         with client.v2.accounts.with_streaming_response.get_portfolio(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -314,7 +324,7 @@ class TestAccounts:
     def test_path_params_get_portfolio(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.v2.accounts.with_raw_response.get_portfolio(
-                "",
+                account_id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -629,7 +639,17 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_get_portfolio(self, async_client: AsyncDinari) -> None:
         account = await async_client.v2.accounts.get_portfolio(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AccountGetPortfolioResponse, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_get_portfolio_with_all_params(self, async_client: AsyncDinari) -> None:
+        account = await async_client.v2.accounts.get_portfolio(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            page=1,
+            page_size=1,
         )
         assert_matches_type(AccountGetPortfolioResponse, account, path=["response"])
 
@@ -637,7 +657,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_raw_response_get_portfolio(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.with_raw_response.get_portfolio(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -649,7 +669,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_streaming_response_get_portfolio(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.accounts.with_streaming_response.get_portfolio(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -664,7 +684,7 @@ class TestAsyncAccounts:
     async def test_path_params_get_portfolio(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.v2.accounts.with_raw_response.get_portfolio(
-                "",
+                account_id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

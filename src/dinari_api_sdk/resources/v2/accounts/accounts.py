@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import date
 
 import httpx
@@ -12,6 +12,7 @@ from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v2 import (
     Chain,
+    account_get_portfolio_params,
     account_mint_sandbox_tokens_params,
     account_get_dividend_payments_params,
     account_get_interest_payments_params,
@@ -357,6 +358,8 @@ class AccountsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
+        page: Optional[int] | Omit = omit,
+        page_size: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -369,6 +372,10 @@ class AccountsResource(SyncAPIResource):
         stablecoins.
 
         Args:
+          page: The page number.
+
+          page_size: The number of stocks to return per page, maximum number is 200.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -382,7 +389,17 @@ class AccountsResource(SyncAPIResource):
         return self._get(
             f"/api/v2/accounts/{account_id}/portfolio",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    account_get_portfolio_params.AccountGetPortfolioParams,
+                ),
             ),
             cast_to=AccountGetPortfolioResponse,
         )
@@ -700,6 +717,8 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
+        page: Optional[int] | Omit = omit,
+        page_size: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -712,6 +731,10 @@ class AsyncAccountsResource(AsyncAPIResource):
         stablecoins.
 
         Args:
+          page: The page number.
+
+          page_size: The number of stocks to return per page, maximum number is 200.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -725,7 +748,17 @@ class AsyncAccountsResource(AsyncAPIResource):
         return await self._get(
             f"/api/v2/accounts/{account_id}/portfolio",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    account_get_portfolio_params.AccountGetPortfolioParams,
+                ),
             ),
             cast_to=AccountGetPortfolioResponse,
         )
