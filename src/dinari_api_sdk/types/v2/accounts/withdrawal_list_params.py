@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import TypedDict
 
 __all__ = ["WithdrawalListParams"]
@@ -12,5 +13,5 @@ class WithdrawalListParams(TypedDict, total=False):
 
     page_size: int
 
-    withdrawal_request_id: str
+    withdrawal_request_id: Optional[str]
     """ID of the `WithdrawalRequest` to find `Withdrawals` for."""

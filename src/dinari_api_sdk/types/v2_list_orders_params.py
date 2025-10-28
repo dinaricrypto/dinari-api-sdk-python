@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import TypedDict
 
 from .v2.chain import Chain
@@ -10,16 +11,16 @@ __all__ = ["V2ListOrdersParams"]
 
 
 class V2ListOrdersParams(TypedDict, total=False):
-    chain_id: Chain
+    chain_id: Optional[Chain]
     """CAIP-2 formatted chain ID of the blockchain the `Order` was made on."""
 
-    order_fulfillment_transaction_hash: str
+    order_fulfillment_transaction_hash: Optional[str]
     """Fulfillment transaction hash of the `Order`."""
 
-    order_request_id: str
+    order_request_id: Optional[str]
     """Order Request ID for the `Order`"""
 
-    order_transaction_hash: str
+    order_transaction_hash: Optional[str]
     """Transaction hash of the `Order`."""
 
     page: int

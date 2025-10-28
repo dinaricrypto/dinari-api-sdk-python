@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 from ..chain import Chain
@@ -21,29 +22,29 @@ class OrderRequestGetFeeQuoteParams(TypedDict, total=False):
     stock_id: Required[str]
     """The Stock ID associated with the Order Request"""
 
-    asset_token_quantity: float
+    asset_token_quantity: Optional[float]
     """Amount of dShare asset tokens involved.
 
     Required for limit `Orders` and market sell `Order Requests`.
     """
 
-    chain_id: Chain
+    chain_id: Optional[Chain]
     """CAIP-2 chain ID of the blockchain where the `Order Request` will be placed.
 
     If not provided, the default chain ID (eip155:42161) will be used.
     """
 
-    limit_price: float
+    limit_price: Optional[float]
     """Price per asset in the asset's native currency.
 
     USD for US equities and ETFs. Required for limit `Order Requests`.
     """
 
-    payment_token_address: str
+    payment_token_address: Optional[str]
     """Address of the payment token to be used for an order.
 
     If not provided, the default payment token (USD+) will be used.
     """
 
-    payment_token_quantity: float
+    payment_token_quantity: Optional[float]
     """Amount of payment tokens involved. Required for market buy `Order Requests`."""

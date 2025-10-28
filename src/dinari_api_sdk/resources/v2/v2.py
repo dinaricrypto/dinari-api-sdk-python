@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ...types import v2_list_orders_params
@@ -82,10 +84,10 @@ class V2Resource(SyncAPIResource):
     def list_orders(
         self,
         *,
-        chain_id: Chain | Omit = omit,
-        order_fulfillment_transaction_hash: str | Omit = omit,
-        order_request_id: str | Omit = omit,
-        order_transaction_hash: str | Omit = omit,
+        chain_id: Optional[Chain] | Omit = omit,
+        order_fulfillment_transaction_hash: Optional[str] | Omit = omit,
+        order_request_id: Optional[str] | Omit = omit,
+        order_transaction_hash: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -175,10 +177,10 @@ class AsyncV2Resource(AsyncAPIResource):
     async def list_orders(
         self,
         *,
-        chain_id: Chain | Omit = omit,
-        order_fulfillment_transaction_hash: str | Omit = omit,
-        order_request_id: str | Omit = omit,
-        order_transaction_hash: str | Omit = omit,
+        chain_id: Optional[Chain] | Omit = omit,
+        order_fulfillment_transaction_hash: Optional[str] | Omit = omit,
+        order_request_id: Optional[str] | Omit = omit,
+        order_transaction_hash: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

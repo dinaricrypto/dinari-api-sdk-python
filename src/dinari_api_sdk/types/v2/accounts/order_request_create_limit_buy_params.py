@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = ["OrderRequestCreateLimitBuyParams"]
@@ -23,5 +24,5 @@ class OrderRequestCreateLimitBuyParams(TypedDict, total=False):
     stock_id: Required[str]
     """ID of `Stock`."""
 
-    recipient_account_id: str
+    recipient_account_id: Optional[str]
     """ID of `Account` to receive the `Order`."""

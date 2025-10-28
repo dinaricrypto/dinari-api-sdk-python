@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import date
 from typing_extensions import Required, Annotated, TypedDict
 
@@ -22,5 +22,5 @@ class AccountGetDividendPaymentsParams(TypedDict, total=False):
 
     page_size: int
 
-    stock_id: str
+    stock_id: Optional[str]
     """Optional ID of the `Stock` to filter by"""

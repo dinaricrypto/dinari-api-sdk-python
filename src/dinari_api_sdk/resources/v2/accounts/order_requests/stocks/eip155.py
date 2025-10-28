@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ......_types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -117,9 +119,9 @@ class Eip155Resource(SyncAPIResource):
         order_type: OrderType,
         payment_token: str,
         stock_id: str,
-        asset_token_quantity: float | Omit = omit,
-        limit_price: float | Omit = omit,
-        payment_token_quantity: float | Omit = omit,
+        asset_token_quantity: Optional[float] | Omit = omit,
+        limit_price: Optional[float] | Omit = omit,
+        payment_token_quantity: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -271,9 +273,9 @@ class AsyncEip155Resource(AsyncAPIResource):
         order_type: OrderType,
         payment_token: str,
         stock_id: str,
-        asset_token_quantity: float | Omit = omit,
-        limit_price: float | Omit = omit,
-        payment_token_quantity: float | Omit = omit,
+        asset_token_quantity: Optional[float] | Omit = omit,
+        limit_price: Optional[float] | Omit = omit,
+        payment_token_quantity: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

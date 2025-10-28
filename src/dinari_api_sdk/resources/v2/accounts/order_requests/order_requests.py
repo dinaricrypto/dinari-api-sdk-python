@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -156,7 +158,7 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
-        recipient_account_id: str | Omit = omit,
+        recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -212,8 +214,8 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
-        payment_token_address: str | Omit = omit,
-        recipient_account_id: str | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
+        recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -273,7 +275,7 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
-        recipient_account_id: str | Omit = omit,
+        recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -328,8 +330,8 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
-        payment_token_address: str | Omit = omit,
-        recipient_account_id: str | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
+        recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -386,11 +388,11 @@ class OrderRequestsResource(SyncAPIResource):
         order_side: OrderSide,
         order_type: OrderType,
         stock_id: str,
-        asset_token_quantity: float | Omit = omit,
-        chain_id: Chain | Omit = omit,
-        limit_price: float | Omit = omit,
-        payment_token_address: str | Omit = omit,
-        payment_token_quantity: float | Omit = omit,
+        asset_token_quantity: Optional[float] | Omit = omit,
+        chain_id: Optional[Chain] | Omit = omit,
+        limit_price: Optional[float] | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
+        payment_token_quantity: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -572,7 +574,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
-        recipient_account_id: str | Omit = omit,
+        recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -628,8 +630,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
-        payment_token_address: str | Omit = omit,
-        recipient_account_id: str | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
+        recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -689,7 +691,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
-        recipient_account_id: str | Omit = omit,
+        recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -744,8 +746,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
-        payment_token_address: str | Omit = omit,
-        recipient_account_id: str | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
+        recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -802,11 +804,11 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         order_side: OrderSide,
         order_type: OrderType,
         stock_id: str,
-        asset_token_quantity: float | Omit = omit,
-        chain_id: Chain | Omit = omit,
-        limit_price: float | Omit = omit,
-        payment_token_address: str | Omit = omit,
-        payment_token_quantity: float | Omit = omit,
+        asset_token_quantity: Optional[float] | Omit = omit,
+        chain_id: Optional[Chain] | Omit = omit,
+        limit_price: Optional[float] | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
+        payment_token_quantity: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
