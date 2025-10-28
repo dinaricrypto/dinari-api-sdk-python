@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -84,7 +86,7 @@ class WithdrawalsResource(SyncAPIResource):
         *,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
-        withdrawal_request_id: str | Omit = omit,
+        withdrawal_request_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -190,7 +192,7 @@ class AsyncWithdrawalsResource(AsyncAPIResource):
         *,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
-        withdrawal_request_id: str | Omit = omit,
+        withdrawal_request_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

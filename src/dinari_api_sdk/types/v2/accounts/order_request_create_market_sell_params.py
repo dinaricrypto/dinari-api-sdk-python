@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = ["OrderRequestCreateMarketSellParams"]
@@ -17,7 +18,7 @@ class OrderRequestCreateMarketSellParams(TypedDict, total=False):
     stock_id: Required[str]
     """ID of `Stock`."""
 
-    payment_token_address: str
+    payment_token_address: Optional[str]
     """Address of the payment token to be used for the sell order.
 
     If not provided, the default payment token (USD+) will be used. Should only be
@@ -25,5 +26,5 @@ class OrderRequestCreateMarketSellParams(TypedDict, total=False):
     provided.
     """
 
-    recipient_account_id: str
+    recipient_account_id: Optional[str]
     """ID of `Account` to receive the `Order`."""
