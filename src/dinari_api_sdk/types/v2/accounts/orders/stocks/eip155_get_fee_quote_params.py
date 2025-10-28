@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 from ....chain import Chain
@@ -31,17 +32,17 @@ class Eip155GetFeeQuoteParams(TypedDict, total=False):
     stock_id: Required[str]
     """The ID of the `Stock` for which the `Order` is being placed."""
 
-    asset_token_quantity: float
+    asset_token_quantity: Optional[float]
     """Amount of dShare asset tokens involved.
 
     Required for limit `Orders` and market sell `Orders`.
     """
 
-    limit_price: float
+    limit_price: Optional[float]
     """Price per asset in the asset's native currency.
 
     USD for US equities and ETFs. Required for limit `Orders`.
     """
 
-    payment_token_quantity: float
+    payment_token_quantity: Optional[float]
     """Amount of payment tokens involved. Required for market buy `Orders`."""

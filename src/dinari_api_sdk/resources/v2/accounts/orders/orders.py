@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -97,8 +99,8 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Chain | Omit = omit,
-        order_transaction_hash: str | Omit = omit,
+        chain_id: Optional[Chain] | Omit = omit,
+        order_transaction_hash: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -307,8 +309,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        chain_id: Chain | Omit = omit,
-        order_transaction_hash: str | Omit = omit,
+        chain_id: Optional[Chain] | Omit = omit,
+        order_transaction_hash: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 from .wallet.wallet_chain_id import WalletChainID
@@ -19,5 +20,5 @@ class WalletConnectInternalParams(TypedDict, total=False):
     wallet_address: Required[str]
     """Address of the `Wallet`."""
 
-    is_shared: bool
+    is_shared: Optional[bool]
     """Is the linked Wallet shared or not"""
