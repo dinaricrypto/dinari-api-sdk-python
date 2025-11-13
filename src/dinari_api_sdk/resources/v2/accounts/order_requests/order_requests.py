@@ -110,6 +110,9 @@ class OrderRequestsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
+        client_order_id: Optional[str] | Omit = omit,
+        order_id: Optional[str] | Omit = omit,
+        order_request_id: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -119,10 +122,19 @@ class OrderRequestsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequestListResponse:
-        """
-        Lists `OrderRequests`.
+        """Lists `OrderRequests`.
+
+        Optionally `OrderRequests` can be filtered by certain
+        parameters.
 
         Args:
+          client_order_id: Customer-supplied ID to map this `OrderRequest` to an order in their own
+              systems.
+
+          order_id: Order ID for the `OrderRequest`
+
+          order_request_id: Order Request ID for the `OrderRequest`
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -142,6 +154,9 @@ class OrderRequestsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "client_order_id": client_order_id,
+                        "order_id": order_id,
+                        "order_request_id": order_request_id,
                         "page": page,
                         "page_size": page_size,
                     },
@@ -158,6 +173,7 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
+        client_order_id: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -169,6 +185,14 @@ class OrderRequestsResource(SyncAPIResource):
         """
         Create a managed `OrderRequest` to place a limit buy `Order`.
 
+        Fees for the `Order` are included in the transaction. Refer to our
+        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
+        for fee estimation.
+
+        If an `OrderRequest` with the same `client_order_id` already exists for the
+        given account, the existing `OrderRequest` will be returned instead of creating
+        a new one.
+
         Args:
           asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
               `Orders`.
@@ -177,6 +201,9 @@ class OrderRequestsResource(SyncAPIResource):
               of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
+
+          client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
+              unique within the entity.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -197,6 +224,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "client_order_id": client_order_id,
                     "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_limit_buy_params.OrderRequestCreateLimitBuyParams,
@@ -214,6 +242,7 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
+        client_order_id: Optional[str] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -226,6 +255,14 @@ class OrderRequestsResource(SyncAPIResource):
         """
         Create a managed `OrderRequest` to place a limit sell `Order`.
 
+        Fees for the `Order` are included in the transaction. Refer to our
+        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
+        for fee estimation.
+
+        If an `OrderRequest` with the same `client_order_id` already exists for the
+        given account, the existing `OrderRequest` will be returned instead of creating
+        a new one.
+
         Args:
           asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
               `Orders`.
@@ -234,6 +271,9 @@ class OrderRequestsResource(SyncAPIResource):
               of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
+
+          client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
+              unique within the entity.
 
           payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
               default payment token (USD+) will be used. Should only be specified if
@@ -258,6 +298,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "client_order_id": client_order_id,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                 },
@@ -275,6 +316,7 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
+        client_order_id: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -283,18 +325,25 @@ class OrderRequestsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
-        """Create a managed `OrderRequest` to place a market buy `Order`.
+        """
+        Create a managed `OrderRequest` to place a market buy `Order`.
 
-        Fees for the
-        `Order` are included in the transaction. Refer to our
+        Fees for the `Order` are included in the transaction. Refer to our
         [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
         for fee estimation.
+
+        If an `OrderRequest` with the same `client_order_id` already exists for the
+        given account, the existing `OrderRequest` will be returned instead of creating
+        a new one.
 
         Args:
           payment_amount: Amount of currency (USD for US equities and ETFs) to pay for the order. Must be
               a positive number with a precision of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
+
+          client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
+              unique within the entity.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -314,6 +363,7 @@ class OrderRequestsResource(SyncAPIResource):
                 {
                     "payment_amount": payment_amount,
                     "stock_id": stock_id,
+                    "client_order_id": client_order_id,
                     "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_market_buy_params.OrderRequestCreateMarketBuyParams,
@@ -330,6 +380,7 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
+        client_order_id: Optional[str] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -342,11 +393,22 @@ class OrderRequestsResource(SyncAPIResource):
         """
         Create a managed `OrderRequest` to place a market sell `Order`.
 
+        Fees for the `Order` are included in the transaction. Refer to our
+        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
+        for fee estimation.
+
+        If an `OrderRequest` with the same `client_order_id` already exists for the
+        given account, the existing `OrderRequest` will be returned instead of creating
+        a new one.
+
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
               9 decimal places.
 
           stock_id: ID of `Stock`.
+
+          client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
+              unique within the entity.
 
           payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
               default payment token (USD+) will be used. Should only be specified if
@@ -370,6 +432,7 @@ class OrderRequestsResource(SyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "stock_id": stock_id,
+                    "client_order_id": client_order_id,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                 },
@@ -526,6 +589,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
+        client_order_id: Optional[str] | Omit = omit,
+        order_id: Optional[str] | Omit = omit,
+        order_request_id: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -535,10 +601,19 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequestListResponse:
-        """
-        Lists `OrderRequests`.
+        """Lists `OrderRequests`.
+
+        Optionally `OrderRequests` can be filtered by certain
+        parameters.
 
         Args:
+          client_order_id: Customer-supplied ID to map this `OrderRequest` to an order in their own
+              systems.
+
+          order_id: Order ID for the `OrderRequest`
+
+          order_request_id: Order Request ID for the `OrderRequest`
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -558,6 +633,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "client_order_id": client_order_id,
+                        "order_id": order_id,
+                        "order_request_id": order_request_id,
                         "page": page,
                         "page_size": page_size,
                     },
@@ -574,6 +652,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
+        client_order_id: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -585,6 +664,14 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         """
         Create a managed `OrderRequest` to place a limit buy `Order`.
 
+        Fees for the `Order` are included in the transaction. Refer to our
+        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
+        for fee estimation.
+
+        If an `OrderRequest` with the same `client_order_id` already exists for the
+        given account, the existing `OrderRequest` will be returned instead of creating
+        a new one.
+
         Args:
           asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
               `Orders`.
@@ -593,6 +680,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
               of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
+
+          client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
+              unique within the entity.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -613,6 +703,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "client_order_id": client_order_id,
                     "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_limit_buy_params.OrderRequestCreateLimitBuyParams,
@@ -630,6 +721,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: float,
         limit_price: float,
         stock_id: str,
+        client_order_id: Optional[str] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -642,6 +734,14 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         """
         Create a managed `OrderRequest` to place a limit sell `Order`.
 
+        Fees for the `Order` are included in the transaction. Refer to our
+        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
+        for fee estimation.
+
+        If an `OrderRequest` with the same `client_order_id` already exists for the
+        given account, the existing `OrderRequest` will be returned instead of creating
+        a new one.
+
         Args:
           asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
               `Orders`.
@@ -650,6 +750,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
               of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
+
+          client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
+              unique within the entity.
 
           payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
               default payment token (USD+) will be used. Should only be specified if
@@ -674,6 +777,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
                     "stock_id": stock_id,
+                    "client_order_id": client_order_id,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                 },
@@ -691,6 +795,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         payment_amount: float,
         stock_id: str,
+        client_order_id: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -699,18 +804,25 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequest:
-        """Create a managed `OrderRequest` to place a market buy `Order`.
+        """
+        Create a managed `OrderRequest` to place a market buy `Order`.
 
-        Fees for the
-        `Order` are included in the transaction. Refer to our
+        Fees for the `Order` are included in the transaction. Refer to our
         [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
         for fee estimation.
+
+        If an `OrderRequest` with the same `client_order_id` already exists for the
+        given account, the existing `OrderRequest` will be returned instead of creating
+        a new one.
 
         Args:
           payment_amount: Amount of currency (USD for US equities and ETFs) to pay for the order. Must be
               a positive number with a precision of up to 2 decimal places.
 
           stock_id: ID of `Stock`.
+
+          client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
+              unique within the entity.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -730,6 +842,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 {
                     "payment_amount": payment_amount,
                     "stock_id": stock_id,
+                    "client_order_id": client_order_id,
                     "recipient_account_id": recipient_account_id,
                 },
                 order_request_create_market_buy_params.OrderRequestCreateMarketBuyParams,
@@ -746,6 +859,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         asset_quantity: float,
         stock_id: str,
+        client_order_id: Optional[str] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -758,11 +872,22 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         """
         Create a managed `OrderRequest` to place a market sell `Order`.
 
+        Fees for the `Order` are included in the transaction. Refer to our
+        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
+        for fee estimation.
+
+        If an `OrderRequest` with the same `client_order_id` already exists for the
+        given account, the existing `OrderRequest` will be returned instead of creating
+        a new one.
+
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
               9 decimal places.
 
           stock_id: ID of `Stock`.
+
+          client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
+              unique within the entity.
 
           payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
               default payment token (USD+) will be used. Should only be specified if
@@ -786,6 +911,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "stock_id": stock_id,
+                    "client_order_id": client_order_id,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                 },

@@ -29,13 +29,16 @@ class Eip155PrepareProxiedOrderParams(TypedDict, total=False):
     payment_token: Required[str]
     """Address of payment token."""
 
-    stock_id: Required[str]
-    """The ID of the `Stock` for which the `Order` is being placed."""
-
     asset_token_quantity: Optional[float]
     """Amount of dShare asset tokens involved.
 
     Required for limit `Orders` and market sell `Orders`.
+    """
+
+    client_order_id: Optional[str]
+    """
+    Customer-supplied unique identifier to map this `Order` to an order in the
+    customer's systems.
     """
 
     limit_price: Optional[float]
@@ -46,3 +49,9 @@ class Eip155PrepareProxiedOrderParams(TypedDict, total=False):
 
     payment_token_quantity: Optional[float]
     """Amount of payment tokens involved. Required for market buy `Orders`."""
+
+    stock_id: Optional[str]
+    """The ID of the `Stock` for which the `Order` is being placed."""
+
+    token_id: Optional[str]
+    """The ID of the `Token` for which the `Order` is being placed."""

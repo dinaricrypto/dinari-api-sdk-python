@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Optional
 
 import httpx
@@ -50,6 +51,7 @@ class Eip155Resource(SyncAPIResource):
         """
         return Eip155ResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def get_fee_quote(
         self,
         account_id: str,
@@ -59,10 +61,12 @@ class Eip155Resource(SyncAPIResource):
         order_tif: OrderTif,
         order_type: OrderType,
         payment_token: str,
-        stock_id: str,
         asset_token_quantity: Optional[float] | Omit = omit,
+        client_order_id: Optional[str] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
+        token_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -79,6 +83,8 @@ class Eip155Resource(SyncAPIResource):
         The `order_fee_contract_object` property contains the opaque fee quote structure
         to be used.
 
+        **⚠️ This endpoint will be deprecated on 2025-12-15.**
+
         Args:
           chain_id: CAIP-2 chain ID of the blockchain where the `Order` will be placed.
 
@@ -90,15 +96,20 @@ class Eip155Resource(SyncAPIResource):
 
           payment_token: Address of payment token.
 
-          stock_id: The ID of the `Stock` for which the `Order` is being placed.
-
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
               sell `Orders`.
+
+          client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
+              customer's systems.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
+
+          stock_id: The ID of the `Stock` for which the `Order` is being placed.
+
+          token_id: The ID of the `Token` for which the `Order` is being placed.
 
           extra_headers: Send extra headers
 
@@ -119,10 +130,12 @@ class Eip155Resource(SyncAPIResource):
                     "order_tif": order_tif,
                     "order_type": order_type,
                     "payment_token": payment_token,
-                    "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
+                    "client_order_id": client_order_id,
                     "limit_price": limit_price,
                     "payment_token_quantity": payment_token_quantity,
+                    "stock_id": stock_id,
+                    "token_id": token_id,
                 },
                 eip155_get_fee_quote_params.Eip155GetFeeQuoteParams,
             ),
@@ -132,6 +145,7 @@ class Eip155Resource(SyncAPIResource):
             cast_to=Eip155GetFeeQuoteResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def prepare_order(
         self,
         account_id: str,
@@ -141,10 +155,12 @@ class Eip155Resource(SyncAPIResource):
         order_tif: OrderTif,
         order_type: OrderType,
         payment_token: str,
-        stock_id: str,
         asset_token_quantity: Optional[float] | Omit = omit,
+        client_order_id: Optional[str] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
+        token_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -161,6 +177,8 @@ class Eip155Resource(SyncAPIResource):
         sent to the EVM network to create the order. Note that the fee quote is already
         included in the transactions, so no additional fee quote lookup is needed.
 
+        **⚠️ This endpoint will be deprecated on 2025-12-15.**
+
         Args:
           chain_id: CAIP-2 chain ID of the blockchain where the `Order` will be placed.
 
@@ -172,15 +190,20 @@ class Eip155Resource(SyncAPIResource):
 
           payment_token: Address of payment token.
 
-          stock_id: The ID of the `Stock` for which the `Order` is being placed.
-
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
               sell `Orders`.
+
+          client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
+              customer's systems.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
+
+          stock_id: The ID of the `Stock` for which the `Order` is being placed.
+
+          token_id: The ID of the `Token` for which the `Order` is being placed.
 
           extra_headers: Send extra headers
 
@@ -201,10 +224,12 @@ class Eip155Resource(SyncAPIResource):
                     "order_tif": order_tif,
                     "order_type": order_type,
                     "payment_token": payment_token,
-                    "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
+                    "client_order_id": client_order_id,
                     "limit_price": limit_price,
                     "payment_token_quantity": payment_token_quantity,
+                    "stock_id": stock_id,
+                    "token_id": token_id,
                 },
                 eip155_prepare_order_params.Eip155PrepareOrderParams,
             ),
@@ -235,6 +260,7 @@ class AsyncEip155Resource(AsyncAPIResource):
         """
         return AsyncEip155ResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def get_fee_quote(
         self,
         account_id: str,
@@ -244,10 +270,12 @@ class AsyncEip155Resource(AsyncAPIResource):
         order_tif: OrderTif,
         order_type: OrderType,
         payment_token: str,
-        stock_id: str,
         asset_token_quantity: Optional[float] | Omit = omit,
+        client_order_id: Optional[str] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
+        token_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -264,6 +292,8 @@ class AsyncEip155Resource(AsyncAPIResource):
         The `order_fee_contract_object` property contains the opaque fee quote structure
         to be used.
 
+        **⚠️ This endpoint will be deprecated on 2025-12-15.**
+
         Args:
           chain_id: CAIP-2 chain ID of the blockchain where the `Order` will be placed.
 
@@ -275,15 +305,20 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           payment_token: Address of payment token.
 
-          stock_id: The ID of the `Stock` for which the `Order` is being placed.
-
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
               sell `Orders`.
+
+          client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
+              customer's systems.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
+
+          stock_id: The ID of the `Stock` for which the `Order` is being placed.
+
+          token_id: The ID of the `Token` for which the `Order` is being placed.
 
           extra_headers: Send extra headers
 
@@ -304,10 +339,12 @@ class AsyncEip155Resource(AsyncAPIResource):
                     "order_tif": order_tif,
                     "order_type": order_type,
                     "payment_token": payment_token,
-                    "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
+                    "client_order_id": client_order_id,
                     "limit_price": limit_price,
                     "payment_token_quantity": payment_token_quantity,
+                    "stock_id": stock_id,
+                    "token_id": token_id,
                 },
                 eip155_get_fee_quote_params.Eip155GetFeeQuoteParams,
             ),
@@ -317,6 +354,7 @@ class AsyncEip155Resource(AsyncAPIResource):
             cast_to=Eip155GetFeeQuoteResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def prepare_order(
         self,
         account_id: str,
@@ -326,10 +364,12 @@ class AsyncEip155Resource(AsyncAPIResource):
         order_tif: OrderTif,
         order_type: OrderType,
         payment_token: str,
-        stock_id: str,
         asset_token_quantity: Optional[float] | Omit = omit,
+        client_order_id: Optional[str] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
+        token_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -346,6 +386,8 @@ class AsyncEip155Resource(AsyncAPIResource):
         sent to the EVM network to create the order. Note that the fee quote is already
         included in the transactions, so no additional fee quote lookup is needed.
 
+        **⚠️ This endpoint will be deprecated on 2025-12-15.**
+
         Args:
           chain_id: CAIP-2 chain ID of the blockchain where the `Order` will be placed.
 
@@ -357,15 +399,20 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           payment_token: Address of payment token.
 
-          stock_id: The ID of the `Stock` for which the `Order` is being placed.
-
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
               sell `Orders`.
+
+          client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
+              customer's systems.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
+
+          stock_id: The ID of the `Stock` for which the `Order` is being placed.
+
+          token_id: The ID of the `Token` for which the `Order` is being placed.
 
           extra_headers: Send extra headers
 
@@ -386,10 +433,12 @@ class AsyncEip155Resource(AsyncAPIResource):
                     "order_tif": order_tif,
                     "order_type": order_type,
                     "payment_token": payment_token,
-                    "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
+                    "client_order_id": client_order_id,
                     "limit_price": limit_price,
                     "payment_token_quantity": payment_token_quantity,
+                    "stock_id": stock_id,
+                    "token_id": token_id,
                 },
                 eip155_prepare_order_params.Eip155PrepareOrderParams,
             ),
@@ -404,11 +453,15 @@ class Eip155ResourceWithRawResponse:
     def __init__(self, eip155: Eip155Resource) -> None:
         self._eip155 = eip155
 
-        self.get_fee_quote = to_raw_response_wrapper(
-            eip155.get_fee_quote,
+        self.get_fee_quote = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                eip155.get_fee_quote,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.prepare_order = to_raw_response_wrapper(
-            eip155.prepare_order,
+        self.prepare_order = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                eip155.prepare_order,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -416,11 +469,15 @@ class AsyncEip155ResourceWithRawResponse:
     def __init__(self, eip155: AsyncEip155Resource) -> None:
         self._eip155 = eip155
 
-        self.get_fee_quote = async_to_raw_response_wrapper(
-            eip155.get_fee_quote,
+        self.get_fee_quote = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                eip155.get_fee_quote,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.prepare_order = async_to_raw_response_wrapper(
-            eip155.prepare_order,
+        self.prepare_order = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                eip155.prepare_order,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -428,11 +485,15 @@ class Eip155ResourceWithStreamingResponse:
     def __init__(self, eip155: Eip155Resource) -> None:
         self._eip155 = eip155
 
-        self.get_fee_quote = to_streamed_response_wrapper(
-            eip155.get_fee_quote,
+        self.get_fee_quote = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                eip155.get_fee_quote,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.prepare_order = to_streamed_response_wrapper(
-            eip155.prepare_order,
+        self.prepare_order = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                eip155.prepare_order,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -440,9 +501,13 @@ class AsyncEip155ResourceWithStreamingResponse:
     def __init__(self, eip155: AsyncEip155Resource) -> None:
         self._eip155 = eip155
 
-        self.get_fee_quote = async_to_streamed_response_wrapper(
-            eip155.get_fee_quote,
+        self.get_fee_quote = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                eip155.get_fee_quote,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.prepare_order = async_to_streamed_response_wrapper(
-            eip155.prepare_order,
+        self.prepare_order = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                eip155.prepare_order,  # pyright: ignore[reportDeprecated],
+            )
         )

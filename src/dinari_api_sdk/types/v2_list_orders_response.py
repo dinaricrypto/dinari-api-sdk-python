@@ -63,6 +63,12 @@ class V2ListOrdersResponseItem(BaseModel):
     cancel_transaction_hash: Optional[str] = None
     """Transaction hash for cancellation of `Order`, if the `Order` was cancelled."""
 
+    client_order_id: Optional[str] = None
+    """
+    Customer-supplied unique identifier to map this `Order` to an order in the
+    customer's systems.
+    """
+
     entity_id: Optional[str] = None
     """Entity ID of the Order"""
 

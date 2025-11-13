@@ -18,5 +18,11 @@ class OrderRequestCreateMarketBuyParams(TypedDict, total=False):
     stock_id: Required[str]
     """ID of `Stock`."""
 
+    client_order_id: Optional[str]
+    """Customer-supplied ID to map this order to an order in their own systems.
+
+    Must be unique within the entity.
+    """
+
     recipient_account_id: Optional[str]
     """ID of `Account` to receive the `Order`."""
