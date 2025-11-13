@@ -59,6 +59,12 @@ class Order(BaseModel):
     cancel_transaction_hash: Optional[str] = None
     """Transaction hash for cancellation of `Order`, if the `Order` was cancelled."""
 
+    client_order_id: Optional[str] = None
+    """
+    Customer-supplied unique identifier to map this `Order` to an order in the
+    customer's systems.
+    """
+
     fee: Optional[float] = None
     """Fee amount associated with `Order`."""
 

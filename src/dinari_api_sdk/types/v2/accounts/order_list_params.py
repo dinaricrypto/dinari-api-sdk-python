@@ -14,6 +14,9 @@ class OrderListParams(TypedDict, total=False):
     chain_id: Optional[Chain]
     """CAIP-2 formatted chain ID of the blockchain the `Order` was made on."""
 
+    client_order_id: Optional[str]
+    """Customer-supplied identifier to search for `Order`s."""
+
     order_transaction_hash: Optional[str]
     """Transaction hash of the `Order`."""
 

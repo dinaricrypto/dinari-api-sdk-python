@@ -37,6 +37,12 @@ class OrderRequest(BaseModel):
     status: Literal["QUOTED", "PENDING", "PENDING_BRIDGE", "SUBMITTED", "ERROR", "CANCELLED", "EXPIRED"]
     """Status of `OrderRequest`."""
 
+    client_order_id: Optional[str] = None
+    """
+    Customer-supplied ID to map this `OrderRequest` to an order in their own
+    systems.
+    """
+
     order_id: Optional[str] = None
     """ID of `Order` created from the `OrderRequest`.
 

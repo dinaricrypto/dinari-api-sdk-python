@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Optional
 
 import httpx
@@ -23,11 +24,7 @@ from ......types.v2.accounts import OrderTif, OrderSide, OrderType
 from ......types.v2.accounts.order_tif import OrderTif
 from ......types.v2.accounts.order_side import OrderSide
 from ......types.v2.accounts.order_type import OrderType
-from ......types.v2.accounts.order_request import OrderRequest
-from ......types.v2.accounts.order_requests.stocks import (
-    eip155_create_proxied_order_params,
-    eip155_prepare_proxied_order_params,
-)
+from ......types.v2.accounts.order_requests.stocks import eip155_prepare_proxied_order_params
 from ......types.v2.accounts.order_requests.stocks.eip155_prepare_proxied_order_response import (
     Eip155PrepareProxiedOrderResponse,
 )
@@ -55,60 +52,7 @@ class Eip155Resource(SyncAPIResource):
         """
         return Eip155ResourceWithStreamingResponse(self)
 
-    def create_proxied_order(
-        self,
-        account_id: str,
-        *,
-        order_signature: str,
-        permit_signature: str,
-        prepared_proxied_order_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderRequest:
-        """Create a proxied order on EVM from a prepared proxied order.
-
-        An `OrderRequest`
-        representing the proxied order is returned.
-
-        Args:
-          order_signature: Signature of the order typed data, allowing Dinari to place the proxied order on
-              behalf of the `Wallet`.
-
-          permit_signature: Signature of the permit typed data, allowing Dinari to spend the payment token
-              or dShare asset token on behalf of the owner.
-
-          prepared_proxied_order_id: ID of the prepared proxied order to be submitted as a proxied order.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/stocks/eip155",
-            body=maybe_transform(
-                {
-                    "order_signature": order_signature,
-                    "permit_signature": permit_signature,
-                    "prepared_proxied_order_id": prepared_proxied_order_id,
-                },
-                eip155_create_proxied_order_params.Eip155CreateProxiedOrderParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=OrderRequest,
-        )
-
+    @typing_extensions.deprecated("deprecated")
     def prepare_proxied_order(
         self,
         account_id: str,
@@ -118,10 +62,12 @@ class Eip155Resource(SyncAPIResource):
         order_tif: OrderTif,
         order_type: OrderType,
         payment_token: str,
-        stock_id: str,
         asset_token_quantity: Optional[float] | Omit = omit,
+        client_order_id: Optional[str] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
+        token_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,6 +81,8 @@ class Eip155Resource(SyncAPIResource):
         necessary data to create an `OrderRequest` with a `Wallet` that is not
         Dinari-managed.
 
+        **⚠️ This endpoint will be deprecated on 2025-12-15.**
+
         Args:
           chain_id: CAIP-2 chain ID of the blockchain where the `Order` will be placed.
 
@@ -146,15 +94,20 @@ class Eip155Resource(SyncAPIResource):
 
           payment_token: Address of payment token.
 
-          stock_id: The ID of the `Stock` for which the `Order` is being placed.
-
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
               sell `Orders`.
+
+          client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
+              customer's systems.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
+
+          stock_id: The ID of the `Stock` for which the `Order` is being placed.
+
+          token_id: The ID of the `Token` for which the `Order` is being placed.
 
           extra_headers: Send extra headers
 
@@ -175,10 +128,12 @@ class Eip155Resource(SyncAPIResource):
                     "order_tif": order_tif,
                     "order_type": order_type,
                     "payment_token": payment_token,
-                    "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
+                    "client_order_id": client_order_id,
                     "limit_price": limit_price,
                     "payment_token_quantity": payment_token_quantity,
+                    "stock_id": stock_id,
+                    "token_id": token_id,
                 },
                 eip155_prepare_proxied_order_params.Eip155PrepareProxiedOrderParams,
             ),
@@ -209,60 +164,7 @@ class AsyncEip155Resource(AsyncAPIResource):
         """
         return AsyncEip155ResourceWithStreamingResponse(self)
 
-    async def create_proxied_order(
-        self,
-        account_id: str,
-        *,
-        order_signature: str,
-        permit_signature: str,
-        prepared_proxied_order_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderRequest:
-        """Create a proxied order on EVM from a prepared proxied order.
-
-        An `OrderRequest`
-        representing the proxied order is returned.
-
-        Args:
-          order_signature: Signature of the order typed data, allowing Dinari to place the proxied order on
-              behalf of the `Wallet`.
-
-          permit_signature: Signature of the permit typed data, allowing Dinari to spend the payment token
-              or dShare asset token on behalf of the owner.
-
-          prepared_proxied_order_id: ID of the prepared proxied order to be submitted as a proxied order.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return await self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/stocks/eip155",
-            body=await async_maybe_transform(
-                {
-                    "order_signature": order_signature,
-                    "permit_signature": permit_signature,
-                    "prepared_proxied_order_id": prepared_proxied_order_id,
-                },
-                eip155_create_proxied_order_params.Eip155CreateProxiedOrderParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=OrderRequest,
-        )
-
+    @typing_extensions.deprecated("deprecated")
     async def prepare_proxied_order(
         self,
         account_id: str,
@@ -272,10 +174,12 @@ class AsyncEip155Resource(AsyncAPIResource):
         order_tif: OrderTif,
         order_type: OrderType,
         payment_token: str,
-        stock_id: str,
         asset_token_quantity: Optional[float] | Omit = omit,
+        client_order_id: Optional[str] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
+        token_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -289,6 +193,8 @@ class AsyncEip155Resource(AsyncAPIResource):
         necessary data to create an `OrderRequest` with a `Wallet` that is not
         Dinari-managed.
 
+        **⚠️ This endpoint will be deprecated on 2025-12-15.**
+
         Args:
           chain_id: CAIP-2 chain ID of the blockchain where the `Order` will be placed.
 
@@ -300,15 +206,20 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           payment_token: Address of payment token.
 
-          stock_id: The ID of the `Stock` for which the `Order` is being placed.
-
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
               sell `Orders`.
+
+          client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
+              customer's systems.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Orders`.
+
+          stock_id: The ID of the `Stock` for which the `Order` is being placed.
+
+          token_id: The ID of the `Token` for which the `Order` is being placed.
 
           extra_headers: Send extra headers
 
@@ -329,10 +240,12 @@ class AsyncEip155Resource(AsyncAPIResource):
                     "order_tif": order_tif,
                     "order_type": order_type,
                     "payment_token": payment_token,
-                    "stock_id": stock_id,
                     "asset_token_quantity": asset_token_quantity,
+                    "client_order_id": client_order_id,
                     "limit_price": limit_price,
                     "payment_token_quantity": payment_token_quantity,
+                    "stock_id": stock_id,
+                    "token_id": token_id,
                 },
                 eip155_prepare_proxied_order_params.Eip155PrepareProxiedOrderParams,
             ),
@@ -347,11 +260,10 @@ class Eip155ResourceWithRawResponse:
     def __init__(self, eip155: Eip155Resource) -> None:
         self._eip155 = eip155
 
-        self.create_proxied_order = to_raw_response_wrapper(
-            eip155.create_proxied_order,
-        )
-        self.prepare_proxied_order = to_raw_response_wrapper(
-            eip155.prepare_proxied_order,
+        self.prepare_proxied_order = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                eip155.prepare_proxied_order,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -359,11 +271,10 @@ class AsyncEip155ResourceWithRawResponse:
     def __init__(self, eip155: AsyncEip155Resource) -> None:
         self._eip155 = eip155
 
-        self.create_proxied_order = async_to_raw_response_wrapper(
-            eip155.create_proxied_order,
-        )
-        self.prepare_proxied_order = async_to_raw_response_wrapper(
-            eip155.prepare_proxied_order,
+        self.prepare_proxied_order = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                eip155.prepare_proxied_order,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -371,11 +282,10 @@ class Eip155ResourceWithStreamingResponse:
     def __init__(self, eip155: Eip155Resource) -> None:
         self._eip155 = eip155
 
-        self.create_proxied_order = to_streamed_response_wrapper(
-            eip155.create_proxied_order,
-        )
-        self.prepare_proxied_order = to_streamed_response_wrapper(
-            eip155.prepare_proxied_order,
+        self.prepare_proxied_order = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                eip155.prepare_proxied_order,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -383,9 +293,8 @@ class AsyncEip155ResourceWithStreamingResponse:
     def __init__(self, eip155: AsyncEip155Resource) -> None:
         self._eip155 = eip155
 
-        self.create_proxied_order = async_to_streamed_response_wrapper(
-            eip155.create_proxied_order,
-        )
-        self.prepare_proxied_order = async_to_streamed_response_wrapper(
-            eip155.prepare_proxied_order,
+        self.prepare_proxied_order = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                eip155.prepare_proxied_order,  # pyright: ignore[reportDeprecated],
+            )
         )

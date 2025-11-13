@@ -86,6 +86,9 @@ class TestOrderRequests:
     def test_method_list_with_all_params(self, client: Dinari) -> None:
         order_request = client.v2.accounts.order_requests.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
+            order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page=1,
             page_size=1,
         )
@@ -144,6 +147,7 @@ class TestOrderRequests:
             asset_quantity=0,
             limit_price=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
@@ -210,6 +214,7 @@ class TestOrderRequests:
             asset_quantity=0,
             limit_price=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -275,6 +280,7 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
@@ -336,6 +342,7 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -522,6 +529,9 @@ class TestAsyncOrderRequests:
     async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
         order_request = await async_client.v2.accounts.order_requests.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
+            order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page=1,
             page_size=1,
         )
@@ -580,6 +590,7 @@ class TestAsyncOrderRequests:
             asset_quantity=0,
             limit_price=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
@@ -646,6 +657,7 @@ class TestAsyncOrderRequests:
             asset_quantity=0,
             limit_price=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -711,6 +723,7 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
@@ -772,6 +785,7 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_order_id="client_order_id",
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )

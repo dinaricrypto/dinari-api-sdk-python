@@ -269,7 +269,6 @@ from dinari_api_sdk.types.v2.accounts.order_requests.stocks import (
 
 Methods:
 
-- <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155">client.v2.accounts.order_requests.stocks.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/stocks/eip155.py">create_proxied_order</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_requests/stocks/eip155_create_proxied_order_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_request.py">OrderRequest</a></code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155/prepare">client.v2.accounts.order_requests.stocks.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/stocks/eip155.py">prepare_proxied_order</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_requests/stocks/eip155_prepare_proxied_order_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_requests/stocks/eip155_prepare_proxied_order_response.py">Eip155PrepareProxiedOrderResponse</a></code>
 
 ### WithdrawalRequests

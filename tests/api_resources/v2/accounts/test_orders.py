@@ -87,6 +87,7 @@ class TestOrders:
         order = client.v2.accounts.orders.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             chain_id="eip155:1",
+            client_order_id="client_order_id",
             order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,
@@ -314,6 +315,7 @@ class TestAsyncOrders:
         order = await async_client.v2.accounts.orders.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             chain_id="eip155:1",
+            client_order_id="client_order_id",
             order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,

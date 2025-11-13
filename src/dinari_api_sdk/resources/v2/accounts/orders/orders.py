@@ -100,6 +100,7 @@ class OrdersResource(SyncAPIResource):
         account_id: str,
         *,
         chain_id: Optional[Chain] | Omit = omit,
+        client_order_id: Optional[str] | Omit = omit,
         order_transaction_hash: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
@@ -113,10 +114,12 @@ class OrdersResource(SyncAPIResource):
         """Get a list of all `Orders` under the `Account`.
 
         Optionally `Orders` can be
-        filtered by chain ID or transaction hash.
+        filtered by chain ID, transaction hash, or client order ID.
 
         Args:
           chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
+
+          client_order_id: Customer-supplied identifier to search for `Order`s.
 
           order_transaction_hash: Transaction hash of the `Order`.
 
@@ -140,6 +143,7 @@ class OrdersResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "chain_id": chain_id,
+                        "client_order_id": client_order_id,
                         "order_transaction_hash": order_transaction_hash,
                         "page": page,
                         "page_size": page_size,
@@ -310,6 +314,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         account_id: str,
         *,
         chain_id: Optional[Chain] | Omit = omit,
+        client_order_id: Optional[str] | Omit = omit,
         order_transaction_hash: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
@@ -323,10 +328,12 @@ class AsyncOrdersResource(AsyncAPIResource):
         """Get a list of all `Orders` under the `Account`.
 
         Optionally `Orders` can be
-        filtered by chain ID or transaction hash.
+        filtered by chain ID, transaction hash, or client order ID.
 
         Args:
           chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
+
+          client_order_id: Customer-supplied identifier to search for `Order`s.
 
           order_transaction_hash: Transaction hash of the `Order`.
 
@@ -350,6 +357,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "chain_id": chain_id,
+                        "client_order_id": client_order_id,
                         "order_transaction_hash": order_transaction_hash,
                         "page": page,
                         "page_size": page_size,
