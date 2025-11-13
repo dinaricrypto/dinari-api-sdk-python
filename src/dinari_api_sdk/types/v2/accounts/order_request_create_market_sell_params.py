@@ -18,6 +18,12 @@ class OrderRequestCreateMarketSellParams(TypedDict, total=False):
     stock_id: Required[str]
     """ID of `Stock`."""
 
+    client_order_id: Optional[str]
+    """Customer-supplied ID to map this order to an order in their own systems.
+
+    Must be unique within the entity.
+    """
+
     payment_token_address: Optional[str]
     """Address of the payment token to be used for the sell order.
 
