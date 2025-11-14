@@ -1,5 +1,50 @@
 # Changelog
 
+## 0.6.0 (2025-11-14)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([cd12cc6](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/cd12cc67f393cc8300ba5400292cbc5c04124499))
+* **api:** api update ([49ef663](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/49ef663cfc08e15e467043c1864f2ec75e762466))
+* **api:** api update ([2ef491d](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/2ef491d4bdf9117dc279819dbda3250d87793d75))
+* **api:** api update ([cd5da5d](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/cd5da5d9d63973d082491fcbf0f1a29dae558a4c))
+* **api:** api update ([f007099](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/f00709966ae896337b6aa491063059fa70610271))
+* **api:** api update ([0f61b8b](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0f61b8bfe6f1431971702faeed91ff6388f1ad6e))
+* **api:** api update ([3b5a6e8](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/3b5a6e83207c586666b2b7179898410dbb421ab3))
+* **api:** api update ([54ada6c](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/54ada6c9b361dc00b79da115b69def8b45c284c8))
+* **api:** api update ([3154e5d](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/3154e5d214e59bb52a2f004769f4cc1dac44964e))
+* **api:** permit, permit transaction, batch cancel ([8952097](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/89520977f075fe6367d0a8a1dd1fa509132eb4d6))
+* improve future compat with pydantic v3 ([aa45352](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/aa453526354e23d325a809905500d097322b035e))
+* **types:** replace List[str] with SequenceNotStr in params ([96d6d2d](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/96d6d2d23820df97f5e748611248585cd71a4055))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([32d1938](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/32d1938c4599b53eb3ede0a969a391ea57f22756))
+* **client:** close streams without requiring full consumption ([7f71c41](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/7f71c41aa4d83a2f6ba52a72e694faec8287173a))
+* compat with Python 3.14 ([547fc34](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/547fc34a7c1a5c354000a86445db87cf394e4013))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([afc2dc7](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/afc2dc7237fc8e2d20599a2d4f4e7c900e72d852))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([5552e64](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/5552e6450bda084a1c68afa7666a742da542aea4))
+* do not install brew dependencies in ./scripts/bootstrap by default ([4999e0d](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/4999e0d58e34beaa6e9990bacfb3b30f94425f55))
+* **internal/tests:** avoid race condition with implicit client cleanup ([d1b5bc7](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d1b5bc7a91cdbe78ea47384009f9468f49c49cfe))
+* **internal:** add Sequence related utils ([08441be](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/08441be51a8cba0f9f1be12eafe3153484d6033e))
+* **internal:** change ci workflow machines ([3731c92](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/3731c925dcc021ceee09c85fdbbdb706f352fd8b))
+* **internal:** detect missing future annotations with ruff ([9ad9a78](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/9ad9a78bb1f0c5a8ff8308b91dab89487ca55f2d))
+* **internal:** grammar fix (it's -&gt; its) ([b77224a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/b77224acfa2e88fd120628a299af00cf89dbe4c1))
+* **internal:** move mypy configurations to `pyproject.toml` file ([5da2fd3](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/5da2fd3f672bfd5b073b13e2f3039a66ef1c7df7))
+* **internal:** update pydantic dependency ([514c6f0](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/514c6f078fcfbb836ef98b5c61bbbdc6a64edd76))
+* **internal:** update pyright exclude list ([74eec61](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/74eec6179ca92be23a5d3ba3e127980454b13b39))
+* **package:** drop Python 3.8 support ([af940b7](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/af940b7187fab931b38a1bc87161365cdc2fd56f))
+* **tests:** simplify `get_platform` test ([7f6cb11](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/7f6cb1180c51205f87a9bf3946896ceaf603b903))
+* **types:** change optional parameter type from NotGiven to Omit ([0d50cdb](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0d50cdb06e092961d8fd4a1ae0785fdbe0bd5c89))
+* update github action ([0a1130f](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0a1130f9302e9b4d805360450ac886092a49b46e))
+
 ## 0.5.0 (2025-08-20)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.4.0...v0.5.0)
