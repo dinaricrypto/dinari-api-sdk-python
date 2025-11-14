@@ -6,7 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ....._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from .....types.v2 import Chain
@@ -27,9 +27,10 @@ from .stocks.stocks import (
 )
 from ....._base_client import make_request_options
 from .....types.v2.chain import Chain
-from .....types.v2.accounts import order_list_params, order_get_fulfillments_params
+from .....types.v2.accounts import order_list_params, order_batch_cancel_params, order_get_fulfillments_params
 from .....types.v2.accounts.order import Order
 from .....types.v2.accounts.order_list_response import OrderListResponse
+from .....types.v2.accounts.order_batch_cancel_response import OrderBatchCancelResponse
 from .....types.v2.accounts.order_get_fulfillments_response import OrderGetFulfillmentsResponse
 
 __all__ = ["OrdersResource", "AsyncOrdersResource"]
@@ -152,6 +153,55 @@ class OrdersResource(SyncAPIResource):
                 ),
             ),
             cast_to=OrderListResponse,
+        )
+
+    def batch_cancel(
+        self,
+        account_id: str,
+        *,
+        order_ids: SequenceNotStr[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderBatchCancelResponse:
+        """Cancel multiple `Orders` by their IDs in a single request.
+
+        Note that this
+        requires the `Order` IDs, not the `OrderRequest` IDs. Once you submit a
+        cancellation request, it cannot be undone. Be advised that orders with a status
+        of PENDING_FILL, PENDING_ESCROW, FILLED, REJECTED, or CANCELLED cannot be
+        cancelled.
+
+        `Order` cancellation is not guaranteed nor is it immediate. The `Orders` may
+        still be executed if the cancellation request is not received in time.
+
+        The response will indicate which orders were successfully queued to cancel and
+        which failed to queue. Check the status using the "Get Order by ID" endpoint to
+        confirm whether individual `Orders` have been cancelled.
+
+        Args:
+          order_ids: List of `Order` IDs to cancel
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._post(
+            f"/api/v2/accounts/{account_id}/orders/cancel",
+            body=maybe_transform({"order_ids": order_ids}, order_batch_cancel_params.OrderBatchCancelParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderBatchCancelResponse,
         )
 
     def cancel(
@@ -368,6 +418,57 @@ class AsyncOrdersResource(AsyncAPIResource):
             cast_to=OrderListResponse,
         )
 
+    async def batch_cancel(
+        self,
+        account_id: str,
+        *,
+        order_ids: SequenceNotStr[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderBatchCancelResponse:
+        """Cancel multiple `Orders` by their IDs in a single request.
+
+        Note that this
+        requires the `Order` IDs, not the `OrderRequest` IDs. Once you submit a
+        cancellation request, it cannot be undone. Be advised that orders with a status
+        of PENDING_FILL, PENDING_ESCROW, FILLED, REJECTED, or CANCELLED cannot be
+        cancelled.
+
+        `Order` cancellation is not guaranteed nor is it immediate. The `Orders` may
+        still be executed if the cancellation request is not received in time.
+
+        The response will indicate which orders were successfully queued to cancel and
+        which failed to queue. Check the status using the "Get Order by ID" endpoint to
+        confirm whether individual `Orders` have been cancelled.
+
+        Args:
+          order_ids: List of `Order` IDs to cancel
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return await self._post(
+            f"/api/v2/accounts/{account_id}/orders/cancel",
+            body=await async_maybe_transform(
+                {"order_ids": order_ids}, order_batch_cancel_params.OrderBatchCancelParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderBatchCancelResponse,
+        )
+
     async def cancel(
         self,
         order_id: str,
@@ -473,6 +574,9 @@ class OrdersResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             orders.list,
         )
+        self.batch_cancel = to_raw_response_wrapper(
+            orders.batch_cancel,
+        )
         self.cancel = to_raw_response_wrapper(
             orders.cancel,
         )
@@ -494,6 +598,9 @@ class AsyncOrdersResourceWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             orders.list,
+        )
+        self.batch_cancel = async_to_raw_response_wrapper(
+            orders.batch_cancel,
         )
         self.cancel = async_to_raw_response_wrapper(
             orders.cancel,
@@ -517,6 +624,9 @@ class OrdersResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             orders.list,
         )
+        self.batch_cancel = to_streamed_response_wrapper(
+            orders.batch_cancel,
+        )
         self.cancel = to_streamed_response_wrapper(
             orders.cancel,
         )
@@ -538,6 +648,9 @@ class AsyncOrdersResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             orders.list,
+        )
+        self.batch_cancel = async_to_streamed_response_wrapper(
+            orders.batch_cancel,
         )
         self.cancel = async_to_streamed_response_wrapper(
             orders.cancel,

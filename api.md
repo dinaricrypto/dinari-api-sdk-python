@@ -185,6 +185,7 @@ from dinari_api_sdk.types.v2.accounts import (
     OrderTif,
     OrderType,
     OrderListResponse,
+    OrderBatchCancelResponse,
     OrderGetFulfillmentsResponse,
 )
 ```
@@ -193,6 +194,7 @@ Methods:
 
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/orders.py">retrieve</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order.py">Order</a></code>
 - <code title="get /api/v2/accounts/{account_id}/orders">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/orders.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_list_response.py">OrderListResponse</a></code>
+- <code title="post /api/v2/accounts/{account_id}/orders/cancel">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/orders.py">batch_cancel</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_batch_cancel_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_batch_cancel_response.py">OrderBatchCancelResponse</a></code>
 - <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/orders.py">cancel</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order.py">Order</a></code>
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders/orders.py">get_fulfillments</a>(order_id, \*, account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_response.py">OrderGetFulfillmentsResponse</a></code>
 
@@ -270,6 +272,24 @@ from dinari_api_sdk.types.v2.accounts.order_requests.stocks import (
 Methods:
 
 - <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155/prepare">client.v2.accounts.order_requests.stocks.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/stocks/eip155.py">prepare_proxied_order</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_requests/stocks/eip155_prepare_proxied_order_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_requests/stocks/eip155_prepare_proxied_order_response.py">Eip155PrepareProxiedOrderResponse</a></code>
+
+#### Eip155
+
+Types:
+
+```python
+from dinari_api_sdk.types.v2.accounts.order_requests import (
+    Eip155CreatePermitResponse,
+    Eip155CreatePermitTransactionResponse,
+    Eip155SubmitResponse,
+)
+```
+
+Methods:
+
+- <code title="post /api/v2/accounts/{account_id}/order_requests/eip155/permit">client.v2.accounts.order_requests.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/eip155.py">create_permit</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_requests/eip155_create_permit_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_requests/eip155_create_permit_response.py">Eip155CreatePermitResponse</a></code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/eip155/permit_transaction">client.v2.accounts.order_requests.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/eip155.py">create_permit_transaction</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_requests/eip155_create_permit_transaction_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_requests/eip155_create_permit_transaction_response.py">Eip155CreatePermitTransactionResponse</a></code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/eip155">client.v2.accounts.order_requests.eip155.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_requests/eip155.py">submit</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_requests/eip155_submit_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_requests/eip155_submit_response.py">Eip155SubmitResponse</a></code>
 
 ### WithdrawalRequests
 
