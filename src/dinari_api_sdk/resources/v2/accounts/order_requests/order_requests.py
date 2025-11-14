@@ -6,6 +6,14 @@ from typing import Optional
 
 import httpx
 
+from .eip155 import (
+    Eip155Resource,
+    AsyncEip155Resource,
+    Eip155ResourceWithRawResponse,
+    AsyncEip155ResourceWithRawResponse,
+    Eip155ResourceWithStreamingResponse,
+    AsyncEip155ResourceWithStreamingResponse,
+)
 from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
@@ -50,6 +58,10 @@ class OrderRequestsResource(SyncAPIResource):
     @cached_property
     def stocks(self) -> StocksResource:
         return StocksResource(self._client)
+
+    @cached_property
+    def eip155(self) -> Eip155Resource:
+        return Eip155Resource(self._client)
 
     @cached_property
     def with_raw_response(self) -> OrderRequestsResourceWithRawResponse:
@@ -529,6 +541,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
     @cached_property
     def stocks(self) -> AsyncStocksResource:
         return AsyncStocksResource(self._client)
+
+    @cached_property
+    def eip155(self) -> AsyncEip155Resource:
+        return AsyncEip155Resource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncOrderRequestsResourceWithRawResponse:
@@ -1034,6 +1050,10 @@ class OrderRequestsResourceWithRawResponse:
     def stocks(self) -> StocksResourceWithRawResponse:
         return StocksResourceWithRawResponse(self._order_requests.stocks)
 
+    @cached_property
+    def eip155(self) -> Eip155ResourceWithRawResponse:
+        return Eip155ResourceWithRawResponse(self._order_requests.eip155)
+
 
 class AsyncOrderRequestsResourceWithRawResponse:
     def __init__(self, order_requests: AsyncOrderRequestsResource) -> None:
@@ -1064,6 +1084,10 @@ class AsyncOrderRequestsResourceWithRawResponse:
     @cached_property
     def stocks(self) -> AsyncStocksResourceWithRawResponse:
         return AsyncStocksResourceWithRawResponse(self._order_requests.stocks)
+
+    @cached_property
+    def eip155(self) -> AsyncEip155ResourceWithRawResponse:
+        return AsyncEip155ResourceWithRawResponse(self._order_requests.eip155)
 
 
 class OrderRequestsResourceWithStreamingResponse:
@@ -1096,6 +1120,10 @@ class OrderRequestsResourceWithStreamingResponse:
     def stocks(self) -> StocksResourceWithStreamingResponse:
         return StocksResourceWithStreamingResponse(self._order_requests.stocks)
 
+    @cached_property
+    def eip155(self) -> Eip155ResourceWithStreamingResponse:
+        return Eip155ResourceWithStreamingResponse(self._order_requests.eip155)
+
 
 class AsyncOrderRequestsResourceWithStreamingResponse:
     def __init__(self, order_requests: AsyncOrderRequestsResource) -> None:
@@ -1126,3 +1154,7 @@ class AsyncOrderRequestsResourceWithStreamingResponse:
     @cached_property
     def stocks(self) -> AsyncStocksResourceWithStreamingResponse:
         return AsyncStocksResourceWithStreamingResponse(self._order_requests.stocks)
+
+    @cached_property
+    def eip155(self) -> AsyncEip155ResourceWithStreamingResponse:
+        return AsyncEip155ResourceWithStreamingResponse(self._order_requests.eip155)
