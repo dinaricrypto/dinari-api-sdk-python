@@ -10,6 +10,14 @@ import httpx
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
+from .activities import (
+    ActivitiesResource,
+    AsyncActivitiesResource,
+    ActivitiesResourceWithRawResponse,
+    AsyncActivitiesResourceWithRawResponse,
+    ActivitiesResourceWithStreamingResponse,
+    AsyncActivitiesResourceWithStreamingResponse,
+)
 from ....types.v2 import (
     Chain,
     account_get_portfolio_params,
@@ -119,6 +127,10 @@ class AccountsResource(SyncAPIResource):
     @cached_property
     def token_transfers(self) -> TokenTransfersResource:
         return TokenTransfersResource(self._client)
+
+    @cached_property
+    def activities(self) -> ActivitiesResource:
+        return ActivitiesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AccountsResourceWithRawResponse:
@@ -478,6 +490,10 @@ class AsyncAccountsResource(AsyncAPIResource):
     @cached_property
     def token_transfers(self) -> AsyncTokenTransfersResource:
         return AsyncTokenTransfersResource(self._client)
+
+    @cached_property
+    def activities(self) -> AsyncActivitiesResource:
+        return AsyncActivitiesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncAccountsResourceWithRawResponse:
@@ -863,6 +879,10 @@ class AccountsResourceWithRawResponse:
     def token_transfers(self) -> TokenTransfersResourceWithRawResponse:
         return TokenTransfersResourceWithRawResponse(self._accounts.token_transfers)
 
+    @cached_property
+    def activities(self) -> ActivitiesResourceWithRawResponse:
+        return ActivitiesResourceWithRawResponse(self._accounts.activities)
+
 
 class AsyncAccountsResourceWithRawResponse:
     def __init__(self, accounts: AsyncAccountsResource) -> None:
@@ -917,6 +937,10 @@ class AsyncAccountsResourceWithRawResponse:
     @cached_property
     def token_transfers(self) -> AsyncTokenTransfersResourceWithRawResponse:
         return AsyncTokenTransfersResourceWithRawResponse(self._accounts.token_transfers)
+
+    @cached_property
+    def activities(self) -> AsyncActivitiesResourceWithRawResponse:
+        return AsyncActivitiesResourceWithRawResponse(self._accounts.activities)
 
 
 class AccountsResourceWithStreamingResponse:
@@ -973,6 +997,10 @@ class AccountsResourceWithStreamingResponse:
     def token_transfers(self) -> TokenTransfersResourceWithStreamingResponse:
         return TokenTransfersResourceWithStreamingResponse(self._accounts.token_transfers)
 
+    @cached_property
+    def activities(self) -> ActivitiesResourceWithStreamingResponse:
+        return ActivitiesResourceWithStreamingResponse(self._accounts.activities)
+
 
 class AsyncAccountsResourceWithStreamingResponse:
     def __init__(self, accounts: AsyncAccountsResource) -> None:
@@ -1027,3 +1055,7 @@ class AsyncAccountsResourceWithStreamingResponse:
     @cached_property
     def token_transfers(self) -> AsyncTokenTransfersResourceWithStreamingResponse:
         return AsyncTokenTransfersResourceWithStreamingResponse(self._accounts.token_transfers)
+
+    @cached_property
+    def activities(self) -> AsyncActivitiesResourceWithStreamingResponse:
+        return AsyncActivitiesResourceWithStreamingResponse(self._accounts.activities)

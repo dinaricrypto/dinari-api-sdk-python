@@ -5,10 +5,10 @@ from datetime import date
 
 from ...._models import BaseModel
 
-__all__ = ["KYCData"]
+__all__ = ["BaselineKYCCheckData"]
 
 
-class KYCData(BaseModel):
+class BaselineKYCCheckData(BaseModel):
     address_country_code: str
     """Country of residence. ISO 3166-1 alpha 2 country code."""
 
