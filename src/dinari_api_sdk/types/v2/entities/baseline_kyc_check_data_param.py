@@ -8,10 +8,10 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["KYCDataParam"]
+__all__ = ["BaselineKYCCheckDataParam"]
 
 
-class KYCDataParam(TypedDict, total=False):
+class BaselineKYCCheckDataParam(TypedDict, total=False):
     address_country_code: Required[str]
     """Country of residence. ISO 3166-1 alpha 2 country code."""
 

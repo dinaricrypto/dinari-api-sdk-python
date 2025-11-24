@@ -24,6 +24,14 @@ from .accounts import (
     AccountsResourceWithStreamingResponse,
     AsyncAccountsResourceWithStreamingResponse,
 )
+from .activities import (
+    ActivitiesResource,
+    AsyncActivitiesResource,
+    ActivitiesResourceWithRawResponse,
+    AsyncActivitiesResourceWithRawResponse,
+    ActivitiesResourceWithStreamingResponse,
+    AsyncActivitiesResourceWithStreamingResponse,
+)
 from .withdrawals import (
     WithdrawalsResource,
     AsyncWithdrawalsResource,
@@ -108,6 +116,12 @@ __all__ = [
     "AsyncTokenTransfersResourceWithRawResponse",
     "TokenTransfersResourceWithStreamingResponse",
     "AsyncTokenTransfersResourceWithStreamingResponse",
+    "ActivitiesResource",
+    "AsyncActivitiesResource",
+    "ActivitiesResourceWithRawResponse",
+    "AsyncActivitiesResourceWithRawResponse",
+    "ActivitiesResourceWithStreamingResponse",
+    "AsyncActivitiesResourceWithStreamingResponse",
     "AccountsResource",
     "AsyncAccountsResource",
     "AccountsResourceWithRawResponse",

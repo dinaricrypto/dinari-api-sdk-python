@@ -1,24 +1,50 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, Annotated, TypeAlias
 
-from .kyc_data import KYCData
+from ...._utils import PropertyInfo
 from ...._models import BaseModel
+from .kyc_status import KYCStatus
+from .us_kyc_check_data import UsKYCCheckData
+from .baseline_kyc_check_data import BaselineKYCCheckData
 
-__all__ = ["KYCInfo"]
+__all__ = ["KYCInfo", "BaselineKYC", "UsKYC"]
 
 
-class KYCInfo(BaseModel):
+class BaselineKYC(BaseModel):
     id: str
     """ID of the KYC check."""
 
-    status: Literal["PASS", "FAIL", "PENDING", "INCOMPLETE"]
+    status: KYCStatus
     """KYC check status."""
 
     checked_dt: Optional[datetime] = None
     """Datetime when the KYC was last checked. ISO 8601 timestamp."""
 
-    data: Optional[KYCData] = None
-    """KYC data for an `Entity`."""
+    data: Optional[BaselineKYCCheckData] = None
+    """KYC data for an `Entity` in the BASELINE jurisdiction."""
+
+    jurisdiction: Optional[Literal["BASELINE"]] = None
+    """Jurisdiction of the KYC check."""
+
+
+class UsKYC(BaseModel):
+    id: str
+    """ID of the KYC check."""
+
+    status: KYCStatus
+    """KYC check status."""
+
+    checked_dt: Optional[datetime] = None
+    """Datetime when the KYC was last checked. ISO 8601 timestamp."""
+
+    data: Optional[UsKYCCheckData] = None
+    """KYC data for an `Entity` in the US jurisdiction."""
+
+    jurisdiction: Optional[Literal["US"]] = None
+    """Jurisdiction of the KYC check."""
+
+
+KYCInfo: TypeAlias = Annotated[Union[BaselineKYC, UsKYC], PropertyInfo(discriminator="jurisdiction")]

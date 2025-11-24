@@ -4,6 +4,7 @@ from typing import Optional
 from datetime import datetime
 
 from ...._models import BaseModel
+from .jurisdiction import Jurisdiction
 
 __all__ = ["Account"]
 
@@ -20,6 +21,9 @@ class Account(BaseModel):
 
     is_active: bool
     """Indicates whether the `Account` is active."""
+
+    jurisdiction: Jurisdiction
+    """Jurisdiction of the `Account`."""
 
     brokerage_account_id: Optional[str] = None
     """ID of the brokerage account associated with the `Account`."""
