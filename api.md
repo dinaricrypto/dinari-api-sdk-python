@@ -84,12 +84,12 @@ Methods:
 Types:
 
 ```python
-from dinari_api_sdk.types.v2.entities import Account, AccountListResponse
+from dinari_api_sdk.types.v2.entities import Account, Jurisdiction, AccountListResponse
 ```
 
 Methods:
 
-- <code title="post /api/v2/entities/{entity_id}/accounts">client.v2.entities.accounts.<a href="./src/dinari_api_sdk/resources/v2/entities/accounts.py">create</a>(entity_id) -> <a href="./src/dinari_api_sdk/types/v2/entities/account.py">Account</a></code>
+- <code title="post /api/v2/entities/{entity_id}/accounts">client.v2.entities.accounts.<a href="./src/dinari_api_sdk/resources/v2/entities/accounts.py">create</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/v2/entities/account_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entities/account.py">Account</a></code>
 - <code title="get /api/v2/entities/{entity_id}/accounts">client.v2.entities.accounts.<a href="./src/dinari_api_sdk/resources/v2/entities/accounts.py">list</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/v2/entities/account_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entities/account_list_response.py">AccountListResponse</a></code>
 
 ### KYC
@@ -97,7 +97,13 @@ Methods:
 Types:
 
 ```python
-from dinari_api_sdk.types.v2.entities import KYCData, KYCInfo, KYCCreateManagedCheckResponse
+from dinari_api_sdk.types.v2.entities import (
+    BaselineKYCCheckData,
+    KYCInfo,
+    KYCStatus,
+    UsKYCCheckData,
+    KYCCreateManagedCheckResponse,
+)
 ```
 
 Methods:
@@ -241,6 +247,7 @@ from dinari_api_sdk.types.v2.accounts import (
     CreateMarketBuyOrderInput,
     CreateMarketSellOrderInput,
     OrderRequest,
+    OrderRequestStatus,
     OrderRequestListResponse,
     OrderRequestGetFeeQuoteResponse,
 )
@@ -279,6 +286,7 @@ Types:
 
 ```python
 from dinari_api_sdk.types.v2.accounts.order_requests import (
+    Eip155OrderRequestPermitTransaction,
     Eip155CreatePermitResponse,
     Eip155CreatePermitTransactionResponse,
     Eip155SubmitResponse,
@@ -331,3 +339,9 @@ Methods:
 - <code title="post /api/v2/accounts/{account_id}/token_transfers">client.v2.accounts.token_transfers.<a href="./src/dinari_api_sdk/resources/v2/accounts/token_transfers.py">create</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/token_transfer_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/token_transfer.py">TokenTransfer</a></code>
 - <code title="get /api/v2/accounts/{account_id}/token_transfers/{transfer_id}">client.v2.accounts.token_transfers.<a href="./src/dinari_api_sdk/resources/v2/accounts/token_transfers.py">retrieve</a>(transfer_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/token_transfer.py">TokenTransfer</a></code>
 - <code title="get /api/v2/accounts/{account_id}/token_transfers">client.v2.accounts.token_transfers.<a href="./src/dinari_api_sdk/resources/v2/accounts/token_transfers.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/token_transfer_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/token_transfer_list_response.py">TokenTransferListResponse</a></code>
+
+### Activities
+
+Methods:
+
+- <code title="get /api/v2/accounts/{account_id}/activities/brokerage">client.v2.accounts.activities.<a href="./src/dinari_api_sdk/resources/v2/accounts/activities.py">retrieve_brokerage</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/activity_retrieve_brokerage_params.py">params</a>) -> None</code>

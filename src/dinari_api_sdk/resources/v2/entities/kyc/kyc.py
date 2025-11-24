@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+from typing_extensions import Literal, overload
+
 import httpx
 
 from .document import (
@@ -12,8 +15,8 @@ from .document import (
     DocumentResourceWithStreamingResponse,
     AsyncDocumentResourceWithStreamingResponse,
 )
-from ....._types import Body, Query, Headers, NotGiven, not_given
-from ....._utils import maybe_transform, async_maybe_transform
+from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ....._utils import required_args, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -25,7 +28,8 @@ from ....._response import (
 from ....._base_client import make_request_options
 from .....types.v2.entities import kyc_submit_params
 from .....types.v2.entities.kyc_info import KYCInfo
-from .....types.v2.entities.kyc_data_param import KYCDataParam
+from .....types.v2.entities.us_kyc_check_data_param import UsKYCCheckDataParam
+from .....types.v2.entities.baseline_kyc_check_data_param import BaselineKYCCheckDataParam
 from .....types.v2.entities.kyc_create_managed_check_response import KYCCreateManagedCheckResponse
 
 __all__ = ["KYCResource", "AsyncKYCResource"]
@@ -84,12 +88,15 @@ class KYCResource(SyncAPIResource):
         """
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
-        return self._get(
-            f"/api/v2/entities/{entity_id}/kyc",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+        return cast(
+            KYCInfo,
+            self._get(
+                f"/api/v2/entities/{entity_id}/kyc",
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, KYCInfo),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=KYCInfo,
         )
 
     def create_managed_check(
@@ -130,12 +137,14 @@ class KYCResource(SyncAPIResource):
             cast_to=KYCCreateManagedCheckResponse,
         )
 
+    @overload
     def submit(
         self,
         entity_id: str,
         *,
-        data: KYCDataParam,
+        data: BaselineKYCCheckDataParam,
         provider_name: str,
+        jurisdiction: Literal["BASELINE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -151,9 +160,11 @@ class KYCResource(SyncAPIResource):
         provisioned partners in production.
 
         Args:
-          data: KYC data for an `Entity`.
+          data: KYC data for an `Entity` in the BASELINE jurisdiction.
 
           provider_name: Name of the KYC provider that provided the KYC information.
+
+          jurisdiction: Jurisdiction of the KYC check.
 
           extra_headers: Send extra headers
 
@@ -163,21 +174,81 @@ class KYCResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def submit(
+        self,
+        entity_id: str,
+        *,
+        data: UsKYCCheckDataParam,
+        provider_name: str,
+        jurisdiction: Literal["US"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> KYCInfo:
+        """
+        Submit KYC data directly, for partners that are provisioned to provide their own
+        KYC data.
+
+        This feature is available for everyone in sandbox mode, and for specifically
+        provisioned partners in production.
+
+        Args:
+          data: KYC data for an `Entity` in the US jurisdiction.
+
+          provider_name: Name of the KYC provider that provided the KYC information.
+
+          jurisdiction: Jurisdiction of the KYC check.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["data", "provider_name"])
+    def submit(
+        self,
+        entity_id: str,
+        *,
+        data: BaselineKYCCheckDataParam | UsKYCCheckDataParam,
+        provider_name: str,
+        jurisdiction: Literal["BASELINE"] | Literal["US"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> KYCInfo:
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
-        return self._post(
-            f"/api/v2/entities/{entity_id}/kyc",
-            body=maybe_transform(
-                {
-                    "data": data,
-                    "provider_name": provider_name,
-                },
-                kyc_submit_params.KYCSubmitParams,
+        return cast(
+            KYCInfo,
+            self._post(
+                f"/api/v2/entities/{entity_id}/kyc",
+                body=maybe_transform(
+                    {
+                        "data": data,
+                        "provider_name": provider_name,
+                        "jurisdiction": jurisdiction,
+                    },
+                    kyc_submit_params.KYCSubmitParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, KYCInfo),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=KYCInfo,
         )
 
 
@@ -234,12 +305,15 @@ class AsyncKYCResource(AsyncAPIResource):
         """
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
-        return await self._get(
-            f"/api/v2/entities/{entity_id}/kyc",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+        return cast(
+            KYCInfo,
+            await self._get(
+                f"/api/v2/entities/{entity_id}/kyc",
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, KYCInfo),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=KYCInfo,
         )
 
     async def create_managed_check(
@@ -280,12 +354,14 @@ class AsyncKYCResource(AsyncAPIResource):
             cast_to=KYCCreateManagedCheckResponse,
         )
 
+    @overload
     async def submit(
         self,
         entity_id: str,
         *,
-        data: KYCDataParam,
+        data: BaselineKYCCheckDataParam,
         provider_name: str,
+        jurisdiction: Literal["BASELINE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -301,9 +377,11 @@ class AsyncKYCResource(AsyncAPIResource):
         provisioned partners in production.
 
         Args:
-          data: KYC data for an `Entity`.
+          data: KYC data for an `Entity` in the BASELINE jurisdiction.
 
           provider_name: Name of the KYC provider that provided the KYC information.
+
+          jurisdiction: Jurisdiction of the KYC check.
 
           extra_headers: Send extra headers
 
@@ -313,21 +391,81 @@ class AsyncKYCResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def submit(
+        self,
+        entity_id: str,
+        *,
+        data: UsKYCCheckDataParam,
+        provider_name: str,
+        jurisdiction: Literal["US"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> KYCInfo:
+        """
+        Submit KYC data directly, for partners that are provisioned to provide their own
+        KYC data.
+
+        This feature is available for everyone in sandbox mode, and for specifically
+        provisioned partners in production.
+
+        Args:
+          data: KYC data for an `Entity` in the US jurisdiction.
+
+          provider_name: Name of the KYC provider that provided the KYC information.
+
+          jurisdiction: Jurisdiction of the KYC check.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["data", "provider_name"])
+    async def submit(
+        self,
+        entity_id: str,
+        *,
+        data: BaselineKYCCheckDataParam | UsKYCCheckDataParam,
+        provider_name: str,
+        jurisdiction: Literal["BASELINE"] | Literal["US"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> KYCInfo:
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
-        return await self._post(
-            f"/api/v2/entities/{entity_id}/kyc",
-            body=await async_maybe_transform(
-                {
-                    "data": data,
-                    "provider_name": provider_name,
-                },
-                kyc_submit_params.KYCSubmitParams,
+        return cast(
+            KYCInfo,
+            await self._post(
+                f"/api/v2/entities/{entity_id}/kyc",
+                body=await async_maybe_transform(
+                    {
+                        "data": data,
+                        "provider_name": provider_name,
+                        "jurisdiction": jurisdiction,
+                    },
+                    kyc_submit_params.KYCSubmitParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, KYCInfo),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=KYCInfo,
         )
 
 

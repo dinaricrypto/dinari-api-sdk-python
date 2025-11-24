@@ -15,8 +15,9 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v2.entities import account_list_params
+from ....types.v2.entities import Jurisdiction, account_list_params, account_create_params
 from ....types.v2.entities.account import Account
+from ....types.v2.entities.jurisdiction import Jurisdiction
 from ....types.v2.entities.account_list_response import AccountListResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
@@ -46,6 +47,7 @@ class AccountsResource(SyncAPIResource):
         self,
         entity_id: str,
         *,
+        jurisdiction: Jurisdiction | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,6 +61,8 @@ class AccountsResource(SyncAPIResource):
         organization itself, or an individual customer of your organization.
 
         Args:
+          jurisdiction: Jurisdiction of the `Account`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -71,6 +75,7 @@ class AccountsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         return self._post(
             f"/api/v2/entities/{entity_id}/accounts",
+            body=maybe_transform({"jurisdiction": jurisdiction}, account_create_params.AccountCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -150,6 +155,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         entity_id: str,
         *,
+        jurisdiction: Jurisdiction | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -163,6 +169,8 @@ class AsyncAccountsResource(AsyncAPIResource):
         organization itself, or an individual customer of your organization.
 
         Args:
+          jurisdiction: Jurisdiction of the `Account`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -175,6 +183,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         return await self._post(
             f"/api/v2/entities/{entity_id}/accounts",
+            body=await async_maybe_transform({"jurisdiction": jurisdiction}, account_create_params.AccountCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

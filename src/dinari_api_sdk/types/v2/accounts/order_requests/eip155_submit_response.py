@@ -2,12 +2,12 @@
 
 from typing import Optional
 from datetime import datetime
-from typing_extensions import Literal
 
 from ..order_tif import OrderTif
 from ....._models import BaseModel
 from ..order_side import OrderSide
 from ..order_type import OrderType
+from ..order_request_status import OrderRequestStatus
 
 __all__ = ["Eip155SubmitResponse"]
 
@@ -34,7 +34,7 @@ class Eip155SubmitResponse(BaseModel):
     order_type: OrderType
     """Type of `Order`."""
 
-    status: Literal["QUOTED", "PENDING", "PENDING_BRIDGE", "SUBMITTED", "ERROR", "CANCELLED", "EXPIRED"]
+    status: OrderRequestStatus
     """Status of `EIP155OrderRequest`."""
 
     order_id: Optional[str] = None
