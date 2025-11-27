@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7.1 (2025-11-27)
+
+Full Changelog: [v0.7.0...v0.7.1](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.7.0...v0.7.1)
+
+### Bug Fixes
+
+* ensure streams are always closed ([d3f2cd2](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d3f2cd2d1447897649bbdaecf2331d92cdb562d5))
+
+
+### Chores
+
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([9827ee0](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/9827ee0387655ecd554c66e6c824fc5394fa9508))
+
 ## 0.7.0 (2025-11-25)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.6.0...v0.7.0)
