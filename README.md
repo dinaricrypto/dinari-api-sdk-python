@@ -87,6 +87,7 @@ pip install dinari-api-sdk[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from dinari_api_sdk import DefaultAioHttpClient
 from dinari_api_sdk import AsyncDinari
@@ -94,8 +95,10 @@ from dinari_api_sdk import AsyncDinari
 
 async def main() -> None:
     async with AsyncDinari(
-        api_key_id="My API Key ID",
-        api_secret_key="My API Secret Key",
+        api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted
+        api_secret_key=os.environ.get(
+            "DINARI_API_SECRET_KEY"
+        ),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         stocks = await client.v2.market_data.stocks.list()

@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.7.1 (2025-12-02)
+
+Full Changelog: [v0.7.0...v0.7.1](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.7.0...v0.7.1)
+
+### Bug Fixes
+
+* **client:** use repeat for array parameters ([447149c](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/447149c250df4e1419aab5343d3322e98b3068f8))
+* ensure streams are always closed ([d3f2cd2](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d3f2cd2d1447897649bbdaecf2331d92cdb562d5))
+
+
+### Chores
+
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([9827ee0](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/9827ee0387655ecd554c66e6c824fc5394fa9508))
+* **docs:** use environment variables for authentication in code snippets ([ca5bfed](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/ca5bfed328e95cfecb06f1d39610f71d0091dd12))
+* update lockfile ([0beb923](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0beb9230d1da4f6e9fb3423a7735417529a7c177))
+
 ## 0.7.0 (2025-11-25)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.6.0...v0.7.0)
