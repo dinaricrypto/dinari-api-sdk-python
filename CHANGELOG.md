@@ -4,13 +4,9 @@
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.7.0...v0.7.1)
 
-### Features
-
-* **api:** use repeat for array parameters ([447149c](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/447149c250df4e1419aab5343d3322e98b3068f8))
-
-
 ### Bug Fixes
 
+* **client:** use repeat for array parameters ([447149c](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/447149c250df4e1419aab5343d3322e98b3068f8))
 * ensure streams are always closed ([d3f2cd2](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d3f2cd2d1447897649bbdaecf2331d92cdb562d5))
 
 
