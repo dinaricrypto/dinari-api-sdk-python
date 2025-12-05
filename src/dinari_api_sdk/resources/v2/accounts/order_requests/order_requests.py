@@ -202,8 +202,7 @@ class OrderRequestsResource(SyncAPIResource):
         for fee estimation.
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
-        given account, the existing `OrderRequest` will be returned instead of creating
-        a new one.
+        given account, the creation call will fail.
 
         Args:
           asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
@@ -272,8 +271,7 @@ class OrderRequestsResource(SyncAPIResource):
         for fee estimation.
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
-        given account, the existing `OrderRequest` will be returned instead of creating
-        a new one.
+        given account, the creation call will fail.
 
         Args:
           asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
@@ -345,8 +343,7 @@ class OrderRequestsResource(SyncAPIResource):
         for fee estimation.
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
-        given account, the existing `OrderRequest` will be returned instead of creating
-        a new one.
+        given account, the creation call will fail.
 
         Args:
           payment_amount: Amount of currency (USD for US equities and ETFs) to pay for the order. Must be
@@ -410,8 +407,7 @@ class OrderRequestsResource(SyncAPIResource):
         for fee estimation.
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
-        given account, the existing `OrderRequest` will be returned instead of creating
-        a new one.
+        given account, the creation call will fail.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
@@ -685,8 +681,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         for fee estimation.
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
-        given account, the existing `OrderRequest` will be returned instead of creating
-        a new one.
+        given account, the creation call will fail.
 
         Args:
           asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
@@ -755,8 +750,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         for fee estimation.
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
-        given account, the existing `OrderRequest` will be returned instead of creating
-        a new one.
+        given account, the creation call will fail.
 
         Args:
           asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
@@ -828,8 +822,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         for fee estimation.
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
-        given account, the existing `OrderRequest` will be returned instead of creating
-        a new one.
+        given account, the creation call will fail.
 
         Args:
           payment_amount: Amount of currency (USD for US equities and ETFs) to pay for the order. Must be
@@ -893,8 +886,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         for fee estimation.
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
-        given account, the existing `OrderRequest` will be returned instead of creating
-        a new one.
+        given account, the creation call will fail.
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
