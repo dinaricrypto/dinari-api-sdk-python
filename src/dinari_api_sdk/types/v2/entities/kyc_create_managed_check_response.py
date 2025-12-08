@@ -8,6 +8,8 @@ __all__ = ["KYCCreateManagedCheckResponse"]
 
 
 class KYCCreateManagedCheckResponse(BaseModel):
+    """URL for a managed KYC flow for an `Entity`."""
+
     embed_url: str
     """URL of a managed KYC flow interface for the `Entity`."""
 

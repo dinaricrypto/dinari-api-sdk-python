@@ -10,6 +10,8 @@ __all__ = ["StockRetrieveDividendsResponse", "StockRetrieveDividendsResponseItem
 
 
 class StockRetrieveDividendsResponseItem(BaseModel):
+    """Information about a dividend announcement for a `Stock`."""
+
     cash_amount: Optional[float] = None
     """Cash amount of the dividend per share owned."""
 

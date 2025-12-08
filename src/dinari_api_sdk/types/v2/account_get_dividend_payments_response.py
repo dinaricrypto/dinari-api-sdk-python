@@ -10,6 +10,8 @@ __all__ = ["AccountGetDividendPaymentsResponse", "AccountGetDividendPaymentsResp
 
 
 class AccountGetDividendPaymentsResponseItem(BaseModel):
+    """Represents a dividend payment event for an `Account`."""
+
     amount: float
     """Amount of the dividend paid."""
 

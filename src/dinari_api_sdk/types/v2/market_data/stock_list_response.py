@@ -9,6 +9,8 @@ __all__ = ["StockListResponse", "StockListResponseItem"]
 
 
 class StockListResponseItem(BaseModel):
+    """Information about stock available for trading."""
+
     id: str
     """ID of the `Stock`"""
 
