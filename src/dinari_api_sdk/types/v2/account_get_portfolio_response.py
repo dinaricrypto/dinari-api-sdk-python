@@ -9,6 +9,8 @@ __all__ = ["AccountGetPortfolioResponse", "Asset"]
 
 
 class Asset(BaseModel):
+    """Balance of a dShare in an `Account`."""
+
     amount: float
     """Total amount of the dShare asset token in the `Account`."""
 
@@ -26,5 +28,7 @@ class Asset(BaseModel):
 
 
 class AccountGetPortfolioResponse(BaseModel):
+    """Balance information of `Stock` assets in your `Account`."""
+
     assets: List[Asset]
     """Balance details for all owned `Stocks`."""

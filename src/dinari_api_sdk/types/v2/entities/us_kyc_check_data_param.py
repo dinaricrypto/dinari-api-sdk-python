@@ -25,6 +25,11 @@ __all__ = [
 
 
 class AlpacaCustomerAgreement(TypedDict, total=False):
+    """
+    Information to affirm that the individual has read, agreed to, and signed Alpaca's customer
+                agreement, found here: https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf
+    """
+
     ip_address: Required[str]
     """The IP address from where the individual signed the agreement."""
 
@@ -33,6 +38,11 @@ class AlpacaCustomerAgreement(TypedDict, total=False):
 
 
 class AmlCheck(TypedDict, total=False):
+    """AML check information for this individual.
+
+    If any of the checks have a match, provide details about the matches or hits found. The individual will be marked as high risk and be subject to manual review.
+    """
+
     check_created_at: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Datetime that this AML check was created."""
 
@@ -59,6 +69,8 @@ class AmlCheck(TypedDict, total=False):
 
 
 class DataCitation(TypedDict, total=False):
+    """Data source citations for a KYC check."""
+
     address_sources: Required[SequenceNotStr[str]]
     """List of sources for address verification"""
 
@@ -70,6 +82,8 @@ class DataCitation(TypedDict, total=False):
 
 
 class Employment(TypedDict, total=False):
+    """Employment information for the individual"""
+
     employment_status: Required[Literal["UNEMPLOYED", "EMPLOYED", "STUDENT", "RETIRED"]]
     """One of the following: employed, unemployed, retired, or student."""
 
@@ -84,6 +98,17 @@ class Employment(TypedDict, total=False):
 
 
 class FinancialProfile(TypedDict, total=False):
+    """
+    Financial profile information for the individual
+                <br/><br/>
+                Examples of liquid net worth ranges:
+                <br/> - $0 - $20,000
+                <br/> - $20,000 - $50,000
+                <br/> - $50,000 - $100,000
+                <br/> - $100,000 - $500,000
+                <br/> - $500,000 - $1,000,000
+    """
+
     funding_sources: Required[
         List[Literal["EMPLOYMENT_INCOME", "INVESTMENTS", "INHERITANCE", "BUSINESS_INCOME", "SAVINGS", "FAMILY"]]
     ]
@@ -104,6 +129,8 @@ class FinancialProfile(TypedDict, total=False):
 
 
 class Identity(TypedDict, total=False):
+    """Identity information for the individual"""
+
     city: Required[str]
     """City of the applicant."""
 
@@ -154,6 +181,8 @@ class Identity(TypedDict, total=False):
 
 
 class KYCMetadata(TypedDict, total=False):
+    """Metadata about the KYC check."""
+
     check_completed_at: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Completion datetime of KYC check."""
 
@@ -168,6 +197,13 @@ class KYCMetadata(TypedDict, total=False):
 
 
 class RiskDisclosure(TypedDict, total=False):
+    """
+    Risk information about the individual
+                <br/><br/>
+                Fields denote if the account owner falls under each category defined by FINRA rules. If any of the answers
+                is true (yes), additional verifications may be required before US account approval.
+    """
+
     immediate_family_exposed: Required[bool]
     """
     If the individual's immediate family member (sibling, husband/wife, child,
@@ -189,6 +225,15 @@ class RiskDisclosure(TypedDict, total=False):
 
 
 class TrustedContact(TypedDict, total=False):
+    """Information for a trusted contact person for the individual.
+
+    More information:
+                <br/>
+                - <a href="https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-trusted-contact" target="_blank" rel="noopener noreferrer">Investor.gov - Trusted Contact</a>
+                <br/>
+                - <a href="https://www.finra.org/investors/insights/trusted-contact" target="_blank" rel="noopener noreferrer">FINRA - Trusted Contact</a>
+    """
+
     family_name: Required[str]
     """The family name of the trusted contact"""
 
@@ -209,6 +254,11 @@ class TrustedContact(TypedDict, total=False):
 
 
 class UsImmigrationInfo(TypedDict, total=False):
+    """US immigration information for this individual.
+
+    Required if the individual is not a US citizen.
+    """
+
     country_of_birth: Required[str]
     """Country where the individual was born."""
 
@@ -226,6 +276,8 @@ class UsImmigrationInfo(TypedDict, total=False):
 
 
 class UsKYCCheckDataParam(TypedDict, total=False):
+    """KYC data for an `Entity` in the US jurisdiction."""
+
     alpaca_customer_agreement: Required[AlpacaCustomerAgreement]
     """
     Information to affirm that the individual has read, agreed to, and signed

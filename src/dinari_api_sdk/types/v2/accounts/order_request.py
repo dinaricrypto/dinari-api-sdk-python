@@ -13,6 +13,14 @@ __all__ = ["OrderRequest"]
 
 
 class OrderRequest(BaseModel):
+    """A request to create an `Order`.
+
+    An `OrderRequest` is created when a user places an order through the Dinari API.
+    The `OrderRequest` is then fulfilled by creating an `Order` on-chain.
+
+    The `OrderRequest` is a record of the user's intent to place an order, while the `Order` is the actual transaction that occurs on the blockchain.
+    """
+
     id: str
     """ID of `OrderRequest`.
 

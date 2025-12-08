@@ -6,6 +6,8 @@ __all__ = ["ExternalGetNonceResponse"]
 
 
 class ExternalGetNonceResponse(BaseModel):
+    """Connection message to sign to prove ownership of the `Wallet`."""
+
     message: str
     """Message to be signed by the `Wallet`"""
 

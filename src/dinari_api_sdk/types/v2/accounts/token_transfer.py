@@ -11,6 +11,8 @@ __all__ = ["TokenTransfer"]
 
 
 class TokenTransfer(BaseModel):
+    """Information about a token transfer between accounts."""
+
     id: str
     """ID of the token transfer."""
 

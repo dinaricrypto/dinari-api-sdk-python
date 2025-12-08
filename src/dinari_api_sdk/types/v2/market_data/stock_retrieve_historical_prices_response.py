@@ -9,6 +9,8 @@ __all__ = ["StockRetrieveHistoricalPricesResponse", "StockRetrieveHistoricalPric
 
 
 class StockRetrieveHistoricalPricesResponseItem(BaseModel):
+    """Datapoint of historical price data for a `Stock`."""
+
     close: float
     """Close price from the given time period."""
 

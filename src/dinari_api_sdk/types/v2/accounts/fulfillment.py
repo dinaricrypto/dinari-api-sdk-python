@@ -10,6 +10,11 @@ __all__ = ["Fulfillment"]
 
 
 class Fulfillment(BaseModel):
+    """Information about a fulfillment of an `Order`.
+
+    An order may be fulfilled in multiple transactions.
+    """
+
     id: str
     """ID of the `OrderFulfillment`."""
 
