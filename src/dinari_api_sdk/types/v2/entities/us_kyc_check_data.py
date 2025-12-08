@@ -22,6 +22,11 @@ __all__ = [
 
 
 class AlpacaCustomerAgreement(BaseModel):
+    """
+    Information to affirm that the individual has read, agreed to, and signed Alpaca's customer
+                agreement, found here: https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf
+    """
+
     ip_address: str
     """The IP address from where the individual signed the agreement."""
 
@@ -30,6 +35,11 @@ class AlpacaCustomerAgreement(BaseModel):
 
 
 class AmlCheck(BaseModel):
+    """AML check information for this individual.
+
+    If any of the checks have a match, provide details about the matches or hits found. The individual will be marked as high risk and be subject to manual review.
+    """
+
     check_created_at: datetime
     """Datetime that this AML check was created."""
 
@@ -56,6 +66,8 @@ class AmlCheck(BaseModel):
 
 
 class DataCitation(BaseModel):
+    """Data source citations for a KYC check."""
+
     address_sources: List[str]
     """List of sources for address verification"""
 
@@ -67,6 +79,8 @@ class DataCitation(BaseModel):
 
 
 class Employment(BaseModel):
+    """Employment information for the individual"""
+
     employment_status: Literal["UNEMPLOYED", "EMPLOYED", "STUDENT", "RETIRED"]
     """One of the following: employed, unemployed, retired, or student."""
 
@@ -81,6 +95,17 @@ class Employment(BaseModel):
 
 
 class FinancialProfile(BaseModel):
+    """
+    Financial profile information for the individual
+                <br/><br/>
+                Examples of liquid net worth ranges:
+                <br/> - $0 - $20,000
+                <br/> - $20,000 - $50,000
+                <br/> - $50,000 - $100,000
+                <br/> - $100,000 - $500,000
+                <br/> - $500,000 - $1,000,000
+    """
+
     funding_sources: List[
         Literal["EMPLOYMENT_INCOME", "INVESTMENTS", "INHERITANCE", "BUSINESS_INCOME", "SAVINGS", "FAMILY"]
     ]
@@ -101,6 +126,8 @@ class FinancialProfile(BaseModel):
 
 
 class Identity(BaseModel):
+    """Identity information for the individual"""
+
     city: str
     """City of the applicant."""
 
@@ -151,6 +178,8 @@ class Identity(BaseModel):
 
 
 class KYCMetadata(BaseModel):
+    """Metadata about the KYC check."""
+
     check_completed_at: datetime
     """Completion datetime of KYC check."""
 
@@ -165,6 +194,13 @@ class KYCMetadata(BaseModel):
 
 
 class RiskDisclosure(BaseModel):
+    """
+    Risk information about the individual
+                <br/><br/>
+                Fields denote if the account owner falls under each category defined by FINRA rules. If any of the answers
+                is true (yes), additional verifications may be required before US account approval.
+    """
+
     immediate_family_exposed: bool
     """
     If the individual's immediate family member (sibling, husband/wife, child,
@@ -186,6 +222,15 @@ class RiskDisclosure(BaseModel):
 
 
 class TrustedContact(BaseModel):
+    """Information for a trusted contact person for the individual.
+
+    More information:
+                <br/>
+                - <a href="https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-trusted-contact" target="_blank" rel="noopener noreferrer">Investor.gov - Trusted Contact</a>
+                <br/>
+                - <a href="https://www.finra.org/investors/insights/trusted-contact" target="_blank" rel="noopener noreferrer">FINRA - Trusted Contact</a>
+    """
+
     family_name: str
     """The family name of the trusted contact"""
 
@@ -206,6 +251,11 @@ class TrustedContact(BaseModel):
 
 
 class UsImmigrationInfo(BaseModel):
+    """US immigration information for this individual.
+
+    Required if the individual is not a US citizen.
+    """
+
     country_of_birth: str
     """Country where the individual was born."""
 
@@ -225,6 +275,8 @@ class UsImmigrationInfo(BaseModel):
 
 
 class UsKYCCheckData(BaseModel):
+    """KYC data for an `Entity` in the US jurisdiction."""
+
     alpaca_customer_agreement: AlpacaCustomerAgreement
     """
     Information to affirm that the individual has read, agreed to, and signed

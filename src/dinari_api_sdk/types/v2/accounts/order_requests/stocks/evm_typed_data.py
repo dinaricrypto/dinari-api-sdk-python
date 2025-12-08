@@ -8,6 +8,10 @@ __all__ = ["EvmTypedData"]
 
 
 class EvmTypedData(BaseModel):
+    """
+    [EIP-712](https://eips.ethereum.org/EIPS/eip-712) typed data to be signed with a wallet.
+    """
+
     domain: object
     """Domain separator for the typed data."""
 

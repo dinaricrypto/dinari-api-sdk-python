@@ -7,6 +7,8 @@ __all__ = ["Wallet"]
 
 
 class Wallet(BaseModel):
+    """Information about a blockchain `Wallet`."""
+
     address: str
     """Address of the `Wallet`."""
 

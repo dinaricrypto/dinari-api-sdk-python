@@ -9,6 +9,13 @@ __all__ = ["Eip155PrepareOrderResponse", "TransactionData"]
 
 
 class TransactionData(BaseModel):
+    """
+    Information about a transaction to be signed with a wallet and submitted on chain.
+
+    Typically the transactions will include an ERC20 approval transaction to allow the Dinari smart contract
+    to spend the payment token or Dshare asset tokens on behalf of the user, followed by a transaction to call the Dinari smart contract to create an `Order`.
+    """
+
     abi: object
     """
     [JSON ABI](https://docs.soliditylang.org/en/v0.8.30/abi-spec.html#json) of the
@@ -30,6 +37,8 @@ class TransactionData(BaseModel):
 
 
 class Eip155PrepareOrderResponse(BaseModel):
+    """Prepared transactions to place an order on an EIP-155 (EVM) chain."""
+
     fees: List[OrderFeeAmount]
     """Fees included in the order transaction. Provided here as a reference."""
 
