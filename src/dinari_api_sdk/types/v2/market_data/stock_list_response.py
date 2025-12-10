@@ -50,7 +50,8 @@ class StockListResponseItem(BaseModel):
     """CUSIP ID.
 
     Refer to [this link](https://www.cusip.com/identifiers.html) for more
-    information.
+    information. A license agreement with CUSIP Global Services is required to
+    receive this value.
     """
 
     description: Optional[str] = None
