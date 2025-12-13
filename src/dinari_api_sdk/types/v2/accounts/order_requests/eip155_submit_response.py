@@ -13,6 +13,14 @@ __all__ = ["Eip155SubmitResponse"]
 
 
 class Eip155SubmitResponse(BaseModel):
+    """A request to create an `Order`.
+
+    An `EIP155OrderRequest` is created when a user places an order through the Dinari API.
+    The `EIP155OrderRequest` is then fulfilled by creating an `Order` on-chain.
+
+    The `EIP155OrderRequest` is a record of the user's intent to place an order, while the `Order` is the actual transaction that occurs on the blockchain.
+    """
+
     id: str
     """ID of `EIP155OrderRequest`.
 

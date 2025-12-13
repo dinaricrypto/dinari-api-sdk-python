@@ -10,6 +10,8 @@ __all__ = ["AccountGetInterestPaymentsResponse", "AccountGetInterestPaymentsResp
 
 
 class AccountGetInterestPaymentsResponseItem(BaseModel):
+    """An object representing an interest payment from stablecoin holdings."""
+
     amount: float
     """Amount of interest paid."""
 

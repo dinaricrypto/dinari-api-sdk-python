@@ -13,6 +13,8 @@ __all__ = ["Eip155GetFeeQuoteResponse", "OrderFeeContractObject", "OrderFeeContr
 
 
 class OrderFeeContractObjectFeeQuote(BaseModel):
+    """`FeeQuote` structure to pass into contracts."""
+
     deadline: int
 
     fee: str
@@ -25,6 +27,10 @@ class OrderFeeContractObjectFeeQuote(BaseModel):
 
 
 class OrderFeeContractObject(BaseModel):
+    """
+    Opaque fee quote object to pass into the contract when creating an `Order` directly through Dinari's smart contracts.
+    """
+
     chain_id: Literal[42161, 1, 8453, 81457, 98866, 202110]
     """EVM chain ID of the blockchain where the `Order` will be placed."""
 

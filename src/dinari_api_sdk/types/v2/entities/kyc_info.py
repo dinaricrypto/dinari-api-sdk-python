@@ -14,6 +14,8 @@ __all__ = ["KYCInfo", "BaselineKYC", "UsKYC"]
 
 
 class BaselineKYC(BaseModel):
+    """KYC information for an `Entity` in the baseline jurisdiction."""
+
     id: str
     """ID of the KYC check."""
 
@@ -31,6 +33,8 @@ class BaselineKYC(BaseModel):
 
 
 class UsKYC(BaseModel):
+    """KYC information for an `Entity` in the US jurisdiction."""
+
     id: str
     """ID of the KYC check."""
 

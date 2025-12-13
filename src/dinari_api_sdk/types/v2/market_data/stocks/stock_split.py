@@ -9,6 +9,10 @@ __all__ = ["StockSplit"]
 
 
 class StockSplit(BaseModel):
+    """
+    Information about a stock split, including the `Stock` ID, the number of shares before and after the split, the record date, payable date, ex-date, and the status of the split.
+    """
+
     id: str
     """ID of the `StockSplit`"""
 

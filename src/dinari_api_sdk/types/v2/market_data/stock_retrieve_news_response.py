@@ -10,6 +10,10 @@ __all__ = ["StockRetrieveNewsResponse", "StockRetrieveNewsResponseItem"]
 
 
 class StockRetrieveNewsResponseItem(BaseModel):
+    """
+    A news article relating to a `Stock` which includes a summary of the article and a link to the original source.
+    """
+
     article_url: str
     """URL of the news article"""
 

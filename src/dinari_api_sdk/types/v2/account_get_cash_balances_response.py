@@ -10,6 +10,8 @@ __all__ = ["AccountGetCashBalancesResponse", "AccountGetCashBalancesResponseItem
 
 
 class AccountGetCashBalancesResponseItem(BaseModel):
+    """Balance of a payment token in an `Account`."""
+
     amount: float
     """Total amount of the payment token in the `Account`."""
 

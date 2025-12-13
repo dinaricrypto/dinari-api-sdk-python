@@ -9,6 +9,10 @@ __all__ = ["Entity"]
 
 
 class Entity(BaseModel):
+    """
+    Information about an `Entity`, which can be either an individual or an organization.
+    """
+
     id: str
     """Unique ID of the `Entity`."""
 

@@ -11,6 +11,10 @@ __all__ = ["Eip155PrepareProxiedOrderResponse"]
 
 
 class Eip155PrepareProxiedOrderResponse(BaseModel):
+    """
+    Prepared data for creating an `OrderRequest` through the EVM proxied order API route.
+    """
+
     id: str
     """ID of the EvmPreparedProxiedOrder."""
 

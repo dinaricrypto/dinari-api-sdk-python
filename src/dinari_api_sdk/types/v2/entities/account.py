@@ -10,6 +10,8 @@ __all__ = ["Account"]
 
 
 class Account(BaseModel):
+    """Information about an `Account` owned by an `Entity`."""
+
     id: str
     """Unique ID for the `Account`."""
 

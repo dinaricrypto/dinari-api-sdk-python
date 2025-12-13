@@ -9,6 +9,8 @@ __all__ = ["BaselineKYCCheckData"]
 
 
 class BaselineKYCCheckData(BaseModel):
+    """KYC data for an `Entity` in the BASELINE jurisdiction."""
+
     address_country_code: str
     """Country of residence. ISO 3166-1 alpha 2 country code."""
 

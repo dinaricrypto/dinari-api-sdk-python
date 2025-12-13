@@ -9,6 +9,10 @@ __all__ = ["WithdrawalRequest"]
 
 
 class WithdrawalRequest(BaseModel):
+    """
+    Information for a withdrawal request of payment tokens from an `Account` backed by a Dinari-managed `Wallet`.
+    """
+
     id: str
     """ID of the `WithdrawalRequest`."""
 

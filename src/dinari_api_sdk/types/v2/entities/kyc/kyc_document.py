@@ -7,6 +7,8 @@ __all__ = ["KYCDocument"]
 
 
 class KYCDocument(BaseModel):
+    """A document associated with KYC for an `Entity`."""
+
     id: str
     """ID of the document."""
 

@@ -12,6 +12,8 @@ __all__ = ["BaselineKYCCheckDataParam"]
 
 
 class BaselineKYCCheckDataParam(TypedDict, total=False):
+    """KYC data for an `Entity` in the BASELINE jurisdiction."""
+
     address_country_code: Required[str]
     """Country of residence. ISO 3166-1 alpha 2 country code."""
 

@@ -8,6 +8,8 @@ __all__ = ["Eip155CreatePermitResponse"]
 
 
 class Eip155CreatePermitResponse(BaseModel):
+    """Token permit to be signed by the smart contract submitter."""
+
     order_request_id: str
     """ID representing the EIP155 `OrderRequest`"""
 
