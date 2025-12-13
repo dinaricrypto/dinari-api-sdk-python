@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.8.0 (2025-12-13)
+
+Full Changelog: [v0.7.1...v0.8.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.7.1...v0.8.0)
+
+### Features
+
+* **api:** api update ([b96d9b6](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/b96d9b6a34cb104213344e30c53fa855dab76761))
+* **api:** api update ([63b497c](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/63b497c6c17bb68a558d75d60c26f56e4bd926d2))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([55c4299](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/55c429977b12cf0de333ef949eff208a002ca980))
+
+
+### Chores
+
+* add missing docstrings ([eff6a5a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/eff6a5a5437e4687124e351d9c213bec81d5907e))
+
 ## 0.7.1 (2025-12-02)
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.7.0...v0.7.1)
