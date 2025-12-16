@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.8.0 (2025-12-16)
+
+Full Changelog: [v0.7.1...v0.8.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.7.1...v0.8.0)
+
+### Features
+
+* **api:** api update ([ac17e02](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/ac17e02915f6af44f38bbe9b1711cf502f39d6b5))
+* **api:** api update ([b96d9b6](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/b96d9b6a34cb104213344e30c53fa855dab76761))
+* **api:** api update ([63b497c](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/63b497c6c17bb68a558d75d60c26f56e4bd926d2))
+* **api:** Regen API after removing EVM prepared routes and adding non-professional trader attestations ([2cfd89b](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/2cfd89b57d76ee27a275a6adf334351a8ccb6847))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([55c4299](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/55c429977b12cf0de333ef949eff208a002ca980))
+
+
+### Chores
+
+* add missing docstrings ([eff6a5a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/eff6a5a5437e4687124e351d9c213bec81d5907e))
+* **internal:** add missing files argument to base client ([6ce288e](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/6ce288e0a52625b6608199f966c6107719e412f5))
+* speedup initial import ([3548326](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/354832682ffbab90593ca1744bbaa02b5363dde8))
+
 ## 0.7.1 (2025-12-02)
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.7.0...v0.7.1)
