@@ -15,6 +15,7 @@ __all__ = [
     "FinancialProfile",
     "Identity",
     "KYCMetadata",
+    "NonProfessionalTraderAttestation",
     "RiskDisclosure",
     "TrustedContact",
     "UsImmigrationInfo",
@@ -193,6 +194,18 @@ class KYCMetadata(BaseModel):
     """Your unique identifier for the KYC check."""
 
 
+class NonProfessionalTraderAttestation(BaseModel):
+    """
+    The non-professional trader property is a self-attestation for US customers that can affect the metered realtime data fees. This field must be updated when if there is a change in the user's attestation. This field may also be modified by Dinari compliance team. For more information, please see the US Customers Integration Guide.
+    """
+
+    attestation_dt: datetime
+    """Datetime when the attestation was made."""
+
+    is_non_professional_trader: bool
+    """Whether the individual attests to being a non-professional trader."""
+
+
 class RiskDisclosure(BaseModel):
     """
     Risk information about the individual
@@ -310,6 +323,15 @@ class UsKYCCheckData(BaseModel):
 
     kyc_metadata: KYCMetadata
     """Metadata about the KYC check."""
+
+    non_professional_trader_attestation: NonProfessionalTraderAttestation
+    """
+    The non-professional trader property is a self-attestation for US customers that
+    can affect the metered realtime data fees. This field must be updated when if
+    there is a change in the user's attestation. This field may also be modified by
+    Dinari compliance team. For more information, please see the US Customers
+    Integration Guide.
+    """
 
     risk_disclosure: RiskDisclosure
     """

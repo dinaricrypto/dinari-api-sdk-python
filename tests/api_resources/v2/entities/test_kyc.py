@@ -248,6 +248,10 @@ class TestKYC:
                     "ip_address": "192.0.2.1",
                     "ref_id": "x",
                 },
+                "non_professional_trader_attestation": {
+                    "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "is_non_professional_trader": True,
+                },
                 "risk_disclosure": {
                     "immediate_family_exposed": True,
                     "is_affiliated_exchange_or_finra": True,
@@ -322,6 +326,10 @@ class TestKYC:
                     "check_initiated_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "ip_address": "192.0.2.1",
                     "ref_id": "x",
+                },
+                "non_professional_trader_attestation": {
+                    "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "is_non_professional_trader": True,
                 },
                 "risk_disclosure": {
                     "immediate_family_exposed": True,
@@ -400,6 +408,10 @@ class TestKYC:
                     "ip_address": "192.0.2.1",
                     "ref_id": "x",
                 },
+                "non_professional_trader_attestation": {
+                    "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "is_non_professional_trader": True,
+                },
                 "risk_disclosure": {
                     "immediate_family_exposed": True,
                     "is_affiliated_exchange_or_finra": True,
@@ -470,6 +482,10 @@ class TestKYC:
                     "check_initiated_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "ip_address": "192.0.2.1",
                     "ref_id": "x",
+                },
+                "non_professional_trader_attestation": {
+                    "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "is_non_professional_trader": True,
                 },
                 "risk_disclosure": {
                     "immediate_family_exposed": True,
@@ -544,6 +560,10 @@ class TestKYC:
                         "check_initiated_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                         "ip_address": "192.0.2.1",
                         "ref_id": "x",
+                    },
+                    "non_professional_trader_attestation": {
+                        "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                        "is_non_professional_trader": True,
                     },
                     "risk_disclosure": {
                         "immediate_family_exposed": True,
@@ -792,6 +812,10 @@ class TestAsyncKYC:
                     "ip_address": "192.0.2.1",
                     "ref_id": "x",
                 },
+                "non_professional_trader_attestation": {
+                    "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "is_non_professional_trader": True,
+                },
                 "risk_disclosure": {
                     "immediate_family_exposed": True,
                     "is_affiliated_exchange_or_finra": True,
@@ -866,6 +890,10 @@ class TestAsyncKYC:
                     "check_initiated_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "ip_address": "192.0.2.1",
                     "ref_id": "x",
+                },
+                "non_professional_trader_attestation": {
+                    "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "is_non_professional_trader": True,
                 },
                 "risk_disclosure": {
                     "immediate_family_exposed": True,
@@ -944,6 +972,10 @@ class TestAsyncKYC:
                     "ip_address": "192.0.2.1",
                     "ref_id": "x",
                 },
+                "non_professional_trader_attestation": {
+                    "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "is_non_professional_trader": True,
+                },
                 "risk_disclosure": {
                     "immediate_family_exposed": True,
                     "is_affiliated_exchange_or_finra": True,
@@ -1014,6 +1046,10 @@ class TestAsyncKYC:
                     "check_initiated_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "ip_address": "192.0.2.1",
                     "ref_id": "x",
+                },
+                "non_professional_trader_attestation": {
+                    "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "is_non_professional_trader": True,
                 },
                 "risk_disclosure": {
                     "immediate_family_exposed": True,
@@ -1088,6 +1124,10 @@ class TestAsyncKYC:
                         "check_initiated_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                         "ip_address": "192.0.2.1",
                         "ref_id": "x",
+                    },
+                    "non_professional_trader_attestation": {
+                        "attestation_dt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                        "is_non_professional_trader": True,
                     },
                     "risk_disclosure": {
                         "immediate_family_exposed": True,
