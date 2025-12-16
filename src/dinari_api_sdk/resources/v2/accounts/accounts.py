@@ -7,6 +7,14 @@ from datetime import date
 
 import httpx
 
+from .orders import (
+    OrdersResource,
+    AsyncOrdersResource,
+    OrdersResourceWithRawResponse,
+    AsyncOrdersResourceWithRawResponse,
+    OrdersResourceWithStreamingResponse,
+    AsyncOrdersResourceWithStreamingResponse,
+)
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
@@ -39,14 +47,6 @@ from ...._response import (
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
-)
-from .orders.orders import (
-    OrdersResource,
-    AsyncOrdersResource,
-    OrdersResourceWithRawResponse,
-    AsyncOrdersResourceWithRawResponse,
-    OrdersResourceWithStreamingResponse,
-    AsyncOrdersResourceWithStreamingResponse,
 )
 from .wallet.wallet import (
     WalletResource,
