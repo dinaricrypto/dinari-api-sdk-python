@@ -6,24 +6,24 @@ from typing import Optional
 
 import httpx
 
-from ....._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from ....._utils import maybe_transform, async_maybe_transform
-from ....._compat import cached_property
-from .....types.v2 import Chain
-from ....._resource import SyncAPIResource, AsyncAPIResource
-from ....._response import (
+from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ...._utils import maybe_transform, async_maybe_transform
+from ...._compat import cached_property
+from ....types.v2 import Chain
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....._base_client import make_request_options
-from .....types.v2.chain import Chain
-from .....types.v2.accounts import order_list_params, order_batch_cancel_params, order_get_fulfillments_params
-from .....types.v2.accounts.order import Order
-from .....types.v2.accounts.order_list_response import OrderListResponse
-from .....types.v2.accounts.order_batch_cancel_response import OrderBatchCancelResponse
-from .....types.v2.accounts.order_get_fulfillments_response import OrderGetFulfillmentsResponse
+from ...._base_client import make_request_options
+from ....types.v2.chain import Chain
+from ....types.v2.accounts import order_list_params, order_batch_cancel_params, order_get_fulfillments_params
+from ....types.v2.accounts.order import Order
+from ....types.v2.accounts.order_list_response import OrderListResponse
+from ....types.v2.accounts.order_batch_cancel_response import OrderBatchCancelResponse
+from ....types.v2.accounts.order_get_fulfillments_response import OrderGetFulfillmentsResponse
 
 __all__ = ["OrdersResource", "AsyncOrdersResource"]
 
