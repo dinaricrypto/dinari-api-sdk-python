@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Mapping, cast
+from typing import TYPE_CHECKING, Any, Dict, Mapping, cast
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -20,6 +20,7 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import DinariError, APIStatusError
@@ -28,7 +29,10 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.v2 import v2
+
+if TYPE_CHECKING:
+    from .resources import v2
+    from .resources.v2.v2 import V2Resource, AsyncV2Resource
 
 __all__ = [
     "ENVIRONMENTS",
@@ -49,10 +53,6 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Dinari(SyncAPIClient):
-    v2: v2.V2Resource
-    with_raw_response: DinariWithRawResponse
-    with_streaming_response: DinariWithStreamedResponse
-
     # client options
     api_key_id: str
     api_secret_key: str
@@ -143,9 +143,19 @@ class Dinari(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.v2 = v2.V2Resource(self)
-        self.with_raw_response = DinariWithRawResponse(self)
-        self.with_streaming_response = DinariWithStreamedResponse(self)
+    @cached_property
+    def v2(self) -> V2Resource:
+        from .resources.v2 import V2Resource
+
+        return V2Resource(self)
+
+    @cached_property
+    def with_raw_response(self) -> DinariWithRawResponse:
+        return DinariWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> DinariWithStreamedResponse:
+        return DinariWithStreamedResponse(self)
 
     @property
     @override
@@ -266,10 +276,6 @@ class Dinari(SyncAPIClient):
 
 
 class AsyncDinari(AsyncAPIClient):
-    v2: v2.AsyncV2Resource
-    with_raw_response: AsyncDinariWithRawResponse
-    with_streaming_response: AsyncDinariWithStreamedResponse
-
     # client options
     api_key_id: str
     api_secret_key: str
@@ -360,9 +366,19 @@ class AsyncDinari(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.v2 = v2.AsyncV2Resource(self)
-        self.with_raw_response = AsyncDinariWithRawResponse(self)
-        self.with_streaming_response = AsyncDinariWithStreamedResponse(self)
+    @cached_property
+    def v2(self) -> AsyncV2Resource:
+        from .resources.v2 import AsyncV2Resource
+
+        return AsyncV2Resource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncDinariWithRawResponse:
+        return AsyncDinariWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncDinariWithStreamedResponse:
+        return AsyncDinariWithStreamedResponse(self)
 
     @property
     @override
@@ -483,23 +499,55 @@ class AsyncDinari(AsyncAPIClient):
 
 
 class DinariWithRawResponse:
+    _client: Dinari
+
     def __init__(self, client: Dinari) -> None:
-        self.v2 = v2.V2ResourceWithRawResponse(client.v2)
+        self._client = client
+
+    @cached_property
+    def v2(self) -> v2.V2ResourceWithRawResponse:
+        from .resources.v2 import V2ResourceWithRawResponse
+
+        return V2ResourceWithRawResponse(self._client.v2)
 
 
 class AsyncDinariWithRawResponse:
+    _client: AsyncDinari
+
     def __init__(self, client: AsyncDinari) -> None:
-        self.v2 = v2.AsyncV2ResourceWithRawResponse(client.v2)
+        self._client = client
+
+    @cached_property
+    def v2(self) -> v2.AsyncV2ResourceWithRawResponse:
+        from .resources.v2 import AsyncV2ResourceWithRawResponse
+
+        return AsyncV2ResourceWithRawResponse(self._client.v2)
 
 
 class DinariWithStreamedResponse:
+    _client: Dinari
+
     def __init__(self, client: Dinari) -> None:
-        self.v2 = v2.V2ResourceWithStreamingResponse(client.v2)
+        self._client = client
+
+    @cached_property
+    def v2(self) -> v2.V2ResourceWithStreamingResponse:
+        from .resources.v2 import V2ResourceWithStreamingResponse
+
+        return V2ResourceWithStreamingResponse(self._client.v2)
 
 
 class AsyncDinariWithStreamedResponse:
+    _client: AsyncDinari
+
     def __init__(self, client: AsyncDinari) -> None:
-        self.v2 = v2.AsyncV2ResourceWithStreamingResponse(client.v2)
+        self._client = client
+
+    @cached_property
+    def v2(self) -> v2.AsyncV2ResourceWithStreamingResponse:
+        from .resources.v2 import AsyncV2ResourceWithStreamingResponse
+
+        return AsyncV2ResourceWithStreamingResponse(self._client.v2)
 
 
 Client = Dinari
