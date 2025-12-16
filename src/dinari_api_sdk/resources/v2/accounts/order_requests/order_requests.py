@@ -25,14 +25,6 @@ from ....._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .stocks.stocks import (
-    StocksResource,
-    AsyncStocksResource,
-    StocksResourceWithRawResponse,
-    AsyncStocksResourceWithRawResponse,
-    StocksResourceWithStreamingResponse,
-    AsyncStocksResourceWithStreamingResponse,
-)
 from ....._base_client import make_request_options
 from .....types.v2.chain import Chain
 from .....types.v2.accounts import (
@@ -55,10 +47,6 @@ __all__ = ["OrderRequestsResource", "AsyncOrderRequestsResource"]
 
 
 class OrderRequestsResource(SyncAPIResource):
-    @cached_property
-    def stocks(self) -> StocksResource:
-        return StocksResource(self._client)
-
     @cached_property
     def eip155(self) -> Eip155Resource:
         return Eip155Resource(self._client)
@@ -205,8 +193,9 @@ class OrderRequestsResource(SyncAPIResource):
         given account, the creation call will fail.
 
         Args:
-          asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
-              `Orders`.
+          asset_quantity: Amount of dShare asset involved. Required for limit `Order Requests` and market
+              sell `Order Requests`. Must be a positive number with a precision of up to 4
+              decimal places.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
@@ -274,8 +263,9 @@ class OrderRequestsResource(SyncAPIResource):
         given account, the creation call will fail.
 
         Args:
-          asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
-              `Orders`.
+          asset_quantity: Amount of dShare asset involved. Required for limit `Order Requests` and market
+              sell `Order Requests`. Must be a positive number with a precision of up to 4
+              decimal places.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
@@ -411,7 +401,7 @@ class OrderRequestsResource(SyncAPIResource):
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
-              9 decimal places.
+              6 decimal places.
 
           stock_id: ID of `Stock`.
 
@@ -487,8 +477,10 @@ class OrderRequestsResource(SyncAPIResource):
 
           stock_id: The Stock ID associated with the Order Request
 
-          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
-              sell `Order Requests`.
+          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
+              market sell `Order Requests`. Must be a positive number with a precision of up
+              to 4 decimal places for limit `Order Requests` or up to 6 decimal places for
+              market sell `Order Requests`.
 
           chain_id: CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
               not provided, the default chain ID (eip155:42161) will be used.
@@ -534,10 +526,6 @@ class OrderRequestsResource(SyncAPIResource):
 
 
 class AsyncOrderRequestsResource(AsyncAPIResource):
-    @cached_property
-    def stocks(self) -> AsyncStocksResource:
-        return AsyncStocksResource(self._client)
-
     @cached_property
     def eip155(self) -> AsyncEip155Resource:
         return AsyncEip155Resource(self._client)
@@ -684,8 +672,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         given account, the creation call will fail.
 
         Args:
-          asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
-              `Orders`.
+          asset_quantity: Amount of dShare asset involved. Required for limit `Order Requests` and market
+              sell `Order Requests`. Must be a positive number with a precision of up to 4
+              decimal places.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
@@ -753,8 +742,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         given account, the creation call will fail.
 
         Args:
-          asset_quantity: Amount of dShare asset involved. Required for limit `Orders` and market sell
-              `Orders`.
+          asset_quantity: Amount of dShare asset involved. Required for limit `Order Requests` and market
+              sell `Order Requests`. Must be a positive number with a precision of up to 4
+              decimal places.
 
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
@@ -890,7 +880,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
         Args:
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
-              9 decimal places.
+              6 decimal places.
 
           stock_id: ID of `Stock`.
 
@@ -966,8 +956,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           stock_id: The Stock ID associated with the Order Request
 
-          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
-              sell `Order Requests`.
+          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
+              market sell `Order Requests`. Must be a positive number with a precision of up
+              to 4 decimal places for limit `Order Requests` or up to 6 decimal places for
+              market sell `Order Requests`.
 
           chain_id: CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
               not provided, the default chain ID (eip155:42161) will be used.
@@ -1039,10 +1031,6 @@ class OrderRequestsResourceWithRawResponse:
         )
 
     @cached_property
-    def stocks(self) -> StocksResourceWithRawResponse:
-        return StocksResourceWithRawResponse(self._order_requests.stocks)
-
-    @cached_property
     def eip155(self) -> Eip155ResourceWithRawResponse:
         return Eip155ResourceWithRawResponse(self._order_requests.eip155)
 
@@ -1072,10 +1060,6 @@ class AsyncOrderRequestsResourceWithRawResponse:
         self.get_fee_quote = async_to_raw_response_wrapper(
             order_requests.get_fee_quote,
         )
-
-    @cached_property
-    def stocks(self) -> AsyncStocksResourceWithRawResponse:
-        return AsyncStocksResourceWithRawResponse(self._order_requests.stocks)
 
     @cached_property
     def eip155(self) -> AsyncEip155ResourceWithRawResponse:
@@ -1109,10 +1093,6 @@ class OrderRequestsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def stocks(self) -> StocksResourceWithStreamingResponse:
-        return StocksResourceWithStreamingResponse(self._order_requests.stocks)
-
-    @cached_property
     def eip155(self) -> Eip155ResourceWithStreamingResponse:
         return Eip155ResourceWithStreamingResponse(self._order_requests.eip155)
 
@@ -1142,10 +1122,6 @@ class AsyncOrderRequestsResourceWithStreamingResponse:
         self.get_fee_quote = async_to_streamed_response_wrapper(
             order_requests.get_fee_quote,
         )
-
-    @cached_property
-    def stocks(self) -> AsyncStocksResourceWithStreamingResponse:
-        return AsyncStocksResourceWithStreamingResponse(self._order_requests.stocks)
 
     @cached_property
     def eip155(self) -> AsyncEip155ResourceWithStreamingResponse:

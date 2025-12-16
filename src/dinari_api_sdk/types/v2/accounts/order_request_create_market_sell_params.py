@@ -12,7 +12,7 @@ class OrderRequestCreateMarketSellParams(TypedDict, total=False):
     asset_quantity: Required[float]
     """Quantity of shares to trade.
 
-    Must be a positive number with a precision of up to 9 decimal places.
+    Must be a positive number with a precision of up to 6 decimal places.
     """
 
     stock_id: Required[str]
