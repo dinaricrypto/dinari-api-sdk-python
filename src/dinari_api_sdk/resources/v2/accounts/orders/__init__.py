@@ -8,22 +8,8 @@ from .orders import (
     OrdersResourceWithStreamingResponse,
     AsyncOrdersResourceWithStreamingResponse,
 )
-from .stocks import (
-    StocksResource,
-    AsyncStocksResource,
-    StocksResourceWithRawResponse,
-    AsyncStocksResourceWithRawResponse,
-    StocksResourceWithStreamingResponse,
-    AsyncStocksResourceWithStreamingResponse,
-)
 
 __all__ = [
-    "StocksResource",
-    "AsyncStocksResource",
-    "StocksResourceWithRawResponse",
-    "AsyncStocksResourceWithRawResponse",
-    "StocksResourceWithStreamingResponse",
-    "AsyncStocksResourceWithStreamingResponse",
     "OrdersResource",
     "AsyncOrdersResource",
     "OrdersResourceWithRawResponse",

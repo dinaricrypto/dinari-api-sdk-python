@@ -100,8 +100,10 @@ class Eip155Resource(SyncAPIResource):
 
           payment_token: Address of payment token.
 
-          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
-              sell `Orders`.
+          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
+              market sell `Order Requests`. Must be a positive number with a precision of up
+              to 4 decimal places for limit `Order Requests` or up to 6 decimal places for
+              market sell `Order Requests`.
 
           client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
               customer's systems.
@@ -312,8 +314,10 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           payment_token: Address of payment token.
 
-          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Orders` and market
-              sell `Orders`.
+          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
+              market sell `Order Requests`. Must be a positive number with a precision of up
+              to 4 decimal places for limit `Order Requests` or up to 6 decimal places for
+              market sell `Order Requests`.
 
           client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
               customer's systems.

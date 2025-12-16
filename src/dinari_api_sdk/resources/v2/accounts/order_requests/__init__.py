@@ -8,14 +8,6 @@ from .eip155 import (
     Eip155ResourceWithStreamingResponse,
     AsyncEip155ResourceWithStreamingResponse,
 )
-from .stocks import (
-    StocksResource,
-    AsyncStocksResource,
-    StocksResourceWithRawResponse,
-    AsyncStocksResourceWithRawResponse,
-    StocksResourceWithStreamingResponse,
-    AsyncStocksResourceWithStreamingResponse,
-)
 from .order_requests import (
     OrderRequestsResource,
     AsyncOrderRequestsResource,
@@ -26,12 +18,6 @@ from .order_requests import (
 )
 
 __all__ = [
-    "StocksResource",
-    "AsyncStocksResource",
-    "StocksResourceWithRawResponse",
-    "AsyncStocksResourceWithRawResponse",
-    "StocksResourceWithStreamingResponse",
-    "AsyncStocksResourceWithStreamingResponse",
     "Eip155Resource",
     "AsyncEip155Resource",
     "Eip155ResourceWithRawResponse",

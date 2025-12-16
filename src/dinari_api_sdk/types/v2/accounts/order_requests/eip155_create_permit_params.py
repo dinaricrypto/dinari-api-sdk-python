@@ -32,7 +32,9 @@ class Eip155CreatePermitParams(TypedDict, total=False):
     asset_token_quantity: Optional[float]
     """Amount of dShare asset tokens involved.
 
-    Required for limit `Orders` and market sell `Orders`.
+    Required for limit `Order Requests` and market sell `Order Requests`. Must be a
+    positive number with a precision of up to 4 decimal places for limit
+    `Order Requests` or up to 6 decimal places for market sell `Order Requests`.
     """
 
     client_order_id: Optional[str]

@@ -12,7 +12,8 @@ class OrderRequestCreateLimitBuyParams(TypedDict, total=False):
     asset_quantity: Required[float]
     """Amount of dShare asset involved.
 
-    Required for limit `Orders` and market sell `Orders`.
+    Required for limit `Order Requests` and market sell `Order Requests`. Must be a
+    positive number with a precision of up to 4 decimal places.
     """
 
     limit_price: Required[float]
