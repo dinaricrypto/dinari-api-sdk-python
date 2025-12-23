@@ -43,7 +43,19 @@ class OrderRequest(BaseModel):
     """Type of `Order`."""
 
     status: OrderRequestStatus
-    """Status of `OrderRequest`."""
+    """Status of `OrderRequest`. Possible values:
+
+    - `QUOTED`: Order request created with fee quote provided, ready for processing
+    - `PENDING`: Order request is being prepared for submission
+    - `PENDING_BRIDGE`: Order is waiting for bridge transaction to complete
+    - `SUBMITTED`: Order has been successfully submitted to the order book
+    - `ERROR`: An error occurred during order processing
+    - `CANCELLED`: Order request was cancelled
+    - `EXPIRED`: Order request expired due to deadline passing
+    """
+
+    cancel_message: Optional[str] = None
+    """Reason for the order cancellation if the order status is CANCELLED"""
 
     client_order_id: Optional[str] = None
     """
