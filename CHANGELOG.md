@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.9.0 (2025-12-23)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** api update ([a3c1d4b](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/a3c1d4b3b7b189817a4ec2ed55a1497195e33284))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([8a97388](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/8a97388cafec555f049ce5ddcdeb6b7562dc46f7))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([caf707b](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/caf707b3ee66e5b7128ee8064659eed189058cf6))
+
 ## 0.8.0 (2025-12-16)
 
 Full Changelog: [v0.7.1...v0.8.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.7.1...v0.8.0)
