@@ -1,6 +1,6 @@
 [project]
 name = "dinari-api-sdk"
-version = "0.9.0"
+version = "0.10.0"
 description = "The official Python library for the dinari API"
 dynamic = ["readme"]
 license = "Apache-2.0"
