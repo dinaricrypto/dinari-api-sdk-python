@@ -52,6 +52,7 @@ class Eip155SubmitResponse(BaseModel):
     - `ERROR`: An error occurred during order processing
     - `CANCELLED`: Order request was cancelled
     - `EXPIRED`: Order request expired due to deadline passing
+    - `REJECTED`: Order request was rejected
     """
 
     cancel_message: Optional[str] = None
@@ -65,3 +66,6 @@ class Eip155SubmitResponse(BaseModel):
 
     recipient_account_id: Optional[str] = None
     """ID of recipient `Account`."""
+
+    reject_message: Optional[str] = None
+    """Reason for the order rejection if the order status is REJECTED"""

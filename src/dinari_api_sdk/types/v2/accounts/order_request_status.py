@@ -5,5 +5,5 @@ from typing_extensions import Literal, TypeAlias
 __all__ = ["OrderRequestStatus"]
 
 OrderRequestStatus: TypeAlias = Literal[
-    "QUOTED", "PENDING", "PENDING_BRIDGE", "SUBMITTED", "ERROR", "CANCELLED", "EXPIRED"
+    "QUOTED", "PENDING", "PENDING_BRIDGE", "SUBMITTED", "ERROR", "CANCELLED", "EXPIRED", "REJECTED"
 ]
