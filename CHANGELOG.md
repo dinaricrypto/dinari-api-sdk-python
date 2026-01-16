@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.12.0 (2026-01-16)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **client:** add support for binary request streaming ([74fed73](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/74fed73b2b34a803380a0bd6a106d65d9a25f484))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([1e158ec](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/1e158ec1047efd2e68f61288f84db489b31299fa))
+
 ## 0.11.0 (2026-01-08)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.10.0...v0.11.0)
