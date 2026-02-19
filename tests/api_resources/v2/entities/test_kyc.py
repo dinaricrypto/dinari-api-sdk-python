@@ -21,7 +21,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestKYC:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Dinari) -> None:
         kyc = client.v2.entities.kyc.retrieve(
@@ -29,7 +29,7 @@ class TestKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Dinari) -> None:
         response = client.v2.entities.kyc.with_raw_response.retrieve(
@@ -41,7 +41,7 @@ class TestKYC:
         kyc = response.parse()
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Dinari) -> None:
         with client.v2.entities.kyc.with_streaming_response.retrieve(
@@ -55,7 +55,7 @@ class TestKYC:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -63,7 +63,7 @@ class TestKYC:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_managed_check(self, client: Dinari) -> None:
         kyc = client.v2.entities.kyc.create_managed_check(
@@ -71,7 +71,7 @@ class TestKYC:
         )
         assert_matches_type(KYCCreateManagedCheckResponse, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_managed_check(self, client: Dinari) -> None:
         response = client.v2.entities.kyc.with_raw_response.create_managed_check(
@@ -83,7 +83,7 @@ class TestKYC:
         kyc = response.parse()
         assert_matches_type(KYCCreateManagedCheckResponse, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_managed_check(self, client: Dinari) -> None:
         with client.v2.entities.kyc.with_streaming_response.create_managed_check(
@@ -97,7 +97,7 @@ class TestKYC:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create_managed_check(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -105,7 +105,7 @@ class TestKYC:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_submit_overload_1(self, client: Dinari) -> None:
         kyc = client.v2.entities.kyc.submit(
@@ -119,7 +119,7 @@ class TestKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_submit_with_all_params_overload_1(self, client: Dinari) -> None:
         kyc = client.v2.entities.kyc.submit(
@@ -144,7 +144,7 @@ class TestKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_submit_overload_1(self, client: Dinari) -> None:
         response = client.v2.entities.kyc.with_raw_response.submit(
@@ -162,7 +162,7 @@ class TestKYC:
         kyc = response.parse()
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_submit_overload_1(self, client: Dinari) -> None:
         with client.v2.entities.kyc.with_streaming_response.submit(
@@ -182,7 +182,7 @@ class TestKYC:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_submit_overload_1(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -196,7 +196,7 @@ class TestKYC:
                 provider_name="x",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_submit_overload_2(self, client: Dinari) -> None:
         kyc = client.v2.entities.kyc.submit(
@@ -267,7 +267,7 @@ class TestKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_submit_with_all_params_overload_2(self, client: Dinari) -> None:
         kyc = client.v2.entities.kyc.submit(
@@ -356,7 +356,7 @@ class TestKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_submit_overload_2(self, client: Dinari) -> None:
         response = client.v2.entities.kyc.with_raw_response.submit(
@@ -431,7 +431,7 @@ class TestKYC:
         kyc = response.parse()
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_submit_overload_2(self, client: Dinari) -> None:
         with client.v2.entities.kyc.with_streaming_response.submit(
@@ -508,7 +508,7 @@ class TestKYC:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_submit_overload_2(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -585,7 +585,7 @@ class TestAsyncKYC:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDinari) -> None:
         kyc = await async_client.v2.entities.kyc.retrieve(
@@ -593,7 +593,7 @@ class TestAsyncKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.kyc.with_raw_response.retrieve(
@@ -605,7 +605,7 @@ class TestAsyncKYC:
         kyc = await response.parse()
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.kyc.with_streaming_response.retrieve(
@@ -619,7 +619,7 @@ class TestAsyncKYC:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -627,7 +627,7 @@ class TestAsyncKYC:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_managed_check(self, async_client: AsyncDinari) -> None:
         kyc = await async_client.v2.entities.kyc.create_managed_check(
@@ -635,7 +635,7 @@ class TestAsyncKYC:
         )
         assert_matches_type(KYCCreateManagedCheckResponse, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_managed_check(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.kyc.with_raw_response.create_managed_check(
@@ -647,7 +647,7 @@ class TestAsyncKYC:
         kyc = await response.parse()
         assert_matches_type(KYCCreateManagedCheckResponse, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_managed_check(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.kyc.with_streaming_response.create_managed_check(
@@ -661,7 +661,7 @@ class TestAsyncKYC:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create_managed_check(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -669,7 +669,7 @@ class TestAsyncKYC:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_submit_overload_1(self, async_client: AsyncDinari) -> None:
         kyc = await async_client.v2.entities.kyc.submit(
@@ -683,7 +683,7 @@ class TestAsyncKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_submit_with_all_params_overload_1(self, async_client: AsyncDinari) -> None:
         kyc = await async_client.v2.entities.kyc.submit(
@@ -708,7 +708,7 @@ class TestAsyncKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_submit_overload_1(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.kyc.with_raw_response.submit(
@@ -726,7 +726,7 @@ class TestAsyncKYC:
         kyc = await response.parse()
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_submit_overload_1(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.kyc.with_streaming_response.submit(
@@ -746,7 +746,7 @@ class TestAsyncKYC:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_submit_overload_1(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
@@ -760,7 +760,7 @@ class TestAsyncKYC:
                 provider_name="x",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_submit_overload_2(self, async_client: AsyncDinari) -> None:
         kyc = await async_client.v2.entities.kyc.submit(
@@ -831,7 +831,7 @@ class TestAsyncKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_submit_with_all_params_overload_2(self, async_client: AsyncDinari) -> None:
         kyc = await async_client.v2.entities.kyc.submit(
@@ -920,7 +920,7 @@ class TestAsyncKYC:
         )
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_submit_overload_2(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.kyc.with_raw_response.submit(
@@ -995,7 +995,7 @@ class TestAsyncKYC:
         kyc = await response.parse()
         assert_matches_type(KYCInfo, kyc, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_submit_overload_2(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.kyc.with_streaming_response.submit(
@@ -1072,7 +1072,7 @@ class TestAsyncKYC:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_submit_overload_2(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):

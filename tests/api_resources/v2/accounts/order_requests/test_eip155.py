@@ -21,7 +21,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestEip155:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_permit(self, client: Dinari) -> None:
         eip155 = client.v2.accounts.order_requests.eip155.create_permit(
@@ -34,7 +34,7 @@ class TestEip155:
         )
         assert_matches_type(Eip155CreatePermitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_permit_with_all_params(self, client: Dinari) -> None:
         eip155 = client.v2.accounts.order_requests.eip155.create_permit(
@@ -53,7 +53,7 @@ class TestEip155:
         )
         assert_matches_type(Eip155CreatePermitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_permit(self, client: Dinari) -> None:
         response = client.v2.accounts.order_requests.eip155.with_raw_response.create_permit(
@@ -70,7 +70,7 @@ class TestEip155:
         eip155 = response.parse()
         assert_matches_type(Eip155CreatePermitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_permit(self, client: Dinari) -> None:
         with client.v2.accounts.order_requests.eip155.with_streaming_response.create_permit(
@@ -89,7 +89,7 @@ class TestEip155:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create_permit(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -102,7 +102,7 @@ class TestEip155:
                 payment_token="payment_token",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_permit_transaction(self, client: Dinari) -> None:
         eip155 = client.v2.accounts.order_requests.eip155.create_permit_transaction(
@@ -112,7 +112,7 @@ class TestEip155:
         )
         assert_matches_type(Eip155CreatePermitTransactionResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_permit_transaction(self, client: Dinari) -> None:
         response = client.v2.accounts.order_requests.eip155.with_raw_response.create_permit_transaction(
@@ -126,7 +126,7 @@ class TestEip155:
         eip155 = response.parse()
         assert_matches_type(Eip155CreatePermitTransactionResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_permit_transaction(self, client: Dinari) -> None:
         with client.v2.accounts.order_requests.eip155.with_streaming_response.create_permit_transaction(
@@ -142,7 +142,7 @@ class TestEip155:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create_permit_transaction(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -152,7 +152,7 @@ class TestEip155:
                 permit_signature="0xeaF12bD1DfFd",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_submit(self, client: Dinari) -> None:
         eip155 = client.v2.accounts.order_requests.eip155.submit(
@@ -162,7 +162,7 @@ class TestEip155:
         )
         assert_matches_type(Eip155SubmitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_submit(self, client: Dinari) -> None:
         response = client.v2.accounts.order_requests.eip155.with_raw_response.submit(
@@ -176,7 +176,7 @@ class TestEip155:
         eip155 = response.parse()
         assert_matches_type(Eip155SubmitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_submit(self, client: Dinari) -> None:
         with client.v2.accounts.order_requests.eip155.with_streaming_response.submit(
@@ -192,7 +192,7 @@ class TestEip155:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_submit(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -208,7 +208,7 @@ class TestAsyncEip155:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_permit(self, async_client: AsyncDinari) -> None:
         eip155 = await async_client.v2.accounts.order_requests.eip155.create_permit(
@@ -221,7 +221,7 @@ class TestAsyncEip155:
         )
         assert_matches_type(Eip155CreatePermitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_permit_with_all_params(self, async_client: AsyncDinari) -> None:
         eip155 = await async_client.v2.accounts.order_requests.eip155.create_permit(
@@ -240,7 +240,7 @@ class TestAsyncEip155:
         )
         assert_matches_type(Eip155CreatePermitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_permit(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.order_requests.eip155.with_raw_response.create_permit(
@@ -257,7 +257,7 @@ class TestAsyncEip155:
         eip155 = await response.parse()
         assert_matches_type(Eip155CreatePermitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_permit(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.accounts.order_requests.eip155.with_streaming_response.create_permit(
@@ -276,7 +276,7 @@ class TestAsyncEip155:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create_permit(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -289,7 +289,7 @@ class TestAsyncEip155:
                 payment_token="payment_token",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_permit_transaction(self, async_client: AsyncDinari) -> None:
         eip155 = await async_client.v2.accounts.order_requests.eip155.create_permit_transaction(
@@ -299,7 +299,7 @@ class TestAsyncEip155:
         )
         assert_matches_type(Eip155CreatePermitTransactionResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_permit_transaction(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.order_requests.eip155.with_raw_response.create_permit_transaction(
@@ -313,7 +313,7 @@ class TestAsyncEip155:
         eip155 = await response.parse()
         assert_matches_type(Eip155CreatePermitTransactionResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_permit_transaction(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.accounts.order_requests.eip155.with_streaming_response.create_permit_transaction(
@@ -329,7 +329,7 @@ class TestAsyncEip155:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create_permit_transaction(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -339,7 +339,7 @@ class TestAsyncEip155:
                 permit_signature="0xeaF12bD1DfFd",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_submit(self, async_client: AsyncDinari) -> None:
         eip155 = await async_client.v2.accounts.order_requests.eip155.submit(
@@ -349,7 +349,7 @@ class TestAsyncEip155:
         )
         assert_matches_type(Eip155SubmitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_submit(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.accounts.order_requests.eip155.with_raw_response.submit(
@@ -363,7 +363,7 @@ class TestAsyncEip155:
         eip155 = await response.parse()
         assert_matches_type(Eip155SubmitResponse, eip155, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_submit(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.accounts.order_requests.eip155.with_streaming_response.submit(
@@ -379,7 +379,7 @@ class TestAsyncEip155:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_submit(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
