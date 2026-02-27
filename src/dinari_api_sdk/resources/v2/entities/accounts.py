@@ -24,6 +24,11 @@ __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
 
 class AccountsResource(SyncAPIResource):
+    """**`Accounts` represent the financial accounts of an `Entity`.**
+
+    `Orders`, dividends, and other transactions are associated with an `Account`.
+    """
+
     @cached_property
     def with_raw_response(self) -> AccountsResourceWithRawResponse:
         """
@@ -132,6 +137,11 @@ class AccountsResource(SyncAPIResource):
 
 
 class AsyncAccountsResource(AsyncAPIResource):
+    """**`Accounts` represent the financial accounts of an `Entity`.**
+
+    `Orders`, dividends, and other transactions are associated with an `Account`.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncAccountsResourceWithRawResponse:
         """

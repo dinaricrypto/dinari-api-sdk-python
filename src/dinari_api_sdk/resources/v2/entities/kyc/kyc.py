@@ -36,8 +36,27 @@ __all__ = ["KYCResource", "AsyncKYCResource"]
 
 
 class KYCResource(SyncAPIResource):
+    """
+    **KYC (Know Your Customer) is a process of verifying the identity of customer `Entities`.**
+
+    KYC is required for all customer `Entities` that transact on Dinari's platform.
+
+    Dinari provides a managed KYC process for its Partners, which provides a convenient KYC flow URL to present to the end customer.
+
+    For Dinari Partners that supply their own KYC data, the API provides a way to record a customer's KYC information using the Partner's KYC data. This requires an existing KYC agreement between Dinari and the Partner.
+    """
+
     @cached_property
     def document(self) -> DocumentResource:
+        """
+        **KYC (Know Your Customer) is a process of verifying the identity of customer `Entities`.**
+
+        KYC is required for all customer `Entities` that transact on Dinari's platform.
+
+        Dinari provides a managed KYC process for its Partners, which provides a convenient KYC flow URL to present to the end customer.
+
+        For Dinari Partners that supply their own KYC data, the API provides a way to record a customer's KYC information using the Partner's KYC data. This requires an existing KYC agreement between Dinari and the Partner.
+        """
         return DocumentResource(self._client)
 
     @cached_property
@@ -253,8 +272,27 @@ class KYCResource(SyncAPIResource):
 
 
 class AsyncKYCResource(AsyncAPIResource):
+    """
+    **KYC (Know Your Customer) is a process of verifying the identity of customer `Entities`.**
+
+    KYC is required for all customer `Entities` that transact on Dinari's platform.
+
+    Dinari provides a managed KYC process for its Partners, which provides a convenient KYC flow URL to present to the end customer.
+
+    For Dinari Partners that supply their own KYC data, the API provides a way to record a customer's KYC information using the Partner's KYC data. This requires an existing KYC agreement between Dinari and the Partner.
+    """
+
     @cached_property
     def document(self) -> AsyncDocumentResource:
+        """
+        **KYC (Know Your Customer) is a process of verifying the identity of customer `Entities`.**
+
+        KYC is required for all customer `Entities` that transact on Dinari's platform.
+
+        Dinari provides a managed KYC process for its Partners, which provides a convenient KYC flow URL to present to the end customer.
+
+        For Dinari Partners that supply their own KYC data, the API provides a way to record a customer's KYC information using the Partner's KYC data. This requires an existing KYC agreement between Dinari and the Partner.
+        """
         return AsyncDocumentResource(self._client)
 
     @cached_property
@@ -485,6 +523,15 @@ class KYCResourceWithRawResponse:
 
     @cached_property
     def document(self) -> DocumentResourceWithRawResponse:
+        """
+        **KYC (Know Your Customer) is a process of verifying the identity of customer `Entities`.**
+
+        KYC is required for all customer `Entities` that transact on Dinari's platform.
+
+        Dinari provides a managed KYC process for its Partners, which provides a convenient KYC flow URL to present to the end customer.
+
+        For Dinari Partners that supply their own KYC data, the API provides a way to record a customer's KYC information using the Partner's KYC data. This requires an existing KYC agreement between Dinari and the Partner.
+        """
         return DocumentResourceWithRawResponse(self._kyc.document)
 
 
@@ -504,6 +551,15 @@ class AsyncKYCResourceWithRawResponse:
 
     @cached_property
     def document(self) -> AsyncDocumentResourceWithRawResponse:
+        """
+        **KYC (Know Your Customer) is a process of verifying the identity of customer `Entities`.**
+
+        KYC is required for all customer `Entities` that transact on Dinari's platform.
+
+        Dinari provides a managed KYC process for its Partners, which provides a convenient KYC flow URL to present to the end customer.
+
+        For Dinari Partners that supply their own KYC data, the API provides a way to record a customer's KYC information using the Partner's KYC data. This requires an existing KYC agreement between Dinari and the Partner.
+        """
         return AsyncDocumentResourceWithRawResponse(self._kyc.document)
 
 
@@ -523,6 +579,15 @@ class KYCResourceWithStreamingResponse:
 
     @cached_property
     def document(self) -> DocumentResourceWithStreamingResponse:
+        """
+        **KYC (Know Your Customer) is a process of verifying the identity of customer `Entities`.**
+
+        KYC is required for all customer `Entities` that transact on Dinari's platform.
+
+        Dinari provides a managed KYC process for its Partners, which provides a convenient KYC flow URL to present to the end customer.
+
+        For Dinari Partners that supply their own KYC data, the API provides a way to record a customer's KYC information using the Partner's KYC data. This requires an existing KYC agreement between Dinari and the Partner.
+        """
         return DocumentResourceWithStreamingResponse(self._kyc.document)
 
 
@@ -542,4 +607,13 @@ class AsyncKYCResourceWithStreamingResponse:
 
     @cached_property
     def document(self) -> AsyncDocumentResourceWithStreamingResponse:
+        """
+        **KYC (Know Your Customer) is a process of verifying the identity of customer `Entities`.**
+
+        KYC is required for all customer `Entities` that transact on Dinari's platform.
+
+        Dinari provides a managed KYC process for its Partners, which provides a convenient KYC flow URL to present to the end customer.
+
+        For Dinari Partners that supply their own KYC data, the API provides a way to record a customer's KYC information using the Partner's KYC data. This requires an existing KYC agreement between Dinari and the Partner.
+        """
         return AsyncDocumentResourceWithStreamingResponse(self._kyc.document)

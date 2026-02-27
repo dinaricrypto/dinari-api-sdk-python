@@ -50,16 +50,38 @@ __all__ = ["V2Resource", "AsyncV2Resource"]
 
 
 class V2Resource(SyncAPIResource):
+    """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+    For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+    For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+    """
+
     @cached_property
     def market_data(self) -> MarketDataResource:
+        """
+        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
         return MarketDataResource(self._client)
 
     @cached_property
     def entities(self) -> EntitiesResource:
+        """
+        **`Entities` represent a business or organization that uses the API, and their customers.**
+
+        Dinari Partners are represented as an organization `Entity` in the API, with their own accounts.
+        Individual customers of Partner `Entities` are also represented as `Entities` in the API, which are managed by the Partner `Entity`.
+        """
         return EntitiesResource(self._client)
 
     @cached_property
     def accounts(self) -> AccountsResource:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AccountsResource(self._client)
 
     @cached_property
@@ -143,16 +165,38 @@ class V2Resource(SyncAPIResource):
 
 
 class AsyncV2Resource(AsyncAPIResource):
+    """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+    For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+    For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+    """
+
     @cached_property
     def market_data(self) -> AsyncMarketDataResource:
+        """
+        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
         return AsyncMarketDataResource(self._client)
 
     @cached_property
     def entities(self) -> AsyncEntitiesResource:
+        """
+        **`Entities` represent a business or organization that uses the API, and their customers.**
+
+        Dinari Partners are represented as an organization `Entity` in the API, with their own accounts.
+        Individual customers of Partner `Entities` are also represented as `Entities` in the API, which are managed by the Partner `Entity`.
+        """
         return AsyncEntitiesResource(self._client)
 
     @cached_property
     def accounts(self) -> AsyncAccountsResource:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AsyncAccountsResource(self._client)
 
     @cached_property
@@ -245,14 +289,29 @@ class V2ResourceWithRawResponse:
 
     @cached_property
     def market_data(self) -> MarketDataResourceWithRawResponse:
+        """
+        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
         return MarketDataResourceWithRawResponse(self._v2.market_data)
 
     @cached_property
     def entities(self) -> EntitiesResourceWithRawResponse:
+        """
+        **`Entities` represent a business or organization that uses the API, and their customers.**
+
+        Dinari Partners are represented as an organization `Entity` in the API, with their own accounts.
+        Individual customers of Partner `Entities` are also represented as `Entities` in the API, which are managed by the Partner `Entity`.
+        """
         return EntitiesResourceWithRawResponse(self._v2.entities)
 
     @cached_property
     def accounts(self) -> AccountsResourceWithRawResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AccountsResourceWithRawResponse(self._v2.accounts)
 
 
@@ -266,14 +325,29 @@ class AsyncV2ResourceWithRawResponse:
 
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithRawResponse:
+        """
+        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
         return AsyncMarketDataResourceWithRawResponse(self._v2.market_data)
 
     @cached_property
     def entities(self) -> AsyncEntitiesResourceWithRawResponse:
+        """
+        **`Entities` represent a business or organization that uses the API, and their customers.**
+
+        Dinari Partners are represented as an organization `Entity` in the API, with their own accounts.
+        Individual customers of Partner `Entities` are also represented as `Entities` in the API, which are managed by the Partner `Entity`.
+        """
         return AsyncEntitiesResourceWithRawResponse(self._v2.entities)
 
     @cached_property
     def accounts(self) -> AsyncAccountsResourceWithRawResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AsyncAccountsResourceWithRawResponse(self._v2.accounts)
 
 
@@ -287,14 +361,29 @@ class V2ResourceWithStreamingResponse:
 
     @cached_property
     def market_data(self) -> MarketDataResourceWithStreamingResponse:
+        """
+        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
         return MarketDataResourceWithStreamingResponse(self._v2.market_data)
 
     @cached_property
     def entities(self) -> EntitiesResourceWithStreamingResponse:
+        """
+        **`Entities` represent a business or organization that uses the API, and their customers.**
+
+        Dinari Partners are represented as an organization `Entity` in the API, with their own accounts.
+        Individual customers of Partner `Entities` are also represented as `Entities` in the API, which are managed by the Partner `Entity`.
+        """
         return EntitiesResourceWithStreamingResponse(self._v2.entities)
 
     @cached_property
     def accounts(self) -> AccountsResourceWithStreamingResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AccountsResourceWithStreamingResponse(self._v2.accounts)
 
 
@@ -308,12 +397,27 @@ class AsyncV2ResourceWithStreamingResponse:
 
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithStreamingResponse:
+        """
+        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
         return AsyncMarketDataResourceWithStreamingResponse(self._v2.market_data)
 
     @cached_property
     def entities(self) -> AsyncEntitiesResourceWithStreamingResponse:
+        """
+        **`Entities` represent a business or organization that uses the API, and their customers.**
+
+        Dinari Partners are represented as an organization `Entity` in the API, with their own accounts.
+        Individual customers of Partner `Entities` are also represented as `Entities` in the API, which are managed by the Partner `Entity`.
+        """
         return AsyncEntitiesResourceWithStreamingResponse(self._v2.entities)
 
     @cached_property
     def accounts(self) -> AsyncAccountsResourceWithStreamingResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AsyncAccountsResourceWithStreamingResponse(self._v2.accounts)

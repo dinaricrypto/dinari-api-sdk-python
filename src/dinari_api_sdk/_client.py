@@ -145,6 +145,12 @@ class Dinari(SyncAPIClient):
 
     @cached_property
     def v2(self) -> V2Resource:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         from .resources.v2 import V2Resource
 
         return V2Resource(self)
@@ -368,6 +374,12 @@ class AsyncDinari(AsyncAPIClient):
 
     @cached_property
     def v2(self) -> AsyncV2Resource:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         from .resources.v2 import AsyncV2Resource
 
         return AsyncV2Resource(self)
@@ -506,6 +518,12 @@ class DinariWithRawResponse:
 
     @cached_property
     def v2(self) -> v2.V2ResourceWithRawResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         from .resources.v2 import V2ResourceWithRawResponse
 
         return V2ResourceWithRawResponse(self._client.v2)
@@ -519,6 +537,12 @@ class AsyncDinariWithRawResponse:
 
     @cached_property
     def v2(self) -> v2.AsyncV2ResourceWithRawResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         from .resources.v2 import AsyncV2ResourceWithRawResponse
 
         return AsyncV2ResourceWithRawResponse(self._client.v2)
@@ -532,6 +556,12 @@ class DinariWithStreamedResponse:
 
     @cached_property
     def v2(self) -> v2.V2ResourceWithStreamingResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         from .resources.v2 import V2ResourceWithStreamingResponse
 
         return V2ResourceWithStreamingResponse(self._client.v2)
@@ -545,6 +575,12 @@ class AsyncDinariWithStreamedResponse:
 
     @cached_property
     def v2(self) -> v2.AsyncV2ResourceWithStreamingResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         from .resources.v2 import AsyncV2ResourceWithStreamingResponse
 
         return AsyncV2ResourceWithStreamingResponse(self._client.v2)

@@ -24,6 +24,15 @@ __all__ = ["ExternalResource", "AsyncExternalResource"]
 
 
 class ExternalResource(SyncAPIResource):
+    """
+    **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+    An `Account` may be connected to a single `Wallet`.
+
+    Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+    For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+    """
+
     @cached_property
     def with_raw_response(self) -> ExternalResourceWithRawResponse:
         """
@@ -150,6 +159,15 @@ class ExternalResource(SyncAPIResource):
 
 
 class AsyncExternalResource(AsyncAPIResource):
+    """
+    **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+    An `Account` may be connected to a single `Wallet`.
+
+    Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+    For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncExternalResourceWithRawResponse:
         """
