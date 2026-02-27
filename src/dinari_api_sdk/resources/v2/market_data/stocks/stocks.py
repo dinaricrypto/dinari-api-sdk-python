@@ -43,6 +43,10 @@ __all__ = ["StocksResource", "AsyncStocksResource"]
 class StocksResource(SyncAPIResource):
     @cached_property
     def splits(self) -> SplitsResource:
+        """**Corporate actions are events that affect the ownership of a `Stock`.**
+
+        Corporate actions include dividends and stock splits.
+        """
         return SplitsResource(self._client)
 
     @cached_property
@@ -302,6 +306,10 @@ class StocksResource(SyncAPIResource):
 class AsyncStocksResource(AsyncAPIResource):
     @cached_property
     def splits(self) -> AsyncSplitsResource:
+        """**Corporate actions are events that affect the ownership of a `Stock`.**
+
+        Corporate actions include dividends and stock splits.
+        """
         return AsyncSplitsResource(self._client)
 
     @cached_property
@@ -583,6 +591,10 @@ class StocksResourceWithRawResponse:
 
     @cached_property
     def splits(self) -> SplitsResourceWithRawResponse:
+        """**Corporate actions are events that affect the ownership of a `Stock`.**
+
+        Corporate actions include dividends and stock splits.
+        """
         return SplitsResourceWithRawResponse(self._stocks.splits)
 
 
@@ -611,6 +623,10 @@ class AsyncStocksResourceWithRawResponse:
 
     @cached_property
     def splits(self) -> AsyncSplitsResourceWithRawResponse:
+        """**Corporate actions are events that affect the ownership of a `Stock`.**
+
+        Corporate actions include dividends and stock splits.
+        """
         return AsyncSplitsResourceWithRawResponse(self._stocks.splits)
 
 
@@ -639,6 +655,10 @@ class StocksResourceWithStreamingResponse:
 
     @cached_property
     def splits(self) -> SplitsResourceWithStreamingResponse:
+        """**Corporate actions are events that affect the ownership of a `Stock`.**
+
+        Corporate actions include dividends and stock splits.
+        """
         return SplitsResourceWithStreamingResponse(self._stocks.splits)
 
 
@@ -667,4 +687,8 @@ class AsyncStocksResourceWithStreamingResponse:
 
     @cached_property
     def splits(self) -> AsyncSplitsResourceWithStreamingResponse:
+        """**Corporate actions are events that affect the ownership of a `Stock`.**
+
+        Corporate actions include dividends and stock splits.
+        """
         return AsyncSplitsResourceWithStreamingResponse(self._stocks.splits)

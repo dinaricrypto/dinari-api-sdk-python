@@ -38,6 +38,12 @@ __all__ = ["Eip155Resource", "AsyncEip155Resource"]
 
 
 class Eip155Resource(SyncAPIResource):
+    """
+    **`Order Requests` represent requests for Dinari to create `Orders` on behalf of an `Account`.**
+
+    `Order Requests` are created when placing **proxied orders** or **managed orders**. See their respective descriptions for more details.
+    """
+
     @cached_property
     def with_raw_response(self) -> Eip155ResourceWithRawResponse:
         """
@@ -252,6 +258,12 @@ class Eip155Resource(SyncAPIResource):
 
 
 class AsyncEip155Resource(AsyncAPIResource):
+    """
+    **`Order Requests` represent requests for Dinari to create `Orders` on behalf of an `Account`.**
+
+    `Order Requests` are created when placing **proxied orders** or **managed orders**. See their respective descriptions for more details.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncEip155ResourceWithRawResponse:
         """

@@ -23,6 +23,11 @@ __all__ = ["SplitsResource", "AsyncSplitsResource"]
 
 
 class SplitsResource(SyncAPIResource):
+    """**Corporate actions are events that affect the ownership of a `Stock`.**
+
+    Corporate actions include dividends and stock splits.
+    """
+
     @cached_property
     def with_raw_response(self) -> SplitsResourceWithRawResponse:
         """
@@ -150,6 +155,11 @@ class SplitsResource(SyncAPIResource):
 
 
 class AsyncSplitsResource(AsyncAPIResource):
+    """**Corporate actions are events that affect the ownership of a `Stock`.**
+
+    Corporate actions include dividends and stock splits.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncSplitsResourceWithRawResponse:
         """

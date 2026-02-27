@@ -34,8 +34,25 @@ __all__ = ["WalletResource", "AsyncWalletResource"]
 
 
 class WalletResource(SyncAPIResource):
+    """
+    **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+    An `Account` may be connected to a single `Wallet`.
+
+    Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+    For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+    """
+
     @cached_property
     def external(self) -> ExternalResource:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return ExternalResource(self._client)
 
     @cached_property
@@ -143,8 +160,25 @@ class WalletResource(SyncAPIResource):
 
 
 class AsyncWalletResource(AsyncAPIResource):
+    """
+    **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+    An `Account` may be connected to a single `Wallet`.
+
+    Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+    For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+    """
+
     @cached_property
     def external(self) -> AsyncExternalResource:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return AsyncExternalResource(self._client)
 
     @cached_property
@@ -264,6 +298,14 @@ class WalletResourceWithRawResponse:
 
     @cached_property
     def external(self) -> ExternalResourceWithRawResponse:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return ExternalResourceWithRawResponse(self._wallet.external)
 
 
@@ -280,6 +322,14 @@ class AsyncWalletResourceWithRawResponse:
 
     @cached_property
     def external(self) -> AsyncExternalResourceWithRawResponse:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return AsyncExternalResourceWithRawResponse(self._wallet.external)
 
 
@@ -296,6 +346,14 @@ class WalletResourceWithStreamingResponse:
 
     @cached_property
     def external(self) -> ExternalResourceWithStreamingResponse:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return ExternalResourceWithStreamingResponse(self._wallet.external)
 
 
@@ -312,4 +370,12 @@ class AsyncWalletResourceWithStreamingResponse:
 
     @cached_property
     def external(self) -> AsyncExternalResourceWithStreamingResponse:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return AsyncExternalResourceWithStreamingResponse(self._wallet.external)

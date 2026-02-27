@@ -23,6 +23,11 @@ __all__ = ["TokenTransfersResource", "AsyncTokenTransfersResource"]
 
 
 class TokenTransfersResource(SyncAPIResource):
+    """**`Accounts` represent the financial accounts of an `Entity`.**
+
+    `Orders`, dividends, and other transactions are associated with an `Account`.
+    """
+
     @cached_property
     def with_raw_response(self) -> TokenTransfersResourceWithRawResponse:
         """
@@ -187,6 +192,11 @@ class TokenTransfersResource(SyncAPIResource):
 
 
 class AsyncTokenTransfersResource(AsyncAPIResource):
+    """**`Accounts` represent the financial accounts of an `Entity`.**
+
+    `Orders`, dividends, and other transactions are associated with an `Account`.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTokenTransfersResourceWithRawResponse:
         """
