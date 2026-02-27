@@ -49,6 +49,11 @@ __all__ = ["OrderRequestsResource", "AsyncOrderRequestsResource"]
 class OrderRequestsResource(SyncAPIResource):
     @cached_property
     def eip155(self) -> Eip155Resource:
+        """
+        **`Order Requests` represent requests for Dinari to create `Orders` on behalf of an `Account`.**
+
+        `Order Requests` are created when placing **proxied orders** or **managed orders**. See their respective descriptions for more details.
+        """
         return Eip155Resource(self._client)
 
     @cached_property
@@ -528,6 +533,11 @@ class OrderRequestsResource(SyncAPIResource):
 class AsyncOrderRequestsResource(AsyncAPIResource):
     @cached_property
     def eip155(self) -> AsyncEip155Resource:
+        """
+        **`Order Requests` represent requests for Dinari to create `Orders` on behalf of an `Account`.**
+
+        `Order Requests` are created when placing **proxied orders** or **managed orders**. See their respective descriptions for more details.
+        """
         return AsyncEip155Resource(self._client)
 
     @cached_property
@@ -1032,6 +1042,11 @@ class OrderRequestsResourceWithRawResponse:
 
     @cached_property
     def eip155(self) -> Eip155ResourceWithRawResponse:
+        """
+        **`Order Requests` represent requests for Dinari to create `Orders` on behalf of an `Account`.**
+
+        `Order Requests` are created when placing **proxied orders** or **managed orders**. See their respective descriptions for more details.
+        """
         return Eip155ResourceWithRawResponse(self._order_requests.eip155)
 
 
@@ -1063,6 +1078,11 @@ class AsyncOrderRequestsResourceWithRawResponse:
 
     @cached_property
     def eip155(self) -> AsyncEip155ResourceWithRawResponse:
+        """
+        **`Order Requests` represent requests for Dinari to create `Orders` on behalf of an `Account`.**
+
+        `Order Requests` are created when placing **proxied orders** or **managed orders**. See their respective descriptions for more details.
+        """
         return AsyncEip155ResourceWithRawResponse(self._order_requests.eip155)
 
 
@@ -1094,6 +1114,11 @@ class OrderRequestsResourceWithStreamingResponse:
 
     @cached_property
     def eip155(self) -> Eip155ResourceWithStreamingResponse:
+        """
+        **`Order Requests` represent requests for Dinari to create `Orders` on behalf of an `Account`.**
+
+        `Order Requests` are created when placing **proxied orders** or **managed orders**. See their respective descriptions for more details.
+        """
         return Eip155ResourceWithStreamingResponse(self._order_requests.eip155)
 
 
@@ -1125,4 +1150,9 @@ class AsyncOrderRequestsResourceWithStreamingResponse:
 
     @cached_property
     def eip155(self) -> AsyncEip155ResourceWithStreamingResponse:
+        """
+        **`Order Requests` represent requests for Dinari to create `Orders` on behalf of an `Account`.**
+
+        `Order Requests` are created when placing **proxied orders** or **managed orders**. See their respective descriptions for more details.
+        """
         return AsyncEip155ResourceWithStreamingResponse(self._order_requests.eip155)

@@ -23,6 +23,11 @@ __all__ = ["ActivitiesResource", "AsyncActivitiesResource"]
 
 
 class ActivitiesResource(SyncAPIResource):
+    """**`Accounts` represent the financial accounts of an `Entity`.**
+
+    `Orders`, dividends, and other transactions are associated with an `Account`.
+    """
+
     @cached_property
     def with_raw_response(self) -> ActivitiesResourceWithRawResponse:
         """
@@ -98,6 +103,11 @@ class ActivitiesResource(SyncAPIResource):
 
 
 class AsyncActivitiesResource(AsyncAPIResource):
+    """**`Accounts` represent the financial accounts of an `Entity`.**
+
+    `Orders`, dividends, and other transactions are associated with an `Account`.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncActivitiesResourceWithRawResponse:
         """

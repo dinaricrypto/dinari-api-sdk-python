@@ -100,16 +100,41 @@ __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
 
 class AccountsResource(SyncAPIResource):
+    """**`Accounts` represent the financial accounts of an `Entity`.**
+
+    `Orders`, dividends, and other transactions are associated with an `Account`.
+    """
+
     @cached_property
     def wallet(self) -> WalletResource:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return WalletResource(self._client)
 
     @cached_property
     def orders(self) -> OrdersResource:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return OrdersResource(self._client)
 
     @cached_property
     def order_fulfillments(self) -> OrderFulfillmentsResource:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return OrderFulfillmentsResource(self._client)
 
     @cached_property
@@ -118,18 +143,44 @@ class AccountsResource(SyncAPIResource):
 
     @cached_property
     def withdrawal_requests(self) -> WithdrawalRequestsResource:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return WithdrawalRequestsResource(self._client)
 
     @cached_property
     def withdrawals(self) -> WithdrawalsResource:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return WithdrawalsResource(self._client)
 
     @cached_property
     def token_transfers(self) -> TokenTransfersResource:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return TokenTransfersResource(self._client)
 
     @cached_property
     def activities(self) -> ActivitiesResource:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return ActivitiesResource(self._client)
 
     @cached_property
@@ -463,16 +514,41 @@ class AccountsResource(SyncAPIResource):
 
 
 class AsyncAccountsResource(AsyncAPIResource):
+    """**`Accounts` represent the financial accounts of an `Entity`.**
+
+    `Orders`, dividends, and other transactions are associated with an `Account`.
+    """
+
     @cached_property
     def wallet(self) -> AsyncWalletResource:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return AsyncWalletResource(self._client)
 
     @cached_property
     def orders(self) -> AsyncOrdersResource:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return AsyncOrdersResource(self._client)
 
     @cached_property
     def order_fulfillments(self) -> AsyncOrderFulfillmentsResource:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return AsyncOrderFulfillmentsResource(self._client)
 
     @cached_property
@@ -481,18 +557,44 @@ class AsyncAccountsResource(AsyncAPIResource):
 
     @cached_property
     def withdrawal_requests(self) -> AsyncWithdrawalRequestsResource:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return AsyncWithdrawalRequestsResource(self._client)
 
     @cached_property
     def withdrawals(self) -> AsyncWithdrawalsResource:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return AsyncWithdrawalsResource(self._client)
 
     @cached_property
     def token_transfers(self) -> AsyncTokenTransfersResource:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AsyncTokenTransfersResource(self._client)
 
     @cached_property
     def activities(self) -> AsyncActivitiesResource:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AsyncActivitiesResource(self._client)
 
     @cached_property
@@ -853,14 +955,34 @@ class AccountsResourceWithRawResponse:
 
     @cached_property
     def wallet(self) -> WalletResourceWithRawResponse:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return WalletResourceWithRawResponse(self._accounts.wallet)
 
     @cached_property
     def orders(self) -> OrdersResourceWithRawResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return OrdersResourceWithRawResponse(self._accounts.orders)
 
     @cached_property
     def order_fulfillments(self) -> OrderFulfillmentsResourceWithRawResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return OrderFulfillmentsResourceWithRawResponse(self._accounts.order_fulfillments)
 
     @cached_property
@@ -869,18 +991,44 @@ class AccountsResourceWithRawResponse:
 
     @cached_property
     def withdrawal_requests(self) -> WithdrawalRequestsResourceWithRawResponse:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return WithdrawalRequestsResourceWithRawResponse(self._accounts.withdrawal_requests)
 
     @cached_property
     def withdrawals(self) -> WithdrawalsResourceWithRawResponse:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return WithdrawalsResourceWithRawResponse(self._accounts.withdrawals)
 
     @cached_property
     def token_transfers(self) -> TokenTransfersResourceWithRawResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return TokenTransfersResourceWithRawResponse(self._accounts.token_transfers)
 
     @cached_property
     def activities(self) -> ActivitiesResourceWithRawResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return ActivitiesResourceWithRawResponse(self._accounts.activities)
 
 
@@ -912,14 +1060,34 @@ class AsyncAccountsResourceWithRawResponse:
 
     @cached_property
     def wallet(self) -> AsyncWalletResourceWithRawResponse:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return AsyncWalletResourceWithRawResponse(self._accounts.wallet)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithRawResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return AsyncOrdersResourceWithRawResponse(self._accounts.orders)
 
     @cached_property
     def order_fulfillments(self) -> AsyncOrderFulfillmentsResourceWithRawResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return AsyncOrderFulfillmentsResourceWithRawResponse(self._accounts.order_fulfillments)
 
     @cached_property
@@ -928,18 +1096,44 @@ class AsyncAccountsResourceWithRawResponse:
 
     @cached_property
     def withdrawal_requests(self) -> AsyncWithdrawalRequestsResourceWithRawResponse:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return AsyncWithdrawalRequestsResourceWithRawResponse(self._accounts.withdrawal_requests)
 
     @cached_property
     def withdrawals(self) -> AsyncWithdrawalsResourceWithRawResponse:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return AsyncWithdrawalsResourceWithRawResponse(self._accounts.withdrawals)
 
     @cached_property
     def token_transfers(self) -> AsyncTokenTransfersResourceWithRawResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AsyncTokenTransfersResourceWithRawResponse(self._accounts.token_transfers)
 
     @cached_property
     def activities(self) -> AsyncActivitiesResourceWithRawResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AsyncActivitiesResourceWithRawResponse(self._accounts.activities)
 
 
@@ -971,14 +1165,34 @@ class AccountsResourceWithStreamingResponse:
 
     @cached_property
     def wallet(self) -> WalletResourceWithStreamingResponse:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return WalletResourceWithStreamingResponse(self._accounts.wallet)
 
     @cached_property
     def orders(self) -> OrdersResourceWithStreamingResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return OrdersResourceWithStreamingResponse(self._accounts.orders)
 
     @cached_property
     def order_fulfillments(self) -> OrderFulfillmentsResourceWithStreamingResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return OrderFulfillmentsResourceWithStreamingResponse(self._accounts.order_fulfillments)
 
     @cached_property
@@ -987,18 +1201,44 @@ class AccountsResourceWithStreamingResponse:
 
     @cached_property
     def withdrawal_requests(self) -> WithdrawalRequestsResourceWithStreamingResponse:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return WithdrawalRequestsResourceWithStreamingResponse(self._accounts.withdrawal_requests)
 
     @cached_property
     def withdrawals(self) -> WithdrawalsResourceWithStreamingResponse:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return WithdrawalsResourceWithStreamingResponse(self._accounts.withdrawals)
 
     @cached_property
     def token_transfers(self) -> TokenTransfersResourceWithStreamingResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return TokenTransfersResourceWithStreamingResponse(self._accounts.token_transfers)
 
     @cached_property
     def activities(self) -> ActivitiesResourceWithStreamingResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return ActivitiesResourceWithStreamingResponse(self._accounts.activities)
 
 
@@ -1030,14 +1270,34 @@ class AsyncAccountsResourceWithStreamingResponse:
 
     @cached_property
     def wallet(self) -> AsyncWalletResourceWithStreamingResponse:
+        """
+        **`Wallets` represent the blockchain wallet that holds the assets of an `Account`.**
+
+        An `Account` may be connected to a single `Wallet`.
+
+        Individual `Entities` can connect their self-custodied `Wallets` by proving ownership of the `Wallet` address.
+        For Dinari Partners, a Dinari-managed `Wallet` can be created for the Partner `Entity` in the [Dinari Partners Portal](https://Partners.dinari.com/). This may be used in omnibus accounting for self-managing customers' assets.
+        """
         return AsyncWalletResourceWithStreamingResponse(self._accounts.wallet)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithStreamingResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return AsyncOrdersResourceWithStreamingResponse(self._accounts.orders)
 
     @cached_property
     def order_fulfillments(self) -> AsyncOrderFulfillmentsResourceWithStreamingResponse:
+        """**`Orders` represent the buying and selling of assets under an `Account`.**
+
+        For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+
+        For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+        """
         return AsyncOrderFulfillmentsResourceWithStreamingResponse(self._accounts.order_fulfillments)
 
     @cached_property
@@ -1046,16 +1306,42 @@ class AsyncAccountsResourceWithStreamingResponse:
 
     @cached_property
     def withdrawal_requests(self) -> AsyncWithdrawalRequestsResourceWithStreamingResponse:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return AsyncWithdrawalRequestsResourceWithStreamingResponse(self._accounts.withdrawal_requests)
 
     @cached_property
     def withdrawals(self) -> AsyncWithdrawalsResourceWithStreamingResponse:
+        """
+        **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+        Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+        Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+        Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+        """
         return AsyncWithdrawalsResourceWithStreamingResponse(self._accounts.withdrawals)
 
     @cached_property
     def token_transfers(self) -> AsyncTokenTransfersResourceWithStreamingResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AsyncTokenTransfersResourceWithStreamingResponse(self._accounts.token_transfers)
 
     @cached_property
     def activities(self) -> AsyncActivitiesResourceWithStreamingResponse:
+        """**`Accounts` represent the financial accounts of an `Entity`.**
+
+        `Orders`, dividends, and other transactions are associated with an `Account`.
+        """
         return AsyncActivitiesResourceWithStreamingResponse(self._accounts.activities)

@@ -28,6 +28,12 @@ __all__ = ["MarketDataResource", "AsyncMarketDataResource"]
 
 
 class MarketDataResource(SyncAPIResource):
+    """
+    **Dinari provides basic market data for `Stocks` that are available to transact on.**
+
+    This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+    """
+
     @cached_property
     def stocks(self) -> StocksResource:
         return StocksResource(self._client)
@@ -75,6 +81,12 @@ class MarketDataResource(SyncAPIResource):
 
 
 class AsyncMarketDataResource(AsyncAPIResource):
+    """
+    **Dinari provides basic market data for `Stocks` that are available to transact on.**
+
+    This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+    """
+
     @cached_property
     def stocks(self) -> AsyncStocksResource:
         return AsyncStocksResource(self._client)

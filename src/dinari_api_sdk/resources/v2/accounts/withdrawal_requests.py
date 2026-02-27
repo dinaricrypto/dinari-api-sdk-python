@@ -23,6 +23,16 @@ __all__ = ["WithdrawalRequestsResource", "AsyncWithdrawalRequestsResource"]
 
 
 class WithdrawalRequestsResource(SyncAPIResource):
+    """
+    **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+    Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+    Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+    Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+    """
+
     @cached_property
     def with_raw_response(self) -> WithdrawalRequestsResourceWithRawResponse:
         """
@@ -178,6 +188,16 @@ class WithdrawalRequestsResource(SyncAPIResource):
 
 
 class AsyncWithdrawalRequestsResource(AsyncAPIResource):
+    """
+    **`Withdrawals` represent the transfer of stablecoins from an `Account` connected to a managed `Wallet` to another `Account` that is owned by the `Entity`.**
+
+    Since the `Account` is backed by a managed `Wallet`, the `Withdrawal` must be processed by Dinari and the corresponding transaction is submitted on chain.
+
+    Upon requesting a withdrawal, a `WithdrawalRequest` is created, which is then submitted on chain by Dinari. Once the transfer is submitted on chain, the corresponding `Withdrawal` is created.
+
+    Currently, withdrawals are made in USDC on the Arbitrum network (Chain ID `eip155:42161`).
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncWithdrawalRequestsResourceWithRawResponse:
         """
