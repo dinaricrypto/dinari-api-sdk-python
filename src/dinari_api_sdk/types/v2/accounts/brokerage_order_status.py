@@ -12,6 +12,7 @@ BrokerageOrderStatus: TypeAlias = Literal[
     "ESCROWED",
     "SUBMITTED",
     "CANCELLED",
+    "PARTIALLY_FILLED",
     "FILLED",
     "REJECTED",
     "REQUIRING_CONTACT",
