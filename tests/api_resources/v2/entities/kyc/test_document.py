@@ -79,7 +79,7 @@ class TestDocument:
             kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="GOVERNMENT_ID",
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(KYCDocument, document, path=["response"])
 
@@ -90,7 +90,7 @@ class TestDocument:
             kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="GOVERNMENT_ID",
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -105,7 +105,7 @@ class TestDocument:
             kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="GOVERNMENT_ID",
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -123,7 +123,7 @@ class TestDocument:
                 kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 entity_id="",
                 document_type="GOVERNMENT_ID",
-                file=b"raw file contents",
+                file=b"Example data",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `kyc_id` but received ''"):
@@ -131,7 +131,7 @@ class TestDocument:
                 kyc_id="",
                 entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 document_type="GOVERNMENT_ID",
-                file=b"raw file contents",
+                file=b"Example data",
             )
 
 
@@ -199,7 +199,7 @@ class TestAsyncDocument:
             kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="GOVERNMENT_ID",
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(KYCDocument, document, path=["response"])
 
@@ -210,7 +210,7 @@ class TestAsyncDocument:
             kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="GOVERNMENT_ID",
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -225,7 +225,7 @@ class TestAsyncDocument:
             kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document_type="GOVERNMENT_ID",
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -243,7 +243,7 @@ class TestAsyncDocument:
                 kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 entity_id="",
                 document_type="GOVERNMENT_ID",
-                file=b"raw file contents",
+                file=b"Example data",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `kyc_id` but received ''"):
@@ -251,5 +251,5 @@ class TestAsyncDocument:
                 kyc_id="",
                 entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 document_type="GOVERNMENT_ID",
-                file=b"raw file contents",
+                file=b"Example data",
             )
