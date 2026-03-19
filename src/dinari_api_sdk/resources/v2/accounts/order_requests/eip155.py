@@ -7,7 +7,7 @@ from typing import Optional
 import httpx
 
 from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ....._utils import maybe_transform, async_maybe_transform
+from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from .....types.v2 import Chain
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -134,7 +134,7 @@ class Eip155Resource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/eip155/permit",
+            path_template("/api/v2/accounts/{account_id}/order_requests/eip155/permit", account_id=account_id),
             body=maybe_transform(
                 {
                     "chain_id": chain_id,
@@ -192,7 +192,9 @@ class Eip155Resource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/eip155/permit_transaction",
+            path_template(
+                "/api/v2/accounts/{account_id}/order_requests/eip155/permit_transaction", account_id=account_id
+            ),
             body=maybe_transform(
                 {
                     "order_request_id": order_request_id,
@@ -242,7 +244,7 @@ class Eip155Resource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/eip155",
+            path_template("/api/v2/accounts/{account_id}/order_requests/eip155", account_id=account_id),
             body=maybe_transform(
                 {
                     "order_request_id": order_request_id,
@@ -354,7 +356,7 @@ class AsyncEip155Resource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/eip155/permit",
+            path_template("/api/v2/accounts/{account_id}/order_requests/eip155/permit", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "chain_id": chain_id,
@@ -412,7 +414,9 @@ class AsyncEip155Resource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/eip155/permit_transaction",
+            path_template(
+                "/api/v2/accounts/{account_id}/order_requests/eip155/permit_transaction", account_id=account_id
+            ),
             body=await async_maybe_transform(
                 {
                     "order_request_id": order_request_id,
@@ -462,7 +466,7 @@ class AsyncEip155Resource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/eip155",
+            path_template("/api/v2/accounts/{account_id}/order_requests/eip155", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "order_request_id": order_request_id,

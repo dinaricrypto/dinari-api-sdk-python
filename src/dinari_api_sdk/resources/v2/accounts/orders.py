@@ -7,7 +7,7 @@ from typing import Optional
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v2 import Chain
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -84,7 +84,7 @@ class OrdersResource(SyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/orders/{order_id}",
+            path_template("/api/v2/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -130,7 +130,7 @@ class OrdersResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/orders",
+            path_template("/api/v2/accounts/{account_id}/orders", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -191,7 +191,7 @@ class OrdersResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/orders/cancel",
+            path_template("/api/v2/accounts/{account_id}/orders/cancel", account_id=account_id),
             body=maybe_transform({"order_ids": order_ids}, order_batch_cancel_params.OrderBatchCancelParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -238,7 +238,9 @@ class OrdersResource(SyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/orders/{order_id}/cancel",
+            path_template(
+                "/api/v2/accounts/{account_id}/orders/{order_id}/cancel", account_id=account_id, order_id=order_id
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -276,7 +278,9 @@ class OrdersResource(SyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/orders/{order_id}/fulfillments",
+            path_template(
+                "/api/v2/accounts/{account_id}/orders/{order_id}/fulfillments", account_id=account_id, order_id=order_id
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -350,7 +354,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/orders/{order_id}",
+            path_template("/api/v2/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -396,7 +400,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/orders",
+            path_template("/api/v2/accounts/{account_id}/orders", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -457,7 +461,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/orders/cancel",
+            path_template("/api/v2/accounts/{account_id}/orders/cancel", account_id=account_id),
             body=await async_maybe_transform(
                 {"order_ids": order_ids}, order_batch_cancel_params.OrderBatchCancelParams
             ),
@@ -506,7 +510,9 @@ class AsyncOrdersResource(AsyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/orders/{order_id}/cancel",
+            path_template(
+                "/api/v2/accounts/{account_id}/orders/{order_id}/cancel", account_id=account_id, order_id=order_id
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -544,7 +550,9 @@ class AsyncOrdersResource(AsyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/orders/{order_id}/fulfillments",
+            path_template(
+                "/api/v2/accounts/{account_id}/orders/{order_id}/fulfillments", account_id=account_id, order_id=order_id
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

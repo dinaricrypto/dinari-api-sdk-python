@@ -15,7 +15,7 @@ from .splits import (
     AsyncSplitsResourceWithStreamingResponse,
 )
 from ....._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from ....._utils import maybe_transform, async_maybe_transform
+from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -141,7 +141,7 @@ class StocksResource(SyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/current_price",
+            path_template("/api/v2/market_data/stocks/{stock_id}/current_price", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -174,7 +174,7 @@ class StocksResource(SyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/current_quote",
+            path_template("/api/v2/market_data/stocks/{stock_id}/current_quote", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -210,7 +210,7 @@ class StocksResource(SyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/dividends",
+            path_template("/api/v2/market_data/stocks/{stock_id}/dividends", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -248,7 +248,7 @@ class StocksResource(SyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/historical_prices/",
+            path_template("/api/v2/market_data/stocks/{stock_id}/historical_prices/", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -291,7 +291,7 @@ class StocksResource(SyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/news",
+            path_template("/api/v2/market_data/stocks/{stock_id}/news", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -404,7 +404,7 @@ class AsyncStocksResource(AsyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return await self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/current_price",
+            path_template("/api/v2/market_data/stocks/{stock_id}/current_price", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -437,7 +437,7 @@ class AsyncStocksResource(AsyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return await self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/current_quote",
+            path_template("/api/v2/market_data/stocks/{stock_id}/current_quote", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -473,7 +473,7 @@ class AsyncStocksResource(AsyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return await self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/dividends",
+            path_template("/api/v2/market_data/stocks/{stock_id}/dividends", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -511,7 +511,7 @@ class AsyncStocksResource(AsyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return await self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/historical_prices/",
+            path_template("/api/v2/market_data/stocks/{stock_id}/historical_prices/", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -554,7 +554,7 @@ class AsyncStocksResource(AsyncAPIResource):
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
         return await self._get(
-            f"/api/v2/market_data/stocks/{stock_id}/news",
+            path_template("/api/v2/market_data/stocks/{stock_id}/news", stock_id=stock_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
