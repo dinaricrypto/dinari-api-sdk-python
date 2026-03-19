@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -86,7 +86,7 @@ class TokenTransfersResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/token_transfers",
+            path_template("/api/v2/accounts/{account_id}/token_transfers", account_id=account_id),
             body=maybe_transform(
                 {
                     "quantity": quantity,
@@ -134,7 +134,11 @@ class TokenTransfersResource(SyncAPIResource):
         if not transfer_id:
             raise ValueError(f"Expected a non-empty value for `transfer_id` but received {transfer_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/token_transfers/{transfer_id}",
+            path_template(
+                "/api/v2/accounts/{account_id}/token_transfers/{transfer_id}",
+                account_id=account_id,
+                transfer_id=transfer_id,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -173,7 +177,7 @@ class TokenTransfersResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/token_transfers",
+            path_template("/api/v2/accounts/{account_id}/token_transfers", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -255,7 +259,7 @@ class AsyncTokenTransfersResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/token_transfers",
+            path_template("/api/v2/accounts/{account_id}/token_transfers", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "quantity": quantity,
@@ -303,7 +307,11 @@ class AsyncTokenTransfersResource(AsyncAPIResource):
         if not transfer_id:
             raise ValueError(f"Expected a non-empty value for `transfer_id` but received {transfer_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/token_transfers/{transfer_id}",
+            path_template(
+                "/api/v2/accounts/{account_id}/token_transfers/{transfer_id}",
+                account_id=account_id,
+                transfer_id=transfer_id,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -342,7 +350,7 @@ class AsyncTokenTransfersResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/token_transfers",
+            path_template("/api/v2/accounts/{account_id}/token_transfers", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

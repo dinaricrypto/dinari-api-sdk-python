@@ -16,7 +16,7 @@ from .orders import (
     AsyncOrdersResourceWithStreamingResponse,
 )
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from .activities import (
     ActivitiesResource,
@@ -228,7 +228,7 @@ class AccountsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}",
+            path_template("/api/v2/accounts/{account_id}", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -262,7 +262,7 @@ class AccountsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/deactivate",
+            path_template("/api/v2/accounts/{account_id}/deactivate", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -296,7 +296,7 @@ class AccountsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/cash",
+            path_template("/api/v2/accounts/{account_id}/cash", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -341,7 +341,7 @@ class AccountsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/dividend_payments",
+            path_template("/api/v2/accounts/{account_id}/dividend_payments", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -398,7 +398,7 @@ class AccountsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/interest_payments",
+            path_template("/api/v2/accounts/{account_id}/interest_payments", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -450,7 +450,7 @@ class AccountsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/portfolio",
+            path_template("/api/v2/accounts/{account_id}/portfolio", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -502,7 +502,7 @@ class AccountsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/api/v2/accounts/{account_id}/faucet",
+            path_template("/api/v2/accounts/{account_id}/faucet", account_id=account_id),
             body=maybe_transform(
                 {"chain_id": chain_id}, account_mint_sandbox_tokens_params.AccountMintSandboxTokensParams
             ),
@@ -642,7 +642,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}",
+            path_template("/api/v2/accounts/{account_id}", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -676,7 +676,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/deactivate",
+            path_template("/api/v2/accounts/{account_id}/deactivate", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -710,7 +710,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/cash",
+            path_template("/api/v2/accounts/{account_id}/cash", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -755,7 +755,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/dividend_payments",
+            path_template("/api/v2/accounts/{account_id}/dividend_payments", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -812,7 +812,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/interest_payments",
+            path_template("/api/v2/accounts/{account_id}/interest_payments", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -864,7 +864,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/portfolio",
+            path_template("/api/v2/accounts/{account_id}/portfolio", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -916,7 +916,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/api/v2/accounts/{account_id}/faucet",
+            path_template("/api/v2/accounts/{account_id}/faucet", account_id=account_id),
             body=await async_maybe_transform(
                 {"chain_id": chain_id}, account_mint_sandbox_tokens_params.AccountMintSandboxTokensParams
             ),

@@ -7,7 +7,7 @@ from typing import Mapping, cast
 import httpx
 
 from ....._types import Body, Query, Headers, NotGiven, FileTypes, not_given
-from ....._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ....._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -84,7 +84,7 @@ class DocumentResource(SyncAPIResource):
         if not kyc_id:
             raise ValueError(f"Expected a non-empty value for `kyc_id` but received {kyc_id!r}")
         return self._get(
-            f"/api/v2/entities/{entity_id}/kyc/{kyc_id}/document",
+            path_template("/api/v2/entities/{entity_id}/kyc/{kyc_id}/document", entity_id=entity_id, kyc_id=kyc_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -134,7 +134,7 @@ class DocumentResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            f"/api/v2/entities/{entity_id}/kyc/{kyc_id}/document",
+            path_template("/api/v2/entities/{entity_id}/kyc/{kyc_id}/document", entity_id=entity_id, kyc_id=kyc_id),
             body=maybe_transform(body, document_upload_params.DocumentUploadParams),
             files=files,
             options=make_request_options(
@@ -207,7 +207,7 @@ class AsyncDocumentResource(AsyncAPIResource):
         if not kyc_id:
             raise ValueError(f"Expected a non-empty value for `kyc_id` but received {kyc_id!r}")
         return await self._get(
-            f"/api/v2/entities/{entity_id}/kyc/{kyc_id}/document",
+            path_template("/api/v2/entities/{entity_id}/kyc/{kyc_id}/document", entity_id=entity_id, kyc_id=kyc_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -257,7 +257,7 @@ class AsyncDocumentResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            f"/api/v2/entities/{entity_id}/kyc/{kyc_id}/document",
+            path_template("/api/v2/entities/{entity_id}/kyc/{kyc_id}/document", entity_id=entity_id, kyc_id=kyc_id),
             body=await async_maybe_transform(body, document_upload_params.DocumentUploadParams),
             files=files,
             options=make_request_options(
