@@ -15,7 +15,7 @@ from .eip155 import (
     AsyncEip155ResourceWithStreamingResponse,
 )
 from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ....._utils import maybe_transform, async_maybe_transform
+from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from .....types.v2 import Chain
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -104,7 +104,11 @@ class OrderRequestsResource(SyncAPIResource):
         if not order_request_id:
             raise ValueError(f"Expected a non-empty value for `order_request_id` but received {order_request_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/order_requests/{order_request_id}",
+            path_template(
+                "/api/v2/accounts/{account_id}/order_requests/{order_request_id}",
+                account_id=account_id,
+                order_request_id=order_request_id,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -151,7 +155,7 @@ class OrderRequestsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
-            f"/api/v2/accounts/{account_id}/order_requests",
+            path_template("/api/v2/accounts/{account_id}/order_requests", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -223,7 +227,7 @@ class OrderRequestsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/limit_buy",
+            path_template("/api/v2/accounts/{account_id}/order_requests/limit_buy", account_id=account_id),
             body=maybe_transform(
                 {
                     "asset_quantity": asset_quantity,
@@ -297,7 +301,7 @@ class OrderRequestsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/limit_sell",
+            path_template("/api/v2/accounts/{account_id}/order_requests/limit_sell", account_id=account_id),
             body=maybe_transform(
                 {
                     "asset_quantity": asset_quantity,
@@ -362,7 +366,7 @@ class OrderRequestsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/market_buy",
+            path_template("/api/v2/accounts/{account_id}/order_requests/market_buy", account_id=account_id),
             body=maybe_transform(
                 {
                     "payment_amount": payment_amount,
@@ -430,7 +434,7 @@ class OrderRequestsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/market_sell",
+            path_template("/api/v2/accounts/{account_id}/order_requests/market_sell", account_id=account_id),
             body=maybe_transform(
                 {
                     "asset_quantity": asset_quantity,
@@ -509,7 +513,7 @@ class OrderRequestsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/fee_quote",
+            path_template("/api/v2/accounts/{account_id}/order_requests/fee_quote", account_id=account_id),
             body=maybe_transform(
                 {
                     "order_side": order_side,
@@ -588,7 +592,11 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         if not order_request_id:
             raise ValueError(f"Expected a non-empty value for `order_request_id` but received {order_request_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/order_requests/{order_request_id}",
+            path_template(
+                "/api/v2/accounts/{account_id}/order_requests/{order_request_id}",
+                account_id=account_id,
+                order_request_id=order_request_id,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -635,7 +643,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
-            f"/api/v2/accounts/{account_id}/order_requests",
+            path_template("/api/v2/accounts/{account_id}/order_requests", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -707,7 +715,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/limit_buy",
+            path_template("/api/v2/accounts/{account_id}/order_requests/limit_buy", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "asset_quantity": asset_quantity,
@@ -781,7 +789,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/limit_sell",
+            path_template("/api/v2/accounts/{account_id}/order_requests/limit_sell", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "asset_quantity": asset_quantity,
@@ -846,7 +854,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/market_buy",
+            path_template("/api/v2/accounts/{account_id}/order_requests/market_buy", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "payment_amount": payment_amount,
@@ -914,7 +922,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/market_sell",
+            path_template("/api/v2/accounts/{account_id}/order_requests/market_sell", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "asset_quantity": asset_quantity,
@@ -993,7 +1001,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/api/v2/accounts/{account_id}/order_requests/fee_quote",
+            path_template("/api/v2/accounts/{account_id}/order_requests/fee_quote", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "order_side": order_side,

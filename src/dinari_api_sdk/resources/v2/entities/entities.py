@@ -23,7 +23,7 @@ from .accounts import (
     AsyncAccountsResourceWithStreamingResponse,
 )
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v2 import entity_list_params, entity_create_params, entity_update_params
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -164,7 +164,7 @@ class EntitiesResource(SyncAPIResource):
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         return self._patch(
-            f"/api/v2/entities/{entity_id}",
+            path_template("/api/v2/entities/{entity_id}", entity_id=entity_id),
             body=maybe_transform({"reference_id": reference_id}, entity_update_params.EntityUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -246,7 +246,7 @@ class EntitiesResource(SyncAPIResource):
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         return self._get(
-            f"/api/v2/entities/{entity_id}",
+            path_template("/api/v2/entities/{entity_id}", entity_id=entity_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -397,7 +397,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         return await self._patch(
-            f"/api/v2/entities/{entity_id}",
+            path_template("/api/v2/entities/{entity_id}", entity_id=entity_id),
             body=await async_maybe_transform({"reference_id": reference_id}, entity_update_params.EntityUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -479,7 +479,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         return await self._get(
-            f"/api/v2/entities/{entity_id}",
+            path_template("/api/v2/entities/{entity_id}", entity_id=entity_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
