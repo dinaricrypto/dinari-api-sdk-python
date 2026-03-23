@@ -22,8 +22,8 @@ class OrderRequestCreateLimitBuyParams(TypedDict, total=False):
     Must be a positive number with a precision of up to 2 decimal places.
     """
 
-    stock_id: Required[str]
-    """ID of `Stock`."""
+    alloy_id: Optional[str]
+    """ID of `Alloy`."""
 
     client_order_id: Optional[str]
     """Customer-supplied ID to map this order to an order in their own systems.
@@ -33,3 +33,6 @@ class OrderRequestCreateLimitBuyParams(TypedDict, total=False):
 
     recipient_account_id: Optional[str]
     """ID of `Account` to receive the `Order`."""
+
+    stock_id: Optional[str]
+    """ID of `Stock`."""

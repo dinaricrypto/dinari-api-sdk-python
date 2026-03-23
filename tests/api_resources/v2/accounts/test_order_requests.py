@@ -135,7 +135,6 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -146,9 +145,10 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -159,7 +159,6 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -174,7 +173,6 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -192,7 +190,6 @@ class TestOrderRequests:
                 account_id="",
                 asset_quantity=0,
                 limit_price=0,
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -202,7 +199,6 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -213,10 +209,11 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -227,7 +224,6 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -242,7 +238,6 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -260,7 +255,6 @@ class TestOrderRequests:
                 account_id="",
                 asset_quantity=0,
                 limit_price=0,
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -269,7 +263,6 @@ class TestOrderRequests:
         order_request = client.v2.accounts.order_requests.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -279,9 +272,10 @@ class TestOrderRequests:
         order_request = client.v2.accounts.order_requests.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -291,7 +285,6 @@ class TestOrderRequests:
         response = client.v2.accounts.order_requests.with_raw_response.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -305,7 +298,6 @@ class TestOrderRequests:
         with client.v2.accounts.order_requests.with_streaming_response.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -322,7 +314,6 @@ class TestOrderRequests:
             client.v2.accounts.order_requests.with_raw_response.create_market_buy(
                 account_id="",
                 payment_amount=0,
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -331,7 +322,6 @@ class TestOrderRequests:
         order_request = client.v2.accounts.order_requests.create_market_sell(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -341,10 +331,11 @@ class TestOrderRequests:
         order_request = client.v2.accounts.order_requests.create_market_sell(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -354,7 +345,6 @@ class TestOrderRequests:
         response = client.v2.accounts.order_requests.with_raw_response.create_market_sell(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -368,7 +358,6 @@ class TestOrderRequests:
         with client.v2.accounts.order_requests.with_streaming_response.create_market_sell(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -385,7 +374,6 @@ class TestOrderRequests:
             client.v2.accounts.order_requests.with_raw_response.create_market_sell(
                 account_id="",
                 asset_quantity=0,
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -395,7 +383,6 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_side="BUY",
             order_type="MARKET",
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
 
@@ -406,12 +393,13 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_side="BUY",
             order_type="MARKET",
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_token_quantity=0,
             chain_id="eip155:1",
             limit_price=0,
             payment_token_address="payment_token_address",
             payment_token_quantity=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
 
@@ -422,7 +410,6 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_side="BUY",
             order_type="MARKET",
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -437,7 +424,6 @@ class TestOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_side="BUY",
             order_type="MARKET",
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -455,7 +441,6 @@ class TestOrderRequests:
                 account_id="",
                 order_side="BUY",
                 order_type="MARKET",
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
 
@@ -578,7 +563,6 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -589,9 +573,10 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -602,7 +587,6 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -617,7 +601,6 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -635,7 +618,6 @@ class TestAsyncOrderRequests:
                 account_id="",
                 asset_quantity=0,
                 limit_price=0,
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -645,7 +627,6 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -656,10 +637,11 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -670,7 +652,6 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -685,7 +666,6 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
             limit_price=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -703,7 +683,6 @@ class TestAsyncOrderRequests:
                 account_id="",
                 asset_quantity=0,
                 limit_price=0,
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -712,7 +691,6 @@ class TestAsyncOrderRequests:
         order_request = await async_client.v2.accounts.order_requests.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -722,9 +700,10 @@ class TestAsyncOrderRequests:
         order_request = await async_client.v2.accounts.order_requests.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -734,7 +713,6 @@ class TestAsyncOrderRequests:
         response = await async_client.v2.accounts.order_requests.with_raw_response.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -748,7 +726,6 @@ class TestAsyncOrderRequests:
         async with async_client.v2.accounts.order_requests.with_streaming_response.create_market_buy(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             payment_amount=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -765,7 +742,6 @@ class TestAsyncOrderRequests:
             await async_client.v2.accounts.order_requests.with_raw_response.create_market_buy(
                 account_id="",
                 payment_amount=0,
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -774,7 +750,6 @@ class TestAsyncOrderRequests:
         order_request = await async_client.v2.accounts.order_requests.create_market_sell(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -784,10 +759,11 @@ class TestAsyncOrderRequests:
         order_request = await async_client.v2.accounts.order_requests.create_market_sell(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequest, order_request, path=["response"])
 
@@ -797,7 +773,6 @@ class TestAsyncOrderRequests:
         response = await async_client.v2.accounts.order_requests.with_raw_response.create_market_sell(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -811,7 +786,6 @@ class TestAsyncOrderRequests:
         async with async_client.v2.accounts.order_requests.with_streaming_response.create_market_sell(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -828,7 +802,6 @@ class TestAsyncOrderRequests:
             await async_client.v2.accounts.order_requests.with_raw_response.create_market_sell(
                 account_id="",
                 asset_quantity=0,
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -838,7 +811,6 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_side="BUY",
             order_type="MARKET",
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
 
@@ -849,12 +821,13 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_side="BUY",
             order_type="MARKET",
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             asset_token_quantity=0,
             chain_id="eip155:1",
             limit_price=0,
             payment_token_address="payment_token_address",
             payment_token_quantity=0,
+            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
 
@@ -865,7 +838,6 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_side="BUY",
             order_type="MARKET",
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -880,7 +852,6 @@ class TestAsyncOrderRequests:
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_side="BUY",
             order_type="MARKET",
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -898,5 +869,4 @@ class TestAsyncOrderRequests:
                 account_id="",
                 order_side="BUY",
                 order_type="MARKET",
-                stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
