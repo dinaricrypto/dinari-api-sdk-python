@@ -48,11 +48,11 @@ class V2ListOrdersResponseItem(BaseModel):
     status: BrokerageOrderStatus
     """Status of the `Order`."""
 
-    stock_id: str
-    """The `Stock` ID associated with the `Order`"""
-
     account_id: Optional[str] = None
     """Account ID the order was made for."""
+
+    alloy_id: Optional[str] = None
+    """The `Alloy` ID associated with the `Order`"""
 
     asset_token: Optional[str] = None
     """The dShare asset token address."""
@@ -86,6 +86,9 @@ class V2ListOrdersResponseItem(BaseModel):
 
     payment_token_quantity: Optional[float] = None
     """Total amount of payment involved."""
+
+    stock_id: Optional[str] = None
+    """The `Stock` ID associated with the `Order`"""
 
 
 V2ListOrdersResponse: TypeAlias = List[V2ListOrdersResponseItem]

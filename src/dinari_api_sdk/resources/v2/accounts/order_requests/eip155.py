@@ -72,6 +72,7 @@ class Eip155Resource(SyncAPIResource):
         order_tif: OrderTif,
         order_type: OrderType,
         payment_token: str,
+        alloy_id: Optional[str] | Omit = omit,
         asset_token_quantity: Optional[float] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
@@ -105,6 +106,8 @@ class Eip155Resource(SyncAPIResource):
           order_type: Type of `Order`.
 
           payment_token: Address of payment token.
+
+          alloy_id: The ID of the `Alloy` for which the `Order` is being placed.
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
               market sell `Order Requests`. Must be a positive number with a precision of up
@@ -142,6 +145,7 @@ class Eip155Resource(SyncAPIResource):
                     "order_tif": order_tif,
                     "order_type": order_type,
                     "payment_token": payment_token,
+                    "alloy_id": alloy_id,
                     "asset_token_quantity": asset_token_quantity,
                     "client_order_id": client_order_id,
                     "limit_price": limit_price,
@@ -294,6 +298,7 @@ class AsyncEip155Resource(AsyncAPIResource):
         order_tif: OrderTif,
         order_type: OrderType,
         payment_token: str,
+        alloy_id: Optional[str] | Omit = omit,
         asset_token_quantity: Optional[float] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
@@ -327,6 +332,8 @@ class AsyncEip155Resource(AsyncAPIResource):
           order_type: Type of `Order`.
 
           payment_token: Address of payment token.
+
+          alloy_id: The ID of the `Alloy` for which the `Order` is being placed.
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
               market sell `Order Requests`. Must be a positive number with a precision of up
@@ -364,6 +371,7 @@ class AsyncEip155Resource(AsyncAPIResource):
                     "order_tif": order_tif,
                     "order_type": order_type,
                     "payment_token": payment_token,
+                    "alloy_id": alloy_id,
                     "asset_token_quantity": asset_token_quantity,
                     "client_order_id": client_order_id,
                     "limit_price": limit_price,

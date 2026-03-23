@@ -181,9 +181,10 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         asset_quantity: float,
         limit_price: float,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -209,12 +210,14 @@ class OrderRequestsResource(SyncAPIResource):
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
 
-          stock_id: ID of `Stock`.
+          alloy_id: ID of `Alloy`.
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
+
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -232,9 +235,10 @@ class OrderRequestsResource(SyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "recipient_account_id": recipient_account_id,
+                    "stock_id": stock_id,
                 },
                 order_request_create_limit_buy_params.OrderRequestCreateLimitBuyParams,
             ),
@@ -250,10 +254,11 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         asset_quantity: float,
         limit_price: float,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -279,7 +284,7 @@ class OrderRequestsResource(SyncAPIResource):
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
 
-          stock_id: ID of `Stock`.
+          alloy_id: ID of `Alloy`.
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
@@ -289,6 +294,8 @@ class OrderRequestsResource(SyncAPIResource):
               `recipient_account_id` for a non-managed wallet account is also provided.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
+
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -306,10 +313,11 @@ class OrderRequestsResource(SyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
+                    "stock_id": stock_id,
                 },
                 order_request_create_limit_sell_params.OrderRequestCreateLimitSellParams,
             ),
@@ -324,9 +332,10 @@ class OrderRequestsResource(SyncAPIResource):
         account_id: str,
         *,
         payment_amount: float,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -348,12 +357,14 @@ class OrderRequestsResource(SyncAPIResource):
           payment_amount: Amount of currency (USD for US equities and ETFs) to pay for the order. Must be
               a positive number with a precision of up to 2 decimal places.
 
-          stock_id: ID of `Stock`.
+          alloy_id: ID of `Alloy`.
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
+
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -370,9 +381,10 @@ class OrderRequestsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "payment_amount": payment_amount,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "recipient_account_id": recipient_account_id,
+                    "stock_id": stock_id,
                 },
                 order_request_create_market_buy_params.OrderRequestCreateMarketBuyParams,
             ),
@@ -387,10 +399,11 @@ class OrderRequestsResource(SyncAPIResource):
         account_id: str,
         *,
         asset_quantity: float,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -412,7 +425,7 @@ class OrderRequestsResource(SyncAPIResource):
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
               6 decimal places.
 
-          stock_id: ID of `Stock`.
+          alloy_id: ID of `Alloy`.
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
@@ -422,6 +435,8 @@ class OrderRequestsResource(SyncAPIResource):
               `recipient_account_id` for a non-managed wallet account is also provided.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
+
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -438,10 +453,11 @@ class OrderRequestsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "asset_quantity": asset_quantity,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
+                    "stock_id": stock_id,
                 },
                 order_request_create_market_sell_params.OrderRequestCreateMarketSellParams,
             ),
@@ -457,12 +473,13 @@ class OrderRequestsResource(SyncAPIResource):
         *,
         order_side: OrderSide,
         order_type: OrderType,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         asset_token_quantity: Optional[float] | Omit = omit,
         chain_id: Optional[Chain] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -484,7 +501,7 @@ class OrderRequestsResource(SyncAPIResource):
 
           order_type: Type of `Order Request`.
 
-          stock_id: The Stock ID associated with the Order Request
+          alloy_id: The `Alloy` ID associated with the Order Request
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
               market sell `Order Requests`. Must be a positive number with a precision of up
@@ -502,6 +519,8 @@ class OrderRequestsResource(SyncAPIResource):
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Order Requests`.
 
+          stock_id: The `Stock` ID associated with the Order Request
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -518,12 +537,13 @@ class OrderRequestsResource(SyncAPIResource):
                 {
                     "order_side": order_side,
                     "order_type": order_type,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "asset_token_quantity": asset_token_quantity,
                     "chain_id": chain_id,
                     "limit_price": limit_price,
                     "payment_token_address": payment_token_address,
                     "payment_token_quantity": payment_token_quantity,
+                    "stock_id": stock_id,
                 },
                 order_request_get_fee_quote_params.OrderRequestGetFeeQuoteParams,
             ),
@@ -669,9 +689,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         asset_quantity: float,
         limit_price: float,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -697,12 +718,14 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
 
-          stock_id: ID of `Stock`.
+          alloy_id: ID of `Alloy`.
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
+
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -720,9 +743,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "recipient_account_id": recipient_account_id,
+                    "stock_id": stock_id,
                 },
                 order_request_create_limit_buy_params.OrderRequestCreateLimitBuyParams,
             ),
@@ -738,10 +762,11 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         asset_quantity: float,
         limit_price: float,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -767,7 +792,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
           limit_price: Price at which to execute the order. Must be a positive number with a precision
               of up to 2 decimal places.
 
-          stock_id: ID of `Stock`.
+          alloy_id: ID of `Alloy`.
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
@@ -777,6 +802,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
               `recipient_account_id` for a non-managed wallet account is also provided.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
+
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -794,10 +821,11 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 {
                     "asset_quantity": asset_quantity,
                     "limit_price": limit_price,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
+                    "stock_id": stock_id,
                 },
                 order_request_create_limit_sell_params.OrderRequestCreateLimitSellParams,
             ),
@@ -812,9 +840,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         account_id: str,
         *,
         payment_amount: float,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -836,12 +865,14 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
           payment_amount: Amount of currency (USD for US equities and ETFs) to pay for the order. Must be
               a positive number with a precision of up to 2 decimal places.
 
-          stock_id: ID of `Stock`.
+          alloy_id: ID of `Alloy`.
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
+
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -858,9 +889,10 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "payment_amount": payment_amount,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "recipient_account_id": recipient_account_id,
+                    "stock_id": stock_id,
                 },
                 order_request_create_market_buy_params.OrderRequestCreateMarketBuyParams,
             ),
@@ -875,10 +907,11 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         account_id: str,
         *,
         asset_quantity: float,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -900,7 +933,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
           asset_quantity: Quantity of shares to trade. Must be a positive number with a precision of up to
               6 decimal places.
 
-          stock_id: ID of `Stock`.
+          alloy_id: ID of `Alloy`.
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
@@ -910,6 +943,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
               `recipient_account_id` for a non-managed wallet account is also provided.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
+
+          stock_id: ID of `Stock`.
 
           extra_headers: Send extra headers
 
@@ -926,10 +961,11 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "asset_quantity": asset_quantity,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
+                    "stock_id": stock_id,
                 },
                 order_request_create_market_sell_params.OrderRequestCreateMarketSellParams,
             ),
@@ -945,12 +981,13 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         *,
         order_side: OrderSide,
         order_type: OrderType,
-        stock_id: str,
+        alloy_id: Optional[str] | Omit = omit,
         asset_token_quantity: Optional[float] | Omit = omit,
         chain_id: Optional[Chain] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
+        stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -972,7 +1009,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           order_type: Type of `Order Request`.
 
-          stock_id: The Stock ID associated with the Order Request
+          alloy_id: The `Alloy` ID associated with the Order Request
 
           asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
               market sell `Order Requests`. Must be a positive number with a precision of up
@@ -990,6 +1027,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           payment_token_quantity: Amount of payment tokens involved. Required for market buy `Order Requests`.
 
+          stock_id: The `Stock` ID associated with the Order Request
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1006,12 +1045,13 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                 {
                     "order_side": order_side,
                     "order_type": order_type,
-                    "stock_id": stock_id,
+                    "alloy_id": alloy_id,
                     "asset_token_quantity": asset_token_quantity,
                     "chain_id": chain_id,
                     "limit_price": limit_price,
                     "payment_token_address": payment_token_address,
                     "payment_token_quantity": payment_token_quantity,
+                    "stock_id": stock_id,
                 },
                 order_request_get_fee_quote_params.OrderRequestGetFeeQuoteParams,
             ),

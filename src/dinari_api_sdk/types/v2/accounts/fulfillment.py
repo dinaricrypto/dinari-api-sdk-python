@@ -42,5 +42,11 @@ class Fulfillment(BaseModel):
     transaction_hash: str
     """Transaction hash for this fulfillment."""
 
+    alloy_id: Optional[str] = None
+    """The `Alloy` ID associated with the `Order`"""
+
     payment_token_fee: Optional[float] = None
     """Fee amount, in payment tokens."""
+
+    stock_id: Optional[str] = None
+    """The `Stock` ID associated with the `Order`"""

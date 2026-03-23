@@ -29,6 +29,9 @@ class Eip155CreatePermitParams(TypedDict, total=False):
     payment_token: Required[str]
     """Address of payment token."""
 
+    alloy_id: Optional[str]
+    """The ID of the `Alloy` for which the `Order` is being placed."""
+
     asset_token_quantity: Optional[float]
     """Amount of dShare asset tokens involved.
 
