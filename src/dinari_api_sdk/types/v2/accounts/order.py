@@ -47,8 +47,8 @@ class Order(BaseModel):
     status: BrokerageOrderStatus
     """Status of the `Order`."""
 
-    stock_id: str
-    """The `Stock` ID associated with the `Order`"""
+    alloy_id: Optional[str] = None
+    """The `Alloy` ID associated with the `Order`"""
 
     asset_token: Optional[str] = None
     """The dShare asset token address."""
@@ -79,3 +79,6 @@ class Order(BaseModel):
 
     payment_token_quantity: Optional[float] = None
     """Total amount of payment involved."""
+
+    stock_id: Optional[str] = None
+    """The `Stock` ID associated with the `Order`"""

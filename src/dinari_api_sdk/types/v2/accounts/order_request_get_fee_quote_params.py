@@ -19,8 +19,8 @@ class OrderRequestGetFeeQuoteParams(TypedDict, total=False):
     order_type: Required[OrderType]
     """Type of `Order Request`."""
 
-    stock_id: Required[str]
-    """The Stock ID associated with the Order Request"""
+    alloy_id: Optional[str]
+    """The `Alloy` ID associated with the Order Request"""
 
     asset_token_quantity: Optional[float]
     """Amount of dShare asset tokens involved.
@@ -50,3 +50,6 @@ class OrderRequestGetFeeQuoteParams(TypedDict, total=False):
 
     payment_token_quantity: Optional[float]
     """Amount of payment tokens involved. Required for market buy `Order Requests`."""
+
+    stock_id: Optional[str]
+    """The `Stock` ID associated with the Order Request"""
