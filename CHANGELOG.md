@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.12.0 (2026-03-23)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **api:** api update ([d3a9bb7](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d3a9bb7488b5844fa58137da6e4232b5375666bd))
+* **api:** api update ([0f5b9d1](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0f5b9d1d77fe3423d8866d83332dbdc1b1c43315))
+* **client:** add custom JSON encoder for extended type support ([2463aa9](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/2463aa959a221b11a0d7e64b831079be54f00c62))
+* **client:** add support for binary request streaming ([74fed73](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/74fed73b2b34a803380a0bd6a106d65d9a25f484))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([d23f5e4](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d23f5e467def262c1726b3df5c3c3d5d56651081))
+* **docs:** fix mcp installation instructions for remote servers ([4d2b8fe](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/4d2b8fecfee896eab6fa020ed9a2f6934eee245d))
+* **pydantic:** do not pass `by_alias` unless set ([b1cb255](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/b1cb255813202289c14c7f52736a5c376d1cd9e7))
+* sanitize endpoint path params ([9d6c8d8](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/9d6c8d8545033c0e2790514a1c54d2bf2eac854e))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([0911c1a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0911c1ad146f4e509c0e45969e0a9c7530a19c69))
+* **ci:** upgrade `actions/github-script` ([ca5b1de](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/ca5b1dea1339bff47d8a253d82b6d2e750068224))
+* configure new SDK language ([5ef7403](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/5ef7403d6c3c2bae546a8fed1be3926e09b2d4bd))
+* **docs:** add missing descriptions ([b9eb198](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/b9eb1983bfa9fb14592b82b10c015f0c25b380c8))
+* format all `api.md` files ([483e0c2](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/483e0c217df547aeca13b17144e23fd645c11024))
+* **internal:** add request options to SSE classes ([ba85bf7](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/ba85bf7b068e6fb42b2a4669cce582cf38898ac3))
+* **internal:** bump dependencies ([6c01c4b](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/6c01c4b885114dd80415751fa9fcd76fa2c015af))
+* **internal:** fix lint error on Python 3.14 ([0a286af](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0a286af564702b3161a32c80d7f6020d56cd6f05))
+* **internal:** make `test_proxy_environment_variables` more resilient ([3b6cdee](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/3b6cdee0614d3bae42f4b10eb0f05e787f34f4ff))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([d1485f8](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d1485f8b4f5e6575ea722c76f95ec32a97b5ee91))
+* **internal:** remove mock server code ([66d1859](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/66d1859c2ed63ba5bbc4928e1644c7840a9c6b7c))
+* **internal:** tweak CI branches ([d979ea3](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/d979ea30f1406c98a6f653278aff275c768d3206))
+* **internal:** update `actions/checkout` version ([1e158ec](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/1e158ec1047efd2e68f61288f84db489b31299fa))
+* **internal:** update gitignore ([b13e491](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/b13e49119a7cc9af3182911d38b598c624bdf394))
+* update mock server docs ([08d4394](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/08d43942009c83403a611e9a0d0031dc99c5b9a7))
+* update placeholder string ([79a8589](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/79a8589c168012767db13ca355f5acabb3f869bd))
+
 ## 0.11.0 (2026-01-08)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.10.0...v0.11.0)
