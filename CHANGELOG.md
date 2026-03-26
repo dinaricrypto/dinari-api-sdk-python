@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.13.0 (2026-03-26)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** Add Historical and Current Price Enterprise API v2 endpoints for Alloy ([3fd00fa](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/3fd00fa10a847f7cfa1a97bd59c6dc717ae097d1))
+* **api:** api update ([85a0c0a](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/85a0c0a5de0f2fe9f6e872bee4e3d280b71cd08d))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([1c7d207](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/1c7d2072c9e07943a0240cc9e4cabc4dbd11c176))
+
 ## 0.12.0 (2026-03-23)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.11.0...v0.12.0)
