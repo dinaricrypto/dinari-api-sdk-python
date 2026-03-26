@@ -4,6 +4,14 @@ from __future__ import annotations
 
 import httpx
 
+from .alloys import (
+    AlloysResource,
+    AsyncAlloysResource,
+    AlloysResourceWithRawResponse,
+    AsyncAlloysResourceWithRawResponse,
+    AlloysResourceWithStreamingResponse,
+    AsyncAlloysResourceWithStreamingResponse,
+)
 from ...._types import Body, Query, Headers, NotGiven, not_given
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -37,6 +45,15 @@ class MarketDataResource(SyncAPIResource):
     @cached_property
     def stocks(self) -> StocksResource:
         return StocksResource(self._client)
+
+    @cached_property
+    def alloys(self) -> AlloysResource:
+        """
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
+        return AlloysResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> MarketDataResourceWithRawResponse:
@@ -92,6 +109,15 @@ class AsyncMarketDataResource(AsyncAPIResource):
         return AsyncStocksResource(self._client)
 
     @cached_property
+    def alloys(self) -> AsyncAlloysResource:
+        """
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
+        return AsyncAlloysResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> AsyncMarketDataResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -145,6 +171,15 @@ class MarketDataResourceWithRawResponse:
     def stocks(self) -> StocksResourceWithRawResponse:
         return StocksResourceWithRawResponse(self._market_data.stocks)
 
+    @cached_property
+    def alloys(self) -> AlloysResourceWithRawResponse:
+        """
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
+        return AlloysResourceWithRawResponse(self._market_data.alloys)
+
 
 class AsyncMarketDataResourceWithRawResponse:
     def __init__(self, market_data: AsyncMarketDataResource) -> None:
@@ -157,6 +192,15 @@ class AsyncMarketDataResourceWithRawResponse:
     @cached_property
     def stocks(self) -> AsyncStocksResourceWithRawResponse:
         return AsyncStocksResourceWithRawResponse(self._market_data.stocks)
+
+    @cached_property
+    def alloys(self) -> AsyncAlloysResourceWithRawResponse:
+        """
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
+        return AsyncAlloysResourceWithRawResponse(self._market_data.alloys)
 
 
 class MarketDataResourceWithStreamingResponse:
@@ -171,6 +215,15 @@ class MarketDataResourceWithStreamingResponse:
     def stocks(self) -> StocksResourceWithStreamingResponse:
         return StocksResourceWithStreamingResponse(self._market_data.stocks)
 
+    @cached_property
+    def alloys(self) -> AlloysResourceWithStreamingResponse:
+        """
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
+        return AlloysResourceWithStreamingResponse(self._market_data.alloys)
+
 
 class AsyncMarketDataResourceWithStreamingResponse:
     def __init__(self, market_data: AsyncMarketDataResource) -> None:
@@ -183,3 +236,12 @@ class AsyncMarketDataResourceWithStreamingResponse:
     @cached_property
     def stocks(self) -> AsyncStocksResourceWithStreamingResponse:
         return AsyncStocksResourceWithStreamingResponse(self._market_data.stocks)
+
+    @cached_property
+    def alloys(self) -> AsyncAlloysResourceWithStreamingResponse:
+        """
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
+
+        This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+        """
+        return AsyncAlloysResourceWithStreamingResponse(self._market_data.alloys)
