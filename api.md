@@ -63,6 +63,24 @@ Methods:
 - <code title="get /api/v2/market_data/stocks/splits">client.v2.market_data.stocks.splits.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/splits.py">list</a>(\*\*<a href="src/dinari_api_sdk/types/v2/market_data/stocks/split_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stocks/split_list_response.py">SplitListResponse</a></code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/splits">client.v2.market_data.stocks.splits.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/splits.py">list_for_stock</a>(stock_id, \*\*<a href="src/dinari_api_sdk/types/v2/market_data/stocks/split_list_for_stock_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stocks/split_list_for_stock_response.py">SplitListForStockResponse</a></code>
 
+### Alloys
+
+Types:
+
+```python
+from dinari_api_sdk.types.v2.market_data import (
+    AlloyListResponse,
+    AlloyRetrieveCurrentPriceResponse,
+    AlloyRetrieveHistoricalPricesResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/v2/market_data/alloys/">client.v2.market_data.alloys.<a href="./src/dinari_api_sdk/resources/v2/market_data/alloys.py">list</a>(\*\*<a href="src/dinari_api_sdk/types/v2/market_data/alloy_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/alloy_list_response.py">AlloyListResponse</a></code>
+- <code title="get /api/v2/market_data/alloys/{alloy_id}/current_price">client.v2.market_data.alloys.<a href="./src/dinari_api_sdk/resources/v2/market_data/alloys.py">retrieve_current_price</a>(alloy_id) -> <a href="./src/dinari_api_sdk/types/v2/market_data/alloy_retrieve_current_price_response.py">AlloyRetrieveCurrentPriceResponse</a></code>
+- <code title="get /api/v2/market_data/alloys/{alloy_id}/historical_prices/">client.v2.market_data.alloys.<a href="./src/dinari_api_sdk/resources/v2/market_data/alloys.py">retrieve_historical_prices</a>(alloy_id, \*\*<a href="src/dinari_api_sdk/types/v2/market_data/alloy_retrieve_historical_prices_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/alloy_retrieve_historical_prices_response.py">AlloyRetrieveHistoricalPricesResponse</a></code>
+
 ## Entities
 
 Types:
