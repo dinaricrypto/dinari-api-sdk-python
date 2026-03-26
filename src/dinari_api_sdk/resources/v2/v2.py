@@ -60,7 +60,7 @@ class V2Resource(SyncAPIResource):
     @cached_property
     def market_data(self) -> MarketDataResource:
         """
-        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
 
         This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
         """
@@ -175,7 +175,7 @@ class AsyncV2Resource(AsyncAPIResource):
     @cached_property
     def market_data(self) -> AsyncMarketDataResource:
         """
-        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
 
         This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
         """
@@ -290,7 +290,7 @@ class V2ResourceWithRawResponse:
     @cached_property
     def market_data(self) -> MarketDataResourceWithRawResponse:
         """
-        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
 
         This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
         """
@@ -326,7 +326,7 @@ class AsyncV2ResourceWithRawResponse:
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithRawResponse:
         """
-        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
 
         This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
         """
@@ -362,7 +362,7 @@ class V2ResourceWithStreamingResponse:
     @cached_property
     def market_data(self) -> MarketDataResourceWithStreamingResponse:
         """
-        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
 
         This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
         """
@@ -398,7 +398,7 @@ class AsyncV2ResourceWithStreamingResponse:
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithStreamingResponse:
         """
-        **Dinari provides basic market data for `Stocks` that are available to transact on.**
+        **Dinari provides basic market data for `Stocks` and `Alloys` that are available to transact on.**
 
         This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
         """
