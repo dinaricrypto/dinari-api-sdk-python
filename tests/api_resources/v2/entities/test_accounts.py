@@ -10,8 +10,8 @@ import pytest
 from tests.utils import assert_matches_type
 from dinari_api_sdk import Dinari, AsyncDinari
 from dinari_api_sdk.types.v2.entities import (
-    Account,
     AccountListResponse,
+    AccountCreateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -26,7 +26,7 @@ class TestAccounts:
         account = client.v2.entities.accounts.create(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(Account, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -35,7 +35,7 @@ class TestAccounts:
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             jurisdiction="BASELINE",
         )
-        assert_matches_type(Account, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -47,7 +47,7 @@ class TestAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
-        assert_matches_type(Account, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -59,7 +59,7 @@ class TestAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = response.parse()
-            assert_matches_type(Account, account, path=["response"])
+            assert_matches_type(AccountCreateResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -84,8 +84,12 @@ class TestAccounts:
     def test_method_list_with_all_params(self, client: Dinari) -> None:
         account = client.v2.entities.accounts.list(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(AccountListResponse, account, path=["response"])
 
@@ -135,7 +139,7 @@ class TestAsyncAccounts:
         account = await async_client.v2.entities.accounts.create(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(Account, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -144,7 +148,7 @@ class TestAsyncAccounts:
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             jurisdiction="BASELINE",
         )
-        assert_matches_type(Account, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -156,7 +160,7 @@ class TestAsyncAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = await response.parse()
-        assert_matches_type(Account, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -168,7 +172,7 @@ class TestAsyncAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = await response.parse()
-            assert_matches_type(Account, account, path=["response"])
+            assert_matches_type(AccountCreateResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -193,8 +197,12 @@ class TestAsyncAccounts:
     async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
         account = await async_client.v2.entities.accounts.list(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(AccountListResponse, account, path=["response"])
 

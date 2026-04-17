@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing import Optional
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["OrderGetFulfillmentsParams"]
 
@@ -10,6 +11,18 @@ __all__ = ["OrderGetFulfillmentsParams"]
 class OrderGetFulfillmentsParams(TypedDict, total=False):
     account_id: Required[str]
 
+    limit: int
+    """Number of results to return"""
+
+    next: Optional[str]
+    """Cursor for next page"""
+
+    order: Literal["asc", "desc"]
+    """Sort order"""
+
     page: int
 
     page_size: int
+
+    previous: Optional[str]
+    """Cursor for previous page"""

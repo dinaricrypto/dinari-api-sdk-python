@@ -82,9 +82,13 @@ class TestOrderFulfillments:
     def test_method_query_with_all_params(self, client: Dinari) -> None:
         order_fulfillment = client.v2.accounts.order_fulfillments.query(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             order_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
 
@@ -193,9 +197,13 @@ class TestAsyncOrderFulfillments:
     async def test_method_query_with_all_params(self, async_client: AsyncDinari) -> None:
         order_fulfillment = await async_client.v2.accounts.order_fulfillments.query(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             order_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
 

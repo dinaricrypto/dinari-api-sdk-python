@@ -27,12 +27,16 @@ class TestV2:
     @parametrize
     def test_method_list_orders_with_all_params(self, client: Dinari) -> None:
         v2 = client.v2.list_orders(
-            chain_id="eip155:1",
+            chain_id="chain_id",
+            limit=20,
+            next="next",
+            order="asc",
             order_fulfillment_transaction_hash="order_fulfillment_transaction_hash",
             order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(V2ListOrdersResponse, v2, path=["response"])
 
@@ -74,12 +78,16 @@ class TestAsyncV2:
     @parametrize
     async def test_method_list_orders_with_all_params(self, async_client: AsyncDinari) -> None:
         v2 = await async_client.v2.list_orders(
-            chain_id="eip155:1",
+            chain_id="chain_id",
+            limit=20,
+            next="next",
+            order="asc",
             order_fulfillment_transaction_hash="order_fulfillment_transaction_hash",
             order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(V2ListOrdersResponse, v2, path=["response"])
 

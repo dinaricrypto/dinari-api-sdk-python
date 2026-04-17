@@ -34,8 +34,12 @@ class TestStocks:
     @parametrize
     def test_method_list_with_all_params(self, client: Dinari) -> None:
         stock = client.v2.market_data.stocks.list(
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
             symbols=["string"],
         )
         assert_matches_type(StockListResponse, stock, path=["response"])
@@ -301,8 +305,12 @@ class TestAsyncStocks:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
         stock = await async_client.v2.market_data.stocks.list(
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
             symbols=["string"],
         )
         assert_matches_type(StockListResponse, stock, path=["response"])

@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Any, Optional, cast
+from typing_extensions import Literal
 
 import httpx
 
@@ -34,8 +35,11 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v2.entity import Entity
 from ....types.v2.entity_list_response import EntityListResponse
+from ....types.v2.entity_create_response import EntityCreateResponse
+from ....types.v2.entity_update_response import EntityUpdateResponse
+from ....types.v2.entity_retrieve_by_id_response import EntityRetrieveByIDResponse
+from ....types.v2.entity_retrieve_current_response import EntityRetrieveCurrentResponse
 
 __all__ = ["EntitiesResource", "AsyncEntitiesResource"]
 
@@ -99,7 +103,7 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Entity:
+    ) -> EntityCreateResponse:
         """Create a new `Entity` to be managed by your organization.
 
         This `Entity`
@@ -131,7 +135,7 @@ class EntitiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entity,
+            cast_to=EntityCreateResponse,
         )
 
     def update(
@@ -145,7 +149,7 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Entity:
+    ) -> EntityUpdateResponse:
         """
         Update a specific customer `Entity` of your organization.
 
@@ -169,14 +173,18 @@ class EntitiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entity,
+            cast_to=EntityUpdateResponse,
         )
 
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         reference_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -191,6 +199,14 @@ class EntitiesResource(SyncAPIResource):
         represent individual customers of your organization.
 
         Args:
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           reference_id: Case sensitive unique reference ID for the `Entity`.
 
           extra_headers: Send extra headers
@@ -201,23 +217,32 @@ class EntitiesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
-            "/api/v2/entities/",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                        "reference_id": reference_id,
-                    },
-                    entity_list_params.EntityListParams,
+        return cast(
+            EntityListResponse,
+            self._get(
+                "/api/v2/entities/",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                            "reference_id": reference_id,
+                        },
+                        entity_list_params.EntityListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, EntityListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=EntityListResponse,
         )
 
     def retrieve_by_id(
@@ -230,7 +255,7 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Entity:
+    ) -> EntityRetrieveByIDResponse:
         """
         Get a specific customer `Entity` of your organization by their ID.
 
@@ -250,7 +275,7 @@ class EntitiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entity,
+            cast_to=EntityRetrieveByIDResponse,
         )
 
     def retrieve_current(
@@ -262,14 +287,14 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Entity:
+    ) -> EntityRetrieveCurrentResponse:
         """Get the current authenticated `Entity`, which represents your organization."""
         return self._get(
             "/api/v2/entities/me",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entity,
+            cast_to=EntityRetrieveCurrentResponse,
         )
 
 
@@ -332,7 +357,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Entity:
+    ) -> EntityCreateResponse:
         """Create a new `Entity` to be managed by your organization.
 
         This `Entity`
@@ -364,7 +389,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entity,
+            cast_to=EntityCreateResponse,
         )
 
     async def update(
@@ -378,7 +403,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Entity:
+    ) -> EntityUpdateResponse:
         """
         Update a specific customer `Entity` of your organization.
 
@@ -402,14 +427,18 @@ class AsyncEntitiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entity,
+            cast_to=EntityUpdateResponse,
         )
 
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         reference_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -424,6 +453,14 @@ class AsyncEntitiesResource(AsyncAPIResource):
         represent individual customers of your organization.
 
         Args:
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           reference_id: Case sensitive unique reference ID for the `Entity`.
 
           extra_headers: Send extra headers
@@ -434,23 +471,32 @@ class AsyncEntitiesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
-            "/api/v2/entities/",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                        "reference_id": reference_id,
-                    },
-                    entity_list_params.EntityListParams,
+        return cast(
+            EntityListResponse,
+            await self._get(
+                "/api/v2/entities/",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                            "reference_id": reference_id,
+                        },
+                        entity_list_params.EntityListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, EntityListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=EntityListResponse,
         )
 
     async def retrieve_by_id(
@@ -463,7 +509,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Entity:
+    ) -> EntityRetrieveByIDResponse:
         """
         Get a specific customer `Entity` of your organization by their ID.
 
@@ -483,7 +529,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entity,
+            cast_to=EntityRetrieveByIDResponse,
         )
 
     async def retrieve_current(
@@ -495,14 +541,14 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Entity:
+    ) -> EntityRetrieveCurrentResponse:
         """Get the current authenticated `Entity`, which represents your organization."""
         return await self._get(
             "/api/v2/entities/me",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entity,
+            cast_to=EntityRetrieveCurrentResponse,
         )
 
 
