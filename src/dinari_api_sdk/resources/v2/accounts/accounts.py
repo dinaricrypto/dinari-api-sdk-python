@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing import Any, Union, Optional, cast
 from datetime import date
+from typing_extensions import Literal
 
 import httpx
 
@@ -82,7 +83,6 @@ from .withdrawal_requests import (
     WithdrawalRequestsResourceWithStreamingResponse,
     AsyncWithdrawalRequestsResourceWithStreamingResponse,
 )
-from ....types.v2.entities.account import Account
 from .order_requests.order_requests import (
     OrderRequestsResource,
     AsyncOrderRequestsResource,
@@ -91,6 +91,8 @@ from .order_requests.order_requests import (
     OrderRequestsResourceWithStreamingResponse,
     AsyncOrderRequestsResourceWithStreamingResponse,
 )
+from ....types.v2.account_retrieve_response import AccountRetrieveResponse
+from ....types.v2.account_deactivate_response import AccountDeactivateResponse
 from ....types.v2.account_get_portfolio_response import AccountGetPortfolioResponse
 from ....types.v2.account_get_cash_balances_response import AccountGetCashBalancesResponse
 from ....types.v2.account_get_dividend_payments_response import AccountGetDividendPaymentsResponse
@@ -212,7 +214,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Account:
+    ) -> AccountRetrieveResponse:
         """
         Get a specific `Account` by its ID.
 
@@ -232,7 +234,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Account,
+            cast_to=AccountRetrieveResponse,
         )
 
     def deactivate(
@@ -245,7 +247,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Account:
+    ) -> AccountDeactivateResponse:
         """Set the `Account` to be inactive.
 
         Inactive accounts cannot be used for trading.
@@ -266,7 +268,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Account,
+            cast_to=AccountDeactivateResponse,
         )
 
     def get_cash_balances(
@@ -309,8 +311,12 @@ class AccountsResource(SyncAPIResource):
         *,
         end_date: Union[str, date],
         start_date: Union[str, date],
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -328,6 +334,14 @@ class AccountsResource(SyncAPIResource):
 
           start_date: Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
 
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           stock_id: Optional ID of the `Stock` to filter by
 
           extra_headers: Send extra headers
@@ -340,25 +354,34 @@ class AccountsResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return self._get(
-            path_template("/api/v2/accounts/{account_id}/dividend_payments", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "end_date": end_date,
-                        "start_date": start_date,
-                        "page": page,
-                        "page_size": page_size,
-                        "stock_id": stock_id,
-                    },
-                    account_get_dividend_payments_params.AccountGetDividendPaymentsParams,
+        return cast(
+            AccountGetDividendPaymentsResponse,
+            self._get(
+                path_template("/api/v2/accounts/{account_id}/dividend_payments", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "end_date": end_date,
+                            "start_date": start_date,
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                            "stock_id": stock_id,
+                        },
+                        account_get_dividend_payments_params.AccountGetDividendPaymentsParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, AccountGetDividendPaymentsResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=AccountGetDividendPaymentsResponse,
         )
 
     def get_interest_payments(
@@ -367,8 +390,12 @@ class AccountsResource(SyncAPIResource):
         *,
         end_date: Union[str, date],
         start_date: Union[str, date],
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -387,6 +414,14 @@ class AccountsResource(SyncAPIResource):
 
           start_date: Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
 
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -397,24 +432,33 @@ class AccountsResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return self._get(
-            path_template("/api/v2/accounts/{account_id}/interest_payments", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "end_date": end_date,
-                        "start_date": start_date,
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    account_get_interest_payments_params.AccountGetInterestPaymentsParams,
+        return cast(
+            AccountGetInterestPaymentsResponse,
+            self._get(
+                path_template("/api/v2/accounts/{account_id}/interest_payments", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "end_date": end_date,
+                            "start_date": start_date,
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        account_get_interest_payments_params.AccountGetInterestPaymentsParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, AccountGetInterestPaymentsResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=AccountGetInterestPaymentsResponse,
         )
 
     def get_portfolio(
@@ -626,7 +670,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Account:
+    ) -> AccountRetrieveResponse:
         """
         Get a specific `Account` by its ID.
 
@@ -646,7 +690,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Account,
+            cast_to=AccountRetrieveResponse,
         )
 
     async def deactivate(
@@ -659,7 +703,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Account:
+    ) -> AccountDeactivateResponse:
         """Set the `Account` to be inactive.
 
         Inactive accounts cannot be used for trading.
@@ -680,7 +724,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Account,
+            cast_to=AccountDeactivateResponse,
         )
 
     async def get_cash_balances(
@@ -723,8 +767,12 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         end_date: Union[str, date],
         start_date: Union[str, date],
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -742,6 +790,14 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           start_date: Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
 
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           stock_id: Optional ID of the `Stock` to filter by
 
           extra_headers: Send extra headers
@@ -754,25 +810,34 @@ class AsyncAccountsResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return await self._get(
-            path_template("/api/v2/accounts/{account_id}/dividend_payments", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "end_date": end_date,
-                        "start_date": start_date,
-                        "page": page,
-                        "page_size": page_size,
-                        "stock_id": stock_id,
-                    },
-                    account_get_dividend_payments_params.AccountGetDividendPaymentsParams,
+        return cast(
+            AccountGetDividendPaymentsResponse,
+            await self._get(
+                path_template("/api/v2/accounts/{account_id}/dividend_payments", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "end_date": end_date,
+                            "start_date": start_date,
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                            "stock_id": stock_id,
+                        },
+                        account_get_dividend_payments_params.AccountGetDividendPaymentsParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, AccountGetDividendPaymentsResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=AccountGetDividendPaymentsResponse,
         )
 
     async def get_interest_payments(
@@ -781,8 +846,12 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         end_date: Union[str, date],
         start_date: Union[str, date],
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -801,6 +870,14 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           start_date: Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
 
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -811,24 +888,33 @@ class AsyncAccountsResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return await self._get(
-            path_template("/api/v2/accounts/{account_id}/interest_payments", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "end_date": end_date,
-                        "start_date": start_date,
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    account_get_interest_payments_params.AccountGetInterestPaymentsParams,
+        return cast(
+            AccountGetInterestPaymentsResponse,
+            await self._get(
+                path_template("/api/v2/accounts/{account_id}/interest_payments", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "end_date": end_date,
+                            "start_date": start_date,
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        account_get_interest_payments_params.AccountGetInterestPaymentsParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, AccountGetInterestPaymentsResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=AccountGetInterestPaymentsResponse,
         )
 
     async def get_portfolio(

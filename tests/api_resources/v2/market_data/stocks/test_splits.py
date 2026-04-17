@@ -30,8 +30,12 @@ class TestSplits:
     @parametrize
     def test_method_list_with_all_params(self, client: Dinari) -> None:
         split = client.v2.market_data.stocks.splits.list(
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(SplitListResponse, split, path=["response"])
 
@@ -70,8 +74,12 @@ class TestSplits:
     def test_method_list_for_stock_with_all_params(self, client: Dinari) -> None:
         split = client.v2.market_data.stocks.splits.list_for_stock(
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
 
@@ -125,8 +133,12 @@ class TestAsyncSplits:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
         split = await async_client.v2.market_data.stocks.splits.list(
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(SplitListResponse, split, path=["response"])
 
@@ -165,8 +177,12 @@ class TestAsyncSplits:
     async def test_method_list_for_stock_with_all_params(self, async_client: AsyncDinari) -> None:
         split = await async_client.v2.market_data.stocks.splits.list_for_stock(
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
 

@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import Any, Optional, cast
+from typing_extensions import Literal
+
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -16,8 +19,9 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v2.accounts import withdrawal_request_list_params, withdrawal_request_create_params
-from ....types.v2.accounts.withdrawal_request import WithdrawalRequest
 from ....types.v2.accounts.withdrawal_request_list_response import WithdrawalRequestListResponse
+from ....types.v2.accounts.withdrawal_request_create_response import WithdrawalRequestCreateResponse
+from ....types.v2.accounts.withdrawal_request_retrieve_response import WithdrawalRequestRetrieveResponse
 
 __all__ = ["WithdrawalRequestsResource", "AsyncWithdrawalRequestsResource"]
 
@@ -64,7 +68,7 @@ class WithdrawalRequestsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WithdrawalRequest:
+    ) -> WithdrawalRequestCreateResponse:
         """
         Request to withdraw USD+ payment tokens from a managed `Account` and send the
         equivalent amount of USDC to the specified recipient `Account`.
@@ -100,7 +104,7 @@ class WithdrawalRequestsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WithdrawalRequest,
+            cast_to=WithdrawalRequestCreateResponse,
         )
 
     def retrieve(
@@ -114,7 +118,7 @@ class WithdrawalRequestsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WithdrawalRequest:
+    ) -> WithdrawalRequestRetrieveResponse:
         """
         Get a specific `WithdrawalRequest` by its ID.
 
@@ -142,15 +146,19 @@ class WithdrawalRequestsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WithdrawalRequest,
+            cast_to=WithdrawalRequestRetrieveResponse,
         )
 
     def list(
         self,
         account_id: str,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -162,6 +170,14 @@ class WithdrawalRequestsResource(SyncAPIResource):
         List `WithdrawalRequests` under the `Account`, sorted by most recent.
 
         Args:
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -172,22 +188,31 @@ class WithdrawalRequestsResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return self._get(
-            path_template("/api/v2/accounts/{account_id}/withdrawal_requests", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    withdrawal_request_list_params.WithdrawalRequestListParams,
+        return cast(
+            WithdrawalRequestListResponse,
+            self._get(
+                path_template("/api/v2/accounts/{account_id}/withdrawal_requests", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        withdrawal_request_list_params.WithdrawalRequestListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, WithdrawalRequestListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=WithdrawalRequestListResponse,
         )
 
 
@@ -233,7 +258,7 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WithdrawalRequest:
+    ) -> WithdrawalRequestCreateResponse:
         """
         Request to withdraw USD+ payment tokens from a managed `Account` and send the
         equivalent amount of USDC to the specified recipient `Account`.
@@ -269,7 +294,7 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WithdrawalRequest,
+            cast_to=WithdrawalRequestCreateResponse,
         )
 
     async def retrieve(
@@ -283,7 +308,7 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WithdrawalRequest:
+    ) -> WithdrawalRequestRetrieveResponse:
         """
         Get a specific `WithdrawalRequest` by its ID.
 
@@ -311,15 +336,19 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WithdrawalRequest,
+            cast_to=WithdrawalRequestRetrieveResponse,
         )
 
     async def list(
         self,
         account_id: str,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -331,6 +360,14 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
         List `WithdrawalRequests` under the `Account`, sorted by most recent.
 
         Args:
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -341,22 +378,31 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return await self._get(
-            path_template("/api/v2/accounts/{account_id}/withdrawal_requests", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    withdrawal_request_list_params.WithdrawalRequestListParams,
+        return cast(
+            WithdrawalRequestListResponse,
+            await self._get(
+                path_template("/api/v2/accounts/{account_id}/withdrawal_requests", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        withdrawal_request_list_params.WithdrawalRequestListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, WithdrawalRequestListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=WithdrawalRequestListResponse,
         )
 
 

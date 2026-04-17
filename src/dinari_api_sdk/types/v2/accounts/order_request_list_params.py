@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["OrderRequestListParams"]
 
@@ -15,6 +15,15 @@ class OrderRequestListParams(TypedDict, total=False):
     systems.
     """
 
+    limit: int
+    """Number of results to return"""
+
+    next: Optional[str]
+    """Cursor for next page"""
+
+    order: Literal["asc", "desc"]
+    """Sort order"""
+
     order_id: Optional[str]
     """Order ID for the `OrderRequest`"""
 
@@ -24,3 +33,6 @@ class OrderRequestListParams(TypedDict, total=False):
     page: int
 
     page_size: int
+
+    previous: Optional[str]
+    """Cursor for previous page"""

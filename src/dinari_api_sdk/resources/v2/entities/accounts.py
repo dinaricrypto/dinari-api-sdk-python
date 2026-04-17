@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import Any, Optional, cast
+from typing_extensions import Literal
+
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -16,9 +19,9 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v2.entities import Jurisdiction, account_list_params, account_create_params
-from ....types.v2.entities.account import Account
 from ....types.v2.entities.jurisdiction import Jurisdiction
 from ....types.v2.entities.account_list_response import AccountListResponse
+from ....types.v2.entities.account_create_response import AccountCreateResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -59,7 +62,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Account:
+    ) -> AccountCreateResponse:
         """Create a new `Account` for a specific `Entity`.
 
         This `Entity` represents your
@@ -84,15 +87,19 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Account,
+            cast_to=AccountCreateResponse,
         )
 
     def list(
         self,
         entity_id: str,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -107,6 +114,14 @@ class AccountsResource(SyncAPIResource):
         organization.
 
         Args:
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -117,22 +132,31 @@ class AccountsResource(SyncAPIResource):
         """
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
-        return self._get(
-            path_template("/api/v2/entities/{entity_id}/accounts", entity_id=entity_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    account_list_params.AccountListParams,
+        return cast(
+            AccountListResponse,
+            self._get(
+                path_template("/api/v2/entities/{entity_id}/accounts", entity_id=entity_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        account_list_params.AccountListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, AccountListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=AccountListResponse,
         )
 
 
@@ -172,7 +196,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Account:
+    ) -> AccountCreateResponse:
         """Create a new `Account` for a specific `Entity`.
 
         This `Entity` represents your
@@ -197,15 +221,19 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Account,
+            cast_to=AccountCreateResponse,
         )
 
     async def list(
         self,
         entity_id: str,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -220,6 +248,14 @@ class AsyncAccountsResource(AsyncAPIResource):
         organization.
 
         Args:
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -230,22 +266,31 @@ class AsyncAccountsResource(AsyncAPIResource):
         """
         if not entity_id:
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
-        return await self._get(
-            path_template("/api/v2/entities/{entity_id}/accounts", entity_id=entity_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    account_list_params.AccountListParams,
+        return cast(
+            AccountListResponse,
+            await self._get(
+                path_template("/api/v2/entities/{entity_id}/accounts", entity_id=entity_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        account_list_params.AccountListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, AccountListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=AccountListResponse,
         )
 
 

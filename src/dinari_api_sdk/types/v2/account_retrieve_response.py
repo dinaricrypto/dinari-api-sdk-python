@@ -2,14 +2,14 @@
 
 from typing import Optional
 from datetime import datetime
-from typing_extensions import Literal
 
-from ...._models import BaseModel
+from ..._models import BaseModel
+from .entities.jurisdiction import Jurisdiction
 
-__all__ = ["Account"]
+__all__ = ["AccountRetrieveResponse"]
 
 
-class Account(BaseModel):
+class AccountRetrieveResponse(BaseModel):
     """Information about an `Account` owned by an `Entity`."""
 
     id: str
@@ -24,7 +24,7 @@ class Account(BaseModel):
     is_active: bool
     """Indicates whether the `Account` is active."""
 
-    jurisdiction: Literal["BASELINE", "US"]
+    jurisdiction: Jurisdiction
     """Jurisdiction of the `Account`."""
 
     brokerage_account_id: Optional[str] = None

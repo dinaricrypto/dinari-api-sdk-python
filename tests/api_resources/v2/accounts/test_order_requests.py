@@ -87,10 +87,14 @@ class TestOrderRequests:
         order_request = client.v2.accounts.order_requests.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            limit=20,
+            next="next",
+            order="asc",
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(OrderRequestListResponse, order_request, path=["response"])
 
@@ -515,10 +519,14 @@ class TestAsyncOrderRequests:
         order_request = await async_client.v2.accounts.order_requests.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            limit=20,
+            next="next",
+            order="asc",
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(OrderRequestListResponse, order_request, path=["response"])
 

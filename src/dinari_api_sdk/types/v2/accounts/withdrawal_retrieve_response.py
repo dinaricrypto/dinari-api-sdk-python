@@ -1,14 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from datetime import datetime
-from typing_extensions import Literal
 
+from ..chain import Chain
 from ...._models import BaseModel
+from .brokerage_order_status import BrokerageOrderStatus
 
-__all__ = ["Withdrawal"]
+__all__ = ["WithdrawalRetrieveResponse"]
 
 
-class Withdrawal(BaseModel):
+class WithdrawalRetrieveResponse(BaseModel):
     """
     Information for a withdrawal of payment tokens from an `Account` backed by a Dinari-managed `Wallet`.
     """
@@ -19,7 +20,7 @@ class Withdrawal(BaseModel):
     account_id: str
     """ID of the `Account` from which the `Withdrawal` is made."""
 
-    chain_id: str
+    chain_id: Chain
     """CAIP-2 chain ID of the blockchain where the `Withdrawal` is made."""
 
     payment_token_address: str
@@ -35,20 +36,7 @@ class Withdrawal(BaseModel):
     same `Entity`.
     """
 
-    status: Literal[
-        "PENDING_SUBMIT",
-        "PENDING_CANCEL",
-        "PENDING_ESCROW",
-        "PENDING_FILL",
-        "ESCROWED",
-        "SUBMITTED",
-        "CANCELLED",
-        "PARTIALLY_FILLED",
-        "FILLED",
-        "REJECTED",
-        "REQUIRING_CONTACT",
-        "ERROR",
-    ]
+    status: BrokerageOrderStatus
     """Status of the `Withdrawal`."""
 
     transaction_dt: datetime
