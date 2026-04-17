@@ -139,8 +139,12 @@ class TestTokenTransfers:
     def test_method_list_with_all_params(self, client: Dinari) -> None:
         token_transfer = client.v2.accounts.token_transfers.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(TokenTransferListResponse, token_transfer, path=["response"])
 
@@ -303,8 +307,12 @@ class TestAsyncTokenTransfers:
     async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
         token_transfer = await async_client.v2.accounts.token_transfers.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(TokenTransferListResponse, token_transfer, path=["response"])
 

@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import date
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -18,6 +18,18 @@ class AccountGetInterestPaymentsParams(TypedDict, total=False):
     start_date: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
     """Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD."""
 
+    limit: int
+    """Number of results to return"""
+
+    next: Optional[str]
+    """Cursor for next page"""
+
+    order: Literal["asc", "desc"]
+    """Sort order"""
+
     page: int
 
     page_size: int
+
+    previous: Optional[str]
+    """Cursor for previous page"""

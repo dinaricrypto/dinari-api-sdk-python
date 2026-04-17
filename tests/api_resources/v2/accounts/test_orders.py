@@ -87,11 +87,15 @@ class TestOrders:
     def test_method_list_with_all_params(self, client: Dinari) -> None:
         order = client.v2.accounts.orders.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id="eip155:1",
+            chain_id="chain_id",
             client_order_id="client_order_id",
+            limit=20,
+            next="next",
+            order="asc",
             order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(OrderListResponse, order, path=["response"])
 
@@ -242,8 +246,12 @@ class TestOrders:
         order = client.v2.accounts.orders.get_fulfillments(
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
 
@@ -361,11 +369,15 @@ class TestAsyncOrders:
     async def test_method_list_with_all_params(self, async_client: AsyncDinari) -> None:
         order = await async_client.v2.accounts.orders.list(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            chain_id="eip155:1",
+            chain_id="chain_id",
             client_order_id="client_order_id",
+            limit=20,
+            next="next",
+            order="asc",
             order_transaction_hash="order_transaction_hash",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(OrderListResponse, order, path=["response"])
 
@@ -516,8 +528,12 @@ class TestAsyncOrders:
         order = await async_client.v2.accounts.orders.get_fulfillments(
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            limit=20,
+            next="next",
+            order="asc",
             page=1,
             page_size=1,
+            previous="previous",
         )
         assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
 

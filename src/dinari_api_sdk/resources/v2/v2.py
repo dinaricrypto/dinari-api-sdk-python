@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Any, Optional, cast
+from typing_extensions import Literal
 
 import httpx
 
@@ -10,7 +11,6 @@ from ...types import v2_list_orders_params
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
-from ...types.v2 import Chain
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -19,7 +19,6 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.v2.chain import Chain
 from .accounts.accounts import (
     AccountsResource,
     AsyncAccountsResource,
@@ -106,12 +105,16 @@ class V2Resource(SyncAPIResource):
     def list_orders(
         self,
         *,
-        chain_id: Optional[Chain] | Omit = omit,
+        chain_id: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         order_fulfillment_transaction_hash: Optional[str] | Omit = omit,
         order_request_id: Optional[str] | Omit = omit,
         order_transaction_hash: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -127,11 +130,19 @@ class V2Resource(SyncAPIResource):
         Args:
           chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
 
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
           order_fulfillment_transaction_hash: Fulfillment transaction hash of the `Order`.
 
           order_request_id: Order Request ID for the `Order`
 
           order_transaction_hash: Transaction hash of the `Order`.
+
+          previous: Cursor for previous page
 
           extra_headers: Send extra headers
 
@@ -141,26 +152,35 @@ class V2Resource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
-            "/api/v2/orders/",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "chain_id": chain_id,
-                        "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
-                        "order_request_id": order_request_id,
-                        "order_transaction_hash": order_transaction_hash,
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    v2_list_orders_params.V2ListOrdersParams,
+        return cast(
+            V2ListOrdersResponse,
+            self._get(
+                "/api/v2/orders/",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "chain_id": chain_id,
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
+                            "order_request_id": order_request_id,
+                            "order_transaction_hash": order_transaction_hash,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        v2_list_orders_params.V2ListOrdersParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, V2ListOrdersResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=V2ListOrdersResponse,
         )
 
 
@@ -221,12 +241,16 @@ class AsyncV2Resource(AsyncAPIResource):
     async def list_orders(
         self,
         *,
-        chain_id: Optional[Chain] | Omit = omit,
+        chain_id: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         order_fulfillment_transaction_hash: Optional[str] | Omit = omit,
         order_request_id: Optional[str] | Omit = omit,
         order_transaction_hash: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -242,11 +266,19 @@ class AsyncV2Resource(AsyncAPIResource):
         Args:
           chain_id: CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
 
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
           order_fulfillment_transaction_hash: Fulfillment transaction hash of the `Order`.
 
           order_request_id: Order Request ID for the `Order`
 
           order_transaction_hash: Transaction hash of the `Order`.
+
+          previous: Cursor for previous page
 
           extra_headers: Send extra headers
 
@@ -256,26 +288,35 @@ class AsyncV2Resource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
-            "/api/v2/orders/",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "chain_id": chain_id,
-                        "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
-                        "order_request_id": order_request_id,
-                        "order_transaction_hash": order_transaction_hash,
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    v2_list_orders_params.V2ListOrdersParams,
+        return cast(
+            V2ListOrdersResponse,
+            await self._get(
+                "/api/v2/orders/",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "chain_id": chain_id,
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
+                            "order_request_id": order_request_id,
+                            "order_transaction_hash": order_transaction_hash,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        v2_list_orders_params.V2ListOrdersParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, V2ListOrdersResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=V2ListOrdersResponse,
         )
 
 

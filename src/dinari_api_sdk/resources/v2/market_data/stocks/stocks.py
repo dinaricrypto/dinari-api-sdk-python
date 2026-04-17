@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Any, Optional, cast
 from typing_extensions import Literal
 
 import httpx
@@ -71,8 +72,12 @@ class StocksResource(SyncAPIResource):
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         symbols: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -81,12 +86,19 @@ class StocksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockListResponse:
-        """Get a list of `Stocks`.
+        """
+        Get a list of `Stocks`.
 
         Args:
-          symbols: List of `Stock` symbols to query.
+          limit: Number of results to return
 
-        If not provided, all `Stocks` are returned.
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
+          symbols: List of `Stock` symbols to query. If not provided, all `Stocks` are returned.
 
           extra_headers: Send extra headers
 
@@ -96,23 +108,30 @@ class StocksResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
-            "/api/v2/market_data/stocks/",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                        "symbols": symbols,
-                    },
-                    stock_list_params.StockListParams,
+        return cast(
+            StockListResponse,
+            self._get(
+                "/api/v2/market_data/stocks/",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                            "symbols": symbols,
+                        },
+                        stock_list_params.StockListParams,
+                    ),
                 ),
+                cast_to=cast(Any, StockListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=StockListResponse,
         )
 
     def retrieve_current_price(
@@ -334,8 +353,12 @@ class AsyncStocksResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         symbols: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -344,12 +367,19 @@ class AsyncStocksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StockListResponse:
-        """Get a list of `Stocks`.
+        """
+        Get a list of `Stocks`.
 
         Args:
-          symbols: List of `Stock` symbols to query.
+          limit: Number of results to return
 
-        If not provided, all `Stocks` are returned.
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
+          symbols: List of `Stock` symbols to query. If not provided, all `Stocks` are returned.
 
           extra_headers: Send extra headers
 
@@ -359,23 +389,30 @@ class AsyncStocksResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
-            "/api/v2/market_data/stocks/",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                        "symbols": symbols,
-                    },
-                    stock_list_params.StockListParams,
+        return cast(
+            StockListResponse,
+            await self._get(
+                "/api/v2/market_data/stocks/",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                            "symbols": symbols,
+                        },
+                        stock_list_params.StockListParams,
+                    ),
                 ),
+                cast_to=cast(Any, StockListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=StockListResponse,
         )
 
     async def retrieve_current_price(

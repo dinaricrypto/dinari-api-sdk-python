@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Any, Optional, cast
+from typing_extensions import Literal
 
 import httpx
 
@@ -18,8 +19,8 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v2.accounts import withdrawal_list_params
-from ....types.v2.accounts.withdrawal import Withdrawal
 from ....types.v2.accounts.withdrawal_list_response import WithdrawalListResponse
+from ....types.v2.accounts.withdrawal_retrieve_response import WithdrawalRetrieveResponse
 
 __all__ = ["WithdrawalsResource", "AsyncWithdrawalsResource"]
 
@@ -65,7 +66,7 @@ class WithdrawalsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Withdrawal:
+    ) -> WithdrawalRetrieveResponse:
         """
         Get a specific `Withdrawal` by its ID.
 
@@ -91,15 +92,19 @@ class WithdrawalsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Withdrawal,
+            cast_to=WithdrawalRetrieveResponse,
         )
 
     def list(
         self,
         account_id: str,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         withdrawal_request_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -112,6 +117,14 @@ class WithdrawalsResource(SyncAPIResource):
         Get a list of all `Withdrawals` under the `Account`, sorted by most recent.
 
         Args:
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           withdrawal_request_id: ID of the `WithdrawalRequest` to find `Withdrawals` for.
 
           extra_headers: Send extra headers
@@ -124,23 +137,32 @@ class WithdrawalsResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return self._get(
-            path_template("/api/v2/accounts/{account_id}/withdrawals", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                        "withdrawal_request_id": withdrawal_request_id,
-                    },
-                    withdrawal_list_params.WithdrawalListParams,
+        return cast(
+            WithdrawalListResponse,
+            self._get(
+                path_template("/api/v2/accounts/{account_id}/withdrawals", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                            "withdrawal_request_id": withdrawal_request_id,
+                        },
+                        withdrawal_list_params.WithdrawalListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, WithdrawalListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=WithdrawalListResponse,
         )
 
 
@@ -185,7 +207,7 @@ class AsyncWithdrawalsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Withdrawal:
+    ) -> WithdrawalRetrieveResponse:
         """
         Get a specific `Withdrawal` by its ID.
 
@@ -211,15 +233,19 @@ class AsyncWithdrawalsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Withdrawal,
+            cast_to=WithdrawalRetrieveResponse,
         )
 
     async def list(
         self,
         account_id: str,
         *,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         withdrawal_request_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -232,6 +258,14 @@ class AsyncWithdrawalsResource(AsyncAPIResource):
         Get a list of all `Withdrawals` under the `Account`, sorted by most recent.
 
         Args:
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
+          previous: Cursor for previous page
+
           withdrawal_request_id: ID of the `WithdrawalRequest` to find `Withdrawals` for.
 
           extra_headers: Send extra headers
@@ -244,23 +278,32 @@ class AsyncWithdrawalsResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return await self._get(
-            path_template("/api/v2/accounts/{account_id}/withdrawals", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "page": page,
-                        "page_size": page_size,
-                        "withdrawal_request_id": withdrawal_request_id,
-                    },
-                    withdrawal_list_params.WithdrawalListParams,
+        return cast(
+            WithdrawalListResponse,
+            await self._get(
+                path_template("/api/v2/accounts/{account_id}/withdrawals", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                            "withdrawal_request_id": withdrawal_request_id,
+                        },
+                        withdrawal_list_params.WithdrawalListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, WithdrawalListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=WithdrawalListResponse,
         )
 
 

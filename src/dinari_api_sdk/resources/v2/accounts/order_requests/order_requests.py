@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Any, Optional, cast
+from typing_extensions import Literal
 
 import httpx
 
@@ -120,10 +121,14 @@ class OrderRequestsResource(SyncAPIResource):
         account_id: str,
         *,
         client_order_id: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         order_id: Optional[str] | Omit = omit,
         order_request_id: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -140,9 +145,17 @@ class OrderRequestsResource(SyncAPIResource):
           client_order_id: Customer-supplied ID to map this `OrderRequest` to an order in their own
               systems.
 
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
           order_id: Order ID for the `OrderRequest`
 
           order_request_id: Order Request ID for the `OrderRequest`
+
+          previous: Cursor for previous page
 
           extra_headers: Send extra headers
 
@@ -154,25 +167,34 @@ class OrderRequestsResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return self._get(
-            path_template("/api/v2/accounts/{account_id}/order_requests", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "client_order_id": client_order_id,
-                        "order_id": order_id,
-                        "order_request_id": order_request_id,
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    order_request_list_params.OrderRequestListParams,
+        return cast(
+            OrderRequestListResponse,
+            self._get(
+                path_template("/api/v2/accounts/{account_id}/order_requests", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "client_order_id": client_order_id,
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "order_id": order_id,
+                            "order_request_id": order_request_id,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        order_request_list_params.OrderRequestListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, OrderRequestListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=OrderRequestListResponse,
         )
 
     def create_limit_buy(
@@ -628,10 +650,14 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         account_id: str,
         *,
         client_order_id: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        next: Optional[str] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
         order_id: Optional[str] | Omit = omit,
         order_request_id: Optional[str] | Omit = omit,
         page: int | Omit = omit,
         page_size: int | Omit = omit,
+        previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -648,9 +674,17 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
           client_order_id: Customer-supplied ID to map this `OrderRequest` to an order in their own
               systems.
 
+          limit: Number of results to return
+
+          next: Cursor for next page
+
+          order: Sort order
+
           order_id: Order ID for the `OrderRequest`
 
           order_request_id: Order Request ID for the `OrderRequest`
+
+          previous: Cursor for previous page
 
           extra_headers: Send extra headers
 
@@ -662,25 +696,34 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return await self._get(
-            path_template("/api/v2/accounts/{account_id}/order_requests", account_id=account_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "client_order_id": client_order_id,
-                        "order_id": order_id,
-                        "order_request_id": order_request_id,
-                        "page": page,
-                        "page_size": page_size,
-                    },
-                    order_request_list_params.OrderRequestListParams,
+        return cast(
+            OrderRequestListResponse,
+            await self._get(
+                path_template("/api/v2/accounts/{account_id}/order_requests", account_id=account_id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "client_order_id": client_order_id,
+                            "limit": limit,
+                            "next": next,
+                            "order": order,
+                            "order_id": order_id,
+                            "order_request_id": order_request_id,
+                            "page": page,
+                            "page_size": page_size,
+                            "previous": previous,
+                        },
+                        order_request_list_params.OrderRequestListParams,
+                    ),
                 ),
+                cast_to=cast(
+                    Any, OrderRequestListResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=OrderRequestListResponse,
         )
 
     async def create_limit_buy(
