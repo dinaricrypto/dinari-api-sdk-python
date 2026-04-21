@@ -13,7 +13,7 @@ class Eip155CreatePermitResponse(BaseModel):
     order_request_id: str
     """ID representing the EIP155 `OrderRequest`"""
 
-    permit: Dict[str, None]
+    permit: Dict[str, object]
     """
     Token permit that is to be signed by smart contract submitter for authorizing
     token transfer for the `OrderRequest`
