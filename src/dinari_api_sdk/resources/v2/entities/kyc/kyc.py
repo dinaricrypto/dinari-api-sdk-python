@@ -179,7 +179,7 @@ class KYCResource(SyncAPIResource):
         provisioned partners in production.
 
         Args:
-          data: KYC data for an `Entity` in the BASELINE jurisdiction.
+          data: KYC data of the `Entity`.
 
           provider_name: Name of the KYC provider that provided the KYC information.
 
@@ -218,7 +218,7 @@ class KYCResource(SyncAPIResource):
         provisioned partners in production.
 
         Args:
-          data: KYC data for an `Entity` in the US jurisdiction.
+          data: KYC data of the `Entity`.
 
           provider_name: Name of the KYC provider that provided the KYC information.
 
@@ -415,7 +415,7 @@ class AsyncKYCResource(AsyncAPIResource):
         provisioned partners in production.
 
         Args:
-          data: KYC data for an `Entity` in the BASELINE jurisdiction.
+          data: KYC data of the `Entity`.
 
           provider_name: Name of the KYC provider that provided the KYC information.
 
@@ -454,7 +454,7 @@ class AsyncKYCResource(AsyncAPIResource):
         provisioned partners in production.
 
         Args:
-          data: KYC data for an `Entity` in the US jurisdiction.
+          data: KYC data of the `Entity`.
 
           provider_name: Name of the KYC provider that provided the KYC information.
 

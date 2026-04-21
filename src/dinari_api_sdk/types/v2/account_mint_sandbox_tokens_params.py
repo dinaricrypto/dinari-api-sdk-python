@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
 
 from .chain import Chain
@@ -11,7 +10,7 @@ __all__ = ["AccountMintSandboxTokensParams"]
 
 
 class AccountMintSandboxTokensParams(TypedDict, total=False):
-    chain_id: Optional[Chain]
+    chain_id: Chain
     """CAIP-2 chain ID of blockchain in which to mint the sandbox payment tokens.
 
     If none specified, defaults to eip155:421614. If the `Account` is linked to a
