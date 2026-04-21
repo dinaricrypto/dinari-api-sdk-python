@@ -13,7 +13,7 @@ __all__ = ["KYCSubmitParams", "CreateBaselineKYCInput", "CreateUsKYCInput"]
 
 class CreateBaselineKYCInput(TypedDict, total=False):
     data: Required[BaselineKYCCheckDataParam]
-    """KYC data for an `Entity` in the BASELINE jurisdiction."""
+    """KYC data of the `Entity`."""
 
     provider_name: Required[str]
     """Name of the KYC provider that provided the KYC information."""
@@ -24,7 +24,7 @@ class CreateBaselineKYCInput(TypedDict, total=False):
 
 class CreateUsKYCInput(TypedDict, total=False):
     data: Required[UsKYCCheckDataParam]
-    """KYC data for an `Entity` in the US jurisdiction."""
+    """KYC data of the `Entity`."""
 
     provider_name: Required[str]
     """Name of the KYC provider that provided the KYC information."""

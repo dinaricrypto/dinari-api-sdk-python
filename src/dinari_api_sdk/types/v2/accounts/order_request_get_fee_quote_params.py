@@ -30,7 +30,7 @@ class OrderRequestGetFeeQuoteParams(TypedDict, total=False):
     `Order Requests` or up to 6 decimal places for market sell `Order Requests`.
     """
 
-    chain_id: Optional[Chain]
+    chain_id: Chain
     """CAIP-2 chain ID of the blockchain where the `Order Request` will be placed.
 
     If not provided, the default chain ID (eip155:42161) will be used.
