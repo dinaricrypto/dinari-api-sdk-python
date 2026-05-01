@@ -75,6 +75,7 @@ class Eip155Resource(SyncAPIResource):
         alloy_id: Optional[str] | Omit = omit,
         asset_token_quantity: Optional[float] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
@@ -96,6 +97,9 @@ class Eip155Resource(SyncAPIResource):
         already included in the transactions, so no additional fee quote lookup is
         needed.
 
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places.
+
         Args:
           chain_id: CAIP-2 chain ID of the blockchain where the `Order` will be placed.
 
@@ -116,6 +120,9 @@ class Eip155Resource(SyncAPIResource):
 
           client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
               customer's systems.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
@@ -148,6 +155,7 @@ class Eip155Resource(SyncAPIResource):
                     "alloy_id": alloy_id,
                     "asset_token_quantity": asset_token_quantity,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "limit_price": limit_price,
                     "payment_token_quantity": payment_token_quantity,
                     "stock_id": stock_id,
@@ -301,6 +309,7 @@ class AsyncEip155Resource(AsyncAPIResource):
         alloy_id: Optional[str] | Omit = omit,
         asset_token_quantity: Optional[float] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         limit_price: Optional[float] | Omit = omit,
         payment_token_quantity: Optional[float] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
@@ -322,6 +331,9 @@ class AsyncEip155Resource(AsyncAPIResource):
         already included in the transactions, so no additional fee quote lookup is
         needed.
 
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places.
+
         Args:
           chain_id: CAIP-2 chain ID of the blockchain where the `Order` will be placed.
 
@@ -342,6 +354,9 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           client_order_id: Customer-supplied unique identifier to map this `Order` to an order in the
               customer's systems.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
               Required for limit `Orders`.
@@ -374,6 +389,7 @@ class AsyncEip155Resource(AsyncAPIResource):
                     "alloy_id": alloy_id,
                     "asset_token_quantity": asset_token_quantity,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "limit_price": limit_price,
                     "payment_token_quantity": payment_token_quantity,
                     "stock_id": stock_id,

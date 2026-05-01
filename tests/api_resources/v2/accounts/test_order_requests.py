@@ -151,6 +151,7 @@ class TestOrderRequests:
             limit_price=0,
             alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            fee=0,
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -215,6 +216,7 @@ class TestOrderRequests:
             limit_price=0,
             alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            fee=0,
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -278,6 +280,7 @@ class TestOrderRequests:
             payment_amount=0,
             alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            fee=0,
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -337,6 +340,7 @@ class TestOrderRequests:
             asset_quantity=0,
             alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            fee=0,
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -583,6 +587,7 @@ class TestAsyncOrderRequests:
             limit_price=0,
             alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            fee=0,
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -647,6 +652,7 @@ class TestAsyncOrderRequests:
             limit_price=0,
             alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            fee=0,
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -710,6 +716,7 @@ class TestAsyncOrderRequests:
             payment_amount=0,
             alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            fee=0,
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -769,6 +776,7 @@ class TestAsyncOrderRequests:
             asset_quantity=0,
             alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             client_order_id="client_order_id",
+            fee=0,
             payment_token_address="payment_token_address",
             recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
