@@ -205,6 +205,7 @@ class OrderRequestsResource(SyncAPIResource):
         limit_price: float,
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -217,9 +218,8 @@ class OrderRequestsResource(SyncAPIResource):
         """
         Create a managed `OrderRequest` to place a limit buy `Order`.
 
-        Fees for the `Order` are included in the transaction. Refer to our
-        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-        for fee estimation.
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
         given account, the creation call will fail.
@@ -236,6 +236,9 @@ class OrderRequestsResource(SyncAPIResource):
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -259,6 +262,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "limit_price": limit_price,
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
                 },
@@ -278,6 +282,7 @@ class OrderRequestsResource(SyncAPIResource):
         limit_price: float,
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
@@ -291,9 +296,8 @@ class OrderRequestsResource(SyncAPIResource):
         """
         Create a managed `OrderRequest` to place a limit sell `Order`.
 
-        Fees for the `Order` are included in the transaction. Refer to our
-        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-        for fee estimation.
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
         given account, the creation call will fail.
@@ -310,6 +314,9 @@ class OrderRequestsResource(SyncAPIResource):
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
               default payment token (USD+) will be used. Should only be specified if
@@ -337,6 +344,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "limit_price": limit_price,
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
@@ -356,6 +364,7 @@ class OrderRequestsResource(SyncAPIResource):
         payment_amount: float,
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -368,9 +377,8 @@ class OrderRequestsResource(SyncAPIResource):
         """
         Create a managed `OrderRequest` to place a market buy `Order`.
 
-        Fees for the `Order` are included in the transaction. Refer to our
-        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-        for fee estimation.
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
         given account, the creation call will fail.
@@ -383,6 +391,9 @@ class OrderRequestsResource(SyncAPIResource):
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -405,6 +416,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "payment_amount": payment_amount,
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
                 },
@@ -423,6 +435,7 @@ class OrderRequestsResource(SyncAPIResource):
         asset_quantity: float,
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
@@ -436,9 +449,8 @@ class OrderRequestsResource(SyncAPIResource):
         """
         Create a managed `OrderRequest` to place a market sell `Order`.
 
-        Fees for the `Order` are included in the transaction. Refer to our
-        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-        for fee estimation.
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
         given account, the creation call will fail.
@@ -451,6 +463,9 @@ class OrderRequestsResource(SyncAPIResource):
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
               default payment token (USD+) will be used. Should only be specified if
@@ -477,6 +492,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
@@ -509,9 +525,11 @@ class OrderRequestsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequestGetFeeQuoteResponse:
-        """Get fee quote data for an `Order Request`.
+        """
+        **DEPRECATED:** This endpoint is deprecated and will be removed on May
+        14th, 2026.
 
-        This is provided primarily for
+        Get fee quote data for an `Order Request`. This is provided primarily for
         informational purposes.
 
         For market buy orders, the notional amount of the order includes the fees. For
@@ -734,6 +752,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         limit_price: float,
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -746,9 +765,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         """
         Create a managed `OrderRequest` to place a limit buy `Order`.
 
-        Fees for the `Order` are included in the transaction. Refer to our
-        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-        for fee estimation.
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
         given account, the creation call will fail.
@@ -765,6 +783,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -788,6 +809,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "limit_price": limit_price,
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
                 },
@@ -807,6 +829,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         limit_price: float,
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
@@ -820,9 +843,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         """
         Create a managed `OrderRequest` to place a limit sell `Order`.
 
-        Fees for the `Order` are included in the transaction. Refer to our
-        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-        for fee estimation.
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
         given account, the creation call will fail.
@@ -839,6 +861,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
               default payment token (USD+) will be used. Should only be specified if
@@ -866,6 +891,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "limit_price": limit_price,
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
@@ -885,6 +911,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         payment_amount: float,
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -897,9 +924,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         """
         Create a managed `OrderRequest` to place a market buy `Order`.
 
-        Fees for the `Order` are included in the transaction. Refer to our
-        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-        for fee estimation.
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
         given account, the creation call will fail.
@@ -912,6 +938,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           recipient_account_id: ID of `Account` to receive the `Order`.
 
@@ -934,6 +963,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "payment_amount": payment_amount,
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
                 },
@@ -952,6 +982,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         asset_quantity: float,
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
+        fee: Optional[float] | Omit = omit,
         payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
@@ -965,9 +996,8 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         """
         Create a managed `OrderRequest` to place a market sell `Order`.
 
-        Fees for the `Order` are included in the transaction. Refer to our
-        [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-        for fee estimation.
+        Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+        orders in USD, supporting up to 6 decimal places
 
         If an `OrderRequest` with the same `client_order_id` already exists for the
         given account, the creation call will fail.
@@ -980,6 +1010,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
 
           client_order_id: Customer-supplied ID to map this order to an order in their own systems. Must be
               unique within the entity.
+
+          fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+              positive number with a precision of up to 6 decimal places.
 
           payment_token_address: Address of the payment token to be used for the sell order. If not provided, the
               default payment token (USD+) will be used. Should only be specified if
@@ -1006,6 +1039,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "asset_quantity": asset_quantity,
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
+                    "fee": fee,
                     "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
@@ -1038,9 +1072,11 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderRequestGetFeeQuoteResponse:
-        """Get fee quote data for an `Order Request`.
+        """
+        **DEPRECATED:** This endpoint is deprecated and will be removed on May
+        14th, 2026.
 
-        This is provided primarily for
+        Get fee quote data for an `Order Request`. This is provided primarily for
         informational purposes.
 
         For market buy orders, the notional amount of the order includes the fees. For
