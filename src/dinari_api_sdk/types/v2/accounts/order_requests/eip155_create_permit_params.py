@@ -46,6 +46,12 @@ class Eip155CreatePermitParams(TypedDict, total=False):
     customer's systems.
     """
 
+    fee: Optional[float]
+    """Optional fee amount associated with `Order` in USD for DFN orders.
+
+    Must be a positive number with a precision of up to 6 decimal places.
+    """
+
     limit_price: Optional[float]
     """Price per asset in the asset's native currency.
 

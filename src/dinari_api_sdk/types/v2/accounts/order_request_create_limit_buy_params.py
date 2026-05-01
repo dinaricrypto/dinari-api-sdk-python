@@ -31,6 +31,12 @@ class OrderRequestCreateLimitBuyParams(TypedDict, total=False):
     Must be unique within the entity.
     """
 
+    fee: Optional[float]
+    """Optional fee amount associated with `Order` in USD for DFN orders.
+
+    Must be a positive number with a precision of up to 6 decimal places.
+    """
+
     recipient_account_id: Optional[str]
     """ID of `Account` to receive the `Order`."""
 
