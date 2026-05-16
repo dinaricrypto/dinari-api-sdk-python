@@ -10,13 +10,13 @@ __all__ = ["StockRetrieveCurrentPriceResponse"]
 
 class StockRetrieveCurrentPriceResponse(BaseModel):
     price: float
-    """The ask price."""
+    """The price (fair market value) of the asset at the given time period."""
 
     stock_id: str
     """ID of the `Stock`"""
 
     timestamp: datetime
-    """When the Stock Quote was generated."""
+    """When the `StockPrice` was generated."""
 
     change: Optional[float] = None
     """The change in price from the previous close."""
@@ -35,8 +35,8 @@ class StockRetrieveCurrentPriceResponse(BaseModel):
 
     market_cap: Optional[int] = None
     """
-    The most recent close price of the ticker multiplied by weighted outstanding
-    shares.
+    The market capitalization of the `Stock` calculated at the most recent close
+    price.
     """
 
     open: Optional[float] = None
@@ -46,7 +46,7 @@ class StockRetrieveCurrentPriceResponse(BaseModel):
     """The close price for the `Stock` from the previous trading session."""
 
     volume: Optional[float] = None
-    """The trading volume from the given time period."""
+    """The trading volume in shares from the given time period."""
 
     weighted_shares_outstanding: Optional[int] = None
     """The number of shares outstanding in the given time period."""
