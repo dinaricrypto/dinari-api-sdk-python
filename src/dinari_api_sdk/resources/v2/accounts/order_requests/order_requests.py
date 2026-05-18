@@ -18,7 +18,6 @@ from .eip155 import (
 from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
-from .....types.v2 import Chain
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
     to_raw_response_wrapper,
@@ -27,22 +26,15 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.v2.chain import Chain
 from .....types.v2.accounts import (
-    OrderSide,
-    OrderType,
     order_request_list_params,
-    order_request_get_fee_quote_params,
     order_request_create_limit_buy_params,
     order_request_create_limit_sell_params,
     order_request_create_market_buy_params,
     order_request_create_market_sell_params,
 )
-from .....types.v2.accounts.order_side import OrderSide
-from .....types.v2.accounts.order_type import OrderType
 from .....types.v2.accounts.order_request import OrderRequest
 from .....types.v2.accounts.order_request_list_response import OrderRequestListResponse
-from .....types.v2.accounts.order_request_get_fee_quote_response import OrderRequestGetFeeQuoteResponse
 
 __all__ = ["OrderRequestsResource", "AsyncOrderRequestsResource"]
 
@@ -505,94 +497,6 @@ class OrderRequestsResource(SyncAPIResource):
             cast_to=OrderRequest,
         )
 
-    def get_fee_quote(
-        self,
-        account_id: str,
-        *,
-        order_side: OrderSide,
-        order_type: OrderType,
-        alloy_id: Optional[str] | Omit = omit,
-        asset_token_quantity: Optional[float] | Omit = omit,
-        chain_id: Chain | Omit = omit,
-        limit_price: Optional[float] | Omit = omit,
-        payment_token_address: Optional[str] | Omit = omit,
-        payment_token_quantity: Optional[float] | Omit = omit,
-        stock_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderRequestGetFeeQuoteResponse:
-        """
-        **DEPRECATED:** This endpoint is deprecated and will be removed on May
-        14th, 2026.
-
-        Get fee quote data for an `Order Request`. This is provided primarily for
-        informational purposes.
-
-        For market buy orders, the notional amount of the order includes the fees. For
-        market and limit sell orders, fees are deducted from the proceeds of the sale.
-        For limit buy orders, the fees are added to the total cost of the order.
-
-        Args:
-          order_side: Indicates whether `Order Request` is a buy or sell.
-
-          order_type: Type of `Order Request`.
-
-          alloy_id: The `Alloy` ID associated with the Order Request
-
-          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
-              market sell `Order Requests`. Must be a positive number with a precision of up
-              to 4 decimal places for limit `Order Requests` or up to 6 decimal places for
-              market sell `Order Requests`.
-
-          chain_id: CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
-              not provided, the default chain ID (eip155:42161) will be used.
-
-          limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
-              Required for limit `Order Requests`.
-
-          payment_token_address: Address of the payment token to be used for an order. If not provided, the
-              default payment token (USD+) will be used.
-
-          payment_token_quantity: Amount of payment tokens involved. Required for market buy `Order Requests`.
-
-          stock_id: The `Stock` ID associated with the Order Request
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return self._post(
-            path_template("/api/v2/accounts/{account_id}/order_requests/fee_quote", account_id=account_id),
-            body=maybe_transform(
-                {
-                    "order_side": order_side,
-                    "order_type": order_type,
-                    "alloy_id": alloy_id,
-                    "asset_token_quantity": asset_token_quantity,
-                    "chain_id": chain_id,
-                    "limit_price": limit_price,
-                    "payment_token_address": payment_token_address,
-                    "payment_token_quantity": payment_token_quantity,
-                    "stock_id": stock_id,
-                },
-                order_request_get_fee_quote_params.OrderRequestGetFeeQuoteParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=OrderRequestGetFeeQuoteResponse,
-        )
-
 
 class AsyncOrderRequestsResource(AsyncAPIResource):
     @cached_property
@@ -1052,94 +956,6 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
             cast_to=OrderRequest,
         )
 
-    async def get_fee_quote(
-        self,
-        account_id: str,
-        *,
-        order_side: OrderSide,
-        order_type: OrderType,
-        alloy_id: Optional[str] | Omit = omit,
-        asset_token_quantity: Optional[float] | Omit = omit,
-        chain_id: Chain | Omit = omit,
-        limit_price: Optional[float] | Omit = omit,
-        payment_token_address: Optional[str] | Omit = omit,
-        payment_token_quantity: Optional[float] | Omit = omit,
-        stock_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderRequestGetFeeQuoteResponse:
-        """
-        **DEPRECATED:** This endpoint is deprecated and will be removed on May
-        14th, 2026.
-
-        Get fee quote data for an `Order Request`. This is provided primarily for
-        informational purposes.
-
-        For market buy orders, the notional amount of the order includes the fees. For
-        market and limit sell orders, fees are deducted from the proceeds of the sale.
-        For limit buy orders, the fees are added to the total cost of the order.
-
-        Args:
-          order_side: Indicates whether `Order Request` is a buy or sell.
-
-          order_type: Type of `Order Request`.
-
-          alloy_id: The `Alloy` ID associated with the Order Request
-
-          asset_token_quantity: Amount of dShare asset tokens involved. Required for limit `Order Requests` and
-              market sell `Order Requests`. Must be a positive number with a precision of up
-              to 4 decimal places for limit `Order Requests` or up to 6 decimal places for
-              market sell `Order Requests`.
-
-          chain_id: CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
-              not provided, the default chain ID (eip155:42161) will be used.
-
-          limit_price: Price per asset in the asset's native currency. USD for US equities and ETFs.
-              Required for limit `Order Requests`.
-
-          payment_token_address: Address of the payment token to be used for an order. If not provided, the
-              default payment token (USD+) will be used.
-
-          payment_token_quantity: Amount of payment tokens involved. Required for market buy `Order Requests`.
-
-          stock_id: The `Stock` ID associated with the Order Request
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return await self._post(
-            path_template("/api/v2/accounts/{account_id}/order_requests/fee_quote", account_id=account_id),
-            body=await async_maybe_transform(
-                {
-                    "order_side": order_side,
-                    "order_type": order_type,
-                    "alloy_id": alloy_id,
-                    "asset_token_quantity": asset_token_quantity,
-                    "chain_id": chain_id,
-                    "limit_price": limit_price,
-                    "payment_token_address": payment_token_address,
-                    "payment_token_quantity": payment_token_quantity,
-                    "stock_id": stock_id,
-                },
-                order_request_get_fee_quote_params.OrderRequestGetFeeQuoteParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=OrderRequestGetFeeQuoteResponse,
-        )
-
 
 class OrderRequestsResourceWithRawResponse:
     def __init__(self, order_requests: OrderRequestsResource) -> None:
@@ -1162,9 +978,6 @@ class OrderRequestsResourceWithRawResponse:
         )
         self.create_market_sell = to_raw_response_wrapper(
             order_requests.create_market_sell,
-        )
-        self.get_fee_quote = to_raw_response_wrapper(
-            order_requests.get_fee_quote,
         )
 
     @cached_property
@@ -1199,9 +1012,6 @@ class AsyncOrderRequestsResourceWithRawResponse:
         self.create_market_sell = async_to_raw_response_wrapper(
             order_requests.create_market_sell,
         )
-        self.get_fee_quote = async_to_raw_response_wrapper(
-            order_requests.get_fee_quote,
-        )
 
     @cached_property
     def eip155(self) -> AsyncEip155ResourceWithRawResponse:
@@ -1235,9 +1045,6 @@ class OrderRequestsResourceWithStreamingResponse:
         self.create_market_sell = to_streamed_response_wrapper(
             order_requests.create_market_sell,
         )
-        self.get_fee_quote = to_streamed_response_wrapper(
-            order_requests.get_fee_quote,
-        )
 
     @cached_property
     def eip155(self) -> Eip155ResourceWithStreamingResponse:
@@ -1270,9 +1077,6 @@ class AsyncOrderRequestsResourceWithStreamingResponse:
         )
         self.create_market_sell = async_to_streamed_response_wrapper(
             order_requests.create_market_sell,
-        )
-        self.get_fee_quote = async_to_streamed_response_wrapper(
-            order_requests.get_fee_quote,
         )
 
     @cached_property
