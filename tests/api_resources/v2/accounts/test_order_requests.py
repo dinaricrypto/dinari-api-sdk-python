@@ -12,7 +12,6 @@ from dinari_api_sdk import Dinari, AsyncDinari
 from dinari_api_sdk.types.v2.accounts import (
     OrderRequest,
     OrderRequestListResponse,
-    OrderRequestGetFeeQuoteResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -384,73 +383,6 @@ class TestOrderRequests:
                 asset_quantity=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_get_fee_quote(self, client: Dinari) -> None:
-        order_request = client.v2.accounts.order_requests.get_fee_quote(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            order_side="BUY",
-            order_type="MARKET",
-        )
-        assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_get_fee_quote_with_all_params(self, client: Dinari) -> None:
-        order_request = client.v2.accounts.order_requests.get_fee_quote(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            order_side="BUY",
-            order_type="MARKET",
-            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            asset_token_quantity=0,
-            chain_id="eip155:1",
-            limit_price=0,
-            payment_token_address="payment_token_address",
-            payment_token_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_get_fee_quote(self, client: Dinari) -> None:
-        response = client.v2.accounts.order_requests.with_raw_response.get_fee_quote(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            order_side="BUY",
-            order_type="MARKET",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        order_request = response.parse()
-        assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_get_fee_quote(self, client: Dinari) -> None:
-        with client.v2.accounts.order_requests.with_streaming_response.get_fee_quote(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            order_side="BUY",
-            order_type="MARKET",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            order_request = response.parse()
-            assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_path_params_get_fee_quote(self, client: Dinari) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.v2.accounts.order_requests.with_raw_response.get_fee_quote(
-                account_id="",
-                order_side="BUY",
-                order_type="MARKET",
-            )
-
 
 class TestAsyncOrderRequests:
     parametrize = pytest.mark.parametrize(
@@ -818,71 +750,4 @@ class TestAsyncOrderRequests:
             await async_client.v2.accounts.order_requests.with_raw_response.create_market_sell(
                 account_id="",
                 asset_quantity=0,
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_get_fee_quote(self, async_client: AsyncDinari) -> None:
-        order_request = await async_client.v2.accounts.order_requests.get_fee_quote(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            order_side="BUY",
-            order_type="MARKET",
-        )
-        assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_get_fee_quote_with_all_params(self, async_client: AsyncDinari) -> None:
-        order_request = await async_client.v2.accounts.order_requests.get_fee_quote(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            order_side="BUY",
-            order_type="MARKET",
-            alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            asset_token_quantity=0,
-            chain_id="eip155:1",
-            limit_price=0,
-            payment_token_address="payment_token_address",
-            payment_token_quantity=0,
-            stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_get_fee_quote(self, async_client: AsyncDinari) -> None:
-        response = await async_client.v2.accounts.order_requests.with_raw_response.get_fee_quote(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            order_side="BUY",
-            order_type="MARKET",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        order_request = await response.parse()
-        assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_get_fee_quote(self, async_client: AsyncDinari) -> None:
-        async with async_client.v2.accounts.order_requests.with_streaming_response.get_fee_quote(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            order_side="BUY",
-            order_type="MARKET",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            order_request = await response.parse()
-            assert_matches_type(OrderRequestGetFeeQuoteResponse, order_request, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_path_params_get_fee_quote(self, async_client: AsyncDinari) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.v2.accounts.order_requests.with_raw_response.get_fee_quote(
-                account_id="",
-                order_side="BUY",
-                order_type="MARKET",
             )
