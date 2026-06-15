@@ -109,7 +109,8 @@ class Eip155Resource(SyncAPIResource):
 
           order_type: Type of `Order`.
 
-          payment_token: Address of payment token.
+          payment_token: Address of payment token. Required for Accounts outside of US jurisdiction.
+              Accounts inside US jurisdiction must use USDC.
 
           alloy_id: The ID of the `Alloy` for which the `Order` is being placed.
 
@@ -343,7 +344,8 @@ class AsyncEip155Resource(AsyncAPIResource):
 
           order_type: Type of `Order`.
 
-          payment_token: Address of payment token.
+          payment_token: Address of payment token. Required for Accounts outside of US jurisdiction.
+              Accounts inside US jurisdiction must use USDC.
 
           alloy_id: The ID of the `Alloy` for which the `Order` is being placed.
 
