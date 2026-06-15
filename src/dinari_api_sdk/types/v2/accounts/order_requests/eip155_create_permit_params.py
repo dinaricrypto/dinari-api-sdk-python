@@ -27,7 +27,11 @@ class Eip155CreatePermitParams(TypedDict, total=False):
     """Type of `Order`."""
 
     payment_token: Required[str]
-    """Address of payment token."""
+    """Address of payment token.
+
+    Required for Accounts outside of US jurisdiction. Accounts inside US
+    jurisdiction must use USDC.
+    """
 
     alloy_id: Optional[str]
     """The ID of the `Alloy` for which the `Order` is being placed."""
