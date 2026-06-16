@@ -30,6 +30,12 @@ class OrderRequestCreateMarketBuyParams(TypedDict, total=False):
     Must be a positive number with a precision of up to 6 decimal places.
     """
 
+    payment_token_address: Optional[str]
+    """Address of the payment token to be used for the payment of the order.
+
+    If not provided, the default payment token (USD+) will be used.
+    """
+
     recipient_account_id: Optional[str]
     """ID of `Account` to receive the `Order`."""
 
