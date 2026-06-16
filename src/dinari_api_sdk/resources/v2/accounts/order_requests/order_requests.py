@@ -198,6 +198,7 @@ class OrderRequestsResource(SyncAPIResource):
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         fee: Optional[float] | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -232,6 +233,9 @@ class OrderRequestsResource(SyncAPIResource):
           fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
               positive number with a precision of up to 6 decimal places.
 
+          payment_token_address: Address of the payment token to be used for the payment of the order. If not
+              provided, the default payment token (USD+) will be used.
+
           recipient_account_id: ID of `Account` to receive the `Order`.
 
           stock_id: ID of `Stock`.
@@ -255,6 +259,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "fee": fee,
+                    "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
                 },
@@ -357,6 +362,7 @@ class OrderRequestsResource(SyncAPIResource):
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         fee: Optional[float] | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -387,6 +393,9 @@ class OrderRequestsResource(SyncAPIResource):
           fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
               positive number with a precision of up to 6 decimal places.
 
+          payment_token_address: Address of the payment token to be used for the payment of the order. If not
+              provided, the default payment token (USD+) will be used.
+
           recipient_account_id: ID of `Account` to receive the `Order`.
 
           stock_id: ID of `Stock`.
@@ -409,6 +418,7 @@ class OrderRequestsResource(SyncAPIResource):
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "fee": fee,
+                    "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
                 },
@@ -657,6 +667,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         fee: Optional[float] | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -691,6 +702,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
           fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
               positive number with a precision of up to 6 decimal places.
 
+          payment_token_address: Address of the payment token to be used for the payment of the order. If not
+              provided, the default payment token (USD+) will be used.
+
           recipient_account_id: ID of `Account` to receive the `Order`.
 
           stock_id: ID of `Stock`.
@@ -714,6 +728,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "fee": fee,
+                    "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
                 },
@@ -816,6 +831,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
         alloy_id: Optional[str] | Omit = omit,
         client_order_id: Optional[str] | Omit = omit,
         fee: Optional[float] | Omit = omit,
+        payment_token_address: Optional[str] | Omit = omit,
         recipient_account_id: Optional[str] | Omit = omit,
         stock_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -846,6 +862,9 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
           fee: Optional fee amount associated with `Order` in USD for DFN orders. Must be a
               positive number with a precision of up to 6 decimal places.
 
+          payment_token_address: Address of the payment token to be used for the payment of the order. If not
+              provided, the default payment token (USD+) will be used.
+
           recipient_account_id: ID of `Account` to receive the `Order`.
 
           stock_id: ID of `Stock`.
@@ -868,6 +887,7 @@ class AsyncOrderRequestsResource(AsyncAPIResource):
                     "alloy_id": alloy_id,
                     "client_order_id": client_order_id,
                     "fee": fee,
+                    "payment_token_address": payment_token_address,
                     "recipient_account_id": recipient_account_id,
                     "stock_id": stock_id,
                 },
