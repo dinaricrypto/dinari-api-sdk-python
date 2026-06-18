@@ -93,8 +93,6 @@ class TestOrders:
             next="next",
             order="asc",
             order_transaction_hash="order_transaction_hash",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(OrderListResponse, order, path=["response"])
@@ -249,8 +247,6 @@ class TestOrders:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
@@ -375,8 +371,6 @@ class TestAsyncOrders:
             next="next",
             order="asc",
             order_transaction_hash="order_transaction_hash",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(OrderListResponse, order, path=["response"])
@@ -531,8 +525,6 @@ class TestAsyncOrders:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])

@@ -34,8 +34,6 @@ class TestV2:
             order_fulfillment_transaction_hash="order_fulfillment_transaction_hash",
             order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_transaction_hash="order_transaction_hash",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(V2ListOrdersResponse, v2, path=["response"])
@@ -85,8 +83,6 @@ class TestAsyncV2:
             order_fulfillment_transaction_hash="order_fulfillment_transaction_hash",
             order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_transaction_hash="order_transaction_hash",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(V2ListOrdersResponse, v2, path=["response"])

@@ -30,9 +30,5 @@ class V2ListOrdersParams(TypedDict, total=False):
     order_transaction_hash: Optional[str]
     """Transaction hash of the `Order`."""
 
-    page: int
-
-    page_size: int
-
     previous: Optional[str]
     """Cursor for previous page"""

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -102,8 +102,6 @@ class WithdrawalsResource(SyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         withdrawal_request_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -137,32 +135,25 @@ class WithdrawalsResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return cast(
-            WithdrawalListResponse,
-            self._get(
-                path_template("/api/v2/accounts/{account_id}/withdrawals", account_id=account_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                            "withdrawal_request_id": withdrawal_request_id,
-                        },
-                        withdrawal_list_params.WithdrawalListParams,
-                    ),
+        return self._get(
+            path_template("/api/v2/accounts/{account_id}/withdrawals", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                        "withdrawal_request_id": withdrawal_request_id,
+                    },
+                    withdrawal_list_params.WithdrawalListParams,
                 ),
-                cast_to=cast(
-                    Any, WithdrawalListResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=WithdrawalListResponse,
         )
 
 
@@ -243,8 +234,6 @@ class AsyncWithdrawalsResource(AsyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         withdrawal_request_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -278,32 +267,25 @@ class AsyncWithdrawalsResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return cast(
-            WithdrawalListResponse,
-            await self._get(
-                path_template("/api/v2/accounts/{account_id}/withdrawals", account_id=account_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=await async_maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                            "withdrawal_request_id": withdrawal_request_id,
-                        },
-                        withdrawal_list_params.WithdrawalListParams,
-                    ),
+        return await self._get(
+            path_template("/api/v2/accounts/{account_id}/withdrawals", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                        "withdrawal_request_id": withdrawal_request_id,
+                    },
+                    withdrawal_list_params.WithdrawalListParams,
                 ),
-                cast_to=cast(
-                    Any, WithdrawalListResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=WithdrawalListResponse,
         )
 
 

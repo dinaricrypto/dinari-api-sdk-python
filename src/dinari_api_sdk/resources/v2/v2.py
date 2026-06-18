@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -112,8 +112,6 @@ class V2Resource(SyncAPIResource):
         order_fulfillment_transaction_hash: Optional[str] | Omit = omit,
         order_request_id: Optional[str] | Omit = omit,
         order_transaction_hash: Optional[str] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -152,35 +150,28 @@ class V2Resource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            V2ListOrdersResponse,
-            self._get(
-                "/api/v2/orders/",
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=maybe_transform(
-                        {
-                            "chain_id": chain_id,
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
-                            "order_request_id": order_request_id,
-                            "order_transaction_hash": order_transaction_hash,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        v2_list_orders_params.V2ListOrdersParams,
-                    ),
+        return self._get(
+            "/api/v2/orders/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "chain_id": chain_id,
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
+                        "order_request_id": order_request_id,
+                        "order_transaction_hash": order_transaction_hash,
+                        "previous": previous,
+                    },
+                    v2_list_orders_params.V2ListOrdersParams,
                 ),
-                cast_to=cast(
-                    Any, V2ListOrdersResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=V2ListOrdersResponse,
         )
 
 
@@ -248,8 +239,6 @@ class AsyncV2Resource(AsyncAPIResource):
         order_fulfillment_transaction_hash: Optional[str] | Omit = omit,
         order_request_id: Optional[str] | Omit = omit,
         order_transaction_hash: Optional[str] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -288,35 +277,28 @@ class AsyncV2Resource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            V2ListOrdersResponse,
-            await self._get(
-                "/api/v2/orders/",
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=await async_maybe_transform(
-                        {
-                            "chain_id": chain_id,
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
-                            "order_request_id": order_request_id,
-                            "order_transaction_hash": order_transaction_hash,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        v2_list_orders_params.V2ListOrdersParams,
-                    ),
+        return await self._get(
+            "/api/v2/orders/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "chain_id": chain_id,
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "order_fulfillment_transaction_hash": order_fulfillment_transaction_hash,
+                        "order_request_id": order_request_id,
+                        "order_transaction_hash": order_transaction_hash,
+                        "previous": previous,
+                    },
+                    v2_list_orders_params.V2ListOrdersParams,
                 ),
-                cast_to=cast(
-                    Any, V2ListOrdersResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=V2ListOrdersResponse,
         )
 
 

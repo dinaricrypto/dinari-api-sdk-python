@@ -23,9 +23,5 @@ class OrderFulfillmentQueryParams(TypedDict, total=False):
     order_ids: SequenceNotStr[str]
     """List of `Order` IDs to query `AccountOrderFulfillment` for."""
 
-    page: int
-
-    page_size: int
-
     previous: Optional[str]
     """Cursor for previous page"""

@@ -171,8 +171,6 @@ class TestAccounts:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -238,8 +236,6 @@ class TestAccounts:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(AccountGetInterestPaymentsResponse, account, path=["response"])
@@ -539,8 +535,6 @@ class TestAsyncAccounts:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -606,8 +600,6 @@ class TestAsyncAccounts:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(AccountGetInterestPaymentsResponse, account, path=["response"])

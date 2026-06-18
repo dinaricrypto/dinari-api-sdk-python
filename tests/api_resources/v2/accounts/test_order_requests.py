@@ -91,8 +91,6 @@ class TestOrderRequests:
             order="asc",
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(OrderRequestListResponse, order_request, path=["response"])
@@ -462,8 +460,6 @@ class TestAsyncOrderRequests:
             order="asc",
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(OrderRequestListResponse, order_request, path=["response"])

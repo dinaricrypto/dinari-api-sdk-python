@@ -1,17 +1,17 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
-from typing_extensions import Literal, TypeAlias
+from typing import List, Optional
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from ....._models import BaseModel
 from .stock_split import StockSplit
 
-__all__ = ["SplitListResponse", "PaginatedStockSplitResponse", "PaginatedStockSplitResponsePaginationMetadata"]
+__all__ = ["SplitListResponse", "PaginationMetadata"]
 
 
-class PaginatedStockSplitResponsePaginationMetadata(BaseModel):
+class PaginationMetadata(BaseModel):
     """Pagination metadata"""
 
     next: Optional[str] = None
@@ -21,15 +21,12 @@ class PaginatedStockSplitResponsePaginationMetadata(BaseModel):
     """Cursor for previous page"""
 
 
-class PaginatedStockSplitResponse(BaseModel):
+class SplitListResponse(BaseModel):
     data: List[StockSplit]
     """List of StockSplit"""
 
-    pagination_metadata: PaginatedStockSplitResponsePaginationMetadata
+    pagination_metadata: PaginationMetadata
     """Pagination metadata"""
 
     api_sv: Optional[Literal["PaginatedStockSplitResponse:v1"]] = FieldInfo(alias="_sv", default=None)
     """Version"""
-
-
-SplitListResponse: TypeAlias = Union[List[StockSplit], PaginatedStockSplitResponse]
