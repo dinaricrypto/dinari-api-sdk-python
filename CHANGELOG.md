@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.14.0 (2026-06-18)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* **api:** api update ([e949717](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/e949717d0970421d65b119e667a5d05dd9546edc))
+* **api:** api update ([26107cd](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/26107cdb51412af9ecf7e2a0bfd42d1924d9ec2f))
+* **api:** api update ([db4f247](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/db4f24713ae7480af54ecc1fdd90f5e5e3a572af))
+* **api:** api update ([a993e42](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/a993e4299bbcb1da37d1b6f02db9e574370e7476))
+* **api:** api update ([582cf62](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/582cf625b31d97eb7d8654c8cfd9a330b597b967))
+* **api:** api update ([f5a5be0](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/f5a5be094e5ec464fdfbeaac64126204bdaa8fb5))
+* **api:** api update ([40e4873](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/40e4873719f2b40d2e8e6690630c8341b18b7666))
+* **api:** api update ([af2de3b](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/af2de3b5a0579c3c973eadf70310e8ff301d4597))
+* **api:** api update ([bf8d3d2](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/bf8d3d2b6341f9fcbe0e4afe068f4ccef914a2e4))
+* **api:** api update ([0f7465b](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0f7465b4f2fa449be8b0c7105b9da4453cb5c63c))
+* **api:** v20260617-0199ffd version sync ([895e14f](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/895e14f1073e33092da82b4803088db4c451afae))
+* **internal/types:** support eagerly validating pydantic iterators ([93e72ac](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/93e72accf763ed1b3dcdfa44a592e90b80771f28))
+* **internal:** implement indices array format for query and form serialization ([6b81bdf](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/6b81bdf8b97ff9a6413bf562ae32cebc9f4bd612))
+* support setting headers via env ([95ebdf5](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/95ebdf55995d6e3cbaf82fe02fd54361a73e20b3))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([0357b17](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0357b175c5fe03d81226956ce06b3a3f1f04578e))
+* **client:** preserve hardcoded query params when merging with user params ([dfd880d](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/dfd880df36b7157c9d76a57b7463eccf98dbcb50))
+* ensure file data are only sent as 1 parameter ([0895f03](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0895f03542119015f0aa79ad8cff07ae3540cf28))
+* use correct field name format for multipart file arrays ([0b0e8fc](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/0b0e8fc01e03ef69964cb84b6fae90848645ca84))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([43d7569](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/43d75692b3236c9dc09ff01492962a39b819d813))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([279caef](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/279caef9de223453a3a111958a1eb081cead4bca))
+* **internal:** reformat pyproject.toml ([3b47664](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/3b476647e539da3f8966ea2e03f63930d053b29f))
+
 ## 0.13.0 (2026-03-26)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.12.0...v0.13.0)
