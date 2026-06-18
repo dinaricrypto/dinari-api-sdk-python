@@ -1,23 +1,17 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List, Optional
 from datetime import date
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = [
-    "AccountGetInterestPaymentsResponse",
-    "UnionMember0",
-    "PaginatedInterestPaymentResponse",
-    "PaginatedInterestPaymentResponseData",
-    "PaginatedInterestPaymentResponsePaginationMetadata",
-]
+__all__ = ["AccountGetInterestPaymentsResponse", "Data", "PaginationMetadata"]
 
 
-class UnionMember0(BaseModel):
+class Data(BaseModel):
     """An object representing an interest payment from stablecoin holdings."""
 
     amount: float
@@ -30,20 +24,7 @@ class UnionMember0(BaseModel):
     """Date of interest payment in US Eastern time zone. ISO 8601 format, YYYY-MM-DD."""
 
 
-class PaginatedInterestPaymentResponseData(BaseModel):
-    """An object representing an interest payment from stablecoin holdings."""
-
-    amount: float
-    """Amount of interest paid."""
-
-    currency: str
-    """Currency in which the interest was paid (e.g. USD)."""
-
-    payment_date: date
-    """Date of interest payment in US Eastern time zone. ISO 8601 format, YYYY-MM-DD."""
-
-
-class PaginatedInterestPaymentResponsePaginationMetadata(BaseModel):
+class PaginationMetadata(BaseModel):
     """Pagination metadata"""
 
     next: Optional[str] = None
@@ -53,15 +34,12 @@ class PaginatedInterestPaymentResponsePaginationMetadata(BaseModel):
     """Cursor for previous page"""
 
 
-class PaginatedInterestPaymentResponse(BaseModel):
-    data: List[PaginatedInterestPaymentResponseData]
+class AccountGetInterestPaymentsResponse(BaseModel):
+    data: List[Data]
     """List of InterestPayment"""
 
-    pagination_metadata: PaginatedInterestPaymentResponsePaginationMetadata
+    pagination_metadata: PaginationMetadata
     """Pagination metadata"""
 
     api_sv: Optional[Literal["PaginatedInterestPaymentResponse:v1"]] = FieldInfo(alias="_sv", default=None)
     """Version"""
-
-
-AccountGetInterestPaymentsResponse: TypeAlias = Union[List[UnionMember0], PaginatedInterestPaymentResponse]

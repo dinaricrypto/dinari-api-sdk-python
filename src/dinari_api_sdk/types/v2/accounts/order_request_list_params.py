@@ -30,9 +30,5 @@ class OrderRequestListParams(TypedDict, total=False):
     order_request_id: Optional[str]
     """Order Request ID for the `OrderRequest`"""
 
-    page: int
-
-    page_size: int
-
     previous: Optional[str]
     """Cursor for previous page"""

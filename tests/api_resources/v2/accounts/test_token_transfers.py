@@ -142,8 +142,6 @@ class TestTokenTransfers:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(TokenTransferListResponse, token_transfer, path=["response"])
@@ -310,8 +308,6 @@ class TestAsyncTokenTransfers:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(TokenTransferListResponse, token_transfer, path=["response"])

@@ -9,7 +9,6 @@ from .stock_list_response import StockListResponse as StockListResponse
 from .stock_retrieve_news_params import StockRetrieveNewsParams as StockRetrieveNewsParams
 from .stock_retrieve_news_response import StockRetrieveNewsResponse as StockRetrieveNewsResponse
 from .stock_retrieve_dividends_response import StockRetrieveDividendsResponse as StockRetrieveDividendsResponse
-from .stock_retrieve_current_quote_params import StockRetrieveCurrentQuoteParams as StockRetrieveCurrentQuoteParams
 from .alloy_retrieve_current_price_response import (
     AlloyRetrieveCurrentPriceResponse as AlloyRetrieveCurrentPriceResponse,
 )

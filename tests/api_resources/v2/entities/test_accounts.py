@@ -87,8 +87,6 @@ class TestAccounts:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(AccountListResponse, account, path=["response"])
@@ -200,8 +198,6 @@ class TestAsyncAccounts:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(AccountListResponse, account, path=["response"])

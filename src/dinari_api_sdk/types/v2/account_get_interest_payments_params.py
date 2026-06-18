@@ -27,9 +27,5 @@ class AccountGetInterestPaymentsParams(TypedDict, total=False):
     order: Literal["asc", "desc"]
     """Sort order"""
 
-    page: int
-
-    page_size: int
-
     previous: Optional[str]
     """Cursor for previous page"""

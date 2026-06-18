@@ -139,8 +139,6 @@ class TestWithdrawalRequests:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(WithdrawalRequestListResponse, withdrawal_request, path=["response"])
@@ -303,8 +301,6 @@ class TestAsyncWithdrawalRequests:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(WithdrawalRequestListResponse, withdrawal_request, path=["response"])

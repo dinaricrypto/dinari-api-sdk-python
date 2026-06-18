@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -16,7 +16,7 @@ from .splits import (
     AsyncSplitsResourceWithStreamingResponse,
 )
 from ....._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from ....._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
+from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -29,7 +29,6 @@ from ....._base_client import make_request_options
 from .....types.v2.market_data import (
     stock_list_params,
     stock_retrieve_news_params,
-    stock_retrieve_current_quote_params,
     stock_retrieve_historical_prices_params,
 )
 from .....types.v2.market_data.stock_list_response import StockListResponse
@@ -76,8 +75,6 @@ class StocksResource(SyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         symbols: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -109,30 +106,25 @@ class StocksResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            StockListResponse,
-            self._get(
-                "/api/v2/market_data/stocks/",
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                            "symbols": symbols,
-                        },
-                        stock_list_params.StockListParams,
-                    ),
+        return self._get(
+            "/api/v2/market_data/stocks/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                        "symbols": symbols,
+                    },
+                    stock_list_params.StockListParams,
                 ),
-                cast_to=cast(Any, StockListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=StockListResponse,
         )
 
     def retrieve_current_price(
@@ -172,8 +164,6 @@ class StocksResource(SyncAPIResource):
         self,
         stock_id: str,
         *,
-        feed: Optional[Literal["sip"]] | Omit = omit,
-        x_api_version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -185,13 +175,6 @@ class StocksResource(SyncAPIResource):
         Get quote for a specified `Stock`.
 
         Args:
-          feed: Requested data source for the quote. Only applies when using x-api-version: 2.
-              Allowed values:
-
-              - `null`: (default) Selects the highest quality available free data source.
-              - `sip`: Consolidated quote from all U.S. exchanges (NBBO). This is a paid data
-                source and incurs usage-based billing.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -202,24 +185,12 @@ class StocksResource(SyncAPIResource):
         """
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
-        extra_headers = {**strip_not_given({"X-API-Version": x_api_version}), **(extra_headers or {})}
-        return cast(
-            StockRetrieveCurrentQuoteResponse,
-            self._get(
-                path_template("/api/v2/market_data/stocks/{stock_id}/current_quote", stock_id=stock_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=maybe_transform(
-                        {"feed": feed}, stock_retrieve_current_quote_params.StockRetrieveCurrentQuoteParams
-                    ),
-                ),
-                cast_to=cast(
-                    Any, StockRetrieveCurrentQuoteResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._get(
+            path_template("/api/v2/market_data/stocks/{stock_id}/current_quote", stock_id=stock_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
+            cast_to=StockRetrieveCurrentQuoteResponse,
         )
 
     def retrieve_dividends(
@@ -378,8 +349,6 @@ class AsyncStocksResource(AsyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         symbols: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -411,30 +380,25 @@ class AsyncStocksResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            StockListResponse,
-            await self._get(
-                "/api/v2/market_data/stocks/",
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=await async_maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                            "symbols": symbols,
-                        },
-                        stock_list_params.StockListParams,
-                    ),
+        return await self._get(
+            "/api/v2/market_data/stocks/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                        "symbols": symbols,
+                    },
+                    stock_list_params.StockListParams,
                 ),
-                cast_to=cast(Any, StockListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=StockListResponse,
         )
 
     async def retrieve_current_price(
@@ -474,8 +438,6 @@ class AsyncStocksResource(AsyncAPIResource):
         self,
         stock_id: str,
         *,
-        feed: Optional[Literal["sip"]] | Omit = omit,
-        x_api_version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -487,13 +449,6 @@ class AsyncStocksResource(AsyncAPIResource):
         Get quote for a specified `Stock`.
 
         Args:
-          feed: Requested data source for the quote. Only applies when using x-api-version: 2.
-              Allowed values:
-
-              - `null`: (default) Selects the highest quality available free data source.
-              - `sip`: Consolidated quote from all U.S. exchanges (NBBO). This is a paid data
-                source and incurs usage-based billing.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -504,24 +459,12 @@ class AsyncStocksResource(AsyncAPIResource):
         """
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
-        extra_headers = {**strip_not_given({"X-API-Version": x_api_version}), **(extra_headers or {})}
-        return cast(
-            StockRetrieveCurrentQuoteResponse,
-            await self._get(
-                path_template("/api/v2/market_data/stocks/{stock_id}/current_quote", stock_id=stock_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=await async_maybe_transform(
-                        {"feed": feed}, stock_retrieve_current_quote_params.StockRetrieveCurrentQuoteParams
-                    ),
-                ),
-                cast_to=cast(
-                    Any, StockRetrieveCurrentQuoteResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._get(
+            path_template("/api/v2/market_data/stocks/{stock_id}/current_quote", stock_id=stock_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
+            cast_to=StockRetrieveCurrentQuoteResponse,
         )
 
     async def retrieve_dividends(

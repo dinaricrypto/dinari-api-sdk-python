@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -56,8 +56,6 @@ class SplitsResource(SyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -96,29 +94,24 @@ class SplitsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            SplitListResponse,
-            self._get(
-                "/api/v2/market_data/stocks/splits",
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        split_list_params.SplitListParams,
-                    ),
+        return self._get(
+            "/api/v2/market_data/stocks/splits",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                    },
+                    split_list_params.SplitListParams,
                 ),
-                cast_to=cast(Any, SplitListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=SplitListResponse,
         )
 
     def list_for_stock(
@@ -128,8 +121,6 @@ class SplitsResource(SyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -169,31 +160,24 @@ class SplitsResource(SyncAPIResource):
         """
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
-        return cast(
-            SplitListForStockResponse,
-            self._get(
-                path_template("/api/v2/market_data/stocks/{stock_id}/splits", stock_id=stock_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        split_list_for_stock_params.SplitListForStockParams,
-                    ),
+        return self._get(
+            path_template("/api/v2/market_data/stocks/{stock_id}/splits", stock_id=stock_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                    },
+                    split_list_for_stock_params.SplitListForStockParams,
                 ),
-                cast_to=cast(
-                    Any, SplitListForStockResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=SplitListForStockResponse,
         )
 
 
@@ -228,8 +212,6 @@ class AsyncSplitsResource(AsyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -268,29 +250,24 @@ class AsyncSplitsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            SplitListResponse,
-            await self._get(
-                "/api/v2/market_data/stocks/splits",
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=await async_maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        split_list_params.SplitListParams,
-                    ),
+        return await self._get(
+            "/api/v2/market_data/stocks/splits",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                    },
+                    split_list_params.SplitListParams,
                 ),
-                cast_to=cast(Any, SplitListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=SplitListResponse,
         )
 
     async def list_for_stock(
@@ -300,8 +277,6 @@ class AsyncSplitsResource(AsyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -341,31 +316,24 @@ class AsyncSplitsResource(AsyncAPIResource):
         """
         if not stock_id:
             raise ValueError(f"Expected a non-empty value for `stock_id` but received {stock_id!r}")
-        return cast(
-            SplitListForStockResponse,
-            await self._get(
-                path_template("/api/v2/market_data/stocks/{stock_id}/splits", stock_id=stock_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=await async_maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        split_list_for_stock_params.SplitListForStockParams,
-                    ),
+        return await self._get(
+            path_template("/api/v2/market_data/stocks/{stock_id}/splits", stock_id=stock_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                    },
+                    split_list_for_stock_params.SplitListForStockParams,
                 ),
-                cast_to=cast(
-                    Any, SplitListForStockResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=SplitListForStockResponse,
         )
 
 

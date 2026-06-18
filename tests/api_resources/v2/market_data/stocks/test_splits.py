@@ -33,8 +33,6 @@ class TestSplits:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(SplitListResponse, split, path=["response"])
@@ -77,8 +75,6 @@ class TestSplits:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
@@ -136,8 +132,6 @@ class TestAsyncSplits:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(SplitListResponse, split, path=["response"])
@@ -180,8 +174,6 @@ class TestAsyncSplits:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(SplitListForStockResponse, split, path=["response"])
