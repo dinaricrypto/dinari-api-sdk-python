@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -155,8 +155,6 @@ class TokenTransfersResource(SyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -191,31 +189,24 @@ class TokenTransfersResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return cast(
-            TokenTransferListResponse,
-            self._get(
-                path_template("/api/v2/accounts/{account_id}/token_transfers", account_id=account_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        token_transfer_list_params.TokenTransferListParams,
-                    ),
+        return self._get(
+            path_template("/api/v2/accounts/{account_id}/token_transfers", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                    },
+                    token_transfer_list_params.TokenTransferListParams,
                 ),
-                cast_to=cast(
-                    Any, TokenTransferListResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=TokenTransferListResponse,
         )
 
 
@@ -349,8 +340,6 @@ class AsyncTokenTransfersResource(AsyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -385,31 +374,24 @@ class AsyncTokenTransfersResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return cast(
-            TokenTransferListResponse,
-            await self._get(
-                path_template("/api/v2/accounts/{account_id}/token_transfers", account_id=account_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=await async_maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        token_transfer_list_params.TokenTransferListParams,
-                    ),
+        return await self._get(
+            path_template("/api/v2/accounts/{account_id}/token_transfers", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                    },
+                    token_transfer_list_params.TokenTransferListParams,
                 ),
-                cast_to=cast(
-                    Any, TokenTransferListResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=TokenTransferListResponse,
         )
 
 

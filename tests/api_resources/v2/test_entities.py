@@ -130,8 +130,6 @@ class TestEntities:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
             reference_id="x",
         )
@@ -342,8 +340,6 @@ class TestAsyncEntities:
             limit=20,
             next="next",
             order="asc",
-            page=1,
-            page_size=1,
             previous="previous",
             reference_id="x",
         )

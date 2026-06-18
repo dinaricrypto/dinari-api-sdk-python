@@ -47,6 +47,7 @@ client = Dinari(
 )
 
 stocks = client.v2.market_data.stocks.list()
+print(stocks.data)
 ```
 
 While you can provide a `api_key_id` keyword argument,
@@ -75,6 +76,7 @@ client = AsyncDinari(
 
 async def main() -> None:
     stocks = await client.v2.market_data.stocks.list()
+    print(stocks.data)
 
 
 asyncio.run(main())
@@ -111,6 +113,7 @@ async def main() -> None:
         http_client=DefaultAioHttpClient(),
     ) as client:
         stocks = await client.v2.market_data.stocks.list()
+        print(stocks.data)
 
 
 asyncio.run(main())
@@ -293,7 +296,7 @@ response = client.v2.market_data.stocks.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
 stock = response.parse()  # get the object that `v2.market_data.stocks.list()` would have returned
-print(stock)
+print(stock.data)
 ```
 
 These methods return an [`APIResponse`](https://github.com/dinaricrypto/dinari-api-sdk-python/tree/main/src/dinari_api_sdk/_response.py) object.

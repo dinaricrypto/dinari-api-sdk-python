@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -102,8 +102,6 @@ class OrderFulfillmentsResource(SyncAPIResource):
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         order_ids: SequenceNotStr[str] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -136,32 +134,25 @@ class OrderFulfillmentsResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return cast(
-            OrderFulfillmentQueryResponse,
-            self._get(
-                path_template("/api/v2/accounts/{account_id}/order_fulfillments", account_id=account_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "order_ids": order_ids,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        order_fulfillment_query_params.OrderFulfillmentQueryParams,
-                    ),
+        return self._get(
+            path_template("/api/v2/accounts/{account_id}/order_fulfillments", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "order_ids": order_ids,
+                        "previous": previous,
+                    },
+                    order_fulfillment_query_params.OrderFulfillmentQueryParams,
                 ),
-                cast_to=cast(
-                    Any, OrderFulfillmentQueryResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=OrderFulfillmentQueryResponse,
         )
 
 
@@ -242,8 +233,6 @@ class AsyncOrderFulfillmentsResource(AsyncAPIResource):
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         order_ids: SequenceNotStr[str] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -276,32 +265,25 @@ class AsyncOrderFulfillmentsResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return cast(
-            OrderFulfillmentQueryResponse,
-            await self._get(
-                path_template("/api/v2/accounts/{account_id}/order_fulfillments", account_id=account_id),
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=await async_maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "order_ids": order_ids,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                        },
-                        order_fulfillment_query_params.OrderFulfillmentQueryParams,
-                    ),
+        return await self._get(
+            path_template("/api/v2/accounts/{account_id}/order_fulfillments", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "order_ids": order_ids,
+                        "previous": previous,
+                    },
+                    order_fulfillment_query_params.OrderFulfillmentQueryParams,
                 ),
-                cast_to=cast(
-                    Any, OrderFulfillmentQueryResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=OrderFulfillmentQueryResponse,
         )
 
 

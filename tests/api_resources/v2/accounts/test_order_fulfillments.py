@@ -86,8 +86,6 @@ class TestOrderFulfillments:
             next="next",
             order="asc",
             order_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
@@ -201,8 +199,6 @@ class TestAsyncOrderFulfillments:
             next="next",
             order="asc",
             order_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            page=1,
-            page_size=1,
             previous="previous",
         )
         assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])

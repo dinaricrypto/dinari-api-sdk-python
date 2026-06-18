@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -182,8 +182,6 @@ class EntitiesResource(SyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         reference_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -217,32 +215,25 @@ class EntitiesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            EntityListResponse,
-            self._get(
-                "/api/v2/entities/",
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                            "reference_id": reference_id,
-                        },
-                        entity_list_params.EntityListParams,
-                    ),
+        return self._get(
+            "/api/v2/entities/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                        "reference_id": reference_id,
+                    },
+                    entity_list_params.EntityListParams,
                 ),
-                cast_to=cast(
-                    Any, EntityListResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=EntityListResponse,
         )
 
     def retrieve_by_id(
@@ -436,8 +427,6 @@ class AsyncEntitiesResource(AsyncAPIResource):
         limit: int | Omit = omit,
         next: Optional[str] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
-        page: int | Omit = omit,
-        page_size: int | Omit = omit,
         previous: Optional[str] | Omit = omit,
         reference_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -471,32 +460,25 @@ class AsyncEntitiesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            EntityListResponse,
-            await self._get(
-                "/api/v2/entities/",
-                options=make_request_options(
-                    extra_headers=extra_headers,
-                    extra_query=extra_query,
-                    extra_body=extra_body,
-                    timeout=timeout,
-                    query=await async_maybe_transform(
-                        {
-                            "limit": limit,
-                            "next": next,
-                            "order": order,
-                            "page": page,
-                            "page_size": page_size,
-                            "previous": previous,
-                            "reference_id": reference_id,
-                        },
-                        entity_list_params.EntityListParams,
-                    ),
+        return await self._get(
+            "/api/v2/entities/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "next": next,
+                        "order": order,
+                        "previous": previous,
+                        "reference_id": reference_id,
+                    },
+                    entity_list_params.EntityListParams,
                 ),
-                cast_to=cast(
-                    Any, EntityListResponse
-                ),  # Union types cannot be passed in as arguments in the type system
             ),
+            cast_to=EntityListResponse,
         )
 
     async def retrieve_by_id(
