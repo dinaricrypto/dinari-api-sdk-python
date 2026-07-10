@@ -7,8 +7,13 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .order_tif import OrderTif
+from .order_side import OrderSide
+from .order_type import OrderType
+from .brokerage_order_status import BrokerageOrderStatus
+from .v2.market_data.pagination_metadata import PaginationMetadata
 
-__all__ = ["V2ListOrdersResponse", "Data", "PaginationMetadata"]
+__all__ = ["V2ListOrdersResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -27,35 +32,22 @@ class Data(BaseModel):
     order_contract_address: str
     """Smart contract address that `Order` was created from."""
 
-    order_side: Literal["BUY", "SELL"]
+    order_side: OrderSide
     """Indicates whether `Order` is a buy or sell."""
 
-    order_tif: Literal["DAY", "GTC", "IOC", "FOK"]
+    order_tif: OrderTif
     """Time in force. Indicates how long `Order` is valid for."""
 
     order_transaction_hash: str
     """Transaction hash for the `Order` creation."""
 
-    order_type: Literal["MARKET", "LIMIT"]
+    order_type: OrderType
     """Type of `Order`."""
 
     payment_token: str
     """The payment token (stablecoin) address."""
 
-    status: Literal[
-        "PENDING_SUBMIT",
-        "PENDING_CANCEL",
-        "PENDING_ESCROW",
-        "PENDING_FILL",
-        "ESCROWED",
-        "SUBMITTED",
-        "CANCELLED",
-        "PARTIALLY_FILLED",
-        "FILLED",
-        "REJECTED",
-        "REQUIRING_CONTACT",
-        "ERROR",
-    ]
+    status: BrokerageOrderStatus
     """Status of the `Order`."""
 
     stock_id: str
@@ -96,16 +88,6 @@ class Data(BaseModel):
 
     payment_token_quantity: Optional[float] = None
     """Total amount of payment involved."""
-
-
-class PaginationMetadata(BaseModel):
-    """Pagination metadata"""
-
-    next: Optional[str] = None
-    """Cursor for next page"""
-
-    previous: Optional[str] = None
-    """Cursor for previous page"""
 
 
 class V2ListOrdersResponse(BaseModel):

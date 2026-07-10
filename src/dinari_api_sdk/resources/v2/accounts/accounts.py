@@ -83,6 +83,7 @@ from .withdrawal_requests import (
     WithdrawalRequestsResourceWithStreamingResponse,
     AsyncWithdrawalRequestsResourceWithStreamingResponse,
 )
+from ....types.v2.entities.account import Account
 from .order_requests.order_requests import (
     OrderRequestsResource,
     AsyncOrderRequestsResource,
@@ -91,8 +92,6 @@ from .order_requests.order_requests import (
     OrderRequestsResourceWithStreamingResponse,
     AsyncOrderRequestsResourceWithStreamingResponse,
 )
-from ....types.v2.account_retrieve_response import AccountRetrieveResponse
-from ....types.v2.account_deactivate_response import AccountDeactivateResponse
 from ....types.v2.account_get_portfolio_response import AccountGetPortfolioResponse
 from ....types.v2.account_get_cash_balances_response import AccountGetCashBalancesResponse
 from ....types.v2.account_get_dividend_payments_response import AccountGetDividendPaymentsResponse
@@ -214,7 +213,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccountRetrieveResponse:
+    ) -> Account:
         """
         Get a specific `Account` by its ID.
 
@@ -234,7 +233,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountRetrieveResponse,
+            cast_to=Account,
         )
 
     def deactivate(
@@ -247,7 +246,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccountDeactivateResponse:
+    ) -> Account:
         """Set the `Account` to be inactive.
 
         Inactive accounts cannot be used for trading.
@@ -268,7 +267,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountDeactivateResponse,
+            cast_to=Account,
         )
 
     def get_cash_balances(
@@ -652,7 +651,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccountRetrieveResponse:
+    ) -> Account:
         """
         Get a specific `Account` by its ID.
 
@@ -672,7 +671,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountRetrieveResponse,
+            cast_to=Account,
         )
 
     async def deactivate(
@@ -685,7 +684,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccountDeactivateResponse:
+    ) -> Account:
         """Set the `Account` to be inactive.
 
         Inactive accounts cannot be used for trading.
@@ -706,7 +705,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountDeactivateResponse,
+            cast_to=Account,
         )
 
     async def get_cash_balances(

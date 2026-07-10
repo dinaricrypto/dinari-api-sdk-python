@@ -10,8 +10,7 @@ import pytest
 from tests.utils import assert_matches_type
 from dinari_api_sdk import Dinari, AsyncDinari
 from dinari_api_sdk.types.v2.market_data.stocks import (
-    SplitListResponse,
-    SplitListForStockResponse,
+    PaginatedStockSplit,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -24,7 +23,7 @@ class TestSplits:
     @parametrize
     def test_method_list(self, client: Dinari) -> None:
         split = client.v2.market_data.stocks.splits.list()
-        assert_matches_type(SplitListResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -35,7 +34,7 @@ class TestSplits:
             order="asc",
             previous="previous",
         )
-        assert_matches_type(SplitListResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -45,7 +44,7 @@ class TestSplits:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         split = response.parse()
-        assert_matches_type(SplitListResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -55,7 +54,7 @@ class TestSplits:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             split = response.parse()
-            assert_matches_type(SplitListResponse, split, path=["response"])
+            assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -65,7 +64,7 @@ class TestSplits:
         split = client.v2.market_data.stocks.splits.list_for_stock(
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(SplitListForStockResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -77,7 +76,7 @@ class TestSplits:
             order="asc",
             previous="previous",
         )
-        assert_matches_type(SplitListForStockResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -89,7 +88,7 @@ class TestSplits:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         split = response.parse()
-        assert_matches_type(SplitListForStockResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -101,7 +100,7 @@ class TestSplits:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             split = response.parse()
-            assert_matches_type(SplitListForStockResponse, split, path=["response"])
+            assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -123,7 +122,7 @@ class TestAsyncSplits:
     @parametrize
     async def test_method_list(self, async_client: AsyncDinari) -> None:
         split = await async_client.v2.market_data.stocks.splits.list()
-        assert_matches_type(SplitListResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -134,7 +133,7 @@ class TestAsyncSplits:
             order="asc",
             previous="previous",
         )
-        assert_matches_type(SplitListResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -144,7 +143,7 @@ class TestAsyncSplits:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         split = await response.parse()
-        assert_matches_type(SplitListResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -154,7 +153,7 @@ class TestAsyncSplits:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             split = await response.parse()
-            assert_matches_type(SplitListResponse, split, path=["response"])
+            assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -164,7 +163,7 @@ class TestAsyncSplits:
         split = await async_client.v2.market_data.stocks.splits.list_for_stock(
             stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(SplitListForStockResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -176,7 +175,7 @@ class TestAsyncSplits:
             order="asc",
             previous="previous",
         )
-        assert_matches_type(SplitListForStockResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -188,7 +187,7 @@ class TestAsyncSplits:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         split = await response.parse()
-        assert_matches_type(SplitListForStockResponse, split, path=["response"])
+        assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -200,7 +199,7 @@ class TestAsyncSplits:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             split = await response.parse()
-            assert_matches_type(SplitListForStockResponse, split, path=["response"])
+            assert_matches_type(PaginatedStockSplit, split, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

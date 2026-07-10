@@ -11,8 +11,8 @@ from .us_kyc_check_data import UsKYCCheckData as UsKYCCheckData
 from .account_list_params import AccountListParams as AccountListParams
 from .account_create_params import AccountCreateParams as AccountCreateParams
 from .account_list_response import AccountListResponse as AccountListResponse
-from .account_create_response import AccountCreateResponse as AccountCreateResponse
 from .baseline_kyc_check_data import BaselineKYCCheckData as BaselineKYCCheckData
 from .us_kyc_check_data_param import UsKYCCheckDataParam as UsKYCCheckDataParam
 from .baseline_kyc_check_data_param import BaselineKYCCheckDataParam as BaselineKYCCheckDataParam
+from .kyc_create_managed_check_params import KYCCreateManagedCheckParams as KYCCreateManagedCheckParams
 from .kyc_create_managed_check_response import KYCCreateManagedCheckResponse as KYCCreateManagedCheckResponse

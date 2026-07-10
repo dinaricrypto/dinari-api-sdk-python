@@ -2,9 +2,9 @@
 
 from typing import Optional
 from datetime import datetime
-from typing_extensions import Literal
 
 from ...._models import BaseModel
+from .jurisdiction import Jurisdiction
 
 __all__ = ["Account"]
 
@@ -24,7 +24,7 @@ class Account(BaseModel):
     is_active: bool
     """Indicates whether the `Account` is active."""
 
-    jurisdiction: Literal["BASELINE", "US"]
+    jurisdiction: Jurisdiction
     """Jurisdiction of the `Account`."""
 
     brokerage_account_id: Optional[str] = None

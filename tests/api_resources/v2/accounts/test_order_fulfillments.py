@@ -9,7 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from dinari_api_sdk import Dinari, AsyncDinari
-from dinari_api_sdk.types.v2.accounts import Fulfillment, OrderFulfillmentQueryResponse
+from dinari_api_sdk.types.v2.accounts import Fulfillment, PaginatedOrderFulfillment
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -75,7 +75,7 @@ class TestOrderFulfillments:
         order_fulfillment = client.v2.accounts.order_fulfillments.query(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order_fulfillment, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -88,7 +88,7 @@ class TestOrderFulfillments:
             order_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             previous="previous",
         )
-        assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order_fulfillment, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -100,7 +100,7 @@ class TestOrderFulfillments:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order_fulfillment = response.parse()
-        assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order_fulfillment, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -112,7 +112,7 @@ class TestOrderFulfillments:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order_fulfillment = response.parse()
-            assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
+            assert_matches_type(PaginatedOrderFulfillment, order_fulfillment, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -188,7 +188,7 @@ class TestAsyncOrderFulfillments:
         order_fulfillment = await async_client.v2.accounts.order_fulfillments.query(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order_fulfillment, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -201,7 +201,7 @@ class TestAsyncOrderFulfillments:
             order_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             previous="previous",
         )
-        assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order_fulfillment, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -213,7 +213,7 @@ class TestAsyncOrderFulfillments:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order_fulfillment = await response.parse()
-        assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order_fulfillment, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -225,7 +225,7 @@ class TestAsyncOrderFulfillments:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order_fulfillment = await response.parse()
-            assert_matches_type(OrderFulfillmentQueryResponse, order_fulfillment, path=["response"])
+            assert_matches_type(PaginatedOrderFulfillment, order_fulfillment, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

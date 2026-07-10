@@ -13,7 +13,7 @@ from dinari_api_sdk.types.v2.accounts import (
     Order,
     OrderListResponse,
     OrderBatchCancelResponse,
-    OrderGetFulfillmentsResponse,
+    PaginatedOrderFulfillment,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -236,7 +236,7 @@ class TestOrders:
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -249,7 +249,7 @@ class TestOrders:
             order="asc",
             previous="previous",
         )
-        assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -262,7 +262,7 @@ class TestOrders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = response.parse()
-        assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -275,7 +275,7 @@ class TestOrders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = response.parse()
-            assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
+            assert_matches_type(PaginatedOrderFulfillment, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -514,7 +514,7 @@ class TestAsyncOrders:
             order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -527,7 +527,7 @@ class TestAsyncOrders:
             order="asc",
             previous="previous",
         )
-        assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -540,7 +540,7 @@ class TestAsyncOrders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = await response.parse()
-        assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
+        assert_matches_type(PaginatedOrderFulfillment, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -553,7 +553,7 @@ class TestAsyncOrders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = await response.parse()
-            assert_matches_type(OrderGetFulfillmentsResponse, order, path=["response"])
+            assert_matches_type(PaginatedOrderFulfillment, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

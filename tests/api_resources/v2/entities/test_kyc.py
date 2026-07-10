@@ -67,7 +67,16 @@ class TestKYC:
     @parametrize
     def test_method_create_managed_check(self, client: Dinari) -> None:
         kyc = client.v2.entities.kyc.create_managed_check(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(KYCCreateManagedCheckResponse, kyc, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_create_managed_check_with_all_params(self, client: Dinari) -> None:
+        kyc = client.v2.entities.kyc.create_managed_check(
+            entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            jurisdiction="BASELINE",
         )
         assert_matches_type(KYCCreateManagedCheckResponse, kyc, path=["response"])
 
@@ -75,7 +84,7 @@ class TestKYC:
     @parametrize
     def test_raw_response_create_managed_check(self, client: Dinari) -> None:
         response = client.v2.entities.kyc.with_raw_response.create_managed_check(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -87,7 +96,7 @@ class TestKYC:
     @parametrize
     def test_streaming_response_create_managed_check(self, client: Dinari) -> None:
         with client.v2.entities.kyc.with_streaming_response.create_managed_check(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -102,7 +111,7 @@ class TestKYC:
     def test_path_params_create_managed_check(self, client: Dinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
             client.v2.entities.kyc.with_raw_response.create_managed_check(
-                "",
+                entity_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -631,7 +640,16 @@ class TestAsyncKYC:
     @parametrize
     async def test_method_create_managed_check(self, async_client: AsyncDinari) -> None:
         kyc = await async_client.v2.entities.kyc.create_managed_check(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(KYCCreateManagedCheckResponse, kyc, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_managed_check_with_all_params(self, async_client: AsyncDinari) -> None:
+        kyc = await async_client.v2.entities.kyc.create_managed_check(
+            entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            jurisdiction="BASELINE",
         )
         assert_matches_type(KYCCreateManagedCheckResponse, kyc, path=["response"])
 
@@ -639,7 +657,7 @@ class TestAsyncKYC:
     @parametrize
     async def test_raw_response_create_managed_check(self, async_client: AsyncDinari) -> None:
         response = await async_client.v2.entities.kyc.with_raw_response.create_managed_check(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -651,7 +669,7 @@ class TestAsyncKYC:
     @parametrize
     async def test_streaming_response_create_managed_check(self, async_client: AsyncDinari) -> None:
         async with async_client.v2.entities.kyc.with_streaming_response.create_managed_check(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -666,7 +684,7 @@ class TestAsyncKYC:
     async def test_path_params_create_managed_check(self, async_client: AsyncDinari) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
             await async_client.v2.entities.kyc.with_raw_response.create_managed_check(
-                "",
+                entity_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

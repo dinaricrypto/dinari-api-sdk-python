@@ -1,9 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from datetime import datetime
-from typing_extensions import Literal
 
 from ...._models import BaseModel
+from ...brokerage_order_status import BrokerageOrderStatus
 
 __all__ = ["Withdrawal"]
 
@@ -35,20 +35,7 @@ class Withdrawal(BaseModel):
     same `Entity`.
     """
 
-    status: Literal[
-        "PENDING_SUBMIT",
-        "PENDING_CANCEL",
-        "PENDING_ESCROW",
-        "PENDING_FILL",
-        "ESCROWED",
-        "SUBMITTED",
-        "CANCELLED",
-        "PARTIALLY_FILLED",
-        "FILLED",
-        "REJECTED",
-        "REQUIRING_CONTACT",
-        "ERROR",
-    ]
+    status: BrokerageOrderStatus
     """Status of the `Withdrawal`."""
 
     transaction_dt: datetime

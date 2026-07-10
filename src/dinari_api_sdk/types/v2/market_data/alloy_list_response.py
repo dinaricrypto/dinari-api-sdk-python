@@ -6,8 +6,9 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
+from .pagination_metadata import PaginationMetadata
 
-__all__ = ["AlloyListResponse", "Data", "PaginationMetadata"]
+__all__ = ["AlloyListResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -27,16 +28,6 @@ class Data(BaseModel):
 
     api_sv: Optional[Literal["Alloy:v1"]] = FieldInfo(alias="_sv", default=None)
     """Schema version"""
-
-
-class PaginationMetadata(BaseModel):
-    """Pagination metadata"""
-
-    next: Optional[str] = None
-    """Cursor for next page"""
-
-    previous: Optional[str] = None
-    """Cursor for previous page"""
 
 
 class AlloyListResponse(BaseModel):

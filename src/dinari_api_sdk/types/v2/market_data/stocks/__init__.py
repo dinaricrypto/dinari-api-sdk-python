@@ -4,6 +4,5 @@ from __future__ import annotations
 
 from .stock_split import StockSplit as StockSplit
 from .split_list_params import SplitListParams as SplitListParams
-from .split_list_response import SplitListResponse as SplitListResponse
+from .paginated_stock_split import PaginatedStockSplit as PaginatedStockSplit
 from .split_list_for_stock_params import SplitListForStockParams as SplitListForStockParams
-from .split_list_for_stock_response import SplitListForStockResponse as SplitListForStockResponse
