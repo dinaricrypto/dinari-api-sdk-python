@@ -7,8 +7,9 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
+from .market_data.pagination_metadata import PaginationMetadata
 
-__all__ = ["AccountGetDividendPaymentsResponse", "Data", "PaginationMetadata"]
+__all__ = ["AccountGetDividendPaymentsResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -25,16 +26,6 @@ class Data(BaseModel):
 
     stock_id: str
     """ID of the `Stock` for which the dividend was paid."""
-
-
-class PaginationMetadata(BaseModel):
-    """Pagination metadata"""
-
-    next: Optional[str] = None
-    """Cursor for next page"""
-
-    previous: Optional[str] = None
-    """Cursor for previous page"""
 
 
 class AccountGetDividendPaymentsResponse(BaseModel):

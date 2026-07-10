@@ -19,9 +19,9 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v2.entities import Jurisdiction, account_list_params, account_create_params
+from ....types.v2.entities.account import Account
 from ....types.v2.entities.jurisdiction import Jurisdiction
 from ....types.v2.entities.account_list_response import AccountListResponse
-from ....types.v2.entities.account_create_response import AccountCreateResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -62,7 +62,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccountCreateResponse:
+    ) -> Account:
         """Create a new `Account` for a specific `Entity`.
 
         This `Entity` represents your
@@ -87,7 +87,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountCreateResponse,
+            cast_to=Account,
         )
 
     def list(
@@ -187,7 +187,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccountCreateResponse:
+    ) -> Account:
         """Create a new `Account` for a specific `Entity`.
 
         This `Entity` represents your
@@ -212,7 +212,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountCreateResponse,
+            cast_to=Account,
         )
 
     async def list(

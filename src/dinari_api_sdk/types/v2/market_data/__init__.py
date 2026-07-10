@@ -5,6 +5,7 @@ from __future__ import annotations
 from .alloy_list_params import AlloyListParams as AlloyListParams
 from .stock_list_params import StockListParams as StockListParams
 from .alloy_list_response import AlloyListResponse as AlloyListResponse
+from .pagination_metadata import PaginationMetadata as PaginationMetadata
 from .stock_list_response import StockListResponse as StockListResponse
 from .stock_retrieve_news_params import StockRetrieveNewsParams as StockRetrieveNewsParams
 from .stock_retrieve_news_response import StockRetrieveNewsResponse as StockRetrieveNewsResponse

@@ -3,7 +3,13 @@
 Types:
 
 ```python
-from dinari_api_sdk.types import V2ListOrdersResponse
+from dinari_api_sdk.types import (
+    BrokerageOrderStatus,
+    OrderSide,
+    OrderTif,
+    OrderType,
+    V2ListOrdersResponse,
+)
 ```
 
 Methods:
@@ -51,17 +57,13 @@ Methods:
 Types:
 
 ```python
-from dinari_api_sdk.types.v2.market_data.stocks import (
-    StockSplit,
-    SplitListResponse,
-    SplitListForStockResponse,
-)
+from dinari_api_sdk.types.v2.market_data.stocks import PaginatedStockSplit, StockSplit
 ```
 
 Methods:
 
-- <code title="get /api/v2/market_data/stocks/splits">client.v2.market_data.stocks.splits.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/splits.py">list</a>(\*\*<a href="src/dinari_api_sdk/types/v2/market_data/stocks/split_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stocks/split_list_response.py">SplitListResponse</a></code>
-- <code title="get /api/v2/market_data/stocks/{stock_id}/splits">client.v2.market_data.stocks.splits.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/splits.py">list_for_stock</a>(stock_id, \*\*<a href="src/dinari_api_sdk/types/v2/market_data/stocks/split_list_for_stock_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stocks/split_list_for_stock_response.py">SplitListForStockResponse</a></code>
+- <code title="get /api/v2/market_data/stocks/splits">client.v2.market_data.stocks.splits.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/splits.py">list</a>(\*\*<a href="src/dinari_api_sdk/types/v2/market_data/stocks/split_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stocks/paginated_stock_split.py">PaginatedStockSplit</a></code>
+- <code title="get /api/v2/market_data/stocks/{stock_id}/splits">client.v2.market_data.stocks.splits.<a href="./src/dinari_api_sdk/resources/v2/market_data/stocks/splits.py">list_for_stock</a>(stock_id, \*\*<a href="src/dinari_api_sdk/types/v2/market_data/stocks/split_list_for_stock_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/market_data/stocks/paginated_stock_split.py">PaginatedStockSplit</a></code>
 
 ### Alloys
 
@@ -69,6 +71,7 @@ Types:
 
 ```python
 from dinari_api_sdk.types.v2.market_data import (
+    PaginationMetadata,
     AlloyListResponse,
     AlloyRetrieveCurrentPriceResponse,
     AlloyRetrieveHistoricalPricesResponse,
@@ -86,40 +89,28 @@ Methods:
 Types:
 
 ```python
-from dinari_api_sdk.types.v2 import (
-    Entity,
-    EntityCreateResponse,
-    EntityUpdateResponse,
-    EntityListResponse,
-    EntityRetrieveByIDResponse,
-    EntityRetrieveCurrentResponse,
-)
+from dinari_api_sdk.types.v2 import Entity, EntityListResponse
 ```
 
 Methods:
 
-- <code title="post /api/v2/entities/">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">create</a>(\*\*<a href="src/dinari_api_sdk/types/v2/entity_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entity_create_response.py">EntityCreateResponse</a></code>
-- <code title="patch /api/v2/entities/{entity_id}">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">update</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/v2/entity_update_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entity_update_response.py">EntityUpdateResponse</a></code>
+- <code title="post /api/v2/entities/">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">create</a>(\*\*<a href="src/dinari_api_sdk/types/v2/entity_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entity.py">Entity</a></code>
+- <code title="patch /api/v2/entities/{entity_id}">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">update</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/v2/entity_update_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entity.py">Entity</a></code>
 - <code title="get /api/v2/entities/">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">list</a>(\*\*<a href="src/dinari_api_sdk/types/v2/entity_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entity_list_response.py">EntityListResponse</a></code>
-- <code title="get /api/v2/entities/{entity_id}">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">retrieve_by_id</a>(entity_id) -> <a href="./src/dinari_api_sdk/types/v2/entity_retrieve_by_id_response.py">EntityRetrieveByIDResponse</a></code>
-- <code title="get /api/v2/entities/me">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">retrieve_current</a>() -> <a href="./src/dinari_api_sdk/types/v2/entity_retrieve_current_response.py">EntityRetrieveCurrentResponse</a></code>
+- <code title="get /api/v2/entities/{entity_id}">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">retrieve_by_id</a>(entity_id) -> <a href="./src/dinari_api_sdk/types/v2/entity.py">Entity</a></code>
+- <code title="get /api/v2/entities/me">client.v2.entities.<a href="./src/dinari_api_sdk/resources/v2/entities/entities.py">retrieve_current</a>() -> <a href="./src/dinari_api_sdk/types/v2/entity.py">Entity</a></code>
 
 ### Accounts
 
 Types:
 
 ```python
-from dinari_api_sdk.types.v2.entities import (
-    Account,
-    Jurisdiction,
-    AccountCreateResponse,
-    AccountListResponse,
-)
+from dinari_api_sdk.types.v2.entities import Account, Jurisdiction, AccountListResponse
 ```
 
 Methods:
 
-- <code title="post /api/v2/entities/{entity_id}/accounts">client.v2.entities.accounts.<a href="./src/dinari_api_sdk/resources/v2/entities/accounts.py">create</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/v2/entities/account_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entities/account_create_response.py">AccountCreateResponse</a></code>
+- <code title="post /api/v2/entities/{entity_id}/accounts">client.v2.entities.accounts.<a href="./src/dinari_api_sdk/resources/v2/entities/accounts.py">create</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/v2/entities/account_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entities/account.py">Account</a></code>
 - <code title="get /api/v2/entities/{entity_id}/accounts">client.v2.entities.accounts.<a href="./src/dinari_api_sdk/resources/v2/entities/accounts.py">list</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/v2/entities/account_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entities/account_list_response.py">AccountListResponse</a></code>
 
 ### KYC
@@ -139,7 +130,7 @@ from dinari_api_sdk.types.v2.entities import (
 Methods:
 
 - <code title="get /api/v2/entities/{entity_id}/kyc">client.v2.entities.kyc.<a href="./src/dinari_api_sdk/resources/v2/entities/kyc/kyc.py">retrieve</a>(entity_id) -> <a href="./src/dinari_api_sdk/types/v2/entities/kyc_info.py">KYCInfo</a></code>
-- <code title="post /api/v2/entities/{entity_id}/kyc/url">client.v2.entities.kyc.<a href="./src/dinari_api_sdk/resources/v2/entities/kyc/kyc.py">create_managed_check</a>(entity_id) -> <a href="./src/dinari_api_sdk/types/v2/entities/kyc_create_managed_check_response.py">KYCCreateManagedCheckResponse</a></code>
+- <code title="post /api/v2/entities/{entity_id}/kyc/url">client.v2.entities.kyc.<a href="./src/dinari_api_sdk/resources/v2/entities/kyc/kyc.py">create_managed_check</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/v2/entities/kyc_create_managed_check_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entities/kyc_create_managed_check_response.py">KYCCreateManagedCheckResponse</a></code>
 - <code title="post /api/v2/entities/{entity_id}/kyc">client.v2.entities.kyc.<a href="./src/dinari_api_sdk/resources/v2/entities/kyc/kyc.py">submit</a>(entity_id, \*\*<a href="src/dinari_api_sdk/types/v2/entities/kyc_submit_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/entities/kyc_info.py">KYCInfo</a></code>
 
 #### Document
@@ -166,8 +157,6 @@ Types:
 ```python
 from dinari_api_sdk.types.v2 import (
     Chain,
-    AccountRetrieveResponse,
-    AccountDeactivateResponse,
     AccountGetCashBalancesResponse,
     AccountGetDividendPaymentsResponse,
     AccountGetInterestPaymentsResponse,
@@ -177,8 +166,8 @@ from dinari_api_sdk.types.v2 import (
 
 Methods:
 
-- <code title="get /api/v2/accounts/{account_id}">client.v2.accounts.<a href="./src/dinari_api_sdk/resources/v2/accounts/accounts.py">retrieve</a>(account_id) -> <a href="./src/dinari_api_sdk/types/v2/account_retrieve_response.py">AccountRetrieveResponse</a></code>
-- <code title="post /api/v2/accounts/{account_id}/deactivate">client.v2.accounts.<a href="./src/dinari_api_sdk/resources/v2/accounts/accounts.py">deactivate</a>(account_id) -> <a href="./src/dinari_api_sdk/types/v2/account_deactivate_response.py">AccountDeactivateResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}">client.v2.accounts.<a href="./src/dinari_api_sdk/resources/v2/accounts/accounts.py">retrieve</a>(account_id) -> <a href="./src/dinari_api_sdk/types/v2/entities/account.py">Account</a></code>
+- <code title="post /api/v2/accounts/{account_id}/deactivate">client.v2.accounts.<a href="./src/dinari_api_sdk/resources/v2/accounts/accounts.py">deactivate</a>(account_id) -> <a href="./src/dinari_api_sdk/types/v2/entities/account.py">Account</a></code>
 - <code title="get /api/v2/accounts/{account_id}/cash">client.v2.accounts.<a href="./src/dinari_api_sdk/resources/v2/accounts/accounts.py">get_cash_balances</a>(account_id) -> <a href="./src/dinari_api_sdk/types/v2/account_get_cash_balances_response.py">AccountGetCashBalancesResponse</a></code>
 - <code title="get /api/v2/accounts/{account_id}/dividend_payments">client.v2.accounts.<a href="./src/dinari_api_sdk/resources/v2/accounts/accounts.py">get_dividend_payments</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/account_get_dividend_payments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/account_get_dividend_payments_response.py">AccountGetDividendPaymentsResponse</a></code>
 - <code title="get /api/v2/accounts/{account_id}/interest_payments">client.v2.accounts.<a href="./src/dinari_api_sdk/resources/v2/accounts/accounts.py">get_interest_payments</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/account_get_interest_payments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/account_get_interest_payments_response.py">AccountGetInterestPaymentsResponse</a></code>
@@ -224,7 +213,6 @@ from dinari_api_sdk.types.v2.accounts import (
     OrderType,
     OrderListResponse,
     OrderBatchCancelResponse,
-    OrderGetFulfillmentsResponse,
 )
 ```
 
@@ -234,20 +222,20 @@ Methods:
 - <code title="get /api/v2/accounts/{account_id}/orders">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_list_response.py">OrderListResponse</a></code>
 - <code title="post /api/v2/accounts/{account_id}/orders/cancel">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">batch_cancel</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_batch_cancel_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_batch_cancel_response.py">OrderBatchCancelResponse</a></code>
 - <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">cancel</a>(order_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order.py">Order</a></code>
-- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">get_fulfillments</a>(order_id, \*, account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_response.py">OrderGetFulfillmentsResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/dinari_api_sdk/resources/v2/accounts/orders.py">get_fulfillments</a>(order_id, \*, account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_get_fulfillments_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/paginated_order_fulfillment.py">PaginatedOrderFulfillment</a></code>
 
 ### OrderFulfillments
 
 Types:
 
 ```python
-from dinari_api_sdk.types.v2.accounts import Fulfillment, OrderFulfillmentQueryResponse
+from dinari_api_sdk.types.v2.accounts import Fulfillment, PaginatedOrderFulfillment
 ```
 
 Methods:
 
 - <code title="get /api/v2/accounts/{account_id}/order_fulfillments/{order_fulfillment_id}">client.v2.accounts.order_fulfillments.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_fulfillments.py">retrieve</a>(order_fulfillment_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/fulfillment.py">Fulfillment</a></code>
-- <code title="get /api/v2/accounts/{account_id}/order_fulfillments">client.v2.accounts.order_fulfillments.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_fulfillments.py">query</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_fulfillment_query_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/order_fulfillment_query_response.py">OrderFulfillmentQueryResponse</a></code>
+- <code title="get /api/v2/accounts/{account_id}/order_fulfillments">client.v2.accounts.order_fulfillments.<a href="./src/dinari_api_sdk/resources/v2/accounts/order_fulfillments.py">query</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/order_fulfillment_query_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/paginated_order_fulfillment.py">PaginatedOrderFulfillment</a></code>
 
 ### OrderRequests
 
@@ -298,18 +286,13 @@ Methods:
 Types:
 
 ```python
-from dinari_api_sdk.types.v2.accounts import (
-    WithdrawalRequest,
-    WithdrawalRequestCreateResponse,
-    WithdrawalRequestRetrieveResponse,
-    WithdrawalRequestListResponse,
-)
+from dinari_api_sdk.types.v2.accounts import WithdrawalRequest, WithdrawalRequestListResponse
 ```
 
 Methods:
 
-- <code title="post /api/v2/accounts/{account_id}/withdrawal_requests">client.v2.accounts.withdrawal_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/withdrawal_requests.py">create</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/withdrawal_request_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/withdrawal_request_create_response.py">WithdrawalRequestCreateResponse</a></code>
-- <code title="get /api/v2/accounts/{account_id}/withdrawal_requests/{withdrawal_request_id}">client.v2.accounts.withdrawal_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/withdrawal_requests.py">retrieve</a>(withdrawal_request_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/withdrawal_request_retrieve_response.py">WithdrawalRequestRetrieveResponse</a></code>
+- <code title="post /api/v2/accounts/{account_id}/withdrawal_requests">client.v2.accounts.withdrawal_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/withdrawal_requests.py">create</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/withdrawal_request_create_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/withdrawal_request.py">WithdrawalRequest</a></code>
+- <code title="get /api/v2/accounts/{account_id}/withdrawal_requests/{withdrawal_request_id}">client.v2.accounts.withdrawal_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/withdrawal_requests.py">retrieve</a>(withdrawal_request_id, \*, account_id) -> <a href="./src/dinari_api_sdk/types/v2/accounts/withdrawal_request.py">WithdrawalRequest</a></code>
 - <code title="get /api/v2/accounts/{account_id}/withdrawal_requests">client.v2.accounts.withdrawal_requests.<a href="./src/dinari_api_sdk/resources/v2/accounts/withdrawal_requests.py">list</a>(account_id, \*\*<a href="src/dinari_api_sdk/types/v2/accounts/withdrawal_request_list_params.py">params</a>) -> <a href="./src/dinari_api_sdk/types/v2/accounts/withdrawal_request_list_response.py">WithdrawalRequestListResponse</a></code>
 
 ### Withdrawals

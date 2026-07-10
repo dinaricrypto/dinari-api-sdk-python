@@ -26,8 +26,13 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.v2.entities import kyc_submit_params
+from .....types.v2.entities import (
+    Jurisdiction,
+    kyc_submit_params,
+    kyc_create_managed_check_params,
+)
 from .....types.v2.entities.kyc_info import KYCInfo
+from .....types.v2.entities.jurisdiction import Jurisdiction
 from .....types.v2.entities.us_kyc_check_data_param import UsKYCCheckDataParam
 from .....types.v2.entities.baseline_kyc_check_data_param import BaselineKYCCheckDataParam
 from .....types.v2.entities.kyc_create_managed_check_response import KYCCreateManagedCheckResponse
@@ -122,6 +127,7 @@ class KYCResource(SyncAPIResource):
         self,
         entity_id: str,
         *,
+        jurisdiction: Jurisdiction | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -138,6 +144,8 @@ class KYCResource(SyncAPIResource):
         KYC check will be created and available in the KYC API.
 
         Args:
+          jurisdiction: Jurisdiction for the KYC check. Defaults to BASELINE.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -150,6 +158,9 @@ class KYCResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         return self._post(
             path_template("/api/v2/entities/{entity_id}/kyc/url", entity_id=entity_id),
+            body=maybe_transform(
+                {"jurisdiction": jurisdiction}, kyc_create_managed_check_params.KYCCreateManagedCheckParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -358,6 +369,7 @@ class AsyncKYCResource(AsyncAPIResource):
         self,
         entity_id: str,
         *,
+        jurisdiction: Jurisdiction | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -374,6 +386,8 @@ class AsyncKYCResource(AsyncAPIResource):
         KYC check will be created and available in the KYC API.
 
         Args:
+          jurisdiction: Jurisdiction for the KYC check. Defaults to BASELINE.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -386,6 +400,9 @@ class AsyncKYCResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
         return await self._post(
             path_template("/api/v2/entities/{entity_id}/kyc/url", entity_id=entity_id),
+            body=await async_maybe_transform(
+                {"jurisdiction": jurisdiction}, kyc_create_managed_check_params.KYCCreateManagedCheckParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

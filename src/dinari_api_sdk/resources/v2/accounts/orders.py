@@ -22,7 +22,7 @@ from ....types.v2.accounts import order_list_params, order_batch_cancel_params, 
 from ....types.v2.accounts.order import Order
 from ....types.v2.accounts.order_list_response import OrderListResponse
 from ....types.v2.accounts.order_batch_cancel_response import OrderBatchCancelResponse
-from ....types.v2.accounts.order_get_fulfillments_response import OrderGetFulfillmentsResponse
+from ....types.v2.accounts.paginated_order_fulfillment import PaginatedOrderFulfillment
 
 __all__ = ["OrdersResource", "AsyncOrdersResource"]
 
@@ -273,7 +273,7 @@ class OrdersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderGetFulfillmentsResponse:
+    ) -> PaginatedOrderFulfillment:
         """
         Get `OrderFulfillments` for a specific `Order`.
 
@@ -317,7 +317,7 @@ class OrdersResource(SyncAPIResource):
                     order_get_fulfillments_params.OrderGetFulfillmentsParams,
                 ),
             ),
-            cast_to=OrderGetFulfillmentsResponse,
+            cast_to=PaginatedOrderFulfillment,
         )
 
 
@@ -569,7 +569,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderGetFulfillmentsResponse:
+    ) -> PaginatedOrderFulfillment:
         """
         Get `OrderFulfillments` for a specific `Order`.
 
@@ -613,7 +613,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                     order_get_fulfillments_params.OrderGetFulfillmentsParams,
                 ),
             ),
-            cast_to=OrderGetFulfillmentsResponse,
+            cast_to=PaginatedOrderFulfillment,
         )
 
 
