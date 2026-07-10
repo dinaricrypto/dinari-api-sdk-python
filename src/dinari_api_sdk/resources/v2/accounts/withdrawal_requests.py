@@ -19,9 +19,8 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v2.accounts import withdrawal_request_list_params, withdrawal_request_create_params
+from ....types.v2.accounts.withdrawal_request import WithdrawalRequest
 from ....types.v2.accounts.withdrawal_request_list_response import WithdrawalRequestListResponse
-from ....types.v2.accounts.withdrawal_request_create_response import WithdrawalRequestCreateResponse
-from ....types.v2.accounts.withdrawal_request_retrieve_response import WithdrawalRequestRetrieveResponse
 
 __all__ = ["WithdrawalRequestsResource", "AsyncWithdrawalRequestsResource"]
 
@@ -68,7 +67,7 @@ class WithdrawalRequestsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WithdrawalRequestCreateResponse:
+    ) -> WithdrawalRequest:
         """
         Request to withdraw USD+ payment tokens from a managed `Account` and send the
         equivalent amount of USDC to the specified recipient `Account`.
@@ -104,7 +103,7 @@ class WithdrawalRequestsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WithdrawalRequestCreateResponse,
+            cast_to=WithdrawalRequest,
         )
 
     def retrieve(
@@ -118,7 +117,7 @@ class WithdrawalRequestsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WithdrawalRequestRetrieveResponse:
+    ) -> WithdrawalRequest:
         """
         Get a specific `WithdrawalRequest` by its ID.
 
@@ -146,7 +145,7 @@ class WithdrawalRequestsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WithdrawalRequestRetrieveResponse,
+            cast_to=WithdrawalRequest,
         )
 
     def list(
@@ -249,7 +248,7 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WithdrawalRequestCreateResponse:
+    ) -> WithdrawalRequest:
         """
         Request to withdraw USD+ payment tokens from a managed `Account` and send the
         equivalent amount of USDC to the specified recipient `Account`.
@@ -285,7 +284,7 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WithdrawalRequestCreateResponse,
+            cast_to=WithdrawalRequest,
         )
 
     async def retrieve(
@@ -299,7 +298,7 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WithdrawalRequestRetrieveResponse:
+    ) -> WithdrawalRequest:
         """
         Get a specific `WithdrawalRequest` by its ID.
 
@@ -327,7 +326,7 @@ class AsyncWithdrawalRequestsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WithdrawalRequestRetrieveResponse,
+            cast_to=WithdrawalRequest,
         )
 
     async def list(

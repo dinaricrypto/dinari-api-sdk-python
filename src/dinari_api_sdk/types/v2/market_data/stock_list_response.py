@@ -6,8 +6,9 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
+from .pagination_metadata import PaginationMetadata
 
-__all__ = ["StockListResponse", "Data", "PaginationMetadata"]
+__all__ = ["StockListResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -67,16 +68,6 @@ class Data(BaseModel):
 
     logo_url: Optional[str] = None
     """URL of the company's logo. Supported formats are SVG and PNG."""
-
-
-class PaginationMetadata(BaseModel):
-    """Pagination metadata"""
-
-    next: Optional[str] = None
-    """Cursor for next page"""
-
-    previous: Optional[str] = None
-    """Cursor for previous page"""
 
 
 class StockListResponse(BaseModel):

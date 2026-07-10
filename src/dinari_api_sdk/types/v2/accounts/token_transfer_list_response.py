@@ -7,18 +7,9 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 from .token_transfer import TokenTransfer
+from ..market_data.pagination_metadata import PaginationMetadata
 
-__all__ = ["TokenTransferListResponse", "PaginationMetadata"]
-
-
-class PaginationMetadata(BaseModel):
-    """Pagination metadata"""
-
-    next: Optional[str] = None
-    """Cursor for next page"""
-
-    previous: Optional[str] = None
-    """Cursor for previous page"""
+__all__ = ["TokenTransferListResponse"]
 
 
 class TokenTransferListResponse(BaseModel):

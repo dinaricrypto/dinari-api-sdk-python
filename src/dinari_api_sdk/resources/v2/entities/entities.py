@@ -35,11 +35,8 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
+from ....types.v2.entity import Entity
 from ....types.v2.entity_list_response import EntityListResponse
-from ....types.v2.entity_create_response import EntityCreateResponse
-from ....types.v2.entity_update_response import EntityUpdateResponse
-from ....types.v2.entity_retrieve_by_id_response import EntityRetrieveByIDResponse
-from ....types.v2.entity_retrieve_current_response import EntityRetrieveCurrentResponse
 
 __all__ = ["EntitiesResource", "AsyncEntitiesResource"]
 
@@ -103,7 +100,7 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntityCreateResponse:
+    ) -> Entity:
         """Create a new `Entity` to be managed by your organization.
 
         This `Entity`
@@ -135,7 +132,7 @@ class EntitiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntityCreateResponse,
+            cast_to=Entity,
         )
 
     def update(
@@ -149,7 +146,7 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntityUpdateResponse:
+    ) -> Entity:
         """
         Update a specific customer `Entity` of your organization.
 
@@ -173,7 +170,7 @@ class EntitiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntityUpdateResponse,
+            cast_to=Entity,
         )
 
     def list(
@@ -246,7 +243,7 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntityRetrieveByIDResponse:
+    ) -> Entity:
         """
         Get a specific customer `Entity` of your organization by their ID.
 
@@ -266,7 +263,7 @@ class EntitiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntityRetrieveByIDResponse,
+            cast_to=Entity,
         )
 
     def retrieve_current(
@@ -278,14 +275,14 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntityRetrieveCurrentResponse:
+    ) -> Entity:
         """Get the current authenticated `Entity`, which represents your organization."""
         return self._get(
             "/api/v2/entities/me",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntityRetrieveCurrentResponse,
+            cast_to=Entity,
         )
 
 
@@ -348,7 +345,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntityCreateResponse:
+    ) -> Entity:
         """Create a new `Entity` to be managed by your organization.
 
         This `Entity`
@@ -380,7 +377,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntityCreateResponse,
+            cast_to=Entity,
         )
 
     async def update(
@@ -394,7 +391,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntityUpdateResponse:
+    ) -> Entity:
         """
         Update a specific customer `Entity` of your organization.
 
@@ -418,7 +415,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntityUpdateResponse,
+            cast_to=Entity,
         )
 
     async def list(
@@ -491,7 +488,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntityRetrieveByIDResponse:
+    ) -> Entity:
         """
         Get a specific customer `Entity` of your organization by their ID.
 
@@ -511,7 +508,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntityRetrieveByIDResponse,
+            cast_to=Entity,
         )
 
     async def retrieve_current(
@@ -523,14 +520,14 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntityRetrieveCurrentResponse:
+    ) -> Entity:
         """Get the current authenticated `Entity`, which represents your organization."""
         return await self._get(
             "/api/v2/entities/me",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntityRetrieveCurrentResponse,
+            cast_to=Entity,
         )
 
 

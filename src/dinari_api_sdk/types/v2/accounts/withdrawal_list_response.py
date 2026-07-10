@@ -7,18 +7,9 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 from .withdrawal import Withdrawal
+from ..market_data.pagination_metadata import PaginationMetadata
 
-__all__ = ["WithdrawalListResponse", "PaginationMetadata"]
-
-
-class PaginationMetadata(BaseModel):
-    """Pagination metadata"""
-
-    next: Optional[str] = None
-    """Cursor for next page"""
-
-    previous: Optional[str] = None
-    """Cursor for previous page"""
+__all__ = ["WithdrawalListResponse"]
 
 
 class WithdrawalListResponse(BaseModel):

@@ -7,8 +7,9 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
+from ..market_data.pagination_metadata import PaginationMetadata
 
-__all__ = ["OrderFulfillmentQueryResponse", "Data", "PaginationMetadata"]
+__all__ = ["PaginatedOrderFulfillment", "Data"]
 
 
 class Data(BaseModel):
@@ -54,17 +55,7 @@ class Data(BaseModel):
     """The `Stock` ID associated with the `Order`"""
 
 
-class PaginationMetadata(BaseModel):
-    """Pagination metadata"""
-
-    next: Optional[str] = None
-    """Cursor for next page"""
-
-    previous: Optional[str] = None
-    """Cursor for previous page"""
-
-
-class OrderFulfillmentQueryResponse(BaseModel):
+class PaginatedOrderFulfillment(BaseModel):
     data: List[Data]
     """List of AccountOrderFulfillment"""
 

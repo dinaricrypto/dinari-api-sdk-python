@@ -19,8 +19,7 @@ from ....._response import (
 )
 from ....._base_client import make_request_options
 from .....types.v2.market_data.stocks import split_list_params, split_list_for_stock_params
-from .....types.v2.market_data.stocks.split_list_response import SplitListResponse
-from .....types.v2.market_data.stocks.split_list_for_stock_response import SplitListForStockResponse
+from .....types.v2.market_data.stocks.paginated_stock_split import PaginatedStockSplit
 
 __all__ = ["SplitsResource", "AsyncSplitsResource"]
 
@@ -63,7 +62,7 @@ class SplitsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SplitListResponse:
+    ) -> PaginatedStockSplit:
         """Get a list of stock splits for `Stocks` available for trade via Dinari.
 
         The
@@ -111,7 +110,7 @@ class SplitsResource(SyncAPIResource):
                     split_list_params.SplitListParams,
                 ),
             ),
-            cast_to=SplitListResponse,
+            cast_to=PaginatedStockSplit,
         )
 
     def list_for_stock(
@@ -128,7 +127,7 @@ class SplitsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SplitListForStockResponse:
+    ) -> PaginatedStockSplit:
         """Get a list of stock splits for a specific `Stock`.
 
         The splits are ordered by the
@@ -177,7 +176,7 @@ class SplitsResource(SyncAPIResource):
                     split_list_for_stock_params.SplitListForStockParams,
                 ),
             ),
-            cast_to=SplitListForStockResponse,
+            cast_to=PaginatedStockSplit,
         )
 
 
@@ -219,7 +218,7 @@ class AsyncSplitsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SplitListResponse:
+    ) -> PaginatedStockSplit:
         """Get a list of stock splits for `Stocks` available for trade via Dinari.
 
         The
@@ -267,7 +266,7 @@ class AsyncSplitsResource(AsyncAPIResource):
                     split_list_params.SplitListParams,
                 ),
             ),
-            cast_to=SplitListResponse,
+            cast_to=PaginatedStockSplit,
         )
 
     async def list_for_stock(
@@ -284,7 +283,7 @@ class AsyncSplitsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SplitListForStockResponse:
+    ) -> PaginatedStockSplit:
         """Get a list of stock splits for a specific `Stock`.
 
         The splits are ordered by the
@@ -333,7 +332,7 @@ class AsyncSplitsResource(AsyncAPIResource):
                     split_list_for_stock_params.SplitListForStockParams,
                 ),
             ),
-            cast_to=SplitListForStockResponse,
+            cast_to=PaginatedStockSplit,
         )
 
 

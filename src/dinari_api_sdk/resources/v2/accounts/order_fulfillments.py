@@ -20,7 +20,7 @@ from ...._response import (
 from ...._base_client import make_request_options
 from ....types.v2.accounts import order_fulfillment_query_params
 from ....types.v2.accounts.fulfillment import Fulfillment
-from ....types.v2.accounts.order_fulfillment_query_response import OrderFulfillmentQueryResponse
+from ....types.v2.accounts.paginated_order_fulfillment import PaginatedOrderFulfillment
 
 __all__ = ["OrderFulfillmentsResource", "AsyncOrderFulfillmentsResource"]
 
@@ -109,7 +109,7 @@ class OrderFulfillmentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderFulfillmentQueryResponse:
+    ) -> PaginatedOrderFulfillment:
         """
         Query `OrderFulfillments` under the `Account`.
 
@@ -152,7 +152,7 @@ class OrderFulfillmentsResource(SyncAPIResource):
                     order_fulfillment_query_params.OrderFulfillmentQueryParams,
                 ),
             ),
-            cast_to=OrderFulfillmentQueryResponse,
+            cast_to=PaginatedOrderFulfillment,
         )
 
 
@@ -240,7 +240,7 @@ class AsyncOrderFulfillmentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderFulfillmentQueryResponse:
+    ) -> PaginatedOrderFulfillment:
         """
         Query `OrderFulfillments` under the `Account`.
 
@@ -283,7 +283,7 @@ class AsyncOrderFulfillmentsResource(AsyncAPIResource):
                     order_fulfillment_query_params.OrderFulfillmentQueryParams,
                 ),
             ),
-            cast_to=OrderFulfillmentQueryResponse,
+            cast_to=PaginatedOrderFulfillment,
         )
 
 

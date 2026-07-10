@@ -7,8 +7,9 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
+from .market_data.pagination_metadata import PaginationMetadata
 
-__all__ = ["AccountGetInterestPaymentsResponse", "Data", "PaginationMetadata"]
+__all__ = ["AccountGetInterestPaymentsResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -22,16 +23,6 @@ class Data(BaseModel):
 
     payment_date: date
     """Date of interest payment in US Eastern time zone. ISO 8601 format, YYYY-MM-DD."""
-
-
-class PaginationMetadata(BaseModel):
-    """Pagination metadata"""
-
-    next: Optional[str] = None
-    """Cursor for next page"""
-
-    previous: Optional[str] = None
-    """Cursor for previous page"""
 
 
 class AccountGetInterestPaymentsResponse(BaseModel):

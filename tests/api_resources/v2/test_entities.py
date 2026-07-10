@@ -10,11 +10,8 @@ import pytest
 from tests.utils import assert_matches_type
 from dinari_api_sdk import Dinari, AsyncDinari
 from dinari_api_sdk.types.v2 import (
+    Entity,
     EntityListResponse,
-    EntityCreateResponse,
-    EntityUpdateResponse,
-    EntityRetrieveByIDResponse,
-    EntityRetrieveCurrentResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -29,7 +26,7 @@ class TestEntities:
         entity = client.v2.entities.create(
             name="x",
         )
-        assert_matches_type(EntityCreateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -38,7 +35,7 @@ class TestEntities:
             name="x",
             reference_id="x",
         )
-        assert_matches_type(EntityCreateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -50,7 +47,7 @@ class TestEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entity = response.parse()
-        assert_matches_type(EntityCreateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -62,7 +59,7 @@ class TestEntities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entity = response.parse()
-            assert_matches_type(EntityCreateResponse, entity, path=["response"])
+            assert_matches_type(Entity, entity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -72,7 +69,7 @@ class TestEntities:
         entity = client.v2.entities.update(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(EntityUpdateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -81,7 +78,7 @@ class TestEntities:
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             reference_id="x",
         )
-        assert_matches_type(EntityUpdateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -93,7 +90,7 @@ class TestEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entity = response.parse()
-        assert_matches_type(EntityUpdateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -105,7 +102,7 @@ class TestEntities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entity = response.parse()
-            assert_matches_type(EntityUpdateResponse, entity, path=["response"])
+            assert_matches_type(Entity, entity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -163,7 +160,7 @@ class TestEntities:
         entity = client.v2.entities.retrieve_by_id(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(EntityRetrieveByIDResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -175,7 +172,7 @@ class TestEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entity = response.parse()
-        assert_matches_type(EntityRetrieveByIDResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -187,7 +184,7 @@ class TestEntities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entity = response.parse()
-            assert_matches_type(EntityRetrieveByIDResponse, entity, path=["response"])
+            assert_matches_type(Entity, entity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -203,7 +200,7 @@ class TestEntities:
     @parametrize
     def test_method_retrieve_current(self, client: Dinari) -> None:
         entity = client.v2.entities.retrieve_current()
-        assert_matches_type(EntityRetrieveCurrentResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -213,7 +210,7 @@ class TestEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entity = response.parse()
-        assert_matches_type(EntityRetrieveCurrentResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -223,7 +220,7 @@ class TestEntities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entity = response.parse()
-            assert_matches_type(EntityRetrieveCurrentResponse, entity, path=["response"])
+            assert_matches_type(Entity, entity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -239,7 +236,7 @@ class TestAsyncEntities:
         entity = await async_client.v2.entities.create(
             name="x",
         )
-        assert_matches_type(EntityCreateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -248,7 +245,7 @@ class TestAsyncEntities:
             name="x",
             reference_id="x",
         )
-        assert_matches_type(EntityCreateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -260,7 +257,7 @@ class TestAsyncEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entity = await response.parse()
-        assert_matches_type(EntityCreateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -272,7 +269,7 @@ class TestAsyncEntities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entity = await response.parse()
-            assert_matches_type(EntityCreateResponse, entity, path=["response"])
+            assert_matches_type(Entity, entity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -282,7 +279,7 @@ class TestAsyncEntities:
         entity = await async_client.v2.entities.update(
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(EntityUpdateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -291,7 +288,7 @@ class TestAsyncEntities:
             entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             reference_id="x",
         )
-        assert_matches_type(EntityUpdateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -303,7 +300,7 @@ class TestAsyncEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entity = await response.parse()
-        assert_matches_type(EntityUpdateResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -315,7 +312,7 @@ class TestAsyncEntities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entity = await response.parse()
-            assert_matches_type(EntityUpdateResponse, entity, path=["response"])
+            assert_matches_type(Entity, entity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -373,7 +370,7 @@ class TestAsyncEntities:
         entity = await async_client.v2.entities.retrieve_by_id(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(EntityRetrieveByIDResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -385,7 +382,7 @@ class TestAsyncEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entity = await response.parse()
-        assert_matches_type(EntityRetrieveByIDResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -397,7 +394,7 @@ class TestAsyncEntities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entity = await response.parse()
-            assert_matches_type(EntityRetrieveByIDResponse, entity, path=["response"])
+            assert_matches_type(Entity, entity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -413,7 +410,7 @@ class TestAsyncEntities:
     @parametrize
     async def test_method_retrieve_current(self, async_client: AsyncDinari) -> None:
         entity = await async_client.v2.entities.retrieve_current()
-        assert_matches_type(EntityRetrieveCurrentResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -423,7 +420,7 @@ class TestAsyncEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entity = await response.parse()
-        assert_matches_type(EntityRetrieveCurrentResponse, entity, path=["response"])
+        assert_matches_type(Entity, entity, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -433,6 +430,6 @@ class TestAsyncEntities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entity = await response.parse()
-            assert_matches_type(EntityRetrieveCurrentResponse, entity, path=["response"])
+            assert_matches_type(Entity, entity, path=["response"])
 
         assert cast(Any, response.is_closed) is True

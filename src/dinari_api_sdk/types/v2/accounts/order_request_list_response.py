@@ -7,8 +7,12 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
+from ...order_tif import OrderTif
+from ...order_side import OrderSide
+from ...order_type import OrderType
+from ..market_data.pagination_metadata import PaginationMetadata
 
-__all__ = ["OrderRequestListResponse", "Data", "PaginationMetadata"]
+__all__ = ["OrderRequestListResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -32,13 +36,13 @@ class Data(BaseModel):
     created_dt: datetime
     """Datetime at which the `OrderRequest` was created. ISO 8601 timestamp."""
 
-    order_side: Literal["BUY", "SELL"]
+    order_side: OrderSide
     """Indicates whether `Order` is a buy or sell."""
 
-    order_tif: Literal["DAY", "GTC", "IOC", "FOK"]
+    order_tif: OrderTif
     """Indicates how long `Order` is valid for."""
 
-    order_type: Literal["MARKET", "LIMIT"]
+    order_type: OrderType
     """Type of `Order`."""
 
     status: Literal["QUOTED", "PENDING", "PENDING_BRIDGE", "SUBMITTED", "ERROR", "CANCELLED", "EXPIRED", "REJECTED"]
@@ -74,16 +78,6 @@ class Data(BaseModel):
 
     reject_message: Optional[str] = None
     """Reason for the order rejection if the order status is REJECTED"""
-
-
-class PaginationMetadata(BaseModel):
-    """Pagination metadata"""
-
-    next: Optional[str] = None
-    """Cursor for next page"""
-
-    previous: Optional[str] = None
-    """Cursor for previous page"""
 
 
 class OrderRequestListResponse(BaseModel):
