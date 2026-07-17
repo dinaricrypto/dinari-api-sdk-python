@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.16.0 (2026-07-17)
+
+Full Changelog: [v0.15.0...v0.16.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.15.0...v0.16.0)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([7432ce3](https://github.com/dinaricrypto/dinari-api-sdk-python/commit/7432ce3700ac14d5c960a49aca6743a3fb4e4267))
+
 ## 0.15.0 (2026-07-10)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/dinaricrypto/dinari-api-sdk-python/compare/v0.14.0...v0.15.0)
