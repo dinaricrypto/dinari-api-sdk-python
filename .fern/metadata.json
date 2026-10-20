@@ -1,0 +1,17 @@
+{
+  "cliVersion": "5.168.1",
+  "generatorName": "fernapi/fern-python-sdk",
+  "generatorVersion": "5.41.3",
+  "generatorConfig": {
+    "package_name": "dinari",
+    "client": {
+      "class_name": "Dinari"
+    },
+    "inline_path_params": true
+  },
+  "originGitCommit": "81f33c4bdbb47452c50cdb297a8953136a5a7e92",
+  "originGitCommitIsDirty": true,
+  "invokedBy": "manual",
+  "requestedVersion": "0.0.1",
+  "sdkVersion": "0.0.1"
+}
