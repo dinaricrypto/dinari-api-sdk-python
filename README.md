@@ -1,12 +1,13 @@
-# Dinari Python Library
+# Dinari Enterprise API Python Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Dinari%2FPython)
 [![pypi](https://img.shields.io/pypi/v/dinari-api-sdk)](https://pypi.python.org/pypi/dinari-api-sdk)
 
-The Dinari Python library provides convenient access to the Dinari APIs from Python.
+Official SDK for the Dinari Enterprise API.
 
 ## Table of Contents
 
+- [Documentation](#documentation)
 - [Installation](#installation)
 - [Reference](#reference)
 - [Usage](#usage)
@@ -19,6 +20,10 @@ The Dinari Python library provides convenient access to the Dinari APIs from Pyt
   - [Timeouts](#timeouts)
   - [Custom Client](#custom-client)
 - [Contributing](#contributing)
+
+## Documentation
+
+API reference documentation is available [here](https://docs.dinari.com/docs/quickstart).
 
 ## Installation
 
