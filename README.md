@@ -1,6 +1,6 @@
 # Dinari Enterprise API Python Library
 
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Dinari%2FPython)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fdinaricrypto%2Fdinari-api-sdk-python)
 [![pypi](https://img.shields.io/pypi/v/dinari-api-sdk)](https://pypi.python.org/pypi/dinari-api-sdk)
 
 Official SDK for the Dinari Enterprise API.
@@ -33,7 +33,7 @@ pip install dinari-api-sdk
 
 ## Reference
 
-A full reference for this library is available [here](./reference.md).
+A full reference for this library is available [here](https://github.com/dinaricrypto/dinari-api-sdk-python/blob/HEAD/./reference.md).
 
 ## Usage
 
